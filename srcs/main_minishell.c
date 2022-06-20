@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/17 18:11:59 by hmarconn         ###   ########.fr       */
+/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/06/20 16:03:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINIHELL_H
+#include <../includes/minishell.h>
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-
-typedef struct s_data
+int	main(int ac, char **av, char **env)
 {
-}t_data
-
-/* BASICS */
-
-#endif
+	printf("Hello World!\n");
+	return (0);
+}
