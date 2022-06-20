@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/29 16:05:24 by cfatrane          #+#    #+#              #
-#    Updated: 2022/06/20 16:12:44 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/06/20 17:35:59 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ HEADER = ./includes/minishell.h
 # Name
 
 SRC_NAME =	main_minishell.c		\
+			test_execve.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

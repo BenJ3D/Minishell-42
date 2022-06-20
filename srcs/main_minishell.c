@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/06/20 16:40:34 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:01:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 int	main(int ac, char **av, char **env)
 {
 	printf("Hello World!\n");
+	test_execve_ls_fork(av);
+
 	return (0);
 }
