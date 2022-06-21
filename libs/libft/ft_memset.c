@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/02 17:05:00 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 15:32:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+void	*ft_memset(void *b, int c, size_t len)
 {
-}t_data;
+	size_t	i;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	i = 0;
+	while (i < len)
+		((char *)b)[i++] = c;
+	return (b);
+}

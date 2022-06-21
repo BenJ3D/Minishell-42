@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/05 13:36:41 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/18 21:20:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-}t_data;
+	char	*d;
+	char	*s;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	d = (char *)dest;
+	s = (char *)src;
+	if (dest == src)
+		return (dest);
+	if (s < d)
+	{
+		while (len--)
+			*(d + len) = *(s + len);
+		return (dest);
+	}
+	while (len--)
+		*d++ = *s++;
+	return (dest);
+}

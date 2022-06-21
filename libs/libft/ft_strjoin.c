@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/03/02 18:41:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-}t_data;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	if (!s1)
+		return (0);
+	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
+}

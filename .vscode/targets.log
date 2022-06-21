@@ -1,0 +1,378 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Tue Jun 21 18:12:08 2022
+
+# Variables
+
+ 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# makefile (from `Makefile', line 41)
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+# makefile (from `Makefile', line 39)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `Makefile', line 23)
+CPPFLAGS = -I./includes/
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/bducrocq/projets/42cursus/minishell
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 47)
+CFLAGS = 
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 48)
+SANITIZE = 
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bjf0002wbh/T/vscode-ipc-b45f6377-180d-46c7-bd83-6ca9890c1942.sock
+# environment
+VSCODE_CWD = /
+# environment
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.6ruL6fv6OX/Render
+# environment
+PATH = /Users/bducrocq/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 19)
+SRC_PATH = ./srcs/
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wgugerrau9/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+HOMEBREW_TEMP = /tmp/bducrocq/Homebrew/Temp
+# environment
+DISPLAY = /private/tmp/com.apple.launchd.AMnhkqTZ8x/org.xquartz:0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/bducrocq/projets/42cursus/minishell
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/bducrocq
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/bducrocq/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+LOGNAME = bducrocq
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/bducrocq/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+HOMEBREW_CACHE = /tmp/bducrocq/Homebrew/Caches
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 45)
+CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
+# makefile (from `Makefile', line 31)
+SRC_NAME = main_minishell.c test_execve.c
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = bducrocq
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 15)
+NAME = minishell
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000bjf0002wbh/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/bducrocq/Library/Application Support/Code/1.67.0-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = com.microsoft.VSCode.1248
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x17170:0x0:0x1
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# makefile (from `Makefile', line 27)
+LIBFT_PATH = ./libs/libft/libft.a
+# environment
+PAGER = less
+ 
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 25)
+HEADER = ./includes/minishell.h
+# makefile (from `Makefile', line 21)
+OBJ_PATH = ./objs/
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# makefile (from `Makefile', line 49)
+LLDBFLAG = -g3
+# default
+.INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 34)
+OBJ_NAME = $(SRC_NAME:.c=.o)
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+VSCODE_PID = 25645
+# variable set hash-table stats:
+# Load=82/1024=8%, Rehash=0, Collisions=6/118=5%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777229, inode 2831728): 11 files, no impossibilities.
+
+# 11 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+objs/%.o: ./srcs/%.c ./includes/minishell.h ./Makefile
+#  commands to execute (from `Makefile', line 61):
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	$(CC) $(CPPFLAGS) -o $@ -c $<
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+all,:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+all: lib minishell
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/2=0%
+
+.PHONY: all, clean, fclean, re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+git:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 88):
+	@git add .
+	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
+	@git push
+	
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-21 18:12:07
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+objs/main_minishell.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+fclean,:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+minishell: libs/libft/libft.a objs/main_minishell.o objs/test_execve.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 56):
+	@echo "\033[34mCreation of $(NAME) ...\033[0m"
+	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread
+	@echo "\033[32m$(NAME) created\n\033[0m"
+	
+
+fclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 72):
+	@echo "\033[33mRemoval of $(NAME)...\033[0m"
+	@make fclean -C ./libs/libft/
+	@rm -rf $(NAME)
+	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
+	
+
+lib:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := lib
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/10=10%
+#  commands to execute (from `Makefile', line 80):
+	@make -C./libs/libft/
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean,:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+libs/libft/libft.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 65):
+	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
+	@make clean -C ./libs/libft/
+	@rm -f $(OBJ)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@echo "\033[31mFiles .o deleted\n\033[0m"
+	
+
+norme:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 83):
+	norminette ./srcs/
+	norminette ./includes/*.h
+	
+
+# Not a target:
+objs/test_execve.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=18/1024=2%, Rehash=0, Collisions=0/44=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Tue Jun 21 18:12:08 2022
+
+ 

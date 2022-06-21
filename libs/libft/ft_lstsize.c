@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/22 13:51:40 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/24 17:02:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+int	ft_lstsize(t_list *lst)
 {
-}t_data;
+	size_t	i;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

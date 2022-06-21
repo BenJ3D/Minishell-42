@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/20 18:07:23 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/04/13 21:02:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+int	ft_putstr(char *s)
 {
-}t_data;
+	int		i;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	i = 0;
+	if (!s)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s[i])
+		write(1, &s[i++], 1);
+	return (i);
+}

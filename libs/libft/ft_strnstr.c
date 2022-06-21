@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/02 14:30:22 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 14:38:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-}t_data;
+	size_t	i;
+	size_t	j;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	i = 0;
+	if (*needle == 0)
+		return ((char *)haystack);
+	while (haystack[i] != 0 && i < len)
+	{
+		j = 0;
+		while (needle[j] == haystack[i + j] && i + j < len)
+		{
+			if (needle[j + 1] == 0)
+				return ((char *)haystack + i);
+			j++;
+		}	
+		i++;
+	}
+	return (0);
+}

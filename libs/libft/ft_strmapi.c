@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/20 16:58:07 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/20 17:26:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-}t_data;
+	char	*sptr;
+	int		i;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	sptr = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!sptr)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		sptr[i] = f(i, s[i]);
+		++i;
+	}
+	sptr[i] = '\0';
+	return (sptr);
+}

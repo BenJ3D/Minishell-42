@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:11:35 by bducrocq         ###   ########.fr       */
+/*   Created: 2019/10/22 10:35:51 by vvaltone          #+#    #+#             */
+/*   Updated: 2022/03/12 13:40:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+int	ft_putnbr(int n)
 {
-}t_data;
+	char	c;
+	int		len;
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-
-
-
-#endif
+	len = ft_intlen((long long)n);
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (11);
+	}
+	if (n < 0)
+	{
+		n = -n;
+		write(1, "-", 1);
+	}
+	if (n < 10)
+	{
+		c = n + '0';
+		write(1, &c, 1);
+	}
+	else
+	{
+		ft_putnbr((n / 10));
+		ft_putnbr((n % 10));
+	}
+	return (len);
+}
