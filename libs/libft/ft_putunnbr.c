@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putunnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 17:44:34 by bducrocq         ###   ########.fr       */
+/*   Created: 2019/10/22 10:35:51 by vvaltone          #+#    #+#             */
+/*   Updated: 2022/03/12 13:39:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+/**
+ * @brief 
+ * 
+ * @param n 
+ * @return intlen
+ */
+int	ft_putunnbr(unsigned int n)
 {
-}t_data;
+	char	c;
+	int		intlen;
 
-/* BASICS */
-
-#endif
+	intlen = ft_intlen((long long)n);
+	if (n < 10)
+	{
+		c = n + '0';
+		write(1, &c, 1);
+	}
+	else
+	{
+		ft_putunnbr((n / 10));
+		ft_putunnbr((n % 10));
+	}
+	return (intlen);
+}

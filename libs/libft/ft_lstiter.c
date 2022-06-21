@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/06/21 17:44:34 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
+/*   Updated: 2021/11/22 16:15:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../libs/libft/libft.h"
-
-typedef struct s_data
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-}t_data;
+	t_list	*lst1;
 
-/* BASICS */
-
-#endif
+	if (!lst || !f)
+		return ;
+	lst1 = lst;
+	while (lst1)
+	{
+		f(lst1->content);
+		lst1 = lst1->next;
+	}
+}
