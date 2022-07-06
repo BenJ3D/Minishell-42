@@ -1,14 +1,19 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
 
+<<<<<<< HEAD
 # This program built for i386-apple-darwin11.3.0
  
 
 # Make data base, printed on Tue Jun 21 18:12:08 2022
+=======
+# Make data base, printed on Wed Jul  6 23:12:47 2022
+>>>>>>> main
 
 # Variables
 
@@ -17,93 +22,107 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+<<<<<<< HEAD
 # makefile (from `Makefile', line 41)
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 # makefile (from `Makefile', line 39)
+=======
+# environment
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 40)
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+# makefile (from 'Makefile', line 38)
+>>>>>>> main
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `Makefile', line 23)
+# makefile (from 'Makefile', line 23)
 CPPFLAGS = -I./includes/
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/bducrocq/projets/42cursus/minishell
+CURDIR := /home/ben/projet/minishell
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"575d78304484aa5fa0cbb32d34fd883d.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/575d78304484aa5fa0cbb32d34fd883d.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/575d78304484aa5fa0cbb32d34fd883d.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/575d78304484aa5fa0cbb32d34fd883d.fr/30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"/home/ben/.vscode-server/data/clp/575d78304484aa5fa0cbb32d34fd883d.fr/corrupted.info","_languagePackSupport":true}
 # environment
+<<<<<<< HEAD
 _ = /usr/bin/make
 # makefile (from `Makefile', line 47)
+=======
+_ = /home/ben/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
+# makefile (from 'Makefile', line 46)
+>>>>>>> main
 CFLAGS = 
-# makefile (from `Makefile', line 1)
+# makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
+# 'override' directive
+GNUMAKEFLAGS := 
 # environment
 VSCODE_VERBOSE_LOGGING = true
+<<<<<<< HEAD
 # makefile (from `Makefile', line 48)
+=======
+# makefile (from 'Makefile', line 47)
+>>>>>>> main
 SANITIZE = 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bjf0002wbh/T/vscode-ipc-b45f6377-180d-46c7-bd83-6ca9890c1942.sock
+VSCODE_CWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-VSCODE_CWD = /
-# environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.6ruL6fv6OX/Render
-# environment
-PATH = /Users/bducrocq/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin
+PATH = /home/ben/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/VMware/VMware Player/bin/:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/120/Tools/Binn/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Common Files/Autodesk Shared/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Users/ben13/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/ben13/AppData/Local/atom/bin:/mnt/c/Program Files/JetBrains/CLion 2022.1.1/bin:/mnt/c/Program Files/JetBrains/DataGrip 2021.2.4/bin:/mnt/c/Users/ben13/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/tools:/mnt/c/Users/ben13/.dotnet/tools:/mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/ben13/AppData/Local/Keybase/
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 19)
+# makefile (from 'Makefile', line 19)
 SRC_PATH = ./srcs/
 # environment
 VSCODE_LOG_STACK = false
 # environment
-ELECTRON_RUN_AS_NODE = 1
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e7b474cc-c6ba-476d-827b-610ac7adea13.sock
 # default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wgugerrau9/Listeners
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # automatic
 %F = $(notdir $%)
 # environment
-HOMEBREW_TEMP = /tmp/bducrocq/Homebrew/Temp
-# environment
-DISPLAY = /private/tmp/com.apple.launchd.AMnhkqTZ8x/org.xquartz:0
-# environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/bducrocq/projets/42cursus/minishell
+PWD = /home/ben/projet/minishell
+# default
+.LOADED := 
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+WSL_INTEROP = /run/WSL/18_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/bducrocq
-# default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+HOME = /home/ben
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/bducrocq/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+LOGNAME = ben
 # environment
-LOGNAME = bducrocq
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-ZSH = /Users/bducrocq/.oh-my-zsh
+ZSH = /home/ben/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-XPC_FLAGS = 0x0
+MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
+<<<<<<< HEAD
 HOMEBREW_CACHE = /tmp/bducrocq/Homebrew/Caches
 # environment
 SHLVL = 1
@@ -111,75 +130,94 @@ SHLVL = 1
 CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
 # makefile (from `Makefile', line 31)
 SRC_NAME = main_minishell.c test_execve.c
+=======
+SHLVL = 0
+# makefile (from 'Makefile', line 44)
+CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
+# makefile (from 'Makefile', line 31)
+SRC_NAME = main_minishell.c 
+>>>>>>> main
 # default
-MAKE_VERSION := 3.81
+MAKE_VERSION := 4.2.1
 # environment
-USER = bducrocq
+USER = ben
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 15)
+# makefile (from 'Makefile', line 15)
 NAME = minishell
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/ben13/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+MAKE_COMMAND := make
+# environment
+OLDPWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
 # default
 .VARIABLES := 
-# environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000bjf0002wbh/T/
 # automatic
 *F = $(notdir $*)
-# environment
-VSCODE_IPC_HOOK = /Users/bducrocq/Library/Application Support/Code/1.67.0-main.sock
 # makefile
-MAKEFLAGS = Rrqp
+MAKEFLAGS = pqrR
 # environment
-MFLAGS = -Rrqp
+MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1248
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-__CF_USER_TEXT_ENCODING = 0x17170:0x0:0x1
+VSCODE_HANDLES_SIGPIPE = true
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-# makefile (from `Makefile', line 27)
+# makefile (from 'Makefile', line 27)
 LIBFT_PATH = ./libs/libft/libft.a
 # environment
 PAGER = less
  
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 25)
+# makefile (from 'Makefile', line 25)
 HEADER = ./includes/minishell.h
-# makefile (from `Makefile', line 21)
+# makefile (from 'Makefile', line 21)
 OBJ_PATH = ./objs/
+# environment
+HOSTTYPE = x86_64
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
+<<<<<<< HEAD
 # makefile (from `Makefile', line 49)
 LLDBFLAG = -g3
 # default
 .INCLUDE_DIRS = /usr/local/include
 # makefile (from `Makefile', line 34)
+=======
+# makefile (from 'Makefile', line 48)
+LLDBFLAG = -g3
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# makefile (from 'Makefile', line 33)
+>>>>>>> main
 OBJ_NAME = $(SRC_NAME:.c=.o)
-# environment
-MAKELEVEL := 0
+# default
+.RECIPEPREFIX := 
 # environment
 LANG = C
 # environment
-VSCODE_PID = 25645
+TERM = xterm-256color
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=82/1024=8%, Rehash=0, Collisions=6/118=5%
+# Load=82/1024=8%, Rehash=0, Collisions=9/121=7%
 
 # Pattern-specific Variable Values
 
@@ -187,17 +225,22 @@ VSCODE_PID = 25645
 
 # Directories
 
-# . (device 16777229, inode 2831728): 11 files, no impossibilities.
+# . (device 2064, inode 93007): 11 files, no impossibilities.
+# srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 11 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
+<<<<<<< HEAD
 objs/%.o: ./srcs/%.c ./includes/minishell.h ./Makefile
 #  commands to execute (from `Makefile', line 61):
+=======
+objs/%.o: srcs/%.c includes/minishell.h Makefile
+#  recipe to execute (from 'Makefile', line 60):
+>>>>>>> main
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CPPFLAGS) -o $@ -c $<
-	
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
@@ -210,13 +253,13 @@ all,:
 #  File has not been updated.
 
 all: lib minishell
-#  Command-line target.
+#  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/2=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 .PHONY: all, clean, fclean, re
 #  Implicit rule search has not been done.
@@ -227,11 +270,14 @@ git:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+<<<<<<< HEAD
 #  commands to execute (from `Makefile', line 88):
+=======
+#  recipe to execute (from 'Makefile', line 87):
+>>>>>>> main
 	@git add .
 	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
 	@git push
-	
 
 # Not a target:
 .SUFFIXES:
@@ -242,11 +288,13 @@ git:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+<<<<<<< HEAD
 #  Last modified 2022-06-21 18:12:07
+=======
+#  Last modified 2022-07-06 23:12:34.588279782
+>>>>>>> main
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 objs/main_minishell.o:
@@ -264,26 +312,33 @@ minishell: libs/libft/libft.a objs/main_minishell.o objs/test_execve.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+<<<<<<< HEAD
 #  commands to execute (from `Makefile', line 56):
+=======
+#  recipe to execute (from 'Makefile', line 55):
+>>>>>>> main
 	@echo "\033[34mCreation of $(NAME) ...\033[0m"
 	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread
 	@echo "\033[32m$(NAME) created\n\033[0m"
-	
 
 fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+<<<<<<< HEAD
 #  commands to execute (from `Makefile', line 72):
+=======
+#  recipe to execute (from 'Makefile', line 71):
+>>>>>>> main
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
 	@make fclean -C ./libs/libft/
 	@rm -rf $(NAME)
 	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
-	
 
 lib:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
+#  Implicit/static pattern stem: ''
+ 
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
@@ -304,10 +359,14 @@ lib:
 # automatic
 # ? := 
 # variable set hash-table stats:
+<<<<<<< HEAD
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
 #  commands to execute (from `Makefile', line 80):
+=======
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'Makefile', line 79):
+>>>>>>> main
 	@make -C./libs/libft/
-	
 
 # Not a target:
 .DEFAULT:
@@ -337,22 +396,28 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+<<<<<<< HEAD
 #  commands to execute (from `Makefile', line 65):
+=======
+#  recipe to execute (from 'Makefile', line 64):
+>>>>>>> main
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@make clean -C ./libs/libft/
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "\033[31mFiles .o deleted\n\033[0m"
-	
 
 norme:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+<<<<<<< HEAD
 #  commands to execute (from `Makefile', line 83):
+=======
+#  recipe to execute (from 'Makefile', line 82):
+>>>>>>> main
 	norminette ./srcs/
 	norminette ./includes/*.h
-	
 
 # Not a target:
 objs/test_execve.o:
@@ -364,15 +429,20 @@ objs/test_execve.o:
 # Load=18/1024=2%, Rehash=0, Collisions=0/44=0%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# No general (`VPATH' variable) search path.
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 1
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+# strcache buffers: 1 (0) / strings = 32 / storage = 275 B / avg = 8 B
+# current buf: size = 8162 B / used = 275 B / count = 32 / avg = 8 B
 
+<<<<<<< HEAD
 # Finished Make data base on Tue Jun 21 18:12:08 2022
+=======
+# strcache performance: lookups = 55 / hit rate = 41%
+# hash-table stats:
+# Load=32/8192=0%, Rehash=0, Collisions=1/55=2%
+# Finished Make data base on Wed Jul  6 23:12:47 2022
+>>>>>>> main
 
  
