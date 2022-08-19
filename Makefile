@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/29 16:05:24 by cfatrane          #+#    #+#              #
-#    Updated: 2022/06/21 18:12:07 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/19 15:45:59 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ LIBFT_PATH	= ./libs/libft/libft.a
 
 # Name
 
-SRC_NAME =	main_minishell.c		\
+SRC_NAME =	main.c					\
+			interactve_mode.c		\
+			prompt.c				\
 			test_execve.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -48,13 +50,27 @@ CFLAGS =# -Wall -Wextra -Werror
 SANITIZE =# -fsanitize=address
 LLDBFLAG = -g3
 
+# Includes lib readline
+
+UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		INC_LIB = -L/usr/local/lib
+		INC_INC = -I/usr/local/include
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		INC_LIB = -L ~/.brew/opt/readline/lib
+		INC_INC = -I ~/.brew/opt/readline/include
+	endif
+
+LIBS	=	$(INC_LIB) $(INC_INC) -lreadline
+
 # Rules
 
 all: lib $(NAME) 
 
 $(NAME): $(LIBFT_PATH) $(OBJ)
 	@echo "\033[34mCreation of $(NAME) ...\033[0m"
-	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread
+	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread $(LIBS)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) ./Makefile

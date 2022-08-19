@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/08/19 17:35:06 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/08/19 17:35:43 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/08/19 17:36:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef INCLUDES_H
 
-# include "includes.h"
-# include "define_common.h"
+# define INCLUDES_H
 
-typedef struct s_data
-{
-}t_data;
+# include "../libs/libft/libft.h"
 
-/* BASICS */
-
-
-
-/* FT TEST */
-int		test_execve_ls_fork(char **av);
-void basic_prompt();
-
-	/* FT AARTIGES */
-	void handler_interative(int signum);
-void	interactive_mode(void);
+# include <limits.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
 
 #endif

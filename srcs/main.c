@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_minishell.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/19 09:50:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:28:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 //TODO: use readline to prompt
 int	main(int ac, char **av, char **env)
 {
-	//printf("Hello World!\n");
-	//test_execve_ls_fork(av);
-	//ft_putstr("Test libft !\n");
+	if (ac > 1)
+	{
+		ft_putstr_fd(av[0], 2);
+		ft_putstr_fd(" to many arguments\n", 2);
+		return (1);
+	}
+	// test_execve_ls_fork(av);
+	// interactive_mode();
+	basic_prompt();
+
 	return (0);
 }

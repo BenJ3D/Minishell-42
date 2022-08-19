@@ -1,12 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/ben/projet/minishell'
 make -C./libs/libft/
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/main_minishell.o -c srcs/main_minishell.c
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/test_execve.o -c srcs/test_execve.c
-echo "\033[34mCreation of minishell ...\033[0m"
-gcc   -g3 ./objs/main_minishell.o ./objs/test_execve.o ./libs/libft/libft.a -o minishell -lpthread
-echo "\033[32mminishell created\n\033[0m"
 make: Leaving directory '/home/ben/projet/minishell'
  

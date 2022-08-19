@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Fri Aug 19 09:40:55 2022
+# Make data base, printed on Fri Aug 19 15:46:39 2022
 
 # Variables
 
@@ -15,12 +16,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
-# makefile (from 'Makefile', line 41)
+# makefile (from 'Makefile', line 43)
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-# makefile (from 'Makefile', line 39)
+# makefile (from 'Makefile', line 41)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
@@ -38,13 +39,13 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8a64477f85858ca31d1daacec93dba94.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
-# makefile (from 'Makefile', line 47)
+# makefile (from 'Makefile', line 49)
 CFLAGS = 
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
 GNUMAKEFLAGS := 
-# makefile (from 'Makefile', line 48)
+# makefile (from 'Makefile', line 50)
 SANITIZE = 
 # environment
 VSCODE_CWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
@@ -59,21 +60,21 @@ SRC_PATH = ./srcs/
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-8330a08d-09d3-4de1-bf4b-8844559057a3.sock
-# environment
-VSCODE_SERVER_TAR = /mnt/c/Users/ben13/AppData/Local/Temp/vscode-remote-wsl/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-stable-linux-x64.tar.gz
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-8469a6a9-395d-4c0f-bc77-f85ee76dc5a7.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
 LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # automatic
 %F = $(notdir $%)
+# makefile (from 'Makefile', line 55)
+UNAME_S := Linux
 # environment
 PWD = /home/ben/projet/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/51_interop
+WSL_INTEROP = /run/WSL/18_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -96,10 +97,10 @@ MAKE = $(MAKE_COMMAND)
 MAKECMDGOALS := all
 # environment
 SHLVL = 0
-# makefile (from 'Makefile', line 45)
+# makefile (from 'Makefile', line 47)
 CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
 # makefile (from 'Makefile', line 31)
-SRC_NAME = main_minishell.c test_execve.c
+SRC_NAME = main.c interactve_mode.c prompt.c test_execve.c
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -134,6 +135,10 @@ MFLAGS = -pqrR
 +F = $(notdir $+)
 # environment
 VSCODE_HANDLES_SIGPIPE = true
+# makefile (from 'Makefile', line 58)
+INC_INC = -I/usr/local/include
+# 'override' directive
+.SHELLSTATUS := 0
 # default
 MAKEFILES := 
 # automatic
@@ -150,18 +155,22 @@ HEADER = ./includes/minishell.h
 OBJ_PATH = ./objs/
 # environment
 HOSTTYPE = x86_64
+# makefile (from 'Makefile', line 65)
+LIBS = $(INC_LIB) $(INC_INC) -lreadline
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from 'Makefile', line 49)
+# makefile (from 'Makefile', line 51)
 LLDBFLAG = -g3
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# makefile (from 'Makefile', line 34)
+# makefile (from 'Makefile', line 36)
 OBJ_NAME = $(SRC_NAME:.c=.o)
 # default
 .RECIPEPREFIX := 
+# makefile (from 'Makefile', line 57)
+INC_LIB = -L/usr/local/lib
 # environment
 LANG = C
 # environment
@@ -169,7 +178,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=79/1024=8%, Rehash=0, Collisions=9/118=8%
+# Load=83/1024=8%, Rehash=0, Collisions=9/127=7%
 
 # Pattern-specific Variable Values
 
@@ -185,7 +194,7 @@ WSL_DISTRO_NAME = Ubuntu
 # Implicit Rules
 
 objs/%.o: srcs/%.c includes/minishell.h Makefile
-#  recipe to execute (from 'Makefile', line 61):
+#  recipe to execute (from 'Makefile', line 77):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CPPFLAGS) -o $@ -c $<
 
@@ -197,6 +206,12 @@ all,:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+objs/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 all: lib minishell
@@ -217,7 +232,7 @@ git:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 88):
+#  recipe to execute (from 'Makefile', line 104):
 	@git add .
 	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
 	@git push
@@ -231,15 +246,9 @@ git:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-06 23:15:18.998281385
+#  Last modified 2022-08-19 15:45:59.871486879
 #  File has been updated.
 #  Successfully updated.
-
-# Not a target:
-objs/main_minishell.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 fclean,:
 #  Phony target (prerequisite of .PHONY).
@@ -247,20 +256,20 @@ fclean,:
 #  File does not exist.
 #  File has not been updated.
 
-minishell: libs/libft/libft.a objs/main_minishell.o objs/test_execve.o
+minishell: libs/libft/libft.a objs/main.o objs/interactve_mode.o objs/prompt.o objs/test_execve.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 56):
+#  recipe to execute (from 'Makefile', line 72):
 	@echo "\033[34mCreation of $(NAME) ...\033[0m"
-	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread
+	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread $(LIBS)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 
 fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 72):
+#  recipe to execute (from 'Makefile', line 88):
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
 	@make fclean -C ./libs/libft/
 	@rm -rf $(NAME)
@@ -272,10 +281,10 @@ lib:
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
+ 
 # automatic
 # @ := lib
 # automatic
- 
 # % := 
 # automatic
 # * := 
@@ -291,7 +300,7 @@ lib:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'Makefile', line 80):
+#  recipe to execute (from 'Makefile', line 96):
 	@make -C./libs/libft/
 
 # Not a target:
@@ -322,18 +331,30 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 65):
+#  recipe to execute (from 'Makefile', line 81):
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@make clean -C ./libs/libft/
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "\033[31mFiles .o deleted\n\033[0m"
 
+# Not a target:
+objs/prompt.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/interactve_mode.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 norme:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 83):
+#  recipe to execute (from 'Makefile', line 99):
 	norminette ./srcs/
 	norminette ./includes/*.h
 
@@ -344,19 +365,19 @@ objs/test_execve.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/44=0%
+# Load=20/1024=2%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 34 / storage = 299 B / avg = 8 B
-# current buf: size = 8162 B / used = 299 B / count = 34 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 36 / storage = 326 B / avg = 9 B
+# current buf: size = 8162 B / used = 326 B / count = 36 / avg = 9 B
 
-# strcache performance: lookups = 58 / hit rate = 41%
+# strcache performance: lookups = 60 / hit rate = 40%
 # hash-table stats:
-# Load=34/8192=0%, Rehash=0, Collisions=1/58=2%
-# Finished Make data base on Fri Aug 19 09:40:55 2022
+# Load=36/8192=0%, Rehash=0, Collisions=1/60=2%
+# Finished Make data base on Fri Aug 19 15:46:39 2022
 
  
