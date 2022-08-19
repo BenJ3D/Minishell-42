@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/29 16:05:24 by cfatrane          #+#    #+#              #
-#    Updated: 2022/08/19 15:45:59 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/19 17:38:27 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT_PATH	= ./libs/libft/libft.a
 # Name
 
 SRC_NAME =	main.c					\
-			interactve_mode.c		\
+			interactive_mode.c		\
 			prompt.c				\
 			test_execve.c
 

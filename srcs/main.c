@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/19 17:28:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:48:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	main(int ac, char **av, char **env)
 	}
 	// test_execve_ls_fork(av);
 	// interactive_mode();
-	basic_prompt();
+	ft_putstr_fd("test fonction readline\n", 1);
+	char *buffer = NULL;
+	readline(buffer);
+	printf("%s\n", buffer);
+	// basic_prompt();
 
 	return (0);
 }

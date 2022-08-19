@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Fri Aug 19 15:46:39 2022
+# Make data base, printed on Fri Aug 19 17:43:09 2022
 
 # Variables
 
@@ -100,7 +99,7 @@ SHLVL = 0
 # makefile (from 'Makefile', line 47)
 CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
 # makefile (from 'Makefile', line 31)
-SRC_NAME = main.c interactve_mode.c prompt.c test_execve.c
+SRC_NAME = main.c interactive_mode.c prompt.c test_execve.c
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -186,10 +185,10 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 93007): 13 files, no impossibilities.
+# . (device 2064, inode 93007): 12 files, no impossibilities.
 # srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 2 directories.
+# 12 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -228,6 +227,12 @@ all: lib minishell
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+objs/interactive_mode.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 git:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -246,7 +251,7 @@ git:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 15:45:59.871486879
+#  Last modified 2022-08-19 17:38:27.641490211
 #  File has been updated.
 #  Successfully updated.
 
@@ -256,7 +261,7 @@ fclean,:
 #  File does not exist.
 #  File has not been updated.
 
-minishell: libs/libft/libft.a objs/main.o objs/interactve_mode.o objs/prompt.o objs/test_execve.o
+minishell: libs/libft/libft.a objs/main.o objs/interactive_mode.o objs/prompt.o objs/test_execve.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -270,6 +275,7 @@ fclean: clean
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 88):
+ 
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
 	@make fclean -C ./libs/libft/
 	@rm -rf $(NAME)
@@ -281,7 +287,6 @@ lib:
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
- 
 # automatic
 # @ := lib
 # automatic
@@ -344,12 +349,6 @@ objs/prompt.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-objs/interactve_mode.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 norme:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -372,12 +371,12 @@ objs/test_execve.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 36 / storage = 326 B / avg = 9 B
-# current buf: size = 8162 B / used = 326 B / count = 36 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 36 / storage = 327 B / avg = 9 B
+# current buf: size = 8162 B / used = 327 B / count = 36 / avg = 9 B
 
-# strcache performance: lookups = 60 / hit rate = 40%
+# strcache performance: lookups = 59 / hit rate = 38%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=1/60=2%
-# Finished Make data base on Fri Aug 19 15:46:39 2022
+# Load=36/8192=0%, Rehash=0, Collisions=1/59=2%
+# Finished Make data base on Fri Aug 19 17:43:09 2022
 
  
