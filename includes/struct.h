@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/19 18:22:18 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/02/21 19:13:38 by aartiges &        #+#    #+#             */
+/*   Updated: 2022/08/19 18:46:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/minishell.h>
+#ifndef STRUCT_H
+# define STRUCT_H
+# include "includes.h"
 
-void basic_prompt()
+typedef struct s_shell
 {
-	char *buffer;
+	t_env	*env;
+}		t_shell;
 
-	buffer = NULL;
-	write(1, "miniHelle v0.1 $> ", 19);
-
-	while ((buffer = readline("")) > 0)
-	{
-		printf("cmd = %s\n", buffer);
-		write(1, "miniHelle v0.1 $> ", 19);
-		free(buffer);
-		buffer = NULL;
-	}
-	printf("Bye \n");
-}
+#endif
