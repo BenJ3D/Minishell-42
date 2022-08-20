@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/06/21 18:05:09 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/21 00:25:12 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ FILES = ft_memset \
 		ft_strdup \
 		ft_substr \
 		ft_strjoin \
+		ft_strjoin_max \
 		ft_strtrim \
 		ft_split \
 		ft_itoa \
