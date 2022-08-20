@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 01:25:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 01:26:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int main()
 	nline = ft_concact(nline, "Benjamin comment\n");
 	ft_putstr(nline);
 	ft_putstr("\n");
-	nline = ft_concact(nline, "tu vas\n");
+	// nline = ft_concact(nline, "tu vas\n");
 	ft_putstr(nline);
 	ft_putstr("Euh..\n");
 	// nline = ft_concact(nline, " tu vas ?\n");
