@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 18:45:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:30:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void basic_prompt(char **av, char **env)
 {
 	char *buffer;
 	char *line;
-	t_shell	shell;
 	
 	buffer = NULL;
 	line = update_prompt();
@@ -40,6 +39,11 @@ void basic_prompt(char **av, char **env)
 	{
 		if (!ft_strncmp(buffer, "ls", 3))
 			execve("/usr/bin/ls", av, env);
+		if (!ft_strncmp(buffer, "testenv", 8))
+		{
+			setenv("LOGNAME", "BEN3D", 1);
+			printf("LOGNAME = %s\n", getenv("LOGNAME"));
+		}
 		else
 			printf("cmd = %s\n", buffer);
 		free(buffer);

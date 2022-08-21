@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug 21 18:52:39 2022
+# Make data base, printed on Sun Aug 21 23:40:07 2022
 
 # Variables
 
@@ -38,9 +40,9 @@ VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePac
 _ = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
 # makefile (from 'Makefile', line 41)
 CFLAGS := 
-# makefile (from 'obj/main.d', line 1)
-MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d obj/exec/test_execve.d obj/signal/interactive_mode.d obj/main.d
-# 'override' directive
+# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
+MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d
+# environment
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 51)
 SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/main.c
@@ -61,8 +63,8 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-077e1b61-6b01-4192-90a0-97f4f5c2f4ce.sock
-# makefile (from 'Makefile', line 44)
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-f2f6a4e8-87d4-440f-8eed-3d00c93a7365.sock
+# makefile (from 'Makefile', line 45)
 LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
@@ -74,6 +76,8 @@ SRCDIR := srcs
 %F = $(notdir $%)
 # makefile (from 'Makefile', line 30)
 UNAME_S := Linux
+# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
+-fsanitize = address
 # makefile (from 'Makefile', line 27)
 DEPEXT := d
 # environment
@@ -81,7 +85,7 @@ PWD = /home/ben/projet42/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/18_interop
+WSL_INTEROP = /run/WSL/24876_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -122,7 +126,7 @@ LESS = -R
 VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/ben13/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
-# makefile (from 'Makefile', line 45)
+# makefile (from 'Makefile', line 46)
 INC := -Iincludes
 # environment
 OLDPWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
@@ -154,6 +158,8 @@ INC_INC = -I/usr/local/include
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
+# makefile (from 'Makefile', line 44)
+LIBFT_PATH := ./libs/libft/libft.a
 # environment
 PAGER = less
 # environment
@@ -166,14 +172,14 @@ HOSTTYPE = x86_64
 SUFFIXES := 
 # makefile (from 'Makefile', line 43)
 LLDBFLAG := -g3
-# makefile (from 'Makefile', line 46)
+# makefile (from 'Makefile', line 47)
 INCDEP := -Iincludes
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
 .RECIPEPREFIX := 
 # makefile (from 'Makefile', line 52)
-OBJECTS := obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/main.o
+OBJECTS := obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/main.o 
 # makefile (from 'Makefile', line 32)
 INC_LIB = -L/usr/local/lib
 # environment
@@ -183,7 +189,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=86/1024=8%, Rehash=0, Collisions=4/155=3%
+# Load=88/1024=9%, Rehash=0, Collisions=4/130=3%
 
 # Pattern-specific Variable Values
 
@@ -191,61 +197,18 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 93007): 14 files, no impossibilities.
-# srcs (device 2064, inode 143210): No files, no impossibilities so far.
+# . (device 2064, inode 93007): 13 files, no impossibilities.
 
-# 14 files, no impossibilities in 2 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-obj/%.o: srcs/%.c
-#  recipe to execute (from 'Makefile', line 91):
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
-	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
-	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
-	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
-
-# 1 implicit rules, 0 (0.0%) terminal.
+# No implicit rules.
 
 # Files
 
-obj/parsing/prompt/prompt.o: srcs/parsing/prompt/prompt.c includes/./../includes/minishell.h includes/./../includes/../libs/libft/libft.h includes/./../includes/define_common.h includes/./../includes/includes.h includes/./../includes/struct.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
- 
-srcs/parsing/prompt/prompt.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/signal/../../includes/struct.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/exec/test_execve.d:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 18:51:42.051150598
-#  File has been updated.
-#  Successfully updated.
-
 all: lib minishell
-#  Phony target (prerequisite of .PHONY).
 #  Command line target.
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-
-.PHONY: all re clean fclean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -257,106 +220,34 @@ resources: directories
 #  recipe to execute (from 'Makefile', line 62):
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
-includes/../includes/../libs/libft/libft.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-obj/main.o: srcs/main.c includes/../includes/minishell.h includes/../includes/../libs/libft/libft.h includes/../includes/define_common.h includes/../includes/includes.h includes/../includes/struct.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 # Not a target:
 Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 18:50:51.511150573
-#  File has been updated.
-#  Successfully updated.
-
-srcs/main.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-includes/../includes/struct.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-obj/signal/interactive_mode.d:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 18:51:42.091150598
-#  File has been updated.
-#  Successfully updated.
-
-includes/./../includes/minishell.h:
+minishell:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-obj/exec/test_execve.o: srcs/exec/test_execve.c includes/./../includes/minishell.h includes/./../includes/../libs/libft/libft.h includes/./../includes/define_common.h includes/./../includes/includes.h includes/./../includes/struct.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/exec/test_execve.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-includes/./../includes/define_common.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-minishell: obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/main.o
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 87):
-	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
 
 fclean: clean
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 79):
-	@$(RM) -rf $(NAME)
-	@make fclean -C ./libs/libft/
-
-includes/./../includes/../libs/libft/libft.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 81):
+	@echo "\033[33mRemoval of $(NAME)...\033[0m"
+	@$(RM) -rf $(NAME)
+	@make fclean -C ./libs/libft/
+	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
 
 lib: directories
 #  Implicit rule search has not been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 65):
 	@make -C./libs/libft/
-
-includes/./../includes/includes.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-includes/../includes/define_common.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -364,122 +255,50 @@ includes/../includes/define_common.h:
 #  Modification time never checked.
 #  File has not been updated.
 
-includes/../includes/includes.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-obj/signal/interactive_mode.o: srcs/signal/interactive_mode.c srcs/signal/../../includes/minishell.h srcs/signal/../../includes/../libs/libft/libft.h srcs/signal/../../includes/define_common.h srcs/signal/../../includes/includes.h srcs/signal/../../includes/struct.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/signal/interactive_mode.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 re: fclean all
-#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Modification time never checked.
 #  File has not been updated.
 
 clean:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 74):
-	@$(RM) -rf $(BUILDDIR)
-	@make clean -C ./libs/libft/
-
-includes/./../includes/struct.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 74):
+	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
+	@$(RM) -rf $(BUILDDIR)
+	@make clean -C ./libs/libft/
+	@echo "\033[31mFiles .o deleted\n\033[0m"
 
 # Not a target:
 obj/parsing/prompt/prompt.d:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 18:51:42.021150598
-#  File has been updated.
-#  Successfully updated.
-
-srcs/signal/../../includes/minishell.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/signal/../../includes/define_common.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-includes/../includes/minishell.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/signal/../../includes/../libs/libft/libft.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/signal/../../includes/includes.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 directories:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := directories
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 69):
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
 
-# Not a target:
-obj/main.d:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 18:51:42.121150598
-#  File has been updated.
-#  Successfully updated.
-
 # files hash-table stats:
-# Load=39/1024=4%, Rehash=0, Collisions=15/122=12%
+ 
+# Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 55 / storage = 1065 B / avg = 19 B
-# current buf: size = 8162 B / used = 1065 B / count = 55 / avg = 19 B
+# strcache buffers: 1 (0) / strings = 28 / storage = 276 B / avg = 9 B
+# current buf: size = 8162 B / used = 276 B / count = 28 / avg = 9 B
 
-# strcache performance: lookups = 148 / hit rate = 62%
+# strcache performance: lookups = 48 / hit rate = 41%
 # hash-table stats:
-# Load=55/8192=1%, Rehash=0, Collisions=16/148=11%
-# Finished Make data base on Sun Aug 21 18:52:39 2022
+# Load=28/8192=0%, Rehash=0, Collisions=1/48=2%
+# Finished Make data base on Sun Aug 21 23:40:07 2022
 
  
