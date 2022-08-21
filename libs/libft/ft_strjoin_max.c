@@ -6,72 +6,42 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 01:26:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 02:31:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_concact(char *src, char *str)
+/**
+ * @brief joint un nombre variadique d'arg str
+ * le return doit être free apres usage
+ * 
+ * @param fmt formattage
+ * @param ... arg : ne mettre que des str ex: "Hello" pas de char ex: 'c'
+ * et aucun arg ne doit etre = NULL
+ * @return char* avec malloc
+ */
+char	*ft_strjoin_max(const char *fmt, ...)
 {
-	char	*tmpline;
-	int		i;
-	int		y;
-	
-	i = 0;
-	if (!src)
-		src = ft_strdup("");
-	tmpline = ft_calloc((ft_strlen(src) + ft_strlen(str) + 1), sizeof(tmpline));
-	while (src[i])
-	{
-		tmpline[y] = src[i];
-		y++;
-		i++;
-	}
-	while (*str)
-	{
-		tmpline[y] = *str;
-		y++;
-		*str++;
-	}
-	tmpline[y] = '\0';
-	free (src);
-	return (tmpline);
-}
+	char	*nline;
+	va_list	ap;
 
-char *ft_strjoin_max_tmp(const char *fmt, ...)
-{
-	char *tmp;
-	char *tmp2;
-	va_list ap;
-
+	nline = NULL;
 	va_start(ap, fmt);
-	// while (*fmt)
-	// {
-	// 	ft_strlcat()
-	// }
-
-	return (tmp);
-}
-
-int main()
-{
-	char *tmp;
-	char *nline = NULL;
-	
-	// nline = ft_strjoin_max_tmp(" -- %s%s%s --\n", "\033[0;31m", "ben", "\033[0;37m");
-
-	// nline = ft_strdup("Coucou ");
-	ft_putstr(nline);
-	ft_putstr("\n");
-	nline = ft_concact(nline, "Benjamin comment\n");
-	ft_putstr(nline);
-	ft_putstr("\n");
-	// nline = ft_concact(nline, "tu vas\n");
-	ft_putstr(nline);
-	ft_putstr("Euh..\n");
-	// nline = ft_concact(nline, " tu vas ?\n");
-	// ft_putstr(nline);
-	free (nline);
-	return (0);
+	while (*fmt)
+	{
+		if (fmt[0] == '%' && fmt[1] == 's')
+		{
+			nline = ft_concat_str(nline, va_arg(ap, char *));
+			fmt++;
+			fmt++;
+		}
+		else
+		{
+			nline = ft_concat_char(nline, fmt[0]);
+			fmt++;
+		}
+	}
+	va_end(ap);
+	return (nline);
 }

@@ -1,15 +1,5 @@
 make --dry-run --keep-going --print-directory
-make: Entering directory '/home/ben/projet/minishell'
+make: Entering directory '/home/ben/projet42/minishell'
 make -C./libs/libft/
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/main.o -c srcs/main.c
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/interactive_mode.o -c srcs/interactive_mode.c
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/prompt.o -c srcs/prompt.c
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/test_execve.o -c srcs/test_execve.c
-make: Leaving directory '/home/ben/projet/minishell'
+make: Leaving directory '/home/ben/projet42/minishell'
  
-make: *** No rule to make target 'libs/libft/libft.a', needed by 'minishell'.
-
