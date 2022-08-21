@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactve_mode.c                                  :+:      :+:    :+:   */
+/*   interactive_mode.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by aartiges          #+#    #+#             */
-/*   Updated: 2022/08/19 12:09:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 11:12:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
