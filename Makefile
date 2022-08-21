@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/29 16:05:24 by cfatrane          #+#    #+#              #
-#    Updated: 2022/08/19 17:38:27 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/21 02:56:41 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
 
 CFLAGS =# -Wall -Wextra -Werror
-SANITIZE =# -fsanitize=address
+SANITIZE = -fsanitize=address
 LLDBFLAG = -g3
 
 # Includes lib readline

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/08/20 23:48:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 03:16:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 # include "includes.h"
 # include "struct.h"
 
-
 /* FT TEST */
 int		test_execve_ls_fork(char **av);
-void	basic_prompt();
+void	basic_prompt(char **av, char **env);
 
-	/* FT AART */
+/* FT AART */
 void	handler_interative(int signum);
 void	interactive_mode(void);
 

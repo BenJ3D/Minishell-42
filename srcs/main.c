@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 02:25:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 03:15:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int	main(int ac, char **av, char **env)
 	
 
 	// interactive_mode();
-	basic_prompt();
 
-	char *nline = NULL;
+	// char *nline = NULL;
 
-	nline = ft_strjoin_max("-- %s -- %s", "NULL", "Hello");
-	ft_putstr(nline);
-	free(nline);
+	// nline = ft_strjoin_max("%s%s@%s:%s%s%s$ ", \
+	// 	GREEN, getenv("LOGNAME"),getenv("NAME"), \
+	// 	CYAN,	getenv("PWD"), NONE_COLOR);
+	// ft_putstr(nline);
+	// free(nline);
 
+	basic_prompt(av, env);
 	return (0);
 }

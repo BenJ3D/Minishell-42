@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug 21 02:28:39 2022
+# Make data base, printed on Sun Aug 21 02:57:40 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ MAKEFILE_LIST :=  Makefile
 # 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 50)
-SANITIZE = 
+SANITIZE = -fsanitize=address
 # environment
 VSCODE_CWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
 # default
@@ -59,7 +59,7 @@ SRC_PATH = ./srcs/
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-830cb921-0527-41a6-90c5-1dc0a8bc0360.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-077e1b61-6b01-4192-90a0-97f4f5c2f4ce.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -251,7 +251,7 @@ git:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 17:38:27.641490211
+#  Last modified 2022-08-21 02:56:41.224489085
 #  File has been updated.
 #  Successfully updated.
 
@@ -281,6 +281,7 @@ fclean: clean
 	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
 
 lib:
+ 
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -376,6 +377,6 @@ objs/test_execve.o:
 # strcache performance: lookups = 60 / hit rate = 40%
 # hash-table stats:
 # Load=36/8192=0%, Rehash=0, Collisions=1/60=2%
-# Finished Make data base on Sun Aug 21 02:28:39 2022
+# Finished Make data base on Sun Aug 21 02:57:40 2022
 
  
