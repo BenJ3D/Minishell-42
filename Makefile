@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/21 22:01:21 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/21 22:06:12 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,6 @@ RESDIR      := lib
 SRCEXT      := c
 DEPEXT      := d
 OBJEXT      := o
-gate = yes
-
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
