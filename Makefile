@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/21 19:01:19 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/21 22:01:21 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ RESDIR      := lib
 SRCEXT      := c
 DEPEXT      := d
 OBJEXT      := o
+gate = yes
+
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
@@ -41,10 +43,10 @@ UNAME_S := $(shell uname -s)
 CFLAGS      :=#-Wall -Wextra -Werror
 SANITIZE    := -fsanitize=address
 LLDBFLAG    := -g3
-LIB         := $(INC_LIB) $(INC_INC) -lreadline ./libs/libft/libft.a
+LIBFT_PATH  := ./libs/libft/libft.a
+LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
 INC         := -I$(INCDIR)
 INCDEP      := -I$(INCDIR)
-
 #------------------------------------------------------------------------------#
 #                                  RULES.......................................#
 #------------------------------------------------------------------------------#
@@ -71,21 +73,20 @@ directories:
 
 #Clean only Objecst
 clean:
+	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@$(RM) -rf $(BUILDDIR)
 	@make clean -C ./libs/libft/
+	@echo "\033[31mFiles .o deleted\n\033[0m"
 
 #Full Clean, Objects and Binaries
 fclean: clean
+	@echo "\033[33mRemoval of $(NAME)...\033[0m"
 	@$(RM) -rf $(NAME)
 	@make fclean -C ./libs/libft/
+	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
 
 #Pull in dependency info for *existing* .o files
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
-
-norme:
-	norminette ./srcs/
-	norminette ./includes/*.h
-
 
 git:
 	@git add .
@@ -93,11 +94,12 @@ git:
 	@git push
 
 #Link
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS) 
 	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
+	@echo "\033[32m$(NAME) created\n\033[0m"
 
 #Compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) ./Makefile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
