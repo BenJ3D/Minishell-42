@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 11:12:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:15:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../../includes/minishell.h>
+#include <./../includes/minishell.h>
 
 /**
  * @brief utiliser la fonction execve pour lancer prog ls
