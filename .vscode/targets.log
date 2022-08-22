@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug 21 23:40:07 2022
+# Make data base, printed on Mon Aug 22 16:37:08 2022
 
 # Variables
 
@@ -40,9 +38,9 @@ VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePac
 _ = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
 # makefile (from 'Makefile', line 41)
 CFLAGS := 
-# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
-MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d
-# environment
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 51)
 SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/main.c
@@ -63,7 +61,7 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-f2f6a4e8-87d4-440f-8eed-3d00c93a7365.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e6bcaf62-aa14-49cb-a90d-7965517fe26f.sock
 # makefile (from 'Makefile', line 45)
 LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
@@ -76,8 +74,6 @@ SRCDIR := srcs
 %F = $(notdir $%)
 # makefile (from 'Makefile', line 30)
 UNAME_S := Linux
-# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
--fsanitize = address
 # makefile (from 'Makefile', line 27)
 DEPEXT := d
 # environment
@@ -85,7 +81,7 @@ PWD = /home/ben/projet42/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/24876_interop
+WSL_INTEROP = /run/WSL/18_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -179,6 +175,7 @@ INCDEP := -Iincludes
 # default
 .RECIPEPREFIX := 
 # makefile (from 'Makefile', line 52)
+ 
 OBJECTS := obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/main.o 
 # makefile (from 'Makefile', line 32)
 INC_LIB = -L/usr/local/lib
@@ -189,7 +186,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=4/130=3%
+# Load=87/1024=8%, Rehash=0, Collisions=4/150=3%
 
 # Pattern-specific Variable Values
 
@@ -197,18 +194,51 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 93007): 13 files, no impossibilities.
+# . (device 2064, inode 93007): 11 files, no impossibilities.
+# srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+obj/%.o: srcs/%.c libs/libft/libft.a Makefile
+#  recipe to execute (from 'Makefile', line 101):
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
+# Not a target:
+obj/parsing/prompt/prompt.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/exec/test_execve.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
 all: lib minishell
+#  Phony target (prerequisite of .PHONY).
 #  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+.PHONY: all re clean fclean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -220,21 +250,59 @@ resources: directories
 #  recipe to execute (from 'Makefile', line 62):
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
+git:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 90):
+	@git add .
+	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
+	@git push
+
+# Not a target:
+obj/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # Not a target:
 Makefile:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-21 23:42:11.061159205
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-minishell:
+obj/signal/interactive_mode.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/exec/test_execve.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-fclean: clean
+minishell: obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 96):
+	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
+	@echo "\033[32m$(NAME) created\n\033[0m"
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 81):
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
@@ -244,8 +312,11 @@ fclean: clean
 
 lib: directories
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 65):
 	@make -C./libs/libft/
 
@@ -255,14 +326,22 @@ lib: directories
 #  Modification time never checked.
 #  File has not been updated.
 
-re: fclean all
+# Not a target:
+obj/signal/interactive_mode.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-clean:
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 74):
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
@@ -272,33 +351,60 @@ clean:
 
 # Not a target:
 obj/parsing/prompt/prompt.d:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 directories:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := directories
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
 #  recipe to execute (from 'Makefile', line 69):
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
 
+# Not a target:
+obj/main.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
 # files hash-table stats:
- 
-# Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/56=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 28 / storage = 276 B / avg = 9 B
-# current buf: size = 8162 B / used = 276 B / count = 28 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 36 / storage = 411 B / avg = 11 B
+# current buf: size = 8162 B / used = 411 B / count = 36 / avg = 11 B
 
-# strcache performance: lookups = 48 / hit rate = 41%
+# strcache performance: lookups = 69 / hit rate = 47%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=1/48=2%
-# Finished Make data base on Sun Aug 21 23:40:07 2022
+# Load=36/8192=0%, Rehash=0, Collisions=1/69=1%
+# Finished Make data base on Mon Aug 22 16:37:08 2022
 
  
