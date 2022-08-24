@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by aartiges &        #+#    #+#             */
-/*   Updated: 2022/08/20 21:57:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:29:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,11 @@ typedef struct s_shell
 	char *logname;
 	char *name;
 }		t_shell;
+
+typedef struct s_env
+{
+	char **env;
+	char *key;
+}		t_env;
 
 #endif

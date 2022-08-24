@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 23:30:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 02:02:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,43 @@ void basic_prompt(char **av, char **env)
 {
 	char *buffer;
 	char *line;
+	pid_t	child;
 	
 	buffer = NULL;
 	line = update_prompt();
 	while ((buffer = readline(line)) > 0)
 	{
 		if (!ft_strncmp(buffer, "ls", 3))
-			execve("/usr/bin/ls", av, env);
-		if (!ft_strncmp(buffer, "testenv", 8))
+		{
+			child = fork();
+			if (child == 0)
+			{
+				execve("/usr/bin/ls", av, env);
+			}
+			wait(0);
+		}
+		else if (!ft_strncmp(buffer, "testenv", 8))
 		{
 			setenv("LOGNAME", "BEN3D", 1);
 			printf("LOGNAME = %s\n", getenv("LOGNAME"));
 		}
+		else if (!ft_strncmp(buffer, "testcd", 8))
+		{
+			setenv("PWD", "/home/ben/projet/", 1);
+			printf("PWD = %s\n", getenv("PWD"));
+			printf("OLDPWD = %s\n", getenv("OLDPWD"));
+		}
+		else if (!ft_strncmp(buffer, "pwd", 8))
+		{
+			printf("%s\n", getenv("PWD"));
+		}
 		else
-			printf("cmd = %s\n", buffer);
+			printf("%s: command not found\n", buffer);
 		free(buffer);
 		buffer = NULL;
 		free(line);
 		line = update_prompt();
+		rl_on_new_line();
 	}
 	if (line)
 		free(line);

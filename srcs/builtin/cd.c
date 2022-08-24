@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 17:35:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/24 02:27:58 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/08/23 22:27:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
+#include <./../includes/minishell.h>
 
-# define INCLUDES_H
-
-# include <limits.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-
-#endif
+int	ft_cd(t_env env, char *next_path)
+{
+	
+	return (0);
+}
