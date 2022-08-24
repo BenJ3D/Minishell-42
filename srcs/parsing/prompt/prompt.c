@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/24 02:02:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:56:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void basic_prompt(char **av, char **env)
 		else if (!ft_strncmp(buffer, "pwd", 8))
 		{
 			printf("%s\n", getenv("PWD"));
+		}
+		else if (!ft_strncmp(buffer, "rmm", 8))
+		{
+			unlink("adieu");
 		}
 		else
 			printf("%s: command not found\n", buffer);
