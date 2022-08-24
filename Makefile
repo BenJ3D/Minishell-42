@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/21 22:06:12 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/24 20:44:01 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ UNAME_S := $(shell uname -s)
 	endif
 
 #Flags, Libraries and Includes
-CFLAGS      :=#-Wall -Wextra -Werror
+CFLAGS      :=# -Wall -Wextra -Werror
 SANITIZE    := -fsanitize=address
 LLDBFLAG    := -g3
 LIBFT_PATH  := ./libs/libft/libft.a
@@ -63,7 +63,7 @@ resources: directories
 
 lib: directories
 	@make -C./libs/libft/
-
+	
 #Make the Directories
 directories:
 	@mkdir -p $(NAMEDIR)

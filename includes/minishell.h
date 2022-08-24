@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/08/21 03:16:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:15:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 /* FT TEST */
 int		test_execve_ls_fork(char **av);
-void	basic_prompt(char **av, char **env);
+void	prompt_basic_test(char **av, char **env);
 
 /* FT AART */
 void	handler_interative(int signum);

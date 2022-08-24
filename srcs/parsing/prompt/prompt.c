@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/24 13:56:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:08:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
-char *update_prompt(void)
+char *prompt_update(void)
 {
 	char *line;
 	
@@ -28,15 +28,16 @@ char *update_prompt(void)
 	return (line);
 }
 
-void basic_prompt(char **av, char **env)
+void prompt_basic_test(char **av, char **env)
 {
 	char *buffer;
 	char *line;
 	pid_t	child;
 	
 	buffer = NULL;
-	line = update_prompt();
-	while ((buffer = readline(line)) > 0)
+	line = prompt_update();
+	buffer = readline(line);
+	while ((buffer))
 	{
 		if (!ft_strncmp(buffer, "ls", 3))
 		{
@@ -64,18 +65,20 @@ void basic_prompt(char **av, char **env)
 		}
 		else if (!ft_strncmp(buffer, "rmm", 8))
 		{
-			unlink("adieu");
+			unlink("adieu"); // supprim un fichier
 		}
 		else
 			printf("%s: command not found\n", buffer);
 		free(buffer);
 		buffer = NULL;
 		free(line);
-		line = update_prompt();
+		line = prompt_update();
 		rl_on_new_line();
+		buffer = readline(line);
 	}
 	if (line)
 		free(line);
+	free(buffer);
 	printf("exit\n");
 }
 

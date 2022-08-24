@@ -6,11 +6,39 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 03:15:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:36:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/minishell.h>
+
+
+int env_test_read(char **env, const char *key)
+{
+	char	*value;
+	int		i;
+	int		ret;
+
+	ret = 0;
+	i = 0;
+	while (ret = ft_strncmp(env[i], key, ft_strlen(key)))
+	{
+		printf("i %i ||  ret = %i || key = %s || val = %s------------\n", i, ret, key, env[i]);
+		i++;
+	}
+	value = ft_strdup(env[i]);
+	printf("env %s : %s", key, value);
+	free (value);
+	// env[i][3] = 'Q';
+	return (i);
+}
+
+char	*ft_env_return_key(char **env, char *key)
+{
+	
+	return (NULL);
+}
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -48,6 +76,12 @@ int	main(int ac, char **av, char **env)
 	// ft_putstr(nline);
 	// free(nline);
 
-	basic_prompt(av, env);
+	env_test_read(env, "LOGNAME");
+	prompt_basic_test(av, env);
+
+	
+	
+	
 	return (0);
 }
+
