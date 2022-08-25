@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/24 20:44:01 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/25 12:35:34 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@find . -name "*.d" -type f -delete
 
 #Non-File NAMEs
 .PHONY: all re clean fclean

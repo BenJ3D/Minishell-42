@@ -8,7 +8,7 @@ obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Aug 24 20:44:03 2022
+# Make data base, printed on Thu Aug 25 12:17:05 2022
 
 # Variables
 
@@ -63,7 +63,7 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-5360efc2-26db-4202-92e0-b378bebff887.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-f8f48831-bb14-4962-b0e3-3bf49c549e09.sock
 # makefile (from 'Makefile', line 45)
 LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
@@ -197,7 +197,7 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 93007): 13 files, no impossibilities.
+# . (device 2064, inode 93007): 13 files, no impossibilities.
 
 # 13 files, no impossibilities in 1 directories.
 
@@ -286,6 +286,7 @@ directories:
 	@mkdir -p $(BUILDDIR)
 
 # files hash-table stats:
+ 
 # Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
 
@@ -293,13 +294,12 @@ directories:
 
 # No general ('VPATH' variable) search path.
 
- 
 # strcache buffers: 1 (0) / strings = 35 / storage = 408 B / avg = 11 B
 # current buf: size = 8162 B / used = 408 B / count = 35 / avg = 11 B
 
 # strcache performance: lookups = 55 / hit rate = 36%
 # hash-table stats:
 # Load=35/8192=0%, Rehash=0, Collisions=1/55=2%
-# Finished Make data base on Wed Aug 24 20:44:03 2022
+# Finished Make data base on Thu Aug 25 12:17:05 2022
 
  

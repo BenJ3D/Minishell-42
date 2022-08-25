@@ -1,14 +1,12 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/ben/projet42/minishell'
  
 mkdir -p ./
 mkdir -p obj
 make -C./libs/libft/
- 
 mkdir -p obj/parsing/prompt/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/parsing/prompt/prompt.o srcs/parsing/prompt/prompt.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/parsing/prompt/prompt.c > obj/parsing/prompt/prompt.d
- 
 cp -f obj/parsing/prompt/prompt.d obj/parsing/prompt/prompt.d.tmp
 sed -e 's|.*:|obj/parsing/prompt/prompt.o:|' < obj/parsing/prompt/prompt.d.tmp > obj/parsing/prompt/prompt.d
 sed -e 's/.*://' -e 's/\\$//' < obj/parsing/prompt/prompt.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/parsing/prompt/prompt.d
@@ -20,12 +18,10 @@ cp -f obj/exec/test_execve.d obj/exec/test_execve.d.tmp
 sed -e 's|.*:|obj/exec/test_execve.o:|' < obj/exec/test_execve.d.tmp > obj/exec/test_execve.d
 sed -e 's/.*://' -e 's/\\$//' < obj/exec/test_execve.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/exec/test_execve.d
 rm -f obj/exec/test_execve.d.tmp
- 
 mkdir -p obj/signal/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/signal/interactive_mode.o srcs/signal/interactive_mode.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/signal/interactive_mode.c > obj/signal/interactive_mode.d
 cp -f obj/signal/interactive_mode.d obj/signal/interactive_mode.d.tmp
- 
 sed -e 's|.*:|obj/signal/interactive_mode.o:|' < obj/signal/interactive_mode.d.tmp > obj/signal/interactive_mode.d
 sed -e 's/.*://' -e 's/\\$//' < obj/signal/interactive_mode.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/signal/interactive_mode.d
 rm -f obj/signal/interactive_mode.d.tmp
@@ -36,7 +32,6 @@ cp -f obj/builtin/cd.d obj/builtin/cd.d.tmp
 sed -e 's|.*:|obj/builtin/cd.o:|' < obj/builtin/cd.d.tmp > obj/builtin/cd.d
 sed -e 's/.*://' -e 's/\\$//' < obj/builtin/cd.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/builtin/cd.d
 rm -f obj/builtin/cd.d.tmp
- 
 mkdir -p obj/builtin/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/builtin/exit.o srcs/builtin/exit.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/builtin/exit.c > obj/builtin/exit.d
@@ -44,7 +39,6 @@ cp -f obj/builtin/exit.d obj/builtin/exit.d.tmp
 sed -e 's|.*:|obj/builtin/exit.o:|' < obj/builtin/exit.d.tmp > obj/builtin/exit.d
 sed -e 's/.*://' -e 's/\\$//' < obj/builtin/exit.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/builtin/exit.d
 rm -f obj/builtin/exit.d.tmp
- 
 mkdir -p obj/builtin/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/builtin/unset.o srcs/builtin/unset.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/builtin/unset.c > obj/builtin/unset.d
@@ -52,7 +46,6 @@ cp -f obj/builtin/unset.d obj/builtin/unset.d.tmp
 sed -e 's|.*:|obj/builtin/unset.o:|' < obj/builtin/unset.d.tmp > obj/builtin/unset.d
 sed -e 's/.*://' -e 's/\\$//' < obj/builtin/unset.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/builtin/unset.d
 rm -f obj/builtin/unset.d.tmp
- 
 mkdir -p obj/builtin/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/builtin/echo.o srcs/builtin/echo.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/builtin/echo.c > obj/builtin/echo.d
@@ -62,7 +55,6 @@ sed -e 's/.*://' -e 's/\\$//' < obj/builtin/echo.d.tmp | fmt -1 | sed -e 's/^ */
 rm -f obj/builtin/echo.d.tmp
 mkdir -p obj/builtin/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/builtin/export.o srcs/builtin/export.c
- 
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/builtin/export.c > obj/builtin/export.d
 cp -f obj/builtin/export.d obj/builtin/export.d.tmp
 sed -e 's|.*:|obj/builtin/export.o:|' < obj/builtin/export.d.tmp > obj/builtin/export.d
@@ -75,7 +67,6 @@ cp -f obj/builtin/pwd.d obj/builtin/pwd.d.tmp
 sed -e 's|.*:|obj/builtin/pwd.o:|' < obj/builtin/pwd.d.tmp > obj/builtin/pwd.d
 sed -e 's/.*://' -e 's/\\$//' < obj/builtin/pwd.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/builtin/pwd.d
 rm -f obj/builtin/pwd.d.tmp
- 
 mkdir -p obj/builtin/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/builtin/env.o srcs/builtin/env.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/builtin/env.c > obj/builtin/env.d
@@ -83,7 +74,6 @@ cp -f obj/builtin/env.d obj/builtin/env.d.tmp
 sed -e 's|.*:|obj/builtin/env.o:|' < obj/builtin/env.d.tmp > obj/builtin/env.d
 sed -e 's/.*://' -e 's/\\$//' < obj/builtin/env.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/builtin/env.d
 rm -f obj/builtin/env.d.tmp
- 
 mkdir -p obj/
 gcc  -fsanitize=address -g3  -Iincludes -c -o obj/main.o srcs/main.c
 gcc  -fsanitize=address -g3  -Iincludes -MM srcs/main.c > obj/main.d
@@ -91,7 +81,6 @@ cp -f obj/main.d obj/main.d.tmp
 sed -e 's|.*:|obj/main.o:|' < obj/main.d.tmp > obj/main.d
 sed -e 's/.*://' -e 's/\\$//' < obj/main.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$/:/' >> obj/main.d
 rm -f obj/main.d.tmp
- 
 gcc  -fsanitize=address -g3 -o .//minishell obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtin/cd.o obj/builtin/exit.o obj/builtin/unset.o obj/builtin/echo.o obj/builtin/export.o obj/builtin/pwd.o obj/builtin/env.o obj/main.o -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 echo "\033[32mminishell created\n\033[0m"
 make: Leaving directory '/home/ben/projet42/minishell'
