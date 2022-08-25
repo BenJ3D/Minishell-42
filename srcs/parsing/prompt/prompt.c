@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/24 20:08:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:12:34 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void prompt_basic_test(char **av, char **env)
 		}
 		else if (!ft_strncmp(buffer, "testenv", 8))
 		{
-			setenv("LOGNAME", "BEN3D", 1);
+			setenv("LOGNAME", "BEN3D", 1); // setenv non autorisé
 			printf("LOGNAME = %s\n", getenv("LOGNAME"));
 		}
 		else if (!ft_strncmp(buffer, "testcd", 8))

@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Aug 25 12:17:05 2022
+# Make data base, printed on Thu Aug 25 12:36:50 2022
 
 # Variables
 
@@ -40,9 +38,9 @@ VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePac
 _ = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
 # makefile (from 'Makefile', line 41)
 CFLAGS := 
-# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
-MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d
-# environment
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 51)
 SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/builtin/cd.c srcs/builtin/exit.c srcs/builtin/unset.c srcs/builtin/echo.c srcs/builtin/export.c srcs/builtin/pwd.c srcs/builtin/env.c srcs/main.c
@@ -76,8 +74,6 @@ SRCDIR := srcs
 %F = $(notdir $%)
 # makefile (from 'Makefile', line 30)
 UNAME_S := Linux
-# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
--fsanitize = address
 # makefile (from 'Makefile', line 27)
 DEPEXT := d
 # environment
@@ -189,7 +185,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=4/130=3%
+# Load=87/1024=8%, Rehash=0, Collisions=4/150=3%
 
 # Pattern-specific Variable Values
 
@@ -198,17 +194,71 @@ WSL_DISTRO_NAME = Ubuntu
 # Directories
 
 # . (device 2064, inode 93007): 13 files, no impossibilities.
+# srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+obj/%.o: srcs/%.c libs/libft/libft.a Makefile
+#  recipe to execute (from 'Makefile', line 101):
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@find . -name "*.d" -type f -delete
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
+# Not a target:
+obj/parsing/prompt/prompt.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/builtin/export.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/builtin/env.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/builtin/exit.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/exec/test_execve.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
 all: lib minishell
+#  Phony target (prerequisite of .PHONY).
 #  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+.PHONY: all re clean fclean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -221,20 +271,84 @@ resources: directories
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
 # Not a target:
-Makefile:
+obj/builtin/unset.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+git:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 90):
+	@git add .
+	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
+	@git push
+
+# Not a target:
+obj/main.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-minishell:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ 
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 12:35:34.848331675
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+obj/builtin/env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/signal/interactive_mode.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/builtin/exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/exec/test_execve.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+minishell: obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtin/cd.o obj/builtin/exit.o obj/builtin/unset.o obj/builtin/echo.o obj/builtin/export.o obj/builtin/pwd.o obj/builtin/env.o obj/main.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 96):
+	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
+	@echo "\033[32m$(NAME) created\n\033[0m"
+
+# Not a target:
+obj/builtin/unset.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 fclean: clean
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 81):
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
@@ -244,11 +358,21 @@ fclean: clean
 
 lib: directories
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 65):
 	@make -C./libs/libft/
 	
+
+# Not a target:
+obj/builtin/pwd.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -256,14 +380,29 @@ lib: directories
 #  Modification time never checked.
 #  File has not been updated.
 
-re: fclean all
+# Not a target:
+obj/builtin/cd.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/signal/interactive_mode.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-clean:
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 74):
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
@@ -272,34 +411,93 @@ clean:
 	@echo "\033[31mFiles .o deleted\n\033[0m"
 
 # Not a target:
+obj/builtin/echo.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
 obj/parsing/prompt/prompt.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/builtin/export.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/builtin/pwd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/builtin/cd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 directories:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := directories
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
 #  recipe to execute (from 'Makefile', line 69):
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
 
+# Not a target:
+obj/main.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+obj/builtin/echo.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
- 
-# Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
+# Load=35/1024=3%, Rehash=0, Collisions=0/84=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 408 B / avg = 11 B
-# current buf: size = 8162 B / used = 408 B / count = 35 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 51 / storage = 679 B / avg = 13 B
+# current buf: size = 8162 B / used = 679 B / count = 51 / avg = 13 B
 
-# strcache performance: lookups = 55 / hit rate = 36%
+# strcache performance: lookups = 92 / hit rate = 44%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=1/55=2%
-# Finished Make data base on Thu Aug 25 12:17:05 2022
+# Load=51/8192=1%, Rehash=0, Collisions=1/92=1%
+# Finished Make data base on Thu Aug 25 12:36:50 2022
 
  
