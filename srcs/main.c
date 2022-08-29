@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/25 17:20:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/29 14:35:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main(int ac, char **av, char **envp)
 	char **env;
 	
 	env = ft_env_init(envp);
-	printf("%s", env[4]);
+	printf("%s\n", env[4]);
 	prompt_basic_test(av, envp);
 	free(env);
 	

@@ -8,7 +8,7 @@ obj/parsing/prompt/prompt.d:2: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 29 09:50:05 2022
+# Make data base, printed on Mon Aug 29 15:57:38 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d
 # environment
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 51)
-SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/builtin/cd.c srcs/builtin/exit.c srcs/builtin/unset.c srcs/builtin/echo.c srcs/builtin/export.c srcs/builtin/pwd.c srcs/builtin/env.c srcs/main.c
+SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/builtins/cd.c srcs/builtins/exit.c srcs/builtins/unset.c srcs/builtins/echo.c srcs/builtins/export.c srcs/builtins/pwd.c srcs/builtins/env.c srcs/main.c
 # makefile (from 'Makefile', line 23)
 BUILDDIR := obj
 # makefile (from 'Makefile', line 42)
@@ -63,7 +63,7 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-89bb08a7-439f-499a-81a6-58bd75941a7a.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-df5acfed-e5fb-4d68-8c9f-297f7a8be592.sock
 # makefile (from 'Makefile', line 45)
 LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
@@ -85,7 +85,7 @@ PWD = /home/ben/projet42/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/18_interop
+WSL_INTEROP = /run/WSL/3209_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -93,7 +93,7 @@ HOME = /home/ben
 # environment
 LOGNAME = ben
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 ZSH = /home/ben/.oh-my-zsh
 # environment
@@ -179,7 +179,7 @@ INCDEP := -Iincludes
 # default
 .RECIPEPREFIX := 
 # makefile (from 'Makefile', line 52)
-OBJECTS := obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtin/cd.o obj/builtin/exit.o obj/builtin/unset.o obj/builtin/echo.o obj/builtin/export.o obj/builtin/pwd.o obj/builtin/env.o obj/main.o 
+OBJECTS := obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtins/cd.o obj/builtins/exit.o obj/builtins/unset.o obj/builtins/echo.o obj/builtins/export.o obj/builtins/pwd.o obj/builtins/env.o obj/main.o 
 # makefile (from 'Makefile', line 32)
 INC_LIB = -L/usr/local/lib
 # environment
@@ -276,7 +276,6 @@ obj/parsing/prompt/prompt.d:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 directories:
 #  Implicit rule search has not been done.
@@ -287,6 +286,7 @@ directories:
 	@mkdir -p $(BUILDDIR)
 
 # files hash-table stats:
+ 
 # Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
 
@@ -294,12 +294,12 @@ directories:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 408 B / avg = 11 B
-# current buf: size = 8162 B / used = 408 B / count = 35 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 35 / storage = 415 B / avg = 11 B
+# current buf: size = 8162 B / used = 415 B / count = 35 / avg = 11 B
 
 # strcache performance: lookups = 55 / hit rate = 36%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=1/55=2%
-# Finished Make data base on Mon Aug 29 09:50:05 2022
+# Load=35/8192=0%, Rehash=0, Collisions=2/55=4%
+# Finished Make data base on Mon Aug 29 15:57:38 2022
 
  
