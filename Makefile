@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/25 12:35:34 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/08/30 17:21:04 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ UNAME_S := $(shell uname -s)
 
 #Flags, Libraries and Includes
 CFLAGS      :=# -Wall -Wextra -Werror
-SANITIZE    := -fsanitize=address
+SANITIZE    :=# -fsanitize=address
 LLDBFLAG    := -g3
 LIBFT_PATH  := ./libs/libft/libft.a
 LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
@@ -53,6 +53,7 @@ OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJE
 
 #Defauilt Make
 all: lib $(NAME)
+	@find . -name "*.d" -type f -delete
 
 #Remake
 re: fclean all
@@ -71,6 +72,7 @@ directories:
 
 #Clean only Objecst
 clean:
+	@find . -name "*.d" -type f -delete
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@$(RM) -rf $(BUILDDIR)
 	@make clean -C ./libs/libft/

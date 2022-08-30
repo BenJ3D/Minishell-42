@@ -6,59 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/29 14:35:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:44:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/minishell.h>
 
 //TODO: faire le split env
-int env_test_read(char **env, const char *key)
-{
-	char	*value;
-	int		i;
-	int		ret;
 
-	ret = 0;
-	i = 0;
-	while (ret = ft_strncmp(env[i], key, ft_strlen(key)))
-	{
-		printf("i %i ||  ret = %i || key = %s || val = %s------------\n", i, ret, key, env[i]);
-		i++;
-	}
-	value = ft_strdup(env[i]);
-	printf("env %s : %s", key, value);
-	free (value);
-	return (i);
-}
-
-char	*ft_env_return_key(char **env, char *key)
-{
-	
-	return (NULL);
-}
-
-int	ft_env_count_keys(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while(envp[i])
-		i++;
-	return (i);
-}
-
-char	**ft_env_init(char **envp)
-{
-	char **env;
-	int	i;
-
-	env = ft_calloc(sizeof(char*), ft_env_count_keys(envp) + 1);
-	i = 0;
-	while(envp[i])
-		env[i] = ft_strdup(envp[i++]);
-	return (env);
-}
 
 
 int	main(int ac, char **av, char **envp)
@@ -99,12 +54,19 @@ int	main(int ac, char **av, char **envp)
 
 	// env_test_read(env, "LOGNAME");
 	char **env;
-	
+	int	i;
+
+	i = 0;
 	env = ft_env_init(envp);
-	printf("%s\n", env[4]);
-	prompt_basic_test(av, envp);
-	free(env);
-	
+	// while(envp[i])
+	// {
+	// 	printf("%s\n", envp[i++]);
+	// }
+	// printf("%s\n", envp[8]);
+	// prompt_basic_test(av, env);
+	// env_test_read(env, "PATH");
+
+	// ft_free_all_array(env);
 	return (0);
 }
 
