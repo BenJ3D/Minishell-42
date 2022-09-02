@@ -1,5 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/ben/projet42/minishell'
+ 
 mkdir -p ./
 mkdir -p obj
 make -C./libs/libft/

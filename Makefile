@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/02 19:23:48 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/02 19:25:56 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ all: lib $(NAME) cleand
 #Remake
 re: fclean all
 
+fix: cleand
+
 #Copy Resources from Resources Directory to NAME Directory
 resources: directories
 	@cp $(RESDIR)/* $(NAMEDIR)/
@@ -88,7 +90,7 @@ cleand:
 	@find . -name "*.d" -type f -delete
 
 #Compile and keep the executable only
-b:	lib $(NAME) cleand
+b:	lib $(NAME) clean
 
 #compile and keep only the binary
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))

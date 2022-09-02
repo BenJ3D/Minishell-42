@@ -8,7 +8,7 @@ obj/parsing/prompt/prompt.d:1: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Sep  2 19:21:16 2022
+# Make data base, printed on Fri Sep  2 19:25:00 2022
 
 # Variables
 
@@ -19,7 +19,7 @@ NAMEDIR := ./
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 22)
@@ -35,7 +35,7 @@ CURDIR := /home/ben/projet42/minishell
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8a64477f85858ca31d1daacec93dba94.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/784b0177c56c607789f9638da7b6bf3230d47a8c","_corruptedFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"5e9f786f0aff7d5ccaa5f6af9d58a1b7.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/5e9f786f0aff7d5ccaa5f6af9d58a1b7.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/5e9f786f0aff7d5ccaa5f6af9d58a1b7.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/5e9f786f0aff7d5ccaa5f6af9d58a1b7.fr/784b0177c56c607789f9638da7b6bf3230d47a8c","_corruptedFile":"/home/ben/.vscode-server/data/clp/5e9f786f0aff7d5ccaa5f6af9d58a1b7.fr/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /home/ben/.vscode-server/bin/784b0177c56c607789f9638da7b6bf3230d47a8c/node
 # makefile (from 'Makefile', line 41)
@@ -63,9 +63,9 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c85c4be7-03a2-48da-8062-c95efadc9e55.sock
-# environment
-VSCODE_SERVER_TAR = /mnt/c/Users/ben13/AppData/Local/Temp/vscode-remote-wsl/784b0177c56c607789f9638da7b6bf3230d47a8c/vscode-server-stable-linux-x64.tar.gz
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-eb596c5c-d9b5-44fe-8f42-e88ed3de908b.sock
+# makefile (from 'Makefile', line 45)
+LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -83,7 +83,7 @@ PWD = /home/ben/projet42/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/15_interop
+WSL_INTEROP = /run/WSL/2709_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -158,8 +158,6 @@ MAKEFILES :=
 <F = $(notdir $<)
 # makefile (from 'Makefile', line 44)
 LIBFT_PATH := ./libs/libft/libft.a
-# makefile (from 'Makefile', line 45)
-LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # environment
 PAGER = less
 # environment
@@ -189,7 +187,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=5/131=4%
+# Load=87/1024=8%, Rehash=0, Collisions=4/130=3%
 
 # Pattern-specific Variable Values
 
@@ -286,8 +284,8 @@ clean:
 # Not a target:
 obj/parsing/prompt/prompt.d:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
  
+#  Modification time never checked.
 #  File has not been updated.
 
 directories:
@@ -312,6 +310,6 @@ directories:
 # strcache performance: lookups = 65 / hit rate = 40%
 # hash-table stats:
 # Load=39/8192=0%, Rehash=0, Collisions=2/65=3%
-# Finished Make data base on Fri Sep  2 19:21:16 2022
+# Finished Make data base on Fri Sep  2 19:25:00 2022
 
  
