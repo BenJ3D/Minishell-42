@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/02 09:09:45 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/02 19:23:48 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,10 @@ fclean: clean
 cleand:
 	@find . -name "*.d" -type f -delete
 
-#Pull in dependency info for *existing* .o files
+#Compile and keep the executable only
+b:	lib $(NAME) cleand
+
+#compile and keep only the binary
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
 git:

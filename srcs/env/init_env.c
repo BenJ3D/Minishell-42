@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/30 17:50:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/02 11:07:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,21 @@ char	**ft_env_init(char **envp)
 	env = ft_calloc(sizeof(char **), ft_env_count_keys(envp) + 1);
 	if (!env)
 		return (NULL);
+	i = 0;
+	while (envp[i])
+		env[i] = ft_strdup(envp[i++]);
 	env_test_read(envp, "LOGNAME");
+	printf("\nenv %s\n", env[12]);
 	i = 0;
 	while (env[i])
-		env[i] = ft_strdup(envp[i++]);
+	{
+		if (!ft_strncmp(env[i], "LOGNAME", 8))
+			break ;
+		i++;
+	}
+	printf("\nenv %s\n", env[i]);
+	
+	
 	return (env);
 }
 

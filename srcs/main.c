@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/01 11:23:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/02 09:23:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av, char **envp)
 	// 	printf("%s\n", envp[i++]);
 	// }
 	// printf("%s\n", envp[8]);
-	// prompt_basic_test(av, env);
+	 prompt_basic_test(av, env);
 	// env_test_read(env, "PATH");
 
 	// ft_free_all_array(env);

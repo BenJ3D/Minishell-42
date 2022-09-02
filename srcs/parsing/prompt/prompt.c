@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/25 15:12:34 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:30:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void prompt_basic_test(char **av, char **env)
 	line = prompt_update();
 	buffer = readline(line);
 	while ((buffer))
-	{
+	{ 
 		if (!ft_strncmp(buffer, "ls", 3))
 		{
 			child = fork();
 			if (child == 0)
-			{
 				execve("/usr/bin/ls", av, env);
-			}
+			// if (child > 0)
+			// 	printf("Child pid = %i\n", child);
 			wait(0);
 		}
 		else if (!ft_strncmp(buffer, "testenv", 8))

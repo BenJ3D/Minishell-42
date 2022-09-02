@@ -1,13 +1,14 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+obj/parsing/prompt/prompt.d:1: *** missing separator.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Fri Sep  2 09:10:00 2022
+# Make data base, printed on Fri Sep  2 19:21:16 2022
 
 # Variables
 
@@ -18,7 +19,7 @@ NAMEDIR := ./
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up
+WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 22)
@@ -34,14 +35,14 @@ CURDIR := /home/ben/projet42/minishell
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8a64477f85858ca31d1daacec93dba94.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8a64477f85858ca31d1daacec93dba94.fr","_translationsConfigFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/tcf.json","_cacheRoot":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr","_resolvedLanguagePackCoreLocation":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/784b0177c56c607789f9638da7b6bf3230d47a8c","_corruptedFile":"/home/ben/.vscode-server/data/clp/8a64477f85858ca31d1daacec93dba94.fr/corrupted.info","_languagePackSupport":true}
 # environment
-_ = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
+_ = /home/ben/.vscode-server/bin/784b0177c56c607789f9638da7b6bf3230d47a8c/node
 # makefile (from 'Makefile', line 41)
 CFLAGS := 
-# makefile (from 'Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
-# 'override' directive
+# makefile (from 'obj/parsing/prompt/prompt.d', line 1)
+MAKEFILE_LIST :=  Makefile obj/parsing/prompt/prompt.d
+# environment
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 51)
 SOURCES := srcs/parsing/prompt/prompt.c srcs/exec/test_execve.c srcs/signal/interactive_mode.c srcs/builtins/cd.c srcs/builtins/exit.c srcs/builtins/unset.c srcs/builtins/echo.c srcs/builtins/export.c srcs/builtins/pwd.c srcs/builtins/env.c srcs/env/init_env.c srcs/env/ft_lst_env.c srcs/main.c
@@ -54,7 +55,7 @@ VSCODE_CWD = /mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/ben/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/VMware/VMware Player/bin/:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/120/Tools/Binn/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Common Files/Autodesk Shared/:/mnt/c/Users/ben13/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/ben13/AppData/Local/atom/bin:/mnt/c/Program Files/JetBrains/CLion 2022.1.1/bin:/mnt/c/Program Files/JetBrains/DataGrip 2021.2.4/bin:/mnt/c/Users/ben13/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/tools:/mnt/c/Users/ben13/.dotnet/tools:/mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/ben13/AppData/Local/Keybase/
+PATH = /home/ben/.vscode-server/bin/784b0177c56c607789f9638da7b6bf3230d47a8c/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/VMware/VMware Player/bin/:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/120/Tools/Binn/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Common Files/Autodesk Shared/:/mnt/c/Users/ben13/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/ben13/AppData/Local/atom/bin:/mnt/c/Program Files/JetBrains/CLion 2022.1.1/bin:/mnt/c/Program Files/JetBrains/DataGrip 2021.2.4/bin:/mnt/c/Users/ben13/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Users/ben13/AppData/Local/Android/Sdk/tools:/mnt/c/Users/ben13/.dotnet/tools:/mnt/c/Users/ben13/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/ben13/AppData/Local/Keybase/
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from 'Makefile', line 28)
@@ -62,9 +63,9 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d8082765-2c16-4920-99ae-879bbc04d83a.sock
-# makefile (from 'Makefile', line 45)
-LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c85c4be7-03a2-48da-8062-c95efadc9e55.sock
+# environment
+VSCODE_SERVER_TAR = /mnt/c/Users/ben13/AppData/Local/Temp/vscode-remote-wsl/784b0177c56c607789f9638da7b6bf3230d47a8c/vscode-server-stable-linux-x64.tar.gz
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -82,7 +83,7 @@ PWD = /home/ben/projet42/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/18_interop
+WSL_INTEROP = /run/WSL/15_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -157,6 +158,8 @@ MAKEFILES :=
 <F = $(notdir $<)
 # makefile (from 'Makefile', line 44)
 LIBFT_PATH := ./libs/libft/libft.a
+# makefile (from 'Makefile', line 45)
+LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # environment
 PAGER = less
 # environment
@@ -186,7 +189,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=87/1024=8%, Rehash=0, Collisions=4/150=3%
+# Load=88/1024=9%, Rehash=0, Collisions=5/131=4%
 
 # Pattern-specific Variable Values
 
@@ -195,58 +198,22 @@ WSL_DISTRO_NAME = Ubuntu
 # Directories
 
 # . (device 2064, inode 93007): 13 files, no impossibilities.
-# includes (device 2064, inode 143154): 6 files, no impossibilities.
-# srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 19 files, no impossibilities in 3 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-obj/%.o: srcs/%.c libs/libft/libft.a Makefile includes/define_common.h includes/includes.h includes/minishell.h includes/struct.h
-#  recipe to execute (from 'Makefile', line 105):
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
-	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
-	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
-	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
-
-# 1 implicit rules, 0 (0.0%) terminal.
+# No implicit rules.
 
 # Files
 
-# Not a target:
-obj/parsing/prompt/prompt.o:
+b: lib minishell clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/builtins/unset.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/exec/test_execve.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
 all: lib minishell cleand
-#  Phony target (prerequisite of .PHONY).
 #  Command line target.
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-
-.PHONY: all re clean fclean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -259,61 +226,7 @@ resources: directories
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
 # Not a target:
-obj/builtins/env.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/builtins/exit.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-git:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 94):
-	@git add .
-	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
-	@git push
-
-# Not a target:
-obj/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-02 09:09:45.563581026
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-obj/signal/interactive_mode.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/builtins/unset.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/exec/test_execve.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -325,39 +238,15 @@ cleand:
 #  recipe to execute (from 'Makefile', line 88):
 	@find . -name "*.d" -type f -delete
 
-minishell: obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtins/cd.o obj/builtins/exit.o obj/builtins/unset.o obj/builtins/echo.o obj/builtins/export.o obj/builtins/pwd.o obj/builtins/env.o obj/env/init_env.o obj/env/ft_lst_env.o obj/main.o
+# Not a target:
+minishell:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 100):
-	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
-	@echo "\033[32m$(NAME) created\n\033[0m"
-
-# Not a target:
-obj/builtins/pwd.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/builtins/export.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/builtins/cd.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
 
 fclean: clean
-#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 81):
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
@@ -367,28 +256,11 @@ fclean: clean
 
 lib: directories
 #  Implicit rule search has not been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 65):
 	@make -C./libs/libft/
 	
-
-# Not a target:
-obj/builtins/echo.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/env/init_env.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -396,29 +268,14 @@ obj/env/init_env.d:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/env/ft_lst_env.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/signal/interactive_mode.o:
+re: fclean all
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-re: fclean all
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-
 clean:
-#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 74):
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
@@ -428,110 +285,33 @@ clean:
 
 # Not a target:
 obj/parsing/prompt/prompt.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/builtins/pwd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
-
-# Not a target:
-obj/builtins/cd.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/builtins/echo.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/env/init_env.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/builtins/export.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/builtins/env.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-obj/env/ft_lst_env.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/builtins/exit.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
 
 directories:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := directories
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 69):
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
 
-# Not a target:
-obj/main.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
 # files hash-table stats:
-# Load=40/1024=4%, Rehash=0, Collisions=3/95=3%
+# Load=14/1024=1%, Rehash=0, Collisions=0/32=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 64 / storage = 912 B / avg = 14 B
-# current buf: size = 8162 B / used = 912 B / count = 64 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 39 / storage = 464 B / avg = 11 B
+# current buf: size = 8162 B / used = 464 B / count = 39 / avg = 11 B
 
-# strcache performance: lookups = 112 / hit rate = 42%
+# strcache performance: lookups = 65 / hit rate = 40%
 # hash-table stats:
-# Load=64/8192=1%, Rehash=0, Collisions=4/112=4%
-# Finished Make data base on Fri Sep  2 09:10:00 2022
+# Load=39/8192=0%, Rehash=0, Collisions=2/65=3%
+# Finished Make data base on Fri Sep  2 19:21:16 2022
 
  
