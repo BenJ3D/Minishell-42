@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/30 14:27:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:51:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_env
 {
 	char *key;
 	char *value;
-	// struct s_env *next;
+	struct s_env *next;
 }		t_env;
 
 #endif

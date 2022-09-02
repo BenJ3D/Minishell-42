@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Tue Aug 30 17:21:17 2022
+# Make data base, printed on Fri Sep  2 09:10:00 2022
 
 # Variables
 
@@ -61,7 +62,7 @@ OBJEXT := o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0f20b2cc-223e-400c-81a1-f1a4cd05e440.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d8082765-2c16-4920-99ae-879bbc04d83a.sock
 # makefile (from 'Makefile', line 45)
 LIB := -L/usr/local/lib -I/usr/local/include -lreadline ./libs/libft/libft.a
 # default
@@ -194,14 +195,15 @@ WSL_DISTRO_NAME = Ubuntu
 # Directories
 
 # . (device 2064, inode 93007): 13 files, no impossibilities.
+# includes (device 2064, inode 143154): 6 files, no impossibilities.
 # srcs (device 2064, inode 143210): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 2 directories.
+# 19 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
-obj/%.o: srcs/%.c libs/libft/libft.a Makefile
-#  recipe to execute (from 'Makefile', line 103):
+obj/%.o: srcs/%.c libs/libft/libft.a Makefile includes/define_common.h includes/includes.h includes/minishell.h includes/struct.h
+#  recipe to execute (from 'Makefile', line 105):
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
@@ -209,7 +211,6 @@ obj/%.o: srcs/%.c libs/libft/libft.a Makefile
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@find . -name "*.d" -type f -delete
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
@@ -235,7 +236,7 @@ obj/exec/test_execve.d:
 #  File has been updated.
 #  Failed to be updated.
 
-all: lib minishell
+all: lib minishell cleand
 #  Phony target (prerequisite of .PHONY).
 #  Command line target.
 #  Implicit rule search has not been done.
@@ -244,8 +245,6 @@ all: lib minishell
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  recipe to execute (from 'Makefile', line 56):
-	@find . -name "*.d" -type f -delete
 
 .PHONY: all re clean fclean
 #  Implicit rule search has not been done.
@@ -256,7 +255,7 @@ resources: directories
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 63):
+#  recipe to execute (from 'Makefile', line 62):
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
 # Not a target:
@@ -275,8 +274,7 @@ git:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-#  recipe to execute (from 'Makefile', line 92):
+#  recipe to execute (from 'Makefile', line 94):
 	@git add .
 	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
 	@git push
@@ -290,13 +288,14 @@ obj/main.o:
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-30 17:21:04.949659384
+#  Last modified 2022-09-02 09:09:45.563581026
 #  File has been updated.
 #  Successfully updated.
 
@@ -319,11 +318,18 @@ obj/exec/test_execve.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+cleand:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 88):
+	@find . -name "*.d" -type f -delete
+
 minishell: obj/parsing/prompt/prompt.o obj/exec/test_execve.o obj/signal/interactive_mode.o obj/builtins/cd.o obj/builtins/exit.o obj/builtins/unset.o obj/builtins/echo.o obj/builtins/export.o obj/builtins/pwd.o obj/builtins/env.o obj/env/init_env.o obj/env/ft_lst_env.o obj/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 98):
+#  recipe to execute (from 'Makefile', line 100):
 	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 
@@ -353,7 +359,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 83):
+#  recipe to execute (from 'Makefile', line 81):
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
 	@$(RM) -rf $(NAME)
 	@make fclean -C ./libs/libft/
@@ -366,7 +372,7 @@ lib: directories
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  recipe to execute (from 'Makefile', line 66):
+#  recipe to execute (from 'Makefile', line 65):
 	@make -C./libs/libft/
 	
 
@@ -414,8 +420,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 75):
-	@find . -name "*.d" -type f -delete
+#  recipe to execute (from 'Makefile', line 74):
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@$(RM) -rf $(BUILDDIR)
 	@make clean -C ./libs/libft/
@@ -502,7 +507,7 @@ directories:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/13=8%
-#  recipe to execute (from 'Makefile', line 70):
+#  recipe to execute (from 'Makefile', line 69):
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
 
@@ -514,19 +519,19 @@ obj/main.d:
 #  Failed to be updated.
 
 # files hash-table stats:
-# Load=39/1024=4%, Rehash=0, Collisions=3/92=3%
+# Load=40/1024=4%, Rehash=0, Collisions=3/95=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 55 / storage = 773 B / avg = 14 B
-# current buf: size = 8162 B / used = 773 B / count = 55 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 64 / storage = 912 B / avg = 14 B
+# current buf: size = 8162 B / used = 912 B / count = 64 / avg = 14 B
 
-# strcache performance: lookups = 98 / hit rate = 43%
+# strcache performance: lookups = 112 / hit rate = 42%
 # hash-table stats:
-# Load=55/8192=1%, Rehash=0, Collisions=3/98=3%
-# Finished Make data base on Tue Aug 30 17:21:17 2022
+# Load=64/8192=1%, Rehash=0, Collisions=4/112=4%
+# Finished Make data base on Fri Sep  2 09:10:00 2022
 
  

@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/08/30 17:21:04 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/02 09:09:45 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) 
 
 #Defauilt Make
-all: lib $(NAME)
-	@find . -name "*.d" -type f -delete
+all: lib $(NAME) cleand
 
 #Remake
 re: fclean all
@@ -72,7 +71,6 @@ directories:
 
 #Clean only Objecst
 clean:
-	@find . -name "*.d" -type f -delete
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@$(RM) -rf $(BUILDDIR)
 	@make clean -C ./libs/libft/
@@ -85,6 +83,10 @@ fclean: clean
 	@make fclean -C ./libs/libft/
 	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
 
+#Clean file *.d
+cleand:
+	@find . -name "*.d" -type f -delete
+
 #Pull in dependency info for *existing* .o files
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
@@ -94,12 +96,12 @@ git:
 	@git push
 
 #Link
-$(NAME): $(OBJECTS) 
+$(NAME): $(OBJECTS)
 	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 
 #Compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includes/*.h 
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
@@ -107,7 +109,6 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@find . -name "*.d" -type f -delete
 
 #Non-File NAMEs
 .PHONY: all re clean fclean
