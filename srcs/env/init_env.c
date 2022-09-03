@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/02 11:07:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/03 10:27:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ int	env_test_read(char **env, const char *key)
 			break ;
 		i++;
 	}
+	if (!env[i])
+	{
+		perror("Aucune variable environnement de ce nom\n");
+		return (1);
+	}
 	value = ft_strdup(env[i]);
-	printf("env %s : %s", key, value);
+	i = 0;
+	while(value[i - 1] != '=')
+		i++;
+	printf("env %s : %s\n", key, value + i);
 	free(value);
 	return (i);
 }
@@ -65,19 +73,7 @@ char	**ft_env_init(char **envp)
 		return (NULL);
 	i = 0;
 	while (envp[i])
-		env[i] = ft_strdup(envp[i++]);
-	env_test_read(envp, "LOGNAME");
-	printf("\nenv %s\n", env[12]);
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], "LOGNAME", 8))
-			break ;
-		i++;
-	}
-	printf("\nenv %s\n", env[i]);
-	
-	
+		env[i++] = ft_strdup(envp[i]);
 	return (env);
 }
 

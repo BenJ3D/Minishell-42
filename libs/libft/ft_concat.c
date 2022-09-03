@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:27:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 02:31:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/03 10:13:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ char	*ft_concat_char(char *src, char c)
 	return (tmpline);
 }
 
+/**
+ * @brief Concat str = joint two str !!and free src!!
+ * 
+ * @param src 
+ * @param str 
+ * @return char* 
+ */
 char	*ft_concat_str(char *src, char *str)
 {
 	char	*tmpline;
