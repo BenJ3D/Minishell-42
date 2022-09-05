@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/03 10:24:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:34:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **envp)
 
 	i = 0;
 	env = ft_env_init(envp);
-	env_test_read(env, "BEN3D");
+	env_test_read(env, "USER");
 	// while(envp[i])
 	// {
 	// 	printf("%s\n", envp[i++]);
