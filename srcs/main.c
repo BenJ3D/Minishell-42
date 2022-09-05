@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/05 11:34:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:45:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int ac, char **av, char **envp)
 	// 	printf("%s\n", envp[i++]);
 	// }
 	// printf("%s\n", envp[8]);
-	//  prompt_basic_test(av, env);
+	prompt_basic_test(av, env);
 	// env_test_read(env, "PATH");
 
 	// ft_free_all_array(env);

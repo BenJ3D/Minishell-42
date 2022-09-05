@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/03 10:27:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:35:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ char	**ft_env_init(char **envp)
 		return (NULL);
 	i = 0;
 	while (envp[i])
-		env[i++] = ft_strdup(envp[i]);
+	{	
+		env[i] = ft_strdup(envp[i]);
+		i++;
+	}
 	return (env);
 }
 

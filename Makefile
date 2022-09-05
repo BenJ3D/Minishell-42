@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/02 19:51:35 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/05 15:11:12 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,15 @@ UNAME_S := $(shell uname -s)
 		INC_INC = -I ~/.brew/opt/readline/include
 	endif
 
+#	-L .brew/opt/readline/lib -I .brew/opt/readline/include
+
 #Flags, Libraries and Includes
 CFLAGS      :=# -Wall -Wextra -Werror
 SANITIZE    :=# -fsanitize=address
 LLDBFLAG    := -g3
 LIBFT_PATH  := ./libs/libft/libft.a
 LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
+# LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
 INC         := -I$(INCDIR)
 INCDEP      := -I$(INCDIR)
 #------------------------------------------------------------------------------#

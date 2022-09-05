@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/02 12:30:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:03:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char *prompt_update(void)
 {
 	char *line;
 	
-	line = ft_strjoin_max("%s%s@%s:%s%s%s$ ",
-		GREEN, getenv("LOGNAME"), getenv("NAME"),
+	line = ft_strjoin_max("%s[ %s ]:%s%s%s>$ ",
+		GREEN, getenv("LOGNAME"),
 		CYAN, getenv("PWD"), NONE_COLOR);
 	return (line);
 }
@@ -43,7 +43,7 @@ void prompt_basic_test(char **av, char **env)
 		{
 			child = fork();
 			if (child == 0)
-				execve("/usr/bin/ls", av, env);
+				execve("/bin/ls", av, env);
 			// if (child > 0)
 			// 	printf("Child pid = %i\n", child);
 			wait(0);

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   interactive_mode.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/29 16:52:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:26:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
 void	handler_interative(int signum)
 {
@@ -20,7 +18,7 @@ void	handler_interative(int signum)
 	{
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_replace_line("", 0); //TODO: implicit declaration C99 ??
 		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
