@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/05 16:03:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:21:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ char *prompt_update(void)
 {
 	char *line;
 	
-	line = ft_strjoin_max("%s[ %s ]:%s%s%s>$ ",
-		GREEN, getenv("LOGNAME"),
+	line = ft_strjoin_max("%s%s@%s:%s%s%s$ ",
+		GREEN, getenv("USER"), getenv("LOGNAME"),
 		CYAN, getenv("PWD"), NONE_COLOR);
+	// line = ft_strdup("Bienvenue dans MiniHelle!! $>");
+	// line = ft_strjoin_max("%s%s", "Bonjour ", "ben");
+
 	return (line);
 }
 
