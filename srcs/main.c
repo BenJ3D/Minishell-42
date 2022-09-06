@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 15:00:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:54:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@
 
 int	main(int ac, char **av, char **envp)
 {
+	char **env;
+	t_data	data;
+	
 	if (ac > 1)
 	{
 		ft_putstr_fd(av[0], 2);
 		ft_putstr_fd(" to many arguments\n", 2);
 		return (1);
 	}
-	char **env;
-	env = ft_env_init(envp);
-	//test push 42
-	env_test_read(env, "LOGNAME");
-	ft_env_read_all_key(env);
-
 	interactive_mode();
+	
+	
+	// env = ft_env_init(envp);
+	// env_test_read(env, "LOGNAME");
+	// ft_show_all_environnement_key(env);
+
 	prompt_basic_test(av, env);
 	return (0);
 }

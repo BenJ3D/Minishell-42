@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 14:43:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:06:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
-void	ft_env_read_all_key(char **env)
+void	ft_show_all_environnement_key(char **env)
 {
 	int	i;
 
@@ -22,6 +22,6 @@ void	ft_env_read_all_key(char **env)
 	while (env[i])
 	{
 		ft_putstr(env[i++]);
-		ft_putchar("\n")
+		ft_putchar('\n');
 	}
 }

@@ -3,17 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/30 14:36:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:57:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
-
-char *ft_export_env()
-{
-	 printf("Hey");
-	return (NULL);
-}

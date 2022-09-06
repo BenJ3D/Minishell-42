@@ -1,17 +1,102 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 14:07:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:59:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
+
+char	*ft_env_extract_key_name(char *str)
+{
+	int		i;
+	int		len;
+	char	*tmp;
+
+	if (str[0] == '\0')
+		return (NULL);
+	len = 0;
+	while (str[len] != '=')
+		len++;
+	len++;
+	tmp = ft_calloc(len + 1, sizeof(tmp));
+	i = 0;
+	while (str[i] != '=')
+	{
+		tmp[i] =  str[i];
+		i++;
+	}
+	tmp[i++] = '=';
+	tmp[i] = '\0';
+	return (tmp);
+}
+
+char	*ft_env_extract_value_content(char *str)
+{
+	int		i;
+	int		y;
+	char	*tmp;
+
+	if (str[i] == '\0')
+		return (NULL);
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	i++;
+	tmp = ft_calloc((ft_strlen(str) - i) + 1, sizeof(tmp));
+	y = 0;
+	while (str[i])
+	{
+		tmp[y] =  str[i];
+		i++;
+		y++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
+}
+
+/**
+ * @brief create copy of envp in list chained 
+ * 
+ * @param envp src env
+ */
+void	ft_env_init_lst(char **envp, t_data *data)
+{
+	int		i;
+	char	*tkey;
+	char	*tvalue;	
+	t_env	*tmp;
+
+	if (!envp)
+		return ;
+	tmp = NULL;
+	tkey = NULL;
+	tvalue = NULL;
+	i = 0;
+	while (envp[i])
+	{	
+		tkey = ft_env_extract_key_name(envp[i]);
+		tvalue = ft_env_extract_value_content(envp[i]);
+		ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+		free(tkey);
+		free(tvalue);
+		i++;
+	}
+	data->env = tmp;
+}
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+///////////////     WITH ENVP TO ENV **CHAR TAB    //////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 //TODO: init env avec struc env pour key et value en chained ou tab**
+
 /**
  * @brief fonction test pour debug le split env
  * 
@@ -47,12 +132,6 @@ int	env_test_read(char **env, const char *key)
 	return (i);
 }
 
-char	*ft_env_return_key(char **env, char *key)
-{
-
-	return (NULL);
-}
-
 int	ft_env_count_keys(char **envp)
 {
 	int i;
@@ -63,6 +142,12 @@ int	ft_env_count_keys(char **envp)
 	return (i);
 }
 
+/**
+ * @brief init env if tab **env
+ * 
+ * @param envp 
+ * @return char** 
+ */
 char	**ft_env_init(char **envp)
 {
 	char **env;
@@ -92,6 +177,6 @@ void	ft_free_all_array(char **env)
 		i++;
 		printf("free i = %i\n", i);
 	}
-	// env = NULL;
+	env = NULL;
 	free (env);
 }
