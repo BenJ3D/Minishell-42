@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/05 18:21:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:40:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@ char *prompt_update(void)
 {
 	char *line;
 	
-	line = ft_strjoin_max("%s%s@%s:%s%s%s$ ",
-		GREEN, getenv("USER"), getenv("LOGNAME"),
+	line = ft_strjoin_max("%s%s:%s%s%s$ ",
+		GREEN, getenv("USER"),
 		CYAN, getenv("PWD"), NONE_COLOR);
-	// line = ft_strdup("Bienvenue dans MiniHelle!! $>");
-	// line = ft_strjoin_max("%s%s", "Bonjour ", "ben");
 
 	return (line);
 }
 
+/**
+ * @brief ft coder en dur pour tests prog
+ * 
+ * @param av 
+ * @param env 
+ */
 void prompt_basic_test(char **av, char **env)
 {
 	char *buffer;
@@ -68,7 +72,7 @@ void prompt_basic_test(char **av, char **env)
 		}
 		else if (!ft_strncmp(buffer, "rmm", 8))
 		{
-			unlink("adieu"); // supprim un fichier
+			unlink("adieu"); // supprime un fichier
 		}
 		else
 			printf("%s: command not found\n", buffer);
@@ -82,7 +86,8 @@ void prompt_basic_test(char **av, char **env)
 	if (line)
 		free(line);
 	free(buffer);
-	printf("exit\n");
+	rl_on_new_line();
+	write(2, "exit\n", 6);
 }
 
 // void init_shell(t_shell *shell)
