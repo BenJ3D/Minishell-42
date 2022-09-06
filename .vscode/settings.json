@@ -5,5 +5,5 @@
 		"includes.h": "c",
 		"readline.h": "c"
 	},
-	"git.postCommitCommand": "none"
+	"git.postCommitCommand": "push"
 }
