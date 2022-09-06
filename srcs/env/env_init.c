@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 19:59:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 22:17:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_env_extract_value_content(char *str)
 		i++;
 		y++;
 	}
-	tmp[i] = '\0';
+	tmp[y] = '\0';
 	return (tmp);
 }
 
@@ -70,7 +70,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	int		i;
 	char	*tkey;
 	char	*tvalue;	
-	t_env	*tmp;
+	t_envlst	*tmp;
 
 	if (!envp)
 		return ;

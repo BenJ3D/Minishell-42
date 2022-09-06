@@ -6,34 +6,34 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 20:04:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 22:20:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
-t_env	*ft_env_lstnew(char *key, char *value)
+t_envlst	*ft_env_lstnew(char *key, char *value)
 {
-	t_env	*tmp;
+	t_envlst	*tmp;
 
-	tmp = (t_env *)malloc(sizeof(*tmp));
+	tmp = (t_envlst *)malloc(sizeof(*tmp));
 	if (!tmp)
 		return (NULL);
-	tmp->key = key;
-	tmp->value = value;
+	tmp->key = ft_strdup(key);
+	tmp->value = ft_strdup(value);
 	tmp->next = NULL;
 	return (tmp);
 }
 
-void	ft_env_lstadd_front(t_env **alst, t_env *new)
+void	ft_env_lstadd_front(t_envlst **alst, t_envlst *new)
 {
 	new->next = *alst;
 	*alst = new;
 }
 
-void	ft_env_lstadd_back(t_env **alst, t_env *new)
+void	ft_env_lstadd_back(t_envlst **alst, t_envlst *new)
 {
-	t_env	*lst1;
+	t_envlst	*lst1;
 
 	if (*alst == NULL)
 		*alst = new;
@@ -44,7 +44,7 @@ void	ft_env_lstadd_back(t_env **alst, t_env *new)
 	}
 }
 
-void	ft_env_lstdelone(t_env *lst)
+void	ft_env_lstdelone(t_envlst *lst)
 {
 	if (!lst)
 		return ;
@@ -55,9 +55,9 @@ void	ft_env_lstdelone(t_env *lst)
 	free(lst);
 }
 
-void	ft_env_lstclear(t_env **lst)
+void	ft_env_lstclear(t_envlst **lst)
 {
-	t_env	*tmp;
+	t_envlst	*tmp;
 
 	if (lst)
 	{
@@ -68,13 +68,4 @@ void	ft_env_lstclear(t_env **lst)
 			(*lst) = tmp;
 		}
 	}
-}
-
-//TODO: max 5 ft
-t_env	*ft_env_lstlast(t_env *lst)
-{
-	if (lst)
-		while (lst->next)
-			lst = lst->next;
-	return (lst);
 }
