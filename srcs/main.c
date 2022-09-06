@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 14:54:44 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:58:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **envp)
 	}
 	char **env;
 	env = ft_env_init(envp);
-	//test push
+	//test push 13
 	env_test_read(env, "LOGNAME");
 	ft_env_read_all_key(env);
 
