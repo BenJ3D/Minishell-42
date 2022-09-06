@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/08/30 15:31:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:41:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		env_test_read(char **env, const char *key);
 char	**ft_env_init(char **envp);
 char	*ft_env_return_key(char **env, char *key);
 int		ft_env_count_keys(char **envp);
+void	ft_env_read_all_key(char **env);
+
 void	ft_free_all_array(char **env);
 
 	/* FT AART */

@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/05 19:15:18 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/06 13:49:41 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ UNAME_S := $(shell uname -s)
 
 #Flags, Libraries and Includes
 CFLAGS      :=# -Wall -Wextra -Werror
-SANITIZE    :=# -fsanitize=address
+SANITIZE    := -fsanitize=address
 LLDBFLAG    := -g3
 LIBFT_PATH  := ./libs/libft/libft.a
 LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)

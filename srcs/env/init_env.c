@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/05 14:35:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:07:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /**
  * @brief fonction test pour debug le split env
  * 
- * @param env 
- * @param key 
- * @return int 
+ * @param env
+ * @param key
+ * @return int
  */
 int	env_test_read(char **env, const char *key)
 {
@@ -35,11 +35,11 @@ int	env_test_read(char **env, const char *key)
 	}
 	if (!env[i])
 	{
-		perror("Aucune variable environnement de ce nom\n");
-		return (1);
+		perror("Aucune variable environnement de ce nom");
+		return (2);
 	}
 	value = ft_strdup(env[i]);
-	i = 0;
+	i = 1;
 	while(value[i - 1] != '=')
 		i++;
 	printf("env %s : %s\n", key, value + i);

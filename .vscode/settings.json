@@ -4,5 +4,6 @@
 		"minishell.h": "c",
 		"includes.h": "c",
 		"readline.h": "c"
-	}
+	},
+	"git.postCommitCommand": "push"
 }
