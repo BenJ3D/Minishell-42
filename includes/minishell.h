@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/06 22:51:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:57:37 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		env_test_read(char **env, const char *key);
 char	**ft_env_init(char **envp);
 char	*ft_env_extract_key_name(char *str);
 char	*ft_env_extract_value_content(char *str);
-int		ft_env_count_keys(char **envp);
 void	ft_show_all_environnement_key(char **env);
 
 

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 11:40:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:28:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char *prompt_update(void)
  * @param av 
  * @param env 
  */
-void prompt_basic_test(char **av, char **env)
+void prompt_basic_test(char **av, t_data *data)
 {
 	char *buffer;
 	char *line;
@@ -50,14 +50,13 @@ void prompt_basic_test(char **av, char **env)
 		{
 			child = fork();
 			if (child == 0)
-				execve("/bin/ls", av, env);
+				execve("/bin/ls", av, env); 
 			// if (child > 0)
 			// 	printf("Child pid = %i\n", child);
 			wait(0);
 		}
-		else if (!ft_strncmp(buffer, "testenv", 8))
+		else if (!ft_strncmp(buffer, "env", 4))
 		{
-			setenv("LOGNAME", "BEN3D", 1); // setenv non autorisé
 			printf("LOGNAME = %s\n", getenv("LOGNAME"));
 		}
 		else if (!ft_strncmp(buffer, "testcd", 8))

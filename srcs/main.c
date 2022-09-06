@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 22:48:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:27:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ int	main(int ac, char **av, char **envp)
 	
 	ft_env_init_lst(envp, &data);
 	ft_display_all_env_lst(data.env);
-	printf("lst env taille = %i\n", ft_env_lstsize(data.env));
-	printf(" envp count key = %i\n", ft_env_count_keys(envp));
 	
 	
 	// env = ft_env_init(envp);
 	// env_test_read(envp, "__CF_USER_TEXT_ENCODING");
 	// ft_show_all_environnement_key(env);
 
-	// prompt_basic_test(av, env);
+	prompt_basic_test(av, envp);
 	return (0);
 }
 

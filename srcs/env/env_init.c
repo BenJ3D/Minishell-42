@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 22:17:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/06 22:58:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,6 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	data->env = tmp;
 }
 
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-///////////////     WITH ENVP TO ENV **CHAR TAB    //////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-//TODO: init env avec struc env pour key et value en chained ou tab**
-
 /**
  * @brief fonction test pour debug le split env
  * 
@@ -130,53 +123,4 @@ int	env_test_read(char **env, const char *key)
 	printf("env %s : %s\n", key, value + i);
 	free(value);
 	return (i);
-}
-
-int	ft_env_count_keys(char **envp)
-{
-	int i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	return (i);
-}
-
-/**
- * @brief init env if tab **env
- * 
- * @param envp 
- * @return char** 
- */
-char	**ft_env_init(char **envp)
-{
-	char **env;
-	int i;
-
-	env = ft_calloc(sizeof(char **), ft_env_count_keys(envp) + 1);
-	if (!env)
-		return (NULL);
-	i = 0;
-	while (envp[i])
-	{	
-		env[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	return (env);
-}
-
-void	ft_free_all_array(char **env)
-{
-	int	i;
-
-	i = 0;
-	while(env[i])
-	{
-
-		free (env[i]);
-		i++;
-		printf("free i = %i\n", i);
-	}
-	env = NULL;
-	free (env);
 }
