@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/06 23:57:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:50:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 /* FT TEST */
 int		test_execve_ls_fork(char **av);
-void	prompt_basic_test(char **av, char **env);
+void	prompt_basic_test(char **av, t_data *data);
 int		env_test_read(char **env, const char *key);
 
 /* FT ENV */
