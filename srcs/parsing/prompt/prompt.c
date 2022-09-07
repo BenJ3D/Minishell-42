@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 15:51:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:12:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ char *prompt_update(void)
 {
 	char *line;
 	
-	line = ft_strjoin_max("%s%s:%s%s%s$ ",
+	// line = ft_strjoin_max("%s%s:%s%s%s$ ",
+	// 	GREEN, getenv("USER"),
+	// 	CYAN, getenv("PWD"), NONE_COLOR);
+	line = ft_strjoin_max("%s%s:%sMiniHell%s$> ",
 		GREEN, getenv("USER"),
-		CYAN, getenv("PWD"), NONE_COLOR);
+		CYAN, NONE_COLOR);
 
 	return (line);
 }
