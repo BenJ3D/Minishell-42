@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 16:12:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:00:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void prompt_basic_test(char **av, t_data *data)
 			child = fork();
 			if (child == 0)
 				execve("/bin/ls", av, NULL); //TODO:TODO:
-			// if (child > 0)
-			// 	printf("Child pid = %i\n", child);
+			//if (child > 0)
+			//	printf("Child pid = %i\n", child);
 			wait(0);
 		}
 		else if (!ft_strncmp(buffer, "env", 4))

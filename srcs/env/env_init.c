@@ -6,12 +6,18 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 22:58:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:48:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
+/**
+ * @brief return name key without '='
+ * 
+ * @param str 
+ * @return char* 
+ */
 char	*ft_env_extract_key_name(char *str)
 {
 	int		i;
@@ -24,18 +30,23 @@ char	*ft_env_extract_key_name(char *str)
 	while (str[len] != '=')
 		len++;
 	len++;
-	tmp = ft_calloc(len + 1, sizeof(tmp));
+	tmp = ft_calloc(len, sizeof(tmp));
 	i = 0;
 	while (str[i] != '=')
 	{
 		tmp[i] =  str[i];
 		i++;
 	}
-	tmp[i++] = '=';
 	tmp[i] = '\0';
 	return (tmp);
 }
 
+/**
+ * @brief return content value after '=' key env
+ * 
+ * @param str 
+ * @return char* 
+ */
 char	*ft_env_extract_value_content(char *str)
 {
 	int		i;
@@ -88,6 +99,40 @@ void	ft_env_init_lst(char **envp, t_data *data)
 		i++;
 	}
 	data->env = tmp;
+}
+
+//FIXME: verifier si return NULL pose pas de soucis, sinon ft_strdup("");
+/**
+ * @brief retourne la valeur d'env correspondant a key
+ * 
+ * @param env 
+ * @param key 
+ * @return char* 
+ */
+char *ft_return_value_of_key_env(t_envlst *env, const char *key)
+{
+	char 		*ret;
+	t_envlst	*tmp;
+	int			keylen;
+
+	if (ft_strlen(key) < 2)
+	{
+		ret = ft_strdup("");
+		if (!ret)
+			return (NULL);
+		return (ret);
+	}
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strequal(tmp->key, key))
+		{
+			ret = ft_strdup(tmp->value);
+			return (ret);
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 /**

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:59:56 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/21 02:26:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:17:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putchar(char c);
 int		ft_intlen(long long nb);
 int		ft_putunnbr_fd(unsigned int n, int fd);
+int		ft_strnequal(const char *s1, const char *s2, size_t n);
+int		ft_strequal(const char *s1, const char *s2);
 
 //chained list
 t_list	*ft_lstnew(void *content);

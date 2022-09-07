@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/07 15:50:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:23:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ char	**ft_env_init(char **envp);
 char	*ft_env_extract_key_name(char *str);
 char	*ft_env_extract_value_content(char *str);
 void	ft_show_all_environnement_key(char **env);
+char	*ft_return_value_of_key_env(t_envlst *env, const char *key);
 
 
 /* FT ENV LIST */
 char	**ft_create_tab_with_envlst(t_envlst *env);
-void	ft_display_all_env_lst(t_envlst *envlst);
+void	ft_env_display_all_env_lst(t_envlst *envlst);
 void	ft_env_init_lst(char **envp, t_data *data);
 t_envlst	*ft_env_lstnew(char *key, char *value);
 void	ft_env_lstadd_front(t_envlst **alst, t_envlst *new);

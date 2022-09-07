@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 00:27:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:45:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ int	main(int ac, char **av, char **envp)
 	interactive_mode();
 	
 	ft_env_init_lst(envp, &data);
-	ft_display_all_env_lst(data.env);
+
+	// ft_env_display_all_env_lst(data.env);
+	char *teststr;
 	
+	teststr = ft_return_value_of_key_env(data.env, "SHLL");
+	printf("%s\n", teststr);
 	
 	// env = ft_env_init(envp);
 	// env_test_read(envp, "__CF_USER_TEXT_ENCODING");
 	// ft_show_all_environnement_key(env);
 
-	prompt_basic_test(av, envp);
+	//prompt_basic_test(av, envp);
 	return (0);
 }
 
