@@ -6,22 +6,38 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 15:06:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:24:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
-void	ft_show_all_environnement_key(char **env)
+void	ft_builtin_env(t_envlst *envlst)
 {
-	int	i;
+	t_envlst	*tmp;
 
-	i = 0;
-	if (!env)
-		return ;
-	while (env[i])
+	tmp = envlst;
+	while (tmp)
 	{
-		ft_putstr(env[i++]);
-		ft_putchar('\n');
+		ft_putstr(tmp->key);
+		ft_putstr("=");
+		ft_putstr(tmp->value);
+		ft_putstr("\n");
+		tmp = tmp->next;
 	}
 }
+
+
+// void	ft_builtin_env(char **env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!env)
+// 		return ;
+// 	while (env[i])
+// 	{
+// 		ft_putstr(env[i++]);
+// 		ft_putchar('\n');
+// 	}
+// }

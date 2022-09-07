@@ -4,7 +4,11 @@
 		"minishell.h": "c",
 		"includes.h": "c",
 		"readline.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"define_common.h": "c",
+		"history.h": "c",
+		"errno.h": "c",
+		"struct.h": "c"
 	},
 	"git.postCommitCommand": "push"
 }

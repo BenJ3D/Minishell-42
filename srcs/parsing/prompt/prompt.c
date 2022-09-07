@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 17:00:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 00:40:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
-char *prompt_update(void)
+char *prompt_update(t_envlst *env)
 {
 	char *line;
 	
-	// line = ft_strjoin_max("%s%s:%s%s%s$ ",
-	// 	GREEN, getenv("USER"),
-	// 	CYAN, getenv("PWD"), NONE_COLOR);
-	line = ft_strjoin_max("%s%s:%sMiniHell%s$> ",
-		GREEN, getenv("USER"),
+	line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
+		GREEN, ft_env_getenv(env ,"USER"),
 		CYAN, NONE_COLOR);
-
+	// line = ft_strjoin_max("%s%s:%sMiniHell%s$> ",
+	// 	GREEN, getenv("USER"),
+	// 	CYAN, NONE_COLOR);
 	return (line);
 }
 
@@ -45,7 +44,7 @@ void prompt_basic_test(char **av, t_data *data)
 	pid_t	child;
 	
 	buffer = NULL;
-	line = prompt_update();
+	line = prompt_update(data->env);
 	buffer = readline(line);
 	while ((buffer))
 	{ 
@@ -60,7 +59,16 @@ void prompt_basic_test(char **av, t_data *data)
 		}
 		else if (!ft_strncmp(buffer, "env", 4))
 		{
-			printf("LOGNAME = %s\n", getenv("LOGNAME"));
+			ft_builtin_env(data->env);
+		}
+		else if (!ft_strncmp(buffer, "export", 7))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = ft_strdup("=export");
+			
+			ft_builtin_export(data->env, tabexport);
 		}
 		else if (!ft_strncmp(buffer, "testcd", 8))
 		{
@@ -81,7 +89,7 @@ void prompt_basic_test(char **av, t_data *data)
 		free(buffer);
 		buffer = NULL;
 		free(line);
-		line = prompt_update();
+		line = prompt_update(data->env);
 		rl_on_new_line();
 		buffer = readline(line);
 	}

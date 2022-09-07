@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 18:45:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:24:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,25 @@ int	main(int ac, char **av, char **envp)
 		ft_putstr_fd(" to many arguments\n", 2);
 		return (1);
 	}
-	interactive_mode();
+	interactive_mode(); //FIXME: ft pomper, la modifier / ameliorer
 	
 	ft_env_init_lst(envp, &data);
 
-	// ft_env_display_all_env_lst(data.env);
-	char *teststr;
-	
-	teststr = ft_return_value_of_key_env(data.env, "SHLL");
-	printf("%s\n", teststr);
+	// ft_builtin_env(data.env);
 	
 	// env = ft_env_init(envp);
-	// env_test_read(envp, "__CF_USER_TEXT_ENCODING");
-	// ft_show_all_environnement_key(env);
+	// env_test_read(envp, "USER");
+	// env = ft_env_convert_envlst_to_tab(data.env);
+	// env_test_read(env, "USER");
 
-	//prompt_basic_test(av, envp);
+	// for (int n = 0; env[n]; n++)
+	// {
+	// 	printf("%i/%i\n", n + 1, ft_env_lstsize(data.env));
+	// }
+
+	
+	// ft_builtin_env(env);
+	prompt_basic_test(av, &data);
 	return (0);
 }
 

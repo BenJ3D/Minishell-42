@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 18:48:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 00:34:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ char	*ft_env_extract_key_name(char *str)
 	int		len;
 	char	*tmp;
 
-	if (str[0] == '\0')
+	i = 1;
+	len = 0;
+	while (str[i])
+		if (str[i++] == '=')
+			len++;
+	if (len == 0)
 		return (NULL);
 	len = 0;
 	while (str[len] != '=')
@@ -109,7 +114,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
  * @param key 
  * @return char* 
  */
-char *ft_return_value_of_key_env(t_envlst *env, const char *key)
+char	*ft_env_getenv(t_envlst *env, const char *key)
 {
 	char 		*ret;
 	t_envlst	*tmp;
@@ -134,6 +139,9 @@ char *ft_return_value_of_key_env(t_envlst *env, const char *key)
 	}
 	return (NULL);
 }
+
+
+
 
 /**
  * @brief fonction test pour debug le split env
@@ -169,3 +177,4 @@ int	env_test_read(char **env, const char *key)
 	free(value);
 	return (i);
 }
+
