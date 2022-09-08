@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 00:41:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:20:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,18 @@ void	ft_env_lstdelone(t_envlst *lst)
 	free(lst->key);
 	free(lst->value);
 	free(lst);
+}
+
+void	ft_env_lstclear_one(t_envlst **lst)
+{
+	t_envlst	*tmp;
+
+	if (lst)
+	{
+			tmp = (*lst)->next;
+			ft_env_lstdelone(*lst);
+			(*lst) = tmp;
+	}
 }
 
 void	ft_env_lstclear(t_envlst **lst)

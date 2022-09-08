@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/08 00:03:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:20:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ void		prompt_basic_test(char **av, t_data *data);
 int			env_test_read(char **env, const char *key);
 
 
+/* FT PARSING */
+
+
 /* FT BUILTIN */
+void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd);
+int			ft_builtin_unset(t_envlst *env, char **cmd);
 
 
 /* FT ENV */
-void		ft_builtin_env(t_envlst *envlst);
 char		**ft_env_init(char **envp);
 char		*ft_env_extract_key_name(char *str);
 char		*ft_env_extract_value_content(char *str);
@@ -45,11 +49,9 @@ void		ft_env_lstclear(t_envlst **lst);
 t_envlst	*ft_env_lstlast(t_envlst *lst);
 int			ft_env_lstsize(t_envlst *lst);
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
+void		ft_env_lstclear_one(t_envlst **lst);
 
-
-void		ft_free_all_array(char **env);
-
-	/* FT AART */
+/* FT AART */
 void		handler_interative(int signum);
 void		interactive_mode(void);
 

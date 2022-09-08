@@ -6,15 +6,17 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 00:40:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:13:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 // TODO: faire correspondre les "/path/" du dossier courant comme
 // TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
+			//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
+
 /**
- * @brief met a jour la phrase du pormpt
+ * @brief update line pormpt
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
@@ -25,14 +27,15 @@ char *prompt_update(t_envlst *env)
 	line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
 		GREEN, ft_env_getenv(env ,"USER"),
 		CYAN, NONE_COLOR);
-	// line = ft_strjoin_max("%s%s:%sMiniHell%s$> ",
+	// line = ft_strjoin_max("minishell-0.1$ "); // classic
+	// line = ft_strjoin_max("%s%s:%sMiniHell%s$> ", 
 	// 	GREEN, getenv("USER"),
-	// 	CYAN, NONE_COLOR);
+	// 	CYAN, NONE_COLOR); //avec path
 	return (line);
 }
 
 /**
- * @brief ft coder en dur pour tests prog
+ * @brief prompt coder en dur pour tests execs
  * 
  * @param av 
  * @param env 
@@ -61,21 +64,87 @@ void prompt_basic_test(char **av, t_data *data)
 		{
 			ft_builtin_env(data->env);
 		}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////      EXPORT TEST     //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 		else if (!ft_strncmp(buffer, "export", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
 			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("=export");
+			tabexport[1] = ft_strdup("BEN=BENEBI");
 			
 			ft_builtin_export(data->env, tabexport);
 		}
+		else if (!ft_strncmp(buffer, "export2", 7))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = ft_strdup("=BENEBI");
+			
+			ft_builtin_export(data->env, tabexport);
+		}
+		else if (!ft_strncmp(buffer, "export3", 7))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = ft_strdup("BENEBI");
+			
+			ft_builtin_export(data->env, tabexport);
+		}
+		else if (!ft_strncmp(buffer, "export4", 7))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = ft_strdup("");
+			
+			ft_builtin_export(data->env, tabexport);
+		}
+		else if (!ft_strncmp(buffer, "export5", 7))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = NULL;
+			
+			ft_builtin_export(data->env, tabexport);
+		}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////      UNSET TEST    //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+		else if (!ft_strncmp(buffer, "unset", 6))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("unset");
+			tabexport[1] = ft_strdup("BEN");
+			
+			ft_builtin_unset(data->env, tabexport);
+		}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////      CD TEST    //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 		else if (!ft_strncmp(buffer, "testcd", 8))
 		{
 			setenv("PWD", "/home/ben/projet/", 1);
 			printf("PWD = %s\n", getenv("PWD"));
 			printf("OLDPWD = %s\n", getenv("OLDPWD"));
 		}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////      PWD TEST    //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 		else if (!ft_strncmp(buffer, "pwd", 8))
 		{
 			printf("%s\n", getenv("PWD"));
@@ -84,13 +153,20 @@ void prompt_basic_test(char **av, t_data *data)
 		{
 			unlink("adieu"); // supprime un fichier
 		}
-		else
-			printf("%s: command not found\n", buffer);
+		else if (buffer[0] != '\0')
+		{
+			char *line2;
+			
+			line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n", 
+				CYAN, PURPLE, buffer, RED, NONE_COLOR);
+			ft_putstr_fd(line2, 2);
+			free (line2);
+		}
 		free(buffer);
 		buffer = NULL;
 		free(line);
 		line = prompt_update(data->env);
-		rl_on_new_line();
+		// rl_on_new_line();
 		buffer = readline(line);
 	}
 	if (line)

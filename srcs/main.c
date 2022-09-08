@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 21:24:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:28:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ int	main(int ac, char **av, char **envp)
 
 	
 	// ft_builtin_env(env);
+			// char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			// tabexport[0] = ft_strdup("export");
+			// tabexport[1] = ft_strdup("45=export");
+			
+			// ft_builtin_export(data.env, tabexport);
+	
 	prompt_basic_test(av, &data);
 	return (0);
 }

@@ -6,13 +6,22 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/07 18:33:35 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/08 11:08:42 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
+DEBUG=1
 
+ifeq ($(DEBUG), 0)
+CC = gcc $(CFLAGS)
+endif
+ifeq ($(DEBUG), 1)
+CC = gcc $(SANITIZE) $(LLDBFLAG)
+endif
+ifeq ($(DEBUG), 2)
+CC = gcc $(LLDBFLAG)
+endif
 
 #The Target Binary Program
 NAME        := minishell
@@ -40,7 +49,7 @@ UNAME_S := $(shell uname -s)
 #	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
 #Flags, Libraries and Includes
-CFLAGS      :=# -Wall -Wextra -Werror
+CFLAGS      := -Wall -Wextra -Werror
 SANITIZE    := -fsanitize=address
 LLDBFLAG    := -g3
 LIBFT_PATH  := ./libs/libft/libft.a
@@ -73,6 +82,9 @@ lib: directories
 directories:
 	@mkdir -p $(NAMEDIR)
 	@mkdir -p $(BUILDDIR)
+
+dbg:
+
 
 #Clean only Objecst
 clean:
@@ -111,8 +123,8 @@ $(NAME): $(OBJECTS)
 #Compile
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includes/*.h 
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) $(INC_INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	$(CC) $(INC) $(INC_INC) -c -o $@ $<
+	@$(CC) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
 	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)

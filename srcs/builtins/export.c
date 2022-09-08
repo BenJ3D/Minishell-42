@@ -6,13 +6,31 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 00:38:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:54:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
+static int	ft_check_if_null(char *str);
+static int	ft_main_export(t_envlst *env, char *str);
+static void	ft_print_export(t_envlst *env);
+
 //TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et que des alphanumeric)
-static int	check_if_null(char *str);
+/**
+ * @brief Fonction mère à appeler, TODO: parsing a faire
+ * 
+ * @param env 
+ * @param cmd 
+ * @return int 
+ */
+int	ft_builtin_export(t_envlst *env, char **cmd)
+{
+	if (!cmd[1] || cmd[1][0] == '\0')
+		ft_print_export(env);
+	else
+		ft_main_export(env, cmd[1]);
+	return (0);
+}
 
 /**
  * @brief add var to env with format key=value
@@ -21,25 +39,28 @@ static int	check_if_null(char *str);
  * @param str
  * @return int 
  */
-static int	main_export(t_envlst *env, char *str)
+static int	ft_main_export(t_envlst *env, char *str)
 {
 	char	*key;
 	char	*value;
 	char	*line;
 	
-	if (check_if_null(key) == 1)
-		return (1);
 	key = ft_env_extract_key_name(str);
+	if (ft_check_if_null(key) == 1)
+		return (1);
 	value = ft_env_extract_value_content(str);
 	ft_env_lstadd_back(&env, ft_env_lstnew(key, value));
 	free (key);
 	free (value);
 	return (0);
 }
-/* function print export
- * @param1 t_env lst
- * @return (void)*/
-static void	ft_print_exp(t_envlst *env)
+
+/**
+ * @brief function print export
+ * 
+ * @param env 
+ */
+static void	ft_print_export(t_envlst *env)
 {
 	t_envlst	*tmp;
 
@@ -60,7 +81,13 @@ static void	ft_print_exp(t_envlst *env)
 	}
 }
 
-static int	check_if_null(char *key)
+/**
+ * @brief vérifie si la key est NULL
+ * 
+ * @param key 
+ * @return int 
+ */
+static int	ft_check_if_null(char *key)
 {
 	if (key == NULL)
 	{
@@ -70,22 +97,3 @@ static int	check_if_null(char *key)
 	}
 	return (0);
 }
-
-int	ft_builtin_export(t_envlst *env, char **cmd)
-{
-	if (!cmd[1] || cmd[1][0] == '\0')
-		ft_print_exp(env);
-	else
-		main_export(env, cmd[1]);
-	return (0);
-}
-
-	// 	if (key[0] == '\0')
-	// {
-	// 	ft_putstr_fd("'minishell : export : ", 2);
-	// 	ft_putstr_fd(" '", 2);
-	// 	ft_putstr_fd(key, 2);
-	// 	ft_putstr_fd("' ", 2);
-	// 	ft_putstr_fd("not a valid identifier\n", 2);
-	// 	return (1);
-	// }
