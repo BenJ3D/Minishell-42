@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 16:25:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:12:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
-
+//TODO:SEGV if unset dont exist
 /**
  * @brief unset var env
  * /!\/!\ Ne check pas si cmd[1] est vide ! donc le faire avant /!\/!\
@@ -29,10 +29,10 @@ static int	ft_main_unset(t_envlst *env, char *str)
 		return (-1);
 	while (tmp)
 	{
-		if (ft_strequal(tmp->key, str))
+		if (ft_strequal(tmp->next->key, str))
 		{
 			ft_env_lstclear_one(&tmp);
-			break ;
+			return (0);
 		}
 		tmp = tmp->next;
 	}
