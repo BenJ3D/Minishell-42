@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 18:30:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:53:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,34 @@ int	main(int ac, char **av, char **envp)
 		ft_putstr_fd(" to many arguments\n", 2);
 		return (1);
 	}
-	interactive_mode(); //FIXME: ft pomper, la modifier / ameliorer
+	interactive_mode(); //FIXME: pomper sur un autre minishell, a modifier 
+																// ameliorer
 	
-	ft_env_init_lst(envp, &data);
-
-	// ft_builtin_env(data.env);
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////      ZONE TEST     //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 	
-	// env = ft_env_init(envp);
-	// env_test_read(envp, "USER");
-	// env = ft_env_convert_envlst_to_tab(data.env);
-	// env_test_read(env, "USER");
-
-	// for (int n = 0; env[n]; n++)
-	// {
-	// 	printf("%i/%i\n", n + 1, ft_env_lstsize(data.env));
-	// }
-
 	
-	// ft_builtin_env(env);
-			// char **tabexport = ft_calloc(3, sizeof(tabexport));
-
-			// tabexport[0] = ft_strdup("export");
-			// tabexport[1] = ft_strdup("45=export");
-			
-			// ft_builtin_export(data.env, tabexport);
+	for(int i=0; envp[i]; i++)
+	{
+		printf("env[i]:%s\n", envp[i]);
+	}
 	
-	prompt_basic_test(av, &data);
-	ft_env_lstclear(&data.env);
+	char *str = getcwd(NULL, PATH_MAX);
+	printf("%s\n", str);
+	
+	
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+	// ft_env_init_lst(envp, &data);
+	// prompt_basic_test(av, &data);
+	// ft_env_lstclear(&data.env);
 	return (0);
 }
 

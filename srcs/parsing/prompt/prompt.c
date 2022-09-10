@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 16:13:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:04:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void prompt_basic_test(char **av, t_data *data)
 	buffer = readline(line);
 	while ((buffer))
 	{ 
+		add_history(buffer);
 		if (!ft_strncmp(buffer, "ls", 3))
 		{
 			child = fork();
