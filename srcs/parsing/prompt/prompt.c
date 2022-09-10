@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/09 11:04:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:58:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 // TODO: faire correspondre les "/path/" du dossier courant comme
 // TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
 			//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
+
+static int	check_env_prompt_keys(t_envlst	*env)
+{
+	if (env == NULL)
+	{
+		return (0);
+	}
+	return (1);
+}
 
 /**
  * @brief update line pormpt
@@ -23,11 +32,24 @@
 char *prompt_update(t_envlst *env)
 {
 	char *line;
-	
-	line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
-		GREEN, ft_env_getenv(env ,"USER"),
-		CYAN, NONE_COLOR);
-	// line = ft_strjoin_max("minishell-0.1$ "); // classic
+
+	if (ft_env_check_if_key_is_valid(env, "USER") < 0)
+	{
+		line = ft_strjoin_max("%s~MiniHell~>%s$ ",
+				CYAN, NONE_COLOR);
+	}
+	else
+		line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
+					GREEN, ft_env_getstr_env_value(env, "USER"),
+					CYAN, NONE_COLOR);
+	// if (check_env_prompt_keys(env))
+	// {
+	// 	line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
+	// 		GREEN, ft_env_getstr_env_value(env, "USER"),
+	// 		CYAN, NONE_COLOR);
+	// }
+	// else
+	// 	line = ft_strjoin_max("minishell-0.1$ "); // classic
 	// line = ft_strjoin_max("%s%s:%sMiniHell%s$> ", 
 	// 	GREEN, getenv("USER"),
 	// 	CYAN, NONE_COLOR); //avec path
@@ -70,7 +92,7 @@ void prompt_basic_test(char **av, t_data *data)
 ////////////////////////      EXPORT TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "export", 7))
+		else if (!ft_strncmp(buffer, "export BEN", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -79,7 +101,7 @@ void prompt_basic_test(char **av, t_data *data)
 			
 			ft_builtin_export(data->env, tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export2", 7))
+		else if (!ft_strncmp(buffer, "export =BEN", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -97,7 +119,7 @@ void prompt_basic_test(char **av, t_data *data)
 			
 			ft_builtin_export(data->env, tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export4", 7))
+		else if (!ft_strncmp(buffer, "export", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -123,10 +145,23 @@ void prompt_basic_test(char **av, t_data *data)
 ////////////////////////////////////////////////////////////////////////////////
 		else if (!ft_strncmp(buffer, "unset", 6))
 		{
+			
+		}
+		else if (!ft_strncmp(buffer, "unset BEN", 10))
+		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
 			tabexport[0] = ft_strdup("unset");
 			tabexport[1] = ft_strdup("BEN");
+			
+			ft_builtin_unset(data->env, tabexport);
+		}
+		else if (!ft_strncmp(buffer, "unset USER", 11))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("unset");
+			tabexport[1] = ft_strdup("USER");
 			
 			ft_builtin_unset(data->env, tabexport);
 		}

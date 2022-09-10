@@ -6,11 +6,56 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 20:04:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:05:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
+
+/**
+ * @brief Recupere le maillot de t_envlst correspondant a key
+ * return NULL si la key n'existe pas
+ * @param env 
+ * @param key 
+ * @return t_envlst* 
+ */
+t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key)
+{
+	t_envlst	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strequal(tmp->key, key))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+/**
+ * @brief Verifie si une clef (key) est deja presente ou non dans l'env
+ * et renvoit sa position dans la liste chained
+ * return -1 si la key n'existe pas
+ * @param env 
+ * @return int 
+ */
+int	ft_env_check_if_key_is_valid(t_envlst *env, char *key)
+{
+	t_envlst	*tmp;
+	int			i;
+	
+	tmp = env;
+	i = 0;
+	while (tmp)
+	{
+		if (ft_strequal(tmp->key, key))
+			return (i);
+		tmp = tmp->next;
+		i++;
+	}
+	return (-1);
+}
 
 t_envlst	*ft_env_lstlast(t_envlst *lst)
 {

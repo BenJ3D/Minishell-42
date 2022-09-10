@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 16:07:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:53:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,22 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	}
 	interactive_mode(); //FIXME: pomper sur un autre minishell, a modifier 
-																// ameliorer
+														// ameliorer
 	
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////      ZONE TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
 	
+	// for(int i=0; envp[i]; i++)
+	// {
+	// 	printf("env[i]:%s\n", envp[i]);
+	// }
 	
-	for(int i=0; envp[i]; i++)
-	{
-		printf("env[i]:%s\n", envp[i]);
-	}
-	
-	char *str = getcwd(NULL, PATH_MAX);
-	printf("%s\n", str);
-	fdgf
+	// char *str = getcwd(NULL, PATH_MAX);
+	// printf("%s\n", str);
 	
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +47,14 @@ int	main(int ac, char **av, char **envp)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-	// ft_env_init_lst(envp, &data);
-	// prompt_basic_test(av, &data);
-	// ft_env_lstclear(&data.env);
+	ft_env_init_lst(envp, &data);
+	// t_envlst **tmp;
+	
+	// tmp = ft_env_getenv_lst_value(data.env, "LOGNAME");
+	// ft_env_check_if_key_is_valid(data.env, "USER");
+	
+	prompt_basic_test(av, &data);
+	ft_env_lstclear(&data.env);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 00:34:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:56:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_env_extract_key_name(char *str)
 	int		i;
 	int		len;
 	char	*tmp;
-
+ 
 	i = 1;
 	len = 0;
 	while (str[i])
@@ -76,6 +76,17 @@ char	*ft_env_extract_value_content(char *str)
 	return (tmp);
 }
 
+static void	ft_env_init_lst_if_empty_env(t_data *data, t_envlst *tmp,
+	char *tkey, char *tvalue)
+{
+	tkey = ft_strdup("USER");
+	tvalue = ft_strdup("guest");
+	ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+	data->env = tmp;
+	free(tkey);
+	free(tvalue);
+}
+
 /**
  * @brief create copy of envp in list chained 
  * 
@@ -88,11 +99,14 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	char	*tvalue;	
 	t_envlst	*tmp;
 
-	if (!envp)
-		return ;
 	tmp = NULL;
 	tkey = NULL;
 	tvalue = NULL;
+	if (!envp[0]) //FIXME:
+	{
+		// ft_env_init_lst_if_empty_env(data, tmp, tkey, tvalue);
+		return ;
+	}
 	i = 0;
 	while (envp[i])
 	{	
@@ -114,7 +128,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
  * @param key 
  * @return char* 
  */
-char	*ft_env_getenv(t_envlst *env, const char *key)
+char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 {
 	char 		*ret;
 	t_envlst	*tmp;

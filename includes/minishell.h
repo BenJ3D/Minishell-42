@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/08 16:20:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:19:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int			ft_builtin_unset(t_envlst *env, char **cmd);
 char		**ft_env_init(char **envp);
 char		*ft_env_extract_key_name(char *str);
 char		*ft_env_extract_value_content(char *str);
-char		*ft_env_getenv(t_envlst *env, const char *key);
+char		*ft_env_getstr_env_value(t_envlst *env, const char *key);
+int			ft_env_check_if_key_is_valid(t_envlst *env, char *key);
+t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
 
 /* FT ENV LIST */
 void		ft_env_init_lst(char **envp, t_data *data);
