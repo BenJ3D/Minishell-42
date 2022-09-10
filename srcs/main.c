@@ -6,13 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/09 11:53:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:07:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/minishell.h>
-
-//TODO: faire le split env
 
 int	main(int ac, char **av, char **envp)
 {
@@ -42,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 	
 	char *str = getcwd(NULL, PATH_MAX);
 	printf("%s\n", str);
-	
+	fdgf
 	
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
