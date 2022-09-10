@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 21:58:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:28:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,12 @@ char *prompt_update(t_envlst *env)
 	char *line;
 
 	if (ft_env_check_if_key_is_valid(env, "USER") < 0)
-	{
 		line = ft_strjoin_max("%s~MiniHell~>%s$ ",
 				CYAN, NONE_COLOR);
-	}
 	else
 		line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
 					GREEN, ft_env_getstr_env_value(env, "USER"),
 					CYAN, NONE_COLOR);
-	// if (check_env_prompt_keys(env))
-	// {
-	// 	line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
-	// 		GREEN, ft_env_getstr_env_value(env, "USER"),
-	// 		CYAN, NONE_COLOR);
-	// }
-	// else
-	// 	line = ft_strjoin_max("minishell-0.1$ "); // classic
-	// line = ft_strjoin_max("%s%s:%sMiniHell%s$> ", 
-	// 	GREEN, getenv("USER"),
-	// 	CYAN, NONE_COLOR); //avec path
 	return (line);
 }
 
@@ -73,7 +60,8 @@ void prompt_basic_test(char **av, t_data *data)
 	buffer = readline(line);
 	while ((buffer))
 	{ 
-		add_history(buffer);
+		if (buffer[0] != '\0')
+			add_history(buffer);
 		if (!ft_strncmp(buffer, "ls", 3))
 		{
 			child = fork();
@@ -92,7 +80,7 @@ void prompt_basic_test(char **av, t_data *data)
 ////////////////////////      EXPORT TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "export BEN", 7))
+		else if (!ft_strncmp(buffer, "export BEN", 11))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -101,7 +89,7 @@ void prompt_basic_test(char **av, t_data *data)
 			
 			ft_builtin_export(data->env, tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export =BEN", 7))
+		else if (!ft_strncmp(buffer, "export =BEN", 12))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -110,7 +98,7 @@ void prompt_basic_test(char **av, t_data *data)
 			
 			ft_builtin_export(data->env, tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export3", 7))
+		else if (!ft_strncmp(buffer, "export3", 8))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -128,12 +116,21 @@ void prompt_basic_test(char **av, t_data *data)
 			
 			ft_builtin_export(data->env, tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export5", 7))
+		else if (!ft_strncmp(buffer, "export5", 8))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
 			tabexport[0] = ft_strdup("export");
 			tabexport[1] = NULL;
+			
+			ft_builtin_export(data->env, tabexport);
+		}
+		else if (!ft_strncmp(buffer, "export USER", 12))
+		{
+			char **tabexport = ft_calloc(3, sizeof(tabexport));
+
+			tabexport[0] = ft_strdup("export");
+			tabexport[1] = ft_strdup("USER=benji42");
 			
 			ft_builtin_export(data->env, tabexport);
 		}

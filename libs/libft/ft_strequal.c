@@ -6,14 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 18:17:06 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 18:24:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:59:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * @brief return 1 if content s1 == s2
+ * @brief if content s1 == s2, return (1)
  * 
  * @param s1 
  * @param s2 

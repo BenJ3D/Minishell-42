@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 19:51:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:52:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,17 @@ void	ft_env_lstdelone(t_envlst *lst)
 void	ft_env_lstclear_one(t_envlst **lst)
 {
 	t_envlst	*tmp;
+	t_envlst	*tmp2;
 
 	if (lst)
 	{
 	
 		tmp = (*lst);
+		tmp2 = (*lst)->next->next;
 		(*lst) = (*lst)->next;
 		ft_env_lstdelone(*lst);
 		(*lst) = tmp;
-		(*lst)->next = NULL;
+		(*lst)->next = tmp2;
 	}
 }
 

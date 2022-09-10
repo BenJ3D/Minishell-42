@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 21:53:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:24:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int ac, char **av, char **envp)
 	
 	// tmp = ft_env_getenv_lst_value(data.env, "LOGNAME");
 	// ft_env_check_if_key_is_valid(data.env, "USER");
-	
 	prompt_basic_test(av, &data);
 	ft_env_lstclear(&data.env);
 	return (0);

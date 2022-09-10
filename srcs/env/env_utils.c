@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 22:05:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:09:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ int	ft_env_check_if_key_is_valid(t_envlst *env, char *key)
 	return (-1);
 }
 
+/**
+ * @brief fait avancer la liste à son dernier maillon
+ * 
+ * @param lst 
+ * @return t_envlst* 
+ */
 t_envlst	*ft_env_lstlast(t_envlst *lst)
 {
 	if (lst)
@@ -65,6 +71,13 @@ t_envlst	*ft_env_lstlast(t_envlst *lst)
 	return (lst);
 }
 
+/**
+ * @brief retourne toutes les key=env sous forme tab**
+ * Usage pour execve qui demande un **env param 
+ * 
+ * @param env 
+ * @return char** 
+ */
 char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 {
 	int			i;
@@ -83,6 +96,13 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 	return (tab);
 }
 
+
+/**
+ * @brief returne la taille de la liste env
+ * 
+ * @param lst 
+ * @return int 
+ */
 int		ft_env_lstsize(t_envlst *lst)
 {
 	t_envlst	*tmp;

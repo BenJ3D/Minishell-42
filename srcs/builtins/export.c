@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/08 14:54:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:38:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@ static int	ft_check_if_null(char *str);
 static int	ft_main_export(t_envlst *env, char *str);
 static void	ft_print_export(t_envlst *env);
 
-//TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et que des alphanumeric)
+//TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et 
+														//que des alphanumeric)
 /**
  * @brief Fonction mère à appeler, TODO: parsing a faire
  * 
@@ -32,6 +33,7 @@ int	ft_builtin_export(t_envlst *env, char **cmd)
 	return (0);
 }
 
+
 /**
  * @brief add var to env with format key=value
  * 
@@ -43,11 +45,12 @@ static int	ft_main_export(t_envlst *env, char *str)
 {
 	char	*key;
 	char	*value;
-	char	*line;
 	
 	key = ft_env_extract_key_name(str);
 	if (ft_check_if_null(key) == 1)
-		return (1);
+		return (-1);
+	if (ft_env_check_if_key_is_valid(env, key) >= 0)
+		ft_putstr("TU EXISTE\n");//TODO:
 	value = ft_env_extract_value_content(str);
 	ft_env_lstadd_back(&env, ft_env_lstnew(key, value));
 	free (key);

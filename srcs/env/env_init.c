@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 21:56:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:32:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ char	*ft_env_extract_value_content(char *str)
 	int		y;
 	char	*tmp;
 
+	i = 0;
 	if (str[i] == '\0')
 		return (NULL);
-	i = 0;
 	while (str[i] != '=')
 		i++;
 	i++;
@@ -76,16 +76,25 @@ char	*ft_env_extract_value_content(char *str)
 	return (tmp);
 }
 
-static void	ft_env_init_lst_if_empty_env(t_data *data, t_envlst *tmp,
-	char *tkey, char *tvalue)
-{
-	tkey = ft_strdup("USER");
-	tvalue = ft_strdup("guest");
-	ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
-	data->env = tmp;
-	free(tkey);
-	free(tvalue);
-}
+/**
+ * @brief verifie sur USER existe, et sinon creer la variable USER=guest
+ * //FIXME: ===>>> depend du comportement voulu pour notre minishell :
+ * soit on ne met plus de login soit on le remplace par guest a voir
+ * @param data 
+ * @param tmp 
+ * @param tkey 
+ * @param tvalue 
+ */
+// static void	ft_env_init_lst_if_empty_env(t_data *data, t_envlst *tmp,
+// 	char *tkey, char *tvalue)
+// {
+// 	tkey = ft_strdup("USER");
+// 	tvalue = ft_strdup("guest");
+// 	ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+// 	data->env = tmp;
+// 	free(tkey);
+// 	free(tvalue);
+// }
 
 /**
  * @brief create copy of envp in list chained 
@@ -105,17 +114,25 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	if (!envp[0]) //FIXME:
 	{
 		// ft_env_init_lst_if_empty_env(data, tmp, tkey, tvalue);
-		return ;
-	}
-	i = 0;
-	while (envp[i])
-	{	
-		tkey = ft_env_extract_key_name(envp[i]);
-		tvalue = ft_env_extract_value_content(envp[i]);
+		tkey = ft_strdup("PWD");
+		printf("HEY %s\n", tkey);
+		tvalue = ft_strdup(getcwd(NULL, PATH_MAX));
 		ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
 		free(tkey);
 		free(tvalue);
-		i++;
+	}
+	else
+	{
+		i = 0;
+		while (envp[i])
+		{
+			tkey = ft_env_extract_key_name(envp[i]);
+			tvalue = ft_env_extract_value_content(envp[i]);
+			ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+			free(tkey);
+			free(tvalue);
+			i++;
+		}
 	}
 	data->env = tmp;
 }
