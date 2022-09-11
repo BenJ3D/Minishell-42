@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 00:28:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 03:01:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,24 @@ static int	check_env_prompt_keys(t_envlst	*env)
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
-char *prompt_update(t_envlst *env)
+char *prompt_update(t_envlst *env, char *prgname)
 {
-	char *line;
-
+	char	*line;
+	char	*user;
+	
+	if (!prgname)
+		prgname = ft_strdup("minishell");
 	if (ft_env_check_if_key_is_valid(env, "USER") < 0)
-		line = ft_strjoin_max("%s~MiniHell~>%s$ ",
-				CYAN, NONE_COLOR);
+		line = ft_strjoin_max("%s%s>%s$ ",
+				CYAN, prgname, NONE_COLOR);
 	else
-		line = ft_strjoin_max("%s- %s -%s ~MiniHell~>%s$ ",
-					GREEN, ft_env_getstr_env_value(env, "USER"),
-					CYAN, NONE_COLOR);
+	{
+		user = ft_env_getstr_env_value(env, "USER");
+		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
+					GREEN, user,
+					CYAN, prgname, NONE_COLOR);
+		free (user);
+	}
 	return (line);
 }
 
@@ -56,7 +63,7 @@ void prompt_basic_test(char **av, t_data *data)
 	pid_t	child;
 	
 	buffer = NULL;
-	line = prompt_update(data->env);
+	line = prompt_update(data->env, data->pgr_name);
 	buffer = readline(line);
 	while ((buffer))
 	{ 
@@ -88,6 +95,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("BEN=BENEBI");
 			
 			ft_builtin_export(data->env, tabexport);
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
 		}
 		else if (!ft_strncmp(buffer, "export =BEN", 12))
 		{
@@ -97,7 +107,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("=BENEBI");
 			
 			ft_builtin_export(data->env, tabexport);
-		}
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);}
 		else if (!ft_strncmp(buffer, "export3", 8))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
@@ -106,7 +118,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("BENEBI");
 			
 			ft_builtin_export(data->env, tabexport);
-		}
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);}
 		else if (!ft_strncmp(buffer, "export", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
@@ -115,6 +129,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("");
 			
 			ft_builtin_export(data->env, tabexport);
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
 		}
 		else if (!ft_strncmp(buffer, "export5", 8))
 		{
@@ -124,6 +141,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = NULL;
 			
 			ft_builtin_export(data->env, tabexport);
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
 		}
 		else if (!ft_strncmp(buffer, "export USER", 12))
 		{
@@ -133,7 +153,10 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("USER=benji42");
 			
 			ft_builtin_export(data->env, tabexport);
-		}
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
+			}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,6 +175,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("BEN");
 			
 			ft_builtin_unset(data->env, tabexport);
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
 		}
 		else if (!ft_strncmp(buffer, "unset USER", 11))
 		{
@@ -161,6 +187,9 @@ void prompt_basic_test(char **av, t_data *data)
 			tabexport[1] = ft_strdup("USER");
 			
 			ft_builtin_unset(data->env, tabexport);
+			free (tabexport[0]);
+			free (tabexport[1]);
+			free (tabexport);
 		}
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +227,7 @@ void prompt_basic_test(char **av, t_data *data)
 		free(buffer);
 		buffer = NULL;
 		free(line);
-		line = prompt_update(data->env);
+		line = prompt_update(data->env, data->pgr_name);
 		// rl_on_new_line();
 		buffer = readline(line);
 	}

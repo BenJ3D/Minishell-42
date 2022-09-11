@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 00:32:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 02:25:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,10 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	tmp = NULL;
 	tkey = NULL;
 	tvalue = NULL;
-	if (!envp[0]) //FIXME:
+	if (!envp[0])
 	{
-		// ft_env_init_lst_if_empty_env(data, tmp, tkey, tvalue);
 		tkey = ft_strdup("PWD");
-		printf("HEY %s\n", tkey);
-		tvalue = ft_strdup(getcwd(NULL, PATH_MAX));
+		tvalue = getcwd(NULL, PATH_MAX);
 		ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
 		free(tkey);
 		free(tvalue);
@@ -174,6 +172,12 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 
 
 
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////     ENV TEST     //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /**
  * @brief fonction test pour debug le split env
  * 

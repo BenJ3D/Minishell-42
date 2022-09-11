@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/07 00:40:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 02:45:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "./../includes/minishell.h"
 
 void	handler_interative(int signum)
 {

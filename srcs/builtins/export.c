@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 00:38:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 02:09:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_builtin_export(t_envlst *env, char **cmd)
 	return (0);
 }
 
-
 /**
  * @brief add var to env with format key=value
  * 
@@ -43,16 +42,25 @@ int	ft_builtin_export(t_envlst *env, char **cmd)
  */
 static int	ft_main_export(t_envlst *env, char *str)
 {
-	char	*key;
-	char	*value;
+	char		*key;
+	char		*value;
+	t_envlst	*ret;
 	
 	key = ft_env_extract_key_name(str);
 	if (ft_check_if_null(key) == 1)
 		return (-1);
-	if (ft_env_check_if_key_is_valid(env, key) >= 0)
-		ft_putstr("TU EXISTE\n");//TODO:
 	value = ft_env_extract_value_content(str);
-	ft_env_lstadd_back(&env, ft_env_lstnew(key, value));
+	ret = ft_env_getenv_lst_value(env, key);
+	if (ret)
+	{
+		if (!ft_strequal(env->value, value))
+		{
+			free(ret->value);
+			ret->value = ft_strdup(value);
+		}
+	}
+	else
+		ft_env_lstadd_back(&env, ft_env_lstnew(key, value));
 	free (key);
 	free (value);
 	return (0);
