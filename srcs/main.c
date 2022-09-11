@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 03:01:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 03:07:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	main(int ac, char **av, char **envp)
 ////////////////////////////////////////////////////////////////////////////////
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
-	prompt_basic_test(av, &data);
+	prompt_minishell(av, &data);
+	// prompt_basic_test(av, &data);
 	ft_env_lstclear(&data.env);
 	free(data.pgr_name);
 	return (0);

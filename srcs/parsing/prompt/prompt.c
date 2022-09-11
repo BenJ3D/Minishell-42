@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 03:01:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 03:12:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,37 @@
 // TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
 			//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
 
-static int	check_env_prompt_keys(t_envlst	*env)
+
+
+
+
+void	prompt_minishell(char **av, t_data *data)
 {
-	if (env == NULL)
-	{
-		return (0);
+	char *buffer;
+	char *line;
+	
+	buffer = NULL;
+	line = prompt_update(data->env, data->pgr_name);
+	buffer = readline(line);
+	while ((buffer))
+	{ 
+		if (buffer[0] != '\0')
+			add_history(buffer);
+		ft_parsing_prrompt(data, buffer);
+
+			
+		free(buffer);
+		buffer = NULL;
+		free(line);
+		line = prompt_update(data->env, data->pgr_name);
+		rl_on_new_line();
+		buffer = readline(line);
 	}
-	return (1);
+	if (line)
+		free(line);
+	free(buffer);
+	rl_on_new_line();
+	write(1, "exit\n", 6);
 }
 
 /**
@@ -235,7 +259,7 @@ void prompt_basic_test(char **av, t_data *data)
 		free(line);
 	free(buffer);
 	rl_on_new_line();
-	write(2, "exit\n", 6);
+	write(1, "exit\n", 6);
 }
 
 // void init_shell(t_shell *shell)

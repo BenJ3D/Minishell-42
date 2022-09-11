@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/11 00:15:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/11 03:21:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@ int			test_execve_ls_fork(char **av);
 void		prompt_basic_test(char **av, t_data *data);
 int			env_test_read(char **env, const char *key);
 
+/* FT MINISHELL */
+void		prompt_minishell(char **av, t_data *data);
 
 /* FT PARSING */
+int			ft_parsing_prompt(t_data data, char *buffer);
 
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd);
 int			ft_builtin_unset(t_envlst *env, char **cmd);
+int			ft_cd(t_envlst env, char *next_path);
 
 
 /* FT ENV */
