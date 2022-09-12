@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 20:42:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:48:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_split_cmd_and_arg(t_cmdtable *cmdtable, char *buffer, t_data *data
 	tmpcmdtab.arg[0] = ft_strdup("bonjour  ");
 	tmpcmdtab.arg[1] = ft_strdup("benjamin");
 	cmdtable = ft_calloc(ft_count_pipe(buffer) + 1, sizeof(cmdtable));
-	ft_lstadd_back(&data->cmdlst, ft_lstnew(&tmpcmdtab));
+	// ft_lstadd_back(&data->cmdlst, ft_lstnew(&tmpcmdtab));
 	i = 0;
 	while (ft_isspace(buffer[i]) && buffer[i]) // passe les premier espace
 		i++;
@@ -56,7 +56,9 @@ static int	ft_split_cmd_and_arg(t_cmdtable *cmdtable, char *buffer, t_data *data
 	ft_putstr("\n");
 	ft_putnbr(len);
 	ft_putstr("\n");
-
+	printf("%s\n",tmpcmdtab.progname);
+	printf("%s %s\n",tmpcmdtab.arg[0], tmpcmdtab.arg[1]);
+	// printf("%s\n", data->cmdlst->((t_cmdtable*)content)->progname);
 	// ft_putstr(buffer);
 	// ft_putstr("\n");
 	// ft_putstr(buffer + i);

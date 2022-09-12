@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/12 15:41:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:44:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ t_envlst	*ft_env_lstlast(t_envlst *lst);
 int			ft_env_lstsize(t_envlst *lst);
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
 void		ft_env_lstclear_one(t_envlst **lst);
+
+/* FT LIST */
+void		ft_lstadd_back(t_list **alst, t_list *new);
+t_list		*ft_lstnew(char *str);
+t_list		*ft_lstlast(t_list *lst);
+int			ft_lstsize(t_list *lst);
+
+
+
 
 /* FT AART */
 void		handler_interative(int signum);

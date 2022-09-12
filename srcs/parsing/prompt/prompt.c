@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 19:12:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:49:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	return (line);
 }
 
-
-
 void	prompt_minishell(char **av, t_data *data)
 {
 	char *buffer;
@@ -56,19 +54,17 @@ void	prompt_minishell(char **av, t_data *data)
 		if (buffer[0] != '\0')
 			add_history(buffer);
 		ft_parsing_prompt(data, buffer);
-		
 		free(buffer);
 		buffer = NULL;
 		free(line);
 		line = prompt_update(data->env, data->pgr_name);
-		rl_on_new_line();
 		buffer = readline(line);
 	}
 	if (line)
 		free(line);
 	free(buffer);
 	rl_on_new_line();
-	write(1, "exit\n", 6);
+	write(1, "exit", 6);
 }
 
 

@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/07 18:18:34 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/12 23:35:54 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,17 +61,17 @@ FILES = ft_memset		\
 		ft_putunnbr		\
 		ft_putunnbr_fd	\
 		ft_isspace		\
-		ft_lstnew		\
-		ft_lstadd_front	\
-		ft_lstsize		\
-		ft_lstlast		\
-		ft_lstadd_back	\
-		ft_lstdelone	\
-		ft_lstclear		\
-		ft_lstiter		\
-		ft_lstmap		\
 		ft_strnequal	\
 		ft_strequal
+#		ft_lstnew		\
+#		ft_lstadd_front	\
+#		ft_lstsize		\
+#		ft_lstlast		\
+#		ft_lstadd_back	\
+#		ft_lstdelone	\
+#		ft_lstclear		\
+#		ft_lstiter		\
+#		ft_lstmap		\
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

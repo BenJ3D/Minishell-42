@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/12 18:45:09 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/12 23:18:25 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ ifeq ($(DEBUG), 0)
 CC = gcc $(CFLAGS)
 endif
 ifeq ($(DEBUG), 1)
-CC = gcc $(SANITIZE) $(LLDBFLAG)
+CC = gcc $(SANITIZE) $(LLDBFLAG
 endif
 ifeq ($(DEBUG), 2)
 CC = gcc $(LLDBFLAG)
