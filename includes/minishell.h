@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/11 03:21:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:41:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			env_test_read(char **env, const char *key);
 void		prompt_minishell(char **av, t_data *data);
 
 /* FT PARSING */
-int			ft_parsing_prompt(t_data data, char *buffer);
+int			ft_parsing_prompt(t_data *data, char *buffer);
 
 
 /* FT BUILTIN */

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 02:45:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:57:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	handler_interative(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
-		rl_on_new_line();
 		rl_replace_line("", 0); //TODO: implicit declaration C99 ??
+		rl_on_new_line();
 		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)

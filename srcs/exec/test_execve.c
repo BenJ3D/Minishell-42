@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/11 02:44:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:53:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		test_execve_ls_fork(char **av)
 	if (father == 0)
 	{
 		printf("I'M YOUR CHILD || father = %i\n", father);
-		execve ("/bin/ls", av, NULL); // execute un ls a l'emplacement courant 
+		execve ("/bin/ls", av, NULL); // execute un ls a l'emplacement courant
+		perror("minishell"); 
 	}
 	return (0);
 }
