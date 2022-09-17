@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 19:20:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 00:32:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,22 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		data->cmdlst[i++] = NULL;
 	// bufi = 0;
 	t_list	*test;
+	t_list	*test2;
+	char	**ptr;
+	char *bufcpy = ft_strdup(buffer);
 	
+	ptr = &buffer;
 	test = ft_split_buffercmd_in_lst(&buffer);
+	test2 = ft_split_buffercmd_in_lst(&bufcpy);
 
 	ft_lstadd_back(&data->cmdlst[0], test);
+	ft_lstadd_back(&data->cmdlst[1], test2);
 	// printf("%s\n", buffer);
 	printf("HOURA ??\n");
 	ft_lstdisplay_color(data->cmdlst[0]);
+	printf("HOURA 2??\n");
+	ft_lstdisplay_color(data->cmdlst[1]);
+	printf("BUF rip %s\n", *ptr);
 	i = 0;
 	// while (i < pipe + 1)
 	// 	ft_lstclear(&data->cmdlst[i++]);
