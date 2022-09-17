@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 19:00:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:20:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,18 +137,20 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	
 	pipe = ft_count_pipe(buffer);
 	data->cmdlst = ft_calloc(pipe + 1, sizeof(data->cmdlst));
-	// i = 0;
-	data->cmdlst = NULL;
-	// while (i < pipe + 1)
-	// 	data->cmdlst[i++] = NULL;
+	i = 0;
+	// data->cmdlst = NULL;
+	// data->cmdlst[0] = NULL;
+	while (i < pipe + 1)
+		data->cmdlst[i++] = NULL;
 	// bufi = 0;
 	t_list	*test;
 	
 	test = ft_split_buffercmd_in_lst(&buffer);
 
+	ft_lstadd_back(&data->cmdlst[0], test);
 	// printf("%s\n", buffer);
 	printf("HOURA ??\n");
-	ft_lstdisplay_color(test);
+	ft_lstdisplay_color(data->cmdlst[0]);
 	i = 0;
 	// while (i < pipe + 1)
 	// 	ft_lstclear(&data->cmdlst[i++]);
