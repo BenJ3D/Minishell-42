@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 23:46:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 10:52:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct s_envlst
 typedef struct s_list
 {
 	char			*str;
+	struct s_list	*arg;
 	struct s_list	*next;
 }					t_list;
+
 typedef enum e_redirection
 {
 	OUT_1,
@@ -36,7 +38,7 @@ typedef enum e_redirection
 typedef struct s_cmdlst
 {
 	char			*cmd;
-	char			**arg;
+	char			*arg;
 	char			*file;
 	t_redirection	type_redirection;
 	struct s_cmdlst	*next;

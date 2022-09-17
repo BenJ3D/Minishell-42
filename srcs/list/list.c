@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 23:44:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:26:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ int		ft_lstsize(t_list *lst)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	ft_lstdisplay(t_list *lst)
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	while(tmp)
+	{
+		ft_putstr(tmp->str);
+		ft_putstr("\n");
+		tmp = tmp->next;
+	}
 }

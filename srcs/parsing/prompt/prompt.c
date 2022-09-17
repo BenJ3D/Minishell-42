@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 21:49:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 09:20:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 // TODO: faire correspondre les "/path/" du dossier courant comme
 // TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
-			//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
+		//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
 
 /**
- * @brief update line pormpt
+ * @brief update line prompt
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
@@ -64,7 +64,7 @@ void	prompt_minishell(char **av, t_data *data)
 		free(line);
 	free(buffer);
 	rl_on_new_line();
-	write(1, "exit", 6);
+	write(1, "exit\n", 5);
 }
 
 
@@ -254,5 +254,5 @@ void prompt_basic_test(char **av, t_data *data)
 		free(line);
 	free(buffer);
 	rl_on_new_line();
-	write(1, "exit\n", 6);
+	write(1, "exit13\n", 8);
 }
