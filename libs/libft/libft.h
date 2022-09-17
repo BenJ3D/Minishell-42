@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:59:56 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 10:18:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:06:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
+typedef struct s_lst
+{
+	void			*content;
+	struct s_lst	*next;
+}					t_lst;
 
 size_t	ft_strlen(const char *str);
 int		ft_isalpha(int c);
@@ -70,15 +70,15 @@ int		ft_strnequal(const char *s1, const char *s2, size_t n);
 int		ft_strequal(const char *s1, const char *s2);
 
 //chained list
-// t_list	*ft_lstnew(void *content);
-// void	ft_lstadd_front(t_list **alst, t_list *new);
-// int		ft_lstsize(t_list *lst);
-// t_list	*ft_lstlast(t_list *lst);
-// void	ft_lstadd_back(t_list **alst, t_list *new);
-// void	ft_lstdelone(t_list *lst, void (*del)(void *));
-// void	ft_lstclear(t_list **lst, void (*del)(void *));
-// void	ft_lstiter(t_list *lst, void (*f)(void *));
-// t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-// char	*ft_strtrim(char const *s1, char const *set);
+t_lst	*ft_lstnew_void(void *content);
+void	ft_lstadd_front_void(t_lst **alst, t_lst *new);
+int		ft_lstsize_void(t_lst *lst);
+t_lst	*ft_lstlast_void(t_lst *lst);
+void	ft_lstadd_back_void(t_lst **alst, t_lst *new);
+void	ft_lstdelone_void(t_lst *lst, void (*del)(void *));
+void	ft_lstclear_void(t_lst **lst, void (*del)(void *));
+void	ft_lstiter_void(t_lst *lst, void (*f)(void *));
+t_lst	*ft_lstmap_void(t_lst *lst, void *(*f)(void *), void (*del)(void *));
+char	*ft_strtrim_void(char const *s1, char const *set);
 
 #endif

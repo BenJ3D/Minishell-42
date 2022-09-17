@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 16:16:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/22 17:37:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:05:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_lst	*ft_lstmap_void(t_lst *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*tmp1;
-	t_list	*tmp2;
-	t_list	*tmp3;
+	t_lst	*tmp1;
+	t_lst	*tmp2;
+	t_lst	*tmp3;
 
 	if (!lst || !f)
 		return (NULL);
 	tmp1 = lst;
-	tmp2 = ft_lstnew(f(lst->content));
+	tmp2 = ft_lstnew_void(f(lst->content));
 	while (tmp1->next)
 	{
-		tmp3 = ft_lstnew(f(tmp1->next->content));
+		tmp3 = ft_lstnew_void(f(tmp1->next->content));
 		if (!tmp2)
 		{
-			ft_lstclear(&tmp2, del);
+			ft_lstclear_void(&tmp2, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&tmp2, tmp3);
+		ft_lstadd_back_void(&tmp2, tmp3);
 		tmp1 = tmp1->next;
 	}
 	return (tmp2);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/17 12:27:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:59:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,13 @@ void		ft_lstadd_back(t_list **alst, t_list *new);
 t_list		*ft_lstnew(char *str);
 t_list		*ft_lstlast(t_list *lst);
 int			ft_lstsize(t_list *lst);
+void		ft_lstdelone(t_list *lst);
+void		ft_lstclear(t_list **lst);
+
 
 /* FT DEBUG */
 void	ft_lstdisplay(t_list *lst);
+void	ft_lstdisplay_color(t_list *lst);
 
 
 /* FT AART */

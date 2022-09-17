@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 12:44:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:00:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,32 +93,33 @@ static int	ft_strlen_next_word(char *str)
  * @param buffer 
  * @return int 
  */
-static int	ft_split_buffercmd_in_lst(t_list *cmd, char *buffer)
+static t_list	*ft_split_buffercmd_in_lst(char **buffer)
 {
 	int		i;
+	int		y;
 	int		len;
 	char	*str;
+	t_list *cmd;
 	
-	while (*buffer)
+	y = 0;
+	cmd = NULL;
+	while (**buffer)
 	{
-		while(ft_isspace(*buffer) && *buffer)
-			buffer++;
-		len = ft_strlen_next_word(buffer);
+		while(ft_isspace(**buffer) && **buffer)
+			*(*buffer)++;
+		if (*(*buffer) == '\0')
+			return (cmd);
+		len = ft_strlen_next_word(*buffer);
 		str = ft_calloc(len + 1, sizeof(str));
 		if (!str)
-			return (-1);
+			return (NULL);
 		i = 0;
-		while(len > 0)
-		{
-			str[i++] = *buffer;
-			len--;
-			buffer++;
-		}
+		while(len-- > 0)
+			str[i++] = *(*buffer)++;
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
-	ft_lstdisplay(cmd);
-	return (0);
+	return (cmd);
 }
 
 /**
@@ -130,9 +131,27 @@ static int	ft_split_buffercmd_in_lst(t_list *cmd, char *buffer)
  */
 int	ft_parsing_prompt(t_data *data, char *buffer)
 {
+	int	pipe;
+	int	i;
+	int	bufi;
+	
+	pipe = ft_count_pipe(buffer);
+	data->cmdlst = ft_calloc(pipe + 1, sizeof(data->cmdlst));
+	// i = 0;
 	data->cmdlst = NULL;
-	ft_split_buffercmd_in_lst(data->cmdlst, buffer);
-	ft_lstdisplay(data->cmdlst);
+	// while (i < pipe + 1)
+	// 	data->cmdlst[i++] = NULL;
+	// bufi = 0;
+	t_list	*test;
+	
+	test = ft_split_buffercmd_in_lst(&buffer);
+
+	// printf("%s\n", buffer);
+	printf("HOURA ??\n");
+	ft_lstdisplay_color(test);
+	i = 0;
+	// while (i < pipe + 1)
+	// 	ft_lstclear(&data->cmdlst[i++]);
 	// ft_split_cmd_and_arg(data->cmdtab, buffer, data);
 
 

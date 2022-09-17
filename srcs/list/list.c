@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 12:26:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:01:34 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,46 @@ void	ft_lstdisplay(t_list *lst)
 		ft_putstr(tmp->str);
 		ft_putstr("\n");
 		tmp = tmp->next;
+	}
+}
+
+void	ft_lstdisplay_color(t_list *lst)
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	while(tmp)
+	{
+		ft_putstr(tmp->str);
+		ft_putstr(RED);
+		ft_putstr(" -> ");
+		ft_putstr(NONE_COLOR);
+		tmp = tmp->next;
+	}
+		ft_putstr("(null)");
+		ft_putstr("\n");
+}
+
+void	ft_lstdelone(t_list *lst)
+{
+	if (!lst)
+		return ;
+	ft_bzero(lst->str, ft_strlen(lst->str));
+	free(lst->str);
+	free(lst);
+}
+
+void	ft_lstclear(t_list **lst)
+{
+	t_list	*tmp;
+
+	if (lst)
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			ft_lstdelone(*lst);
+			(*lst) = tmp;
+		}
 	}
 }

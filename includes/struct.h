@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 10:52:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:35:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_data
 	char		*pgr_name;
 	t_envlst	*env;
 	t_cmdtable	*cmdtab;
-	t_list		*cmdlst;
+	t_list		**cmdlst;
 }				t_data;
 
 #endif

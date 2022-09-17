@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
-/*   Updated: 2021/11/22 16:15:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:05:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter_void(t_lst *lst, void (*f)(void *))
 {
-	t_list	*lst1;
+	t_lst	*lst1;
 
 	if (!lst || !f)
 		return ;
