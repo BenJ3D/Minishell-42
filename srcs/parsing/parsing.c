@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 00:32:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 14:44:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,11 @@ static t_list	*ft_split_buffercmd_in_lst(char **buffer)
 	
 	y = 0;
 	cmd = NULL;
-	while (**buffer)
+	while (*(*buffer))
 	{
 		while(ft_isspace(**buffer) && **buffer)
-			*(*buffer)++;
+			// *(*buffer)++;
+			(*(*buffer)) = (*(*buffer) + 1);
 		if (*(*buffer) == '\0')
 			return (cmd);
 		len = ft_strlen_next_word(*buffer);
@@ -150,17 +151,16 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	
 	ptr = &buffer;
 	test = ft_split_buffercmd_in_lst(&buffer);
-	test2 = ft_split_buffercmd_in_lst(&bufcpy);
 
 	ft_lstadd_back(&data->cmdlst[0], test);
-	ft_lstadd_back(&data->cmdlst[1], test2);
 	// printf("%s\n", buffer);
 	printf("HOURA ??\n");
 	ft_lstdisplay_color(data->cmdlst[0]);
 	printf("HOURA 2??\n");
-	ft_lstdisplay_color(data->cmdlst[1]);
 	printf("BUF rip %s\n", *ptr);
 	i = 0;
+	ft_lstclear(&data->cmdlst[0]);
+	free(data->cmdlst);
 	// while (i < pipe + 1)
 	// 	ft_lstclear(&data->cmdlst[i++]);
 	// ft_split_cmd_and_arg(data->cmdtab, buffer, data);
