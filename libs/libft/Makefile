@@ -3,20 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/17 18:06:59 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/18 14:34:28 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
-RM = rm -f
-HEADER = libft.h
+DEBUG=0
+
+ifeq ($(DEBUG), 0)
+CC = gcc $(CFLAGS)
+endif
+ifeq ($(DEBUG), 1)
+CC = gcc $(SANITIZE) $(LLDBFLAG)
+endif
+ifeq ($(DEBUG), 2)
+CC = gcc $(LLDBFLAG)
+endif
+
+CFLAGS      := -Wall -Wextra -Werror
+SANITIZE    := -fsanitize=address
+LLDBFLAG    := -g3
+AR          := ar rcs
+RM          := rm -f
+HEADER      := libft.h
 
 FILES = ft_memset				\
 		ft_bzero				\
@@ -78,6 +91,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+
 
 all: $(NAME) ./Makefile
 

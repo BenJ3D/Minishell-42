@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 17:19:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:19:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	prompt_minishell(char **av, t_data *data)
 		if (buffer[0] != '\0')
 			add_history(buffer);
 		ft_parsing_prompt(data, buffer);
-		free(buffer);
-		buffer = NULL;
 		free(line);
 		line = prompt_update(data->env, data->pgr_name);
+		free(buffer);
+		buffer = NULL;
 		buffer = readline(line);
 	}
 	if (line)

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 14:44:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 16:59:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,46 +25,46 @@ static int	ft_count_pipe(char *buffer) //ft pour test sans parsing
 	return (len);
 }
 
-static int	ft_split_cmd_and_arg(t_cmdtable *cmdtable, char *buffer, t_data *data) //FIXME: virer t_data
-{
-	int	i;
-	int	b;
-	int	len;
-	t_cmdtable tmpcmdtab;
+// static int	ft_split_cmd_and_arg(t_cmdtable *cmdtable, char *buffer, t_data *data) //FIXME: virer t_data
+// {
+// 	int	i;
+// 	int	b;
+// 	int	len;
+// 	t_cmdtable tmpcmdtab;
 	
-	tmpcmdtab.progname = ft_strdup("echo");
-	tmpcmdtab.arg = ft_calloc(2 + 1, sizeof(tmpcmdtab.arg));
-	tmpcmdtab.arg[0] = ft_strdup("bonjour  ");
-	tmpcmdtab.arg[1] = ft_strdup("benjamin");
-	cmdtable = ft_calloc(ft_count_pipe(buffer) + 1, sizeof(cmdtable));
-	// ft_lstadd_back(&data->cmdlst, ft_lstnew(&tmpcmdtab));
-	i = 0;
-	while (ft_isspace(buffer[i]) && buffer[i]) // passe les premier espace
-		i++;
-	b = 0;
-	len = 0;
-	ft_putnbr(i);
-	ft_putstr("\n");
-	if (buffer[i] == '\0')
-		ft_putstr("IL EST NULL\n");
-	while (buffer[i] && (!ft_isspace(buffer[i]) || buffer[i] != '|'))
-	{
-		i++;
-		len++;
-	}
-	ft_putnbr(i);
-	ft_putstr("\n");
-	ft_putnbr(len);
-	ft_putstr("\n");
-	printf("%s\n",tmpcmdtab.progname);
-	printf("%s %s\n",tmpcmdtab.arg[0], tmpcmdtab.arg[1]);
-	// printf("%s\n", data->cmdlst->((t_cmdtable*)content)->progname);
-	ft_putstr(buffer);
-	ft_putstr("\n");
-	ft_putstr(buffer + i);
-	ft_putstr("\n");
-	return (0);
-}
+// 	tmpcmdtab.progname = ft_strdup("echo");
+// 	tmpcmdtab.arg = ft_calloc(2 + 1, sizeof(tmpcmdtab.arg));
+// 	tmpcmdtab.arg[0] = ft_strdup("bonjour  ");
+// 	tmpcmdtab.arg[1] = ft_strdup("benjamin");
+// 	cmdtable = ft_calloc(ft_count_pipe(buffer) + 1, sizeof(cmdtable));
+// 	// ft_lstadd_back(&data->cmdlst, ft_lstnew(&tmpcmdtab));
+// 	i = 0;
+// 	while (ft_isspace(buffer[i]) && buffer[i]) // passe les premier espace
+// 		i++;
+// 	b = 0;
+// 	len = 0;
+// 	ft_putnbr(i);
+// 	ft_putstr("\n");
+// 	if (buffer[i] == '\0')
+// 		ft_putstr("IL EST NULL\n");
+// 	while (buffer[i] && (!ft_isspace(buffer[i]) || buffer[i] != '|'))
+// 	{
+// 		i++;
+// 		len++;
+// 	}
+// 	ft_putnbr(i);
+// 	ft_putstr("\n");
+// 	ft_putnbr(len);
+// 	ft_putstr("\n");
+// 	printf("%s\n",tmpcmdtab.progname);
+// 	printf("%s %s\n",tmpcmdtab.arg[0], tmpcmdtab.arg[1]);
+// 	// printf("%s\n", data->cmdlst->((t_cmdtable*)content)->progname);
+// 	ft_putstr(buffer);
+// 	ft_putstr("\n");
+// 	ft_putstr(buffer + i);
+// 	ft_putstr("\n");
+// 	return (0);
+// }
 
 /**
  * @brief retourne len du prochain mot
@@ -93,7 +93,7 @@ static int	ft_strlen_next_word(char *str)
  * @param buffer 
  * @return int 
  */
-static t_list	*ft_split_buffercmd_in_lst(char **buffer)
+static t_list	*ft_split_buffercmd_in_lst(char *buffer, int *bufi)
 {
 	int		i;
 	int		y;
@@ -103,24 +103,38 @@ static t_list	*ft_split_buffercmd_in_lst(char **buffer)
 	
 	y = 0;
 	cmd = NULL;
-	while (*(*buffer))
+	while (buffer[*bufi])
 	{
-		while(ft_isspace(**buffer) && **buffer)
-			// *(*buffer)++;
-			(*(*buffer)) = (*(*buffer) + 1);
-		if (*(*buffer) == '\0')
+		while(ft_isspace(buffer[*bufi]) && buffer[*bufi] && buffer[*bufi] != '|')
+			*bufi = *bufi + 1;
+		if (buffer[*bufi] == '\0')
 			return (cmd);
-		len = ft_strlen_next_word(*buffer);
+		len = ft_strlen_next_word(buffer + *bufi);
 		str = ft_calloc(len + 1, sizeof(str));
 		if (!str)
 			return (NULL);
 		i = 0;
 		while(len-- > 0)
-			str[i++] = *(*buffer)++;
+		{
+			str[i++] = buffer[*bufi];
+			*bufi = *bufi + 1;
+		}
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
 	return (cmd);
+}
+
+t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int i)
+{
+	t_list	*tmp;
+	
+	tmp = lst;
+	while(tmp)
+	{
+		
+		tmp = tmp->next;
+	}
 }
 
 /**
@@ -134,35 +148,37 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 {
 	int	pipe;
 	int	i;
-	int	bufi;
 	
 	pipe = ft_count_pipe(buffer);
-	data->cmdlst = ft_calloc(pipe + 1, sizeof(data->cmdlst));
+	printf("pipe = %i\n", pipe);
+	if (pipe == 0)
+		pipe++;
+	data->cmdtab = ft_calloc(pipe + 1, sizeof(data->cmdtab));
+	// data->cmdtoparse = ft_calloc(pipe + 1, sizeof(data->cmdtoparse));
 	i = 0;
-	// data->cmdlst = NULL;
-	// data->cmdlst[0] = NULL;
-	while (i < pipe + 1)
-		data->cmdlst[i++] = NULL;
+	// data->cmdtoparse = NULL;
+	// data->cmdtoparse[0] = NULL;
+	data->cmdtoparse = NULL;
 	// bufi = 0;
-	t_list	*test;
-	t_list	*test2;
-	char	**ptr;
-	char *bufcpy = ft_strdup(buffer);
+	t_list	*tmp;
+	t_list	*tmp2;
+	int		bufi;
 	
-	ptr = &buffer;
-	test = ft_split_buffercmd_in_lst(&buffer);
+	bufi = 0;
+	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, &bufi);
 
-	ft_lstadd_back(&data->cmdlst[0], test);
+	// ft_lstadd_back(&data->cmdtoparse[0], tmp);
 	// printf("%s\n", buffer);
 	printf("HOURA ??\n");
-	ft_lstdisplay_color(data->cmdlst[0]);
-	printf("HOURA 2??\n");
-	printf("BUF rip %s\n", *ptr);
+	ft_lstdisplay_color(data->cmdtoparse);
+	ft_lstdisplay_color(data->cmdtab[2].lst);
+	printf("bufi = %i??\n", bufi);
+	printf("BUF rip %s\n", buffer);
 	i = 0;
-	ft_lstclear(&data->cmdlst[0]);
-	free(data->cmdlst);
+	ft_lstclear(&data->cmdtab[2].lst);
+	free(data->cmdtab);
 	// while (i < pipe + 1)
-	// 	ft_lstclear(&data->cmdlst[i++]);
+	// 	ft_lstclear(&data->cmdtoparse[i++]);
 	// ft_split_cmd_and_arg(data->cmdtab, buffer, data);
 
 

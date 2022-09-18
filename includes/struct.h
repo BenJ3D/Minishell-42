@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 17:35:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 16:29:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,17 @@ typedef struct s_cmdlst
 	struct s_cmdlst	*next;
 }				t_cmdlst;
 
-typedef struct s_cmdtable
+typedef struct s_cmdtab
 {
-	char	*progname;
-	char	**arg;
-}				t_cmdtable;
-
+	t_list	*lst;
+}				t_cmdtab;
 
 typedef struct s_data
 {
 	char		*pgr_name;
 	t_envlst	*env;
-	t_cmdtable	*cmdtab;
-	t_list		**cmdlst;
+	t_cmdtab	*cmdtab;
+	t_list		*cmdtoparse; //contient toute la commande separer par mot
 }				t_data;
 
 #endif
