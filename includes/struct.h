@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 16:29:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:12:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 	char		*pgr_name;
 	t_envlst	*env;
 	t_cmdtab	*cmdtab;
-	t_list		*cmdtoparse; //contient toute la commande separer par mot
+	t_list		*cmdtoparse; //contient toute la commande split dans un list
 }				t_data;
 
 #endif

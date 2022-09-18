@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 16:59:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:14:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,15 +125,21 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int *bufi)
 	return (cmd);
 }
 
-t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int i)
+t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int i) //TODO: 
 {
 	t_list	*tmp;
+	t_list	*tmp2;
 	
 	tmp = lst;
 	while(tmp)
 	{
+		if (tmp->str[0] == '|')
+		{
+			tmp2 = tmp;
+		}
+		else
+			tmp = tmp->next;
 		
-		tmp = tmp->next;
 	}
 }
 
