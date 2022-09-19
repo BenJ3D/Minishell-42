@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 20:12:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:40:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_envlst
 
 typedef struct s_list
 {
+	int				type;
 	char			*str;
-	struct s_list	*arg;
 	struct s_list	*next;
 }					t_list;
 

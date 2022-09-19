@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/08/19 17:34:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:55:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 
 # define READ 0
 # define WRITE 1
+
+# define CMD 0
+# define ARG 1
+# define REDI 2
+# define PIPE 3
+
+
 
 # define BLUE		"\033[0;34m"
 # define NONE_COLOR	"\033[0;37m"
