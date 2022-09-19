@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 18:54:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:04:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@
 
 # define CMD 0
 # define ARG 1
-# define REDI 2
-# define PIPE 3
+# define PIPE 2
+# define IN1 3 //<
+# define IN2 4	//<<
+# define OUT1 5	//>
+# define OUT2 6 //>>
 
 
 

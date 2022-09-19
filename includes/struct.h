@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 18:40:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:03:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ typedef enum e_redirection
 	IN_1,
 	IN_2
 }	t_redirection;
-typedef struct s_cmdlst
-{
-	char			*cmd;
-	char			*arg;
-	char			*file;
-	t_redirection	type_redirection;
-	struct s_cmdlst	*next;
-}				t_cmdlst;
+// typedef struct s_cmdlst
+// {
+// 	char			*cmd;
+// 	char			*arg;
+// 	char			*file;
+// 	t_redirection	type_redirection;
+// 	struct s_cmdlst	*next;
+// }				t_cmdlst;
 
 typedef struct s_cmdtab
 {

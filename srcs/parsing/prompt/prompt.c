@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 18:59:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:55:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	prompt_minishell(char **av, t_data *data)
 		free(line);
 		line = prompt_update(data->env, data->pgr_name);
 		free(buffer);
-		buffer = NULL;
+		// buffer = NULL;
 		buffer = readline(line);
 	}
 	if (line)
@@ -84,6 +84,14 @@ void prompt_basic_test(char **av, t_data *data)
 	buffer = NULL;
 	line = prompt_update(data->env, data->pgr_name);
 	buffer = readline(line);
+
+	char **args;
+
+	args = ft_calloc(4, sizeof(args));
+	args[0]= ft_strdup("ls");
+	args[1]= ft_strdup("-all");
+	// args[2]= ft_strdup("-all");
+	
 	while ((buffer))
 	{ 
 		if (buffer[0] != '\0')
@@ -92,7 +100,7 @@ void prompt_basic_test(char **av, t_data *data)
 		{
 			child = fork();
 			if (child == 0)
-				execve("/bin/ls", av, NULL); //TODO:TODO:
+				execve("/bin/ls", args, NULL); //TODO:TODO:
 			//if (child > 0)
 			//	printf("Child pid = %i\n", child);
 			wait(0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 17:32:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:57:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_free_all_minishell(t_data *data)
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
-	
+
 	if (ac > 1)
 	{
 		ft_putstr_fd(av[0], 2);
@@ -35,7 +35,6 @@ int	main(int ac, char **av, char **envp)
 	}
 	interactive_mode (); //FIXME: pomper sur un autre minishell, a modifier 
 														// ameliorer
-	
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////      ZONE TEST     //////////////////////////////////
@@ -58,8 +57,8 @@ int	main(int ac, char **av, char **envp)
 ////////////////////////////////////////////////////////////////////////////////
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
-	prompt_minishell(av, &data);
-	// prompt_basic_test(av, &data);
+	//prompt_minishell(av, &data);
+	 prompt_basic_test(av, &data);
 	ft_free_all_minishell(&data);
 	return (0);
 }
