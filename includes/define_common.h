@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 15:55:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:54:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@
 
 
 
-# define BLUE		"\033[0;34m"
-# define NONE_COLOR	"\033[0;37m"
-# define RED		"\033[0;31m"
-# define GREEN		"\033[0;32m"
-# define PURPLE		"\033[0;35m"
-# define CYAN		"\033[0;36m"
+# define BLUE		"\001\033[0;34m\002"
+# define NONE_COLOR	"\001\033[0;37m\002"
+# define RED		"\001\033[0;31m\002"
+# define GREEN		"\001\033[0;32m\002"
+# define PURPLE		"\001\033[0;35m\002"
+# define CYAN		"\001\033[0;36m\002"
 
 #endif

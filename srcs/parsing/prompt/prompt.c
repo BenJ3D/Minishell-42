@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/18 15:19:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:50:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	char	*line;
 	char	*user;
 	
+	// if (!prgname) //FIXME: sans couleur pour eviter bug readline
+	// 	prgname = ft_strdup("minishell");
+	// if (ft_env_check_if_key_is_valid(env, "USER") < 0)
+	// 	line = ft_strjoin_max("%s>$ ", prgname);
+	// else
+	// {
+	// 	user = ft_env_getstr_env_value(env, "USER");
+	// 	line = ft_strjoin_max("- %s -%s>$ ", user, prgname);
+	// 	free (user);
+	// }
 	if (!prgname)
 		prgname = ft_strdup("minishell");
 	if (ft_env_check_if_key_is_valid(env, "USER") < 0)
