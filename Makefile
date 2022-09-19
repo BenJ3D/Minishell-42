@@ -6,20 +6,20 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/18 14:34:33 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/19 22:17:56 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=1
+DEBUG=2
 
 ifeq ($(DEBUG), 0)
 CC = gcc $(CFLAGS)
 endif
-ifeq ($(DEBUG), 1)
+ifeq ($(DEBUG), 1)  # for sanitize test
 CC = gcc $(SANITIZE) $(LLDBFLAG)
 endif
-ifeq ($(DEBUG), 2)
+ifeq ($(DEBUG), 2) # for LEAKS test
 CC = gcc $(LLDBFLAG)
 endif
 

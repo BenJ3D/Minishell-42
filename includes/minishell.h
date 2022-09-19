@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/17 18:59:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:13:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ char		*ft_env_extract_value_content(char *str);
 char		*ft_env_getstr_env_value(t_envlst *env, const char *key);
 int			ft_env_check_if_key_is_valid(t_envlst *env, char *key);
 t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
+char		**ft_env_convert_envlst_to_tab(t_envlst *env);
 
 /* FT ENV LIST */
-void		ft_env_init_lst(char **envp, t_data *data);
 t_envlst	*ft_env_lstnew(char *key, char *value);
+t_envlst	*ft_env_lstlast(t_envlst *lst);
+int			ft_env_lstsize(t_envlst *lst);
+void		ft_env_init_lst(char **envp, t_data *data);
 void		ft_env_lstadd_front(t_envlst **alst, t_envlst *new);
 void		ft_env_lstadd_back(t_envlst **alst, t_envlst *new);
 void		ft_env_lstdelone(t_envlst *lst);
 void		ft_env_lstclear(t_envlst **lst);
-t_envlst	*ft_env_lstlast(t_envlst *lst);
-int			ft_env_lstsize(t_envlst *lst);
-char		**ft_env_convert_envlst_to_tab(t_envlst *env);
 void		ft_env_lstclear_one(t_envlst **lst);
 
 /* FT LIST */
@@ -65,11 +65,14 @@ int			ft_lstsize(t_list *lst);
 void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
 
+/* FT FREE */
+int			ft_free_cmdtab(int pipe, t_cmdtab *cmdtab);
+void		ft_free_all_minishell(t_data *data);
 
 /* FT DEBUG */
-void	ft_lstdisplay(t_list *lst);
-void	ft_lstdisplay_color(t_list *lst);
-
+void		ft_lstdisplay(t_list *lst);
+void		ft_lstdisplay_color(t_list *lst);
+void		dbg_display_cmdtab(int pipe, t_cmdtab *cmdtab);
 
 /* FT AART */
 void		handler_interative(int signum);

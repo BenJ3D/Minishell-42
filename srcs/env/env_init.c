@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 19:14:44 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:02:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_env_extract_value_content(char *str)
 }
 
 /**
- * @brief verifie sur USER existe, et sinon creer la variable USER=guest
+ * @brief verifie si USER existe, et sinon creer la variable USER=guest
  * //FIXME: ===>>> depend du comportement voulu pour notre minishell :
  * soit on ne met plus de login soit on le remplace par guest a voir
  * @param data 

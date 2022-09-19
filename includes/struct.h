@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 19:03:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:49:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,40 @@
 # define STRUCT_H
 # include "includes.h"
 
-typedef struct s_envlst
-{
-	char *key;
-	char *value;
-	struct s_envlst *next;
-}		t_envlst;
-
-typedef struct s_list
-{
-	int				type;
-	char			*str;
-	struct s_list	*next;
-}					t_list;
-
-typedef enum e_redirection
+typedef enum	e_redirection
 {
 	OUT_1,
 	OUT_2,
 	IN_1,
 	IN_2
 }	t_redirection;
-// typedef struct s_cmdlst
-// {
-// 	char			*cmd;
-// 	char			*arg;
-// 	char			*file;
-// 	t_redirection	type_redirection;
-// 	struct s_cmdlst	*next;
-// }				t_cmdlst;
 
-typedef struct s_cmdtab
+typedef struct	s_envlst
 {
-	t_list	*lst;
-}				t_cmdtab;
+	char			*key;
+	char			*value;
+	struct s_envlst	*next;
+}			t_envlst;
+
+typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls -> -all -> (pipe) -> cat -> -e -> (null))
+{
+	int				type;
+	char			*str;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
+{											//exemple si buffer = ls -all | cat -e
+	t_list	*lst;							//    cmdtab[0].lst = ls -> -all -> (pipe)
+}				t_cmdtab;					//    cmdtab[1].lst = cat -> -e -> (null)
+
 
 typedef struct s_data
 {
-	char		*pgr_name;
-	t_envlst	*env;
-	t_cmdtab	*cmdtab;
-	t_list		*cmdtoparse; //contient toute la commande split dans un list
+	char		*pgr_name; //le nom de notre programe afficher dans notre prompt
+	t_envlst	*env;	//contient tout l'environnement sous forme de liste
+	t_cmdtab	*cmdtab; //toutes les commandes sont stockées dans un tableau de list
+	t_list		*cmdtoparse; //contient toute la ligne de commande split en mot
 }				t_data;
 
 #endif

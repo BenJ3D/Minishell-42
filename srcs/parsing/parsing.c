@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 20:06:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:24:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	ft_strlen_next_word(char *str)
 		i++;
 	return (i);
 }
+
 /**
  * @brief split tout le buffer en plusieurs cmd dans une liste 
  * 
@@ -101,8 +102,6 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe) //TODO:
 	return (cmdtab);
 }
 
-// 							ls -all | grep @ | ls
-//TODO: separer data->cmdtoparse en list dans un tableau (ft_create_tab_per_cmd)
 /**
  * @brief parsing de base pour decouper les cmd et args
  * 
@@ -125,50 +124,9 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
 	ft_lstdisplay_color(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
-	while (i <= pipe)
-	{
-		ft_putstr("data->cmdtab[");
-		ft_putnbr(i);
-		ft_putstr("] = ");
-		ft_lstdisplay_color(data->cmdtab[i].lst);
-		ft_lstclear(&data->cmdtab[i].lst);
-		i++;
-	}
-	free(data->cmdtab);
+	// dbg_display_cmdtab(pipe, data->cmdtab); //Debbug pour afficher les commandes decouper en multi liste
+	ft_free_cmdtab(pipe, data->cmdtab);
 	return (0);
 }
 
-// /**
-//  * @brief split tout le buffer en plusieurs cmd dans des lists 
-//  * (lst[0]->str = "ls -all |"
-//  * 	lst[1]->str = "cat -e")
-//  * 
-//  * @param lst 
-//  * @param buffer 
-//  * @return int 
-//  */
-// static int	ft_split_buffercmd_in_lst(t_list *cmd, char *buffer)
-// {
-// 	int		i;
-// 	int		b;
-// 	int		len;
-// 	char	*tmp;
-// 	i = 0;
-// 	while (ft_isspace(buffer[i]) && buffer[i]) // passe les premier espace
-// 		i++;
-// 	len = 0;
-// 	b = i;
-// 	while (buffer[i] && (!ft_isspace(buffer[i++])))
-// 		len++;
-// 	tmp = ft_calloc(len + 1, sizeof(tmp));
-// 	if (!tmp)
-// 		return (1);
-// 	i = b;
-// 	b = 0;
-// 	while(buffer[i] && (!ft_isspace(buffer[i])))
-// 		tmp[b++] = buffer[i++];
-// 	ft_lstadd_back(&cmd, ft_lstnew(tmp));
-// 	printf("lst1 = %s\n", cmd->str);
-// 	free(tmp);
-// 	return (0);
-// }
+// 							ls -all | grep @ | ls
