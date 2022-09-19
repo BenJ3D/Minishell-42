@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 22:54:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:13:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	prompt_minishell(char **av, t_data *data)
 		if (buffer[0] != '\0')
 			add_history(buffer);
 		nbpipe = ft_parsing_prompt(data, buffer);
-		dbg_display_cmdtab(nbpipe, data->cmdtab);
-		//TODO: ft execv et lst to argv for execved
+		// dbg_display_cmdtab(nbpipe, data->cmdtab);
+		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
 		ft_free_cmdtab(nbpipe, data->cmdtab);
 		free(line);
 		line = prompt_update(data->env, data->pgr_name);

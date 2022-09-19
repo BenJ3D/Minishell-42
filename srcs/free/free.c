@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 22:37:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:26:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_free_all_minishell(t_data *data)
 	rl_clear_history();
 }
 
-int ft_free_cmdtab(int pipe, t_cmdtab *cmdtab)
+int	ft_free_cmdtab(int pipe, t_cmdtab *cmdtab)
 {
 	int	i;
 
@@ -28,4 +28,17 @@ int ft_free_cmdtab(int pipe, t_cmdtab *cmdtab)
 		ft_lstclear(&cmdtab[i++].lst);
 	free (cmdtab);
 	return (0);
+}
+
+void	ft_free_argv(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free (argv);
 }

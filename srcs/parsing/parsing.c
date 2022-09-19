@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 22:50:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:26:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,42 @@ static int	ft_strlen_next_word(char *str)
 	return (i);
 }
 
+static int	ft_define_cmd_type(t_list *lst) // FIXME: 32 lignes !!
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	tmp->type = CMD;
+	tmp = tmp->next;
+	while (tmp)
+	{
+		if (tmp->str[0] == '>')
+		{
+			if (tmp->str[1] == '>')
+				tmp->type = OUT2;
+			else
+				tmp->type = OUT1;
+		}
+		else if (tmp->str[0] == '<')
+		{
+			if (tmp->str[1] == '<')
+				tmp->type = IN2;
+			else
+				tmp->type = IN1;
+		}
+		else if (tmp->str[0] == '|')
+		{
+			tmp->type = PIPE;
+			tmp = tmp->next;
+			tmp->type = CMD;
+		}
+		else
+			tmp->type = ARG;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 /**
  * @brief split tout le buffer en plusieurs cmd dans une liste 
  * 
@@ -51,7 +87,7 @@ static int	ft_strlen_next_word(char *str)
  * @param buffer 
  * @return int 
  */
-static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)//TODO: une ligne en trop
+static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 {
 	int		i;
 	int		len;
@@ -78,7 +114,14 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)//TODO: une lign
 	return (cmd);
 }
 
-static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe) //TODO: 
+/**
+ * @brief 
+ * 
+ * @param lst 
+ * @param nbrpipe 
+ * @return t_cmdtab* 
+ */
+static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 {
 	t_list		*tmp;
 	t_cmdtab	*cmdtab;
@@ -122,8 +165,40 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = NULL;
 	bufi = 0;
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
+	ft_define_cmd_type(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
+}
+
+
+/**
+ * @brief  return **argv pour execve (ex: "echo bonjour >> out.txt"  
+ * 													==> return tab :
+ * 													 tab[0]=echo /
+ * 													 tab[1]=bonjour)
+ * @param cmd 
+ * @return char** 
+ */
+char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
+{
+	char	**argv;
+	int		nbword;
+	t_list	*lst;
+	int		y;
+	
+
+	nbword = ft_lstsize(cmd); //FIXME: ft pour calculer le nombre de mot cmd+arg sans les redirections et pipe
+	argv = ft_calloc(nbword + 1, sizeof(argv));
+	lst = cmd;
+	y = 0;
+	while (lst)
+	{
+		if (lst->type == CMD || lst->type == ARG)
+			argv[y] = ft_strdup(lst->str);
+		y++;
+		lst = lst->next;
+	}
+	return (argv);
 }
 
 // 							ls -all | grep @ | ls
