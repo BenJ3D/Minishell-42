@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 21:29:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:52:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ char	*prompt_update(t_envlst *env, char *prgname)
 
 void	prompt_minishell(char **av, t_data *data)
 {
-	char *buffer;
-	char *line;
+	char	*buffer;
+	char	*line;
+	int		nbpipe;
 	
 	buffer = NULL;
 	line = prompt_update(data->env, data->pgr_name);
@@ -53,11 +54,13 @@ void	prompt_minishell(char **av, t_data *data)
 	{ 
 		if (buffer[0] != '\0')
 			add_history(buffer);
-		ft_parsing_prompt(data, buffer);
+		nbpipe = ft_parsing_prompt(data, buffer);
+		dbg_display_cmdtab(nbpipe, data->cmdtab);
+		//TODO: ft execv et lst to argv for execve
+		ft_free_cmdtab(nbpipe, data->cmdtab);
 		free(line);
 		line = prompt_update(data->env, data->pgr_name);
 		free(buffer);
-		// buffer = NULL;
 		buffer = readline(line);
 	}
 	if (line)

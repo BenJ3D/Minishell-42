@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 22:24:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:50:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,8 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = NULL;
 	bufi = 0;
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
-	ft_lstdisplay_color(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
-	// dbg_display_cmdtab(pipe, data->cmdtab); //Debbug pour afficher les commandes decouper en multi liste
-	ft_free_cmdtab(pipe, data->cmdtab);
-	return (0);
+	return (pipe);
 }
 
 // 							ls -all | grep @ | ls
