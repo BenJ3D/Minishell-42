@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 18:26:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:30:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab)
 	return (0);
 }
 
-void	ft_free_tabstr(char **tab)
+void	ft_free_tab_char(char **tab)
 {
 	int	i;
 

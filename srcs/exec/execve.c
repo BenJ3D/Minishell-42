@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 18:26:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:15:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,27 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 {
 	char		*envpaths;
 	char		**pathsplit;
+	char		*pathhascheck;
 	int			i;
-
+	
+	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
 	pathsplit = ft_split(envpaths, ':');
 	i = 0;
 	while (pathsplit[i])
 	{
-		printf("dbgGetNextPath:%s\n", pathsplit[i++]);
+		if (pathhascheck != NULL)
+			free (pathhascheck);
+		pathhascheck = ft_strjoin_max("%s/%s", pathsplit[i], progname);
+		if (!access(pathhascheck, R_OK))
+		{
+			ft_free_tab_char(pathsplit);
+			free (envpaths);
+			return (pathhascheck);
+		}
+		i++;
 	}
-	ft_free_tabstr(pathsplit);
+	ft_free_tab_char(pathsplit);
 	free (envpaths);
 	return (NULL);
 }
@@ -65,16 +76,27 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	char	**argv;
 	char	**envp;
 	char	*progpath;
-	int		ipath;
+	pid_t	father;
 
-	ipath = 0;
 	argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[0].lst);
-	dbg_display_argv(argv);
-	ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
-	
+	// dbg_display_argv(argv);
+	progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
 	envp = ft_env_convert_envlst_to_tab(data->env);
-	execve(progpath, argv, envp);
-	ft_free_tabstr(argv);
-	ft_free_tabstr(envp);
+	// if (progpath)
+	// 	execve(progpath, argv, envp); //TODO: faire un fork
+	if (progpath)
+	{
+		father = fork();
+		if (father > 0)
+			wait(0);
+		if (father == 0)
+		{
+			execve(progpath, argv, envp);
+			ft_exit();
+		} // TODO: faire un fork
+	}
+	free (progpath);
+	ft_free_tab_char(argv);
+	ft_free_tab_char(envp);
 	return (0);
 }

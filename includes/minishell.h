@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/20 18:26:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:15:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd);
 int			ft_builtin_unset(t_envlst *env, char **cmd);
 int			ft_cd(t_envlst env, char *next_path);
+int			ft_echo(void);
+void		ft_exit(void);
+
 
 
 /* FT ENV */
@@ -71,7 +74,7 @@ void		ft_lstclear(t_list **lst);
 /* FT FREE */
 int			ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab);
 void		ft_free_all_minishell(t_data *data);
-void		ft_free_tabstr(char **tab);
+void		ft_free_tab_char(char **tab);
 
 /* FT DEBUG BEN */
 void		dbg_lstdisplay(t_list *lst);
