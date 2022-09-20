@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 23:07:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:37:37 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@
 
 # define CMD 0
 # define ARG 1
-# define PIPE 2
-# define IN1 3 //<
-# define IN2 4	//<<
-# define OUT1 5	//>
-# define OUT2 6 //>>
+# define PIPE 2 //	|
+# define IN1 3 //	<
+# define IN2 4	//	<<
+# define OUT1 5	//	>
+# define OUT2 6 //	>>
 
 
 
-# define BLUE		"\001\033[0;34m\002"
-# define NONE_COLOR	"\001\033[0;37m\002"
-# define RED		"\001\033[0;31m\002"
-# define GREEN		"\001\033[0;32m\002"
-# define PURPLE		"\001\033[0;35m\002"
-# define CYAN		"\001\033[0;36m\002"
+# define COLOR_BLUE		"\001\033[0;34m\002"
+# define COLOR_NONE	"\001\033[0;37m\002"
+# define COLOR_RED		"\001\033[0;31m\002"
+# define COLOR_GREEN		"\001\033[0;32m\002"
+# define COLOR_PURPLE		"\001\033[0;35m\002"
+# define COLOR_CYAN		"\001\033[0;36m\002"
 
 #endif

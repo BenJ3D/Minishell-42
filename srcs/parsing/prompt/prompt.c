@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:38:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char	*prompt_update(t_envlst *env, char *prgname)
 		prgname = ft_strdup("minishell");
 	if (ft_env_check_if_key_is_valid(env, "USER") < 0)
 		line = ft_strjoin_max("%s%s>%s$ ",
-				CYAN, prgname, NONE_COLOR);
+				COLOR_CYAN, prgname, COLOR_NONE);
 	else
 	{
 		user = ft_env_getstr_env_value(env, "USER");
 		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
-					GREEN, user,
-					CYAN, prgname, NONE_COLOR);
+					COLOR_GREEN, user,
+					COLOR_CYAN, prgname, COLOR_NONE);
 		free (user);
 	}
 	return (line);
@@ -250,7 +250,7 @@ void prompt_basic_test(char **av, t_data *data)
 			char *line2;
 			
 			line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n", 
-				CYAN, PURPLE, buffer, RED, NONE_COLOR);
+				COLOR_CYAN, COLOR_PURPLE, buffer, COLOR_RED, COLOR_NONE);
 			ft_putstr_fd(line2, 2);
 			free (line2);
 		}

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 00:47:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:37:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void dbg_display_argv(char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		ft_putstr(PURPLE);
+		ft_putstr(COLOR_PURPLE);
 		ft_putstr(argv[i]);
-		ft_putstr(RED);
+		ft_putstr(COLOR_RED);
 		ft_putstr(" . ");
 		i++;
 	}
-	ft_putstr(NONE_COLOR);
+	ft_putstr(COLOR_NONE);
 	ft_putstr("\n");
 }
