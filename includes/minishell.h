@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/20 19:15:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:36:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			ft_builtin_export(t_envlst *env, char **cmd);
 int			ft_builtin_unset(t_envlst *env, char **cmd);
 int			ft_cd(t_envlst env, char *next_path);
 int			ft_echo(void);
-void		ft_exit(void);
+void		ft_exit(t_data *data);
 
 
 

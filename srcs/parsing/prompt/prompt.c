@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 17:53:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:49:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 		//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
 
 /**
- * @brief update line prompt
+ * @brief update data->line prompt
  *
  * @return char* alloue avec malloc()! ==>> penser a free()
  */
@@ -43,29 +43,27 @@ char	*prompt_update(t_envlst *env, char *prgname)
 
 void	prompt_minishell(char **av, t_data *data)
 {
-	char	*buffer;
-	char	*line;
 	int		nbpipe;
 	
-	buffer = NULL;
-	line = prompt_update(data->env, data->pgr_name);
-	buffer = readline(line);
-	while ((buffer))
+	data->buffer = NULL;
+	data->line = prompt_update(data->env, data->pgr_name);
+	data->buffer = readline(data->line);
+	while ((data->buffer))
 	{ 
-		if (buffer[0] != '\0')
-			add_history(buffer);
-		nbpipe = ft_parsing_prompt(data, buffer);
+		if (data->buffer[0] != '\0')
+			add_history(data->buffer);
+		nbpipe = ft_parsing_prompt(data, data->buffer);
 		// dbg_display_cmdtab(nbpipe, data->cmdtab);
 		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
 		ft_free_cmdtab_lst(nbpipe, data->cmdtab);
-		free(line);
-		line = prompt_update(data->env, data->pgr_name);
-		free(buffer);
-		buffer = readline(line);
+		free(data->line);
+		data->line = prompt_update(data->env, data->pgr_name);
+		free(data->buffer);
+		data->buffer = readline(data->line);
 	}
-	if (line)
-		free(line);
-	free(buffer);
+	if (data->line)
+		free(data->line);
+	free(data->buffer);
 	rl_on_new_line();
 	write(1, "exit\n", 5);
 }
@@ -80,13 +78,11 @@ void	prompt_minishell(char **av, t_data *data)
  */
 void prompt_basic_test(char **av, t_data *data)
 {
-	char *buffer;
-	char *line;
 	pid_t	child;
 	
-	buffer = NULL;
-	line = prompt_update(data->env, data->pgr_name);
-	buffer = readline(line);
+	data->buffer = NULL;
+	data->line = prompt_update(data->env, data->pgr_name);
+	data->buffer = readline(data->line);
 
 	char **args;
 
@@ -95,11 +91,11 @@ void prompt_basic_test(char **av, t_data *data)
 	args[1]= ft_strdup("-all");
 	// args[2]= ft_strdup("-all");
 	
-	while ((buffer))
+	while ((data->buffer))
 	{ 
-		if (buffer[0] != '\0')
-			add_history(buffer);
-		if (!ft_strncmp(buffer, "ls", 3))
+		if (data->buffer[0] != '\0')
+			add_history(data->buffer);
+		if (!ft_strncmp(data->buffer, "ls", 3))
 		{
 			child = fork();
 			if (child == 0)
@@ -108,7 +104,7 @@ void prompt_basic_test(char **av, t_data *data)
 			//	printf("Child pid = %i\n", child);
 			wait(0);
 		}
-		else if (!ft_strncmp(buffer, "env", 4))
+		else if (!ft_strncmp(data->buffer, "env", 4))
 		{
 			ft_builtin_env(data->env);
 		}
@@ -117,7 +113,7 @@ void prompt_basic_test(char **av, t_data *data)
 ////////////////////////      EXPORT TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "export BEN", 11))
+		else if (!ft_strncmp(data->buffer, "export BEN", 11))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -129,7 +125,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[1]);
 			free (tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export =BEN", 12))
+		else if (!ft_strncmp(data->buffer, "export =BEN", 12))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -140,7 +136,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[0]);
 			free (tabexport[1]);
 			free (tabexport);}
-		else if (!ft_strncmp(buffer, "export3", 8))
+		else if (!ft_strncmp(data->buffer, "export3", 8))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -151,7 +147,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[0]);
 			free (tabexport[1]);
 			free (tabexport);}
-		else if (!ft_strncmp(buffer, "export", 7))
+		else if (!ft_strncmp(data->buffer, "export", 7))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -163,7 +159,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[1]);
 			free (tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export5", 8))
+		else if (!ft_strncmp(data->buffer, "export5", 8))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -175,7 +171,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[1]);
 			free (tabexport);
 		}
-		else if (!ft_strncmp(buffer, "export USER", 12))
+		else if (!ft_strncmp(data->buffer, "export USER", 12))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -193,11 +189,11 @@ void prompt_basic_test(char **av, t_data *data)
 //////////////////////////      UNSET TEST    //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "unset", 6))
+		else if (!ft_strncmp(data->buffer, "unset", 6))
 		{
 			
 		}
-		else if (!ft_strncmp(buffer, "unset BEN", 10))
+		else if (!ft_strncmp(data->buffer, "unset BEN", 10))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -209,7 +205,7 @@ void prompt_basic_test(char **av, t_data *data)
 			free (tabexport[1]);
 			free (tabexport);
 		}
-		else if (!ft_strncmp(buffer, "unset USER", 11))
+		else if (!ft_strncmp(data->buffer, "unset USER", 11))
 		{
 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
@@ -226,7 +222,7 @@ void prompt_basic_test(char **av, t_data *data)
 /////////////////////////////      CD TEST    //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "testcd", 8))
+		else if (!ft_strncmp(data->buffer, "testcd", 8))
 		{
 			setenv("PWD", "/home/ben/projet/", 1);
 			printf("PWD = %s\n", getenv("PWD"));
@@ -237,33 +233,33 @@ void prompt_basic_test(char **av, t_data *data)
 ////////////////////////////      PWD TEST    //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(buffer, "pwd", 8))
+		else if (!ft_strncmp(data->buffer, "pwd", 8))
 		{
 			printf("%s\n", getenv("PWD"));
 		}
-		else if (!ft_strncmp(buffer, "rmm", 8))
+		else if (!ft_strncmp(data->buffer, "rmm", 8))
 		{
 			unlink("adieu"); // supprime un fichier
 		}
-		else if (buffer[0] != '\0')
+		else if (data->buffer[0] != '\0')
 		{
 			char *line2;
 			
 			line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n", 
-				COLOR_CYAN, COLOR_PURPLE, buffer, COLOR_RED, COLOR_NONE);
+				COLOR_CYAN, COLOR_PURPLE, data->buffer, COLOR_RED, COLOR_NONE);
 			ft_putstr_fd(line2, 2);
 			free (line2);
 		}
-		free(buffer);
-		buffer = NULL;
-		free(line);
-		line = prompt_update(data->env, data->pgr_name);
+		free(data->buffer);
+		data->buffer = NULL;
+		free(data->line);
+		data->line = prompt_update(data->env, data->pgr_name);
 		// rl_on_new_line();
-		buffer = readline(line);
+		data->buffer = readline(data->line);
 	}
-	if (line)
-		free(line);
-	free(buffer);
+	if (data->line)
+		free(data->line);
+	free(data->buffer);
 	rl_on_new_line();
 	write(1, "exit13\n", 8);
 }

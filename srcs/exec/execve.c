@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 19:15:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:57:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,30 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	return (NULL);
 }
 
+/**
+ * @brief //TODO: check parmit une liste si il y a une builtin
+ * 
+ * @return int 
+ */
+int	ft_check_if_builtin(void)
+{
+
+	return (0);
+}
+
+/**
+ * @brief //TODO: filtre pour savoir si exe une builtin ou non et creer le fork
+ * 
+ * @param cmdtab 
+ * @param data 
+ * @return int 
+ */
+int	ft_filter_cmdtab_before_execve(t_cmdtab *cmdtab, t_data *data)
+{
+	
+	return (0);
+}
+
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
 	char	**argv;
@@ -82,8 +106,6 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	// dbg_display_argv(argv);
 	progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
 	envp = ft_env_convert_envlst_to_tab(data->env);
-	// if (progpath)
-	// 	execve(progpath, argv, envp); //TODO: faire un fork
 	if (progpath)
 	{
 		father = fork();
@@ -92,8 +114,12 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		if (father == 0)
 		{
 			execve(progpath, argv, envp);
-			ft_exit();
-		} // TODO: faire un fork
+			free (progpath);
+			ft_free_tab_char(argv);
+			ft_free_tab_char(envp);
+			
+			ft_exit(data);
+		} 
 	}
 	free (progpath);
 	ft_free_tab_char(argv);

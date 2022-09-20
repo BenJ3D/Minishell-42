@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 22:07:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:38:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 //////////////////////////      ZONE TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
+	
 	
 	// for(int i=0; envp[i]; i++)
 	// {
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **envp)
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);
 	//  prompt_basic_test(av, &data);
-	ft_free_all_minishell(&data);
+	ft_exit(&data);
 	return (0);
 }
 
