@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 20:38:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:55:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_next_path(char *envpaths)
  * @param envlst 
  * @return char* return le path complet si il existe, null à l'inverse
  */
-char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO:
+char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO: norm
 {
 	char		*envpaths;
 	char		**pathsplit;
@@ -51,13 +51,13 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	
 	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
-	if (!envpaths)
+	if (!envpaths || !progname)
 		return (NULL);
 	pathsplit = ft_split(envpaths, ':');
 	i = 0;
 	while (pathsplit[i])
 	{
-		if (pathhascheck != NULL)
+		if (pathhascheck)
 			free (pathhascheck);
 		pathhascheck = ft_strjoin_max("%s/%s", pathsplit[i], progname);
 		if (!access(pathhascheck, R_OK))
