@@ -3,24 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/20 18:02:41 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/21 19:33:25 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=2
+DEBUG=1
 
 ifeq ($(DEBUG), 0)
 CC = gcc $(CFLAGS)
+MAKELIB = @make DEBUG=0 -C./libs/libft/
 endif
 ifeq ($(DEBUG), 1)  # for sanitize test
 CC = gcc $(SANITIZE) $(LLDBFLAG)
+MAKELIB = @make DEBUG=1 -C./libs/libft/
 endif
 ifeq ($(DEBUG), 2) # for LEAKS test
 CC = gcc $(LLDBFLAG)
+MAKELIB = @make DEBUG=2 -C./libs/libft/
 endif
 
 #The Target Binary Program
@@ -76,7 +79,7 @@ resources: directories
 	@cp $(RESDIR)/* $(NAMEDIR)/
 
 lib: directories
-	@make -C./libs/libft/
+	$(MAKELIB)
 	
 #Make the Directories
 directories:

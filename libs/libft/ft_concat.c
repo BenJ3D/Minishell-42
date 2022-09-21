@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:27:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/03 10:13:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/21 18:53:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_concat_str(char *src, char *str)
 	y = 0;
 	if (!src)
 		src = ft_strdup("");
-	if (!str)
+	else if (!str)
 		src = ft_strdup("");
 	tmpline = ft_calloc((ft_strlen(src) + ft_strlen(str) + 1), sizeof(char));
 	while (src[i])

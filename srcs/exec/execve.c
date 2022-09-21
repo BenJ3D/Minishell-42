@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 21:57:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:38:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	
 	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
+	if (!envpaths)
+		return (NULL);
 	pathsplit = ft_split(envpaths, ':');
 	i = 0;
 	while (pathsplit[i])
