@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 20:55:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:48:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,46 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	
 	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
-	if (!envpaths || !progname)
+	if (!envpaths)
 		return (NULL);
+	if (!progname)
+	{
+		free (envpaths);
+		return (NULL);
+	}
 	pathsplit = ft_split(envpaths, ':');
 	i = 0;
 	while (pathsplit[i])
 	{
-		if (pathhascheck)
-			free (pathhascheck);
 		pathhascheck = ft_strjoin_max("%s/%s", pathsplit[i], progname);
-		if (!access(pathhascheck, R_OK))
+		if (!access(pathhascheck, X_OK)) // TODO: FIXME: peut etre check exe
 		{
 			ft_free_tab_char(pathsplit);
 			free (envpaths);
 			return (pathhascheck);
 		}
 		i++;
+		free(pathhascheck);
 	}
 	ft_free_tab_char(pathsplit);
 	free (envpaths);
 	return (NULL);
+}
+
+int	ft_command_not_found_message(t_data *data)
+{
+	char *line2;
+
+	if (data->buffer[0] != '\0')
+	{
+
+		line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n",
+							   COLOR_CYAN, COLOR_PURPLE, data->buffer, 
+							   COLOR_RED, COLOR_NONE);
+		ft_putstr_fd(line2, 2);
+		free(line2);
+	}
+	return (0);
 }
 
 /**
@@ -108,7 +128,9 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	// dbg_display_argv(argv);
 	progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
 	envp = ft_env_convert_envlst_to_tab(data->env);
-	if (progpath)
+	if (!progpath)
+		ft_command_not_found_message(data);
+	else if (progpath)
 	{
 		father = fork();
 		if (father > 0)

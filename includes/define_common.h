@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 16:42:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:39:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@
 # define IN2 4	//	<<
 # define OUT1 5	//	>
 # define OUT2 6 //	>>
-
-
 
 # define COLOR_BLUE		"\001\033[0;34m\002"
 # define COLOR_NONE		"\001\033[0;37m\002"
