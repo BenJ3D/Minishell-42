@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/21 19:33:25 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/09/22 00:03:23 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ DEPEXT      := d
 OBJEXT      := o
 
 UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
+	ifeq ($(UNAME_S),Linux) #sur linux (ou WSL) instal readline : 'apt-get install readline'
 		INC_LIB = -L/usr/local/lib
 		INC_INC = -I/usr/local/include
 	endif

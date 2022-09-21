@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/21 23:28:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 00:22:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,18 @@ char		**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd);
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
 int			ft_command_not_found_message(t_data *data);
+int			ft_check_builtin(t_data	*data, char **argv);
+
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd);
 int			ft_builtin_unset(t_envlst *env, char **cmd);
-int			ft_cd(t_envlst env, char *next_path);
-int			ft_echo(void);
+int			ft_builtin_cd(t_envlst *env, char **argv);
+int			ft_builtin_pwd(t_envlst *env, char **argv);
+int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data);
+void		ft_exit_child(t_data *data);
 
 
 

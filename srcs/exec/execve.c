@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 23:48:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:20:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,26 @@ int	ft_command_not_found_message(t_data *data)
  * 
  * @return int 
  */
-int	ft_check_if_builtin(void)
+int	ft_check_builtin(t_data	*data, char **argv)
 {
-
+	if (*argv ==  NULL)
+		return (0);
+	else if (!ft_strncmp(argv[0], "cd", 3))
+		ft_builtin_cd(data->env, argv);
+	else if (!ft_strncmp(argv[0], "echo", 5))
+		ft_builtin_echo(argv);
+	else if (!ft_strncmp(argv[0], "env", 4))
+		ft_builtin_env(data->env);
+	else if (!ft_strncmp(argv[0], "exit", 5))
+		ft_exit(data);
+	else if (!ft_strncmp(argv[0], "export", 7))
+		ft_builtin_export(data->env, argv);
+	else if (!ft_strncmp(argv[0], "pwd", 4))
+		ft_builtin_pwd(data->env, argv);
+	else if (!ft_strncmp(argv[0], "unset", 6))
+		ft_builtin_unset(data->env, argv);
+	else 
+		return (1);
 	return (0);
 }
 
@@ -123,20 +140,22 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	char	**envp;
 	char	*progpath;
 	pid_t	father;
+	int		ret;
 
 	argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[0].lst);
 	// dbg_display_argv(argv);
 	progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
-	envp = ft_env_convert_envlst_to_tab(data->env);
-	if (!progpath)
-		ft_command_not_found_message(data);
-	else if (progpath)
+	ret = ft_check_builtin(data, argv);
+	if (!progpath && ret == 1)
+			ft_command_not_found_message(data);
+	else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
 	{
 		father = fork();
 		if (father > 0)
 			wait(0);
 		if (father == 0)
 		{
+			envp = ft_env_convert_envlst_to_tab(data->env);
 			execve(progpath, argv, envp);
 			free (progpath);
 			ft_free_tab_char(argv);
@@ -147,6 +166,6 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	}
 	free (progpath);
 	ft_free_tab_char(argv);
-	ft_free_tab_char(envp);
+	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
 }
