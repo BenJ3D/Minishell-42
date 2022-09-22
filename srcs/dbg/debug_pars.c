@@ -6,18 +6,18 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 16:37:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:36:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
-void dbg_display_cmdtab(int pipe, t_cmdtab *cmdtab)
+void dbg_display_cmdtab(t_cmdtab *cmdtab)
 {
 	int	i;
 
 	i = 0;
-	while (i <= pipe)
+	while (cmdtab[i].lst)
 	{
 		ft_putstr("cmdtab[");
 		ft_putnbr(i);

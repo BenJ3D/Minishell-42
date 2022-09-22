@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 14:42:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:40:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,31 +141,39 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	char	*progpath;
 	pid_t	father;
 	int		ret;
+	int		i;
 
-	argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[0].lst);
 	// dbg_display_argv(argv);
-	progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
-	ret = ft_check_builtin(data, argv);
-	if (!progpath && ret == 1)
-			ft_command_not_found_message(data);
-	else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
+	i = 0;
+	dbg_display_cmdtab(cmdtab);
+	while(cmdtab[i].lst)
 	{
-		father = fork();
-		if (father > 0)
-			waitpid(father, NULL, 0);
-		if (father == 0)
+		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
+		dbg_display_argv(argv);
+		progpath = ft_check_if_prog_exist_in_pathenv(argv[i], data->env);
+		ret = ft_check_builtin(data, argv);
+		if (!progpath && ret == 1)
+			ft_command_not_found_message(data);
+		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
 		{
-			envp = ft_env_convert_envlst_to_tab(data->env);
-			execve(progpath, argv, envp);
-			free (progpath);
-			ft_free_tab_char(argv);
-			ft_free_tab_char(envp);
-			
-			ft_exit_child(data);
-		} 
+			father = fork();
+			if (father > 0)
+				waitpid(father, NULL, 0);
+			if (father == 0)
+			{
+				envp = ft_env_convert_envlst_to_tab(data->env);
+				execve(progpath, argv, envp);
+				free(progpath);
+				ft_free_tab_char(argv);
+				ft_free_tab_char(envp);
+
+				ft_exit_child(data); // FIXME: utile ?
+			}
+		}
+		free(progpath);
+		i++;
 	}
-	free (progpath);
-	ft_free_tab_char(argv);
+		ft_free_tab_char(argv);
 	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
 }

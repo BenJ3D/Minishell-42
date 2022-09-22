@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/22 00:22:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:54:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		ft_free_tab_char(char **tab);
 void		dbg_lstdisplay(t_list *lst);
 void		dbg_lstdisplay_color(t_list *lst);
 void		dbg_lstdisplay_color_type(t_list *lst);
-void		dbg_display_cmdtab(int pipe, t_cmdtab *cmdtab);
+void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
 
 

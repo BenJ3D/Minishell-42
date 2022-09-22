@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 21:49:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:56:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void prompt_basic_test(char **av, t_data *data)
 	data->buffer = readline(data->line);
 
 	char **args;
-
 	args = ft_calloc(4, sizeof(args));
 	args[0]= ft_strdup("ls");
 	args[1]= ft_strdup("-all");
