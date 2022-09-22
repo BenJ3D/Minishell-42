@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 01:20:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:42:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	{
 		father = fork();
 		if (father > 0)
-			wait(0);
+			waitpid(father, NULL, 0);
 		if (father == 0)
 		{
 			envp = ft_env_convert_envlst_to_tab(data->env);
@@ -161,7 +161,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			ft_free_tab_char(argv);
 			ft_free_tab_char(envp);
 			
-			ft_exit(data);
+			ft_exit_child(data);
 		} 
 	}
 	free (progpath);
