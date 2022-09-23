@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 00:28:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:26:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_builtin_cd(t_envlst *env, char **argv)
 {
-	ft_putstr("cd: Work In Progress...\n");
+	// ft_putstr("cd: Work In Progress...\n");
+	chdir(argv[1]);
 	return (0);
 }
