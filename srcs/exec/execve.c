@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 14:53:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:30:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_command_not_found_message(t_data *data)
  * 
  * @return int 
  */
-int	ft_check_builtin(t_data	*data, char **argv)
+int	ft_check_is_builtin(t_data	*data, char **argv)
 {
 	if (*argv ==  NULL)
 		return (0);
@@ -121,19 +121,6 @@ int	ft_check_builtin(t_data	*data, char **argv)
 	return (0);
 }
 
-/**
- * @brief //TODO: filtre pour savoir si exe une builtin ou non et creer le fork
- * 
- * @param cmdtab 
- * @param data 
- * @return int 
- */
-int	ft_filter_cmdtab_before_execve(t_cmdtab *cmdtab, t_data *data)
-{
-	
-	return (0);
-}
-
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
 	char	**argv;
@@ -151,7 +138,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
 		// dbg_display_argv(argv);
 		progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
-		ret = ft_check_builtin(data, argv);
+		ret = ft_check_is_builtin(data, argv);
 		if (!progpath && ret == 1)
 			ft_command_not_found_message(data);
 		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
