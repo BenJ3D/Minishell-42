@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 11:50:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:53:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 
 	// dbg_display_argv(argv);
 	i = 0;
-	dbg_display_cmdtab(cmdtab);
+	// dbg_display_cmdtab(cmdtab);
 	while(cmdtab[i].lst)
 	{
 		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 11:31:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:32:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ static int	ft_define_cmd_type(t_list *lst) // FIXME: 32 lignes !!
 		{
 			tmp->type = PIPE;
 			tmp = tmp->next;
-			tmp->type = CMD;
+			if (tmp)
+				tmp->type = CMD;
 		}
 		else
 			tmp->type = ARG;
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (0);
 }
