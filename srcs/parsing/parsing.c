@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 21:45:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:15:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	int			i;
 	
 	tmp = lst;
-	cmdtab = ft_calloc(nbrpipe + 1, sizeof(cmdtab));
+	cmdtab = ft_calloc(nbrpipe + 2, sizeof(cmdtab));
 	i = 0;
 	cmdtab[i++].lst = lst;
 	while(tmp)

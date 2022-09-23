@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 17:53:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:46:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	dbg_lstdisplay_color_type(t_list *lst)
 {
 	t_list	*tmp;
 
+	if (!tmp)
+		return ;
 	tmp = lst;
 	while(tmp)
 	{

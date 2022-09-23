@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 18:40:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:23:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	{
 		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
 		dbg_display_argv(argv);
-		progpath = ft_check_if_prog_exist_in_pathenv(argv[i], data->env);
+		progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
 		ret = ft_check_builtin(data, argv);
 		if (!progpath && ret == 1)
 			ft_command_not_found_message(data);
