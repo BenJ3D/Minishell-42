@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 00:10:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:33:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,36 @@ int	main(int ac, char **av, char **envp)
 	// char *str = getcwd(NULL, PATH_MAX);
 	// printf("%s\n", str);
 
-	int		fd[2];
-	pipe(fd);
-	int pid1 = fork();
+	// int		fd[2];
+	// pipe(fd);
+	// int pid1 = fork();
 	
-	if (pid1 == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execlp("ls", "ls", "-all", NULL);
-		exit(0);
-	}
+	// if (pid1 == 0)
+	// {
+	// 	dup2(fd[1], STDOUT_FILENO);
+	// 	close(fd[1]);
+	// 	close(fd[0]);
+	// 	execlp("ls", "ls", "-all", NULL);
+	// 	exit(0);
+	// }
 
 	
-	waitpid(pid1, NULL, 0);
-	int pid2 = fork();
+	// waitpid(pid1, NULL, 0);
+	// int pid2 = fork();
 	
-	if (pid2 == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execlp("cat", "cat", "-e", NULL);
-		exit(0);
-	}
+	// if (pid2 == 0)
+	// {
+	// 	dup2(fd[0], STDIN_FILENO);
+	// 	close(fd[1]);
+	// 	close(fd[0]);
+	// 	execlp("cat", "cat", "-e", NULL);
+	// 	exit(0);
+	// }
 
-	close(fd[0]);
-	close(fd[1]);
+	// close(fd[0]);
+	// close(fd[1]);
 	
-	waitpid(pid2, NULL, 0);
+	// waitpid(pid2, NULL, 0);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

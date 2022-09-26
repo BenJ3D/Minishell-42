@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 00:11:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:30:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_command_not_found_message(char **argv)
 {
 	char *line2;
 
-	if (argv[0] != '\0')
+	if (argv[0] != NULL)
 	{
 
 		line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n",
