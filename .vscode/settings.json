@@ -8,7 +8,8 @@
 		"define_common.h": "c",
 		"history.h": "c",
 		"errno.h": "c",
-		"struct.h": "c"
+		"struct.h": "c",
+		"_pthread_types.h": "c"
 	},
 	"git.postCommitCommand": "push"
 }

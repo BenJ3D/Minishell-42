@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 13:32:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:57:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	y = 0;
 	while (lst)
 	{
+		if (lst->type )
 		if (lst->type == CMD || lst->type == ARG)
 			argv[y] = ft_strdup(lst->str);
 		y++;

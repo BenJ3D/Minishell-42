@@ -3,37 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 15:30:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:11:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
 // ft_lstcmd_to_cmdarg_for_execve
-
-char	*get_next_path(char *envpaths)
-{
-	char		*path;
-	int			i;
-	static int	ipath = 0;
-	
-	i = ipath;
-	while(envpaths[i])
-	{
-		if (envpaths[i++] == ':')
-		{
-			ipath = i + 1;
-			break;
-		}
-	}
-	path = ft_calloc(i + 1, sizeof(path));
-	ft_strlcpy(path, (envpaths + ipath), i);
-
-	return (path);
-}
 
 /**
  * @brief check dans tous les path présent dans env si un programe existe
@@ -48,7 +27,7 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	char		**pathsplit;
 	char		*pathhascheck;
 	int			i;
-	
+
 	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
 	if (!envpaths)
@@ -63,7 +42,7 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	while (pathsplit[i])
 	{
 		pathhascheck = ft_strjoin_max("%s/%s", pathsplit[i], progname);
-		if (!access(pathhascheck, X_OK)) // TODO: FIXME: peut etre check exe
+		if (!access(pathhascheck, X_OK))
 		{
 			ft_free_tab_char(pathsplit);
 			free (envpaths);
@@ -77,19 +56,21 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	return (NULL);
 }
 
-int	ft_command_not_found_message(t_data *data)
+int	ft_command_not_found_message(char **argv)
 {
 	char *line2;
 
-	if (data->buffer[0] != '\0')
+	if (argv[0] != '\0')
 	{
 
 		line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n",
-							   COLOR_CYAN, COLOR_PURPLE, data->buffer, 
+							   COLOR_CYAN, COLOR_PURPLE, argv[0], 
 							   COLOR_RED, COLOR_NONE);
 		ft_putstr_fd(line2, 2);
 		free(line2);
 	}
+	else
+		return (1);
 	return (0);
 }
 
@@ -121,18 +102,79 @@ int	ft_check_is_builtin(t_data	*data, char **argv)
 	return (0);
 }
 
+int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi)
+{
+	char	**envp;
+	pid_t	father;
+
+	father = fork();
+	if (father > 0)
+		waitpid(father, NULL, 0);
+	if (father == 0)
+	{
+		dup2(data->fd[1], STDOUT_FILENO);
+		close(data->fd[0]);
+		close(data->fd[1]);
+		envp = ft_env_convert_envlst_to_tab(data->env);
+		execve(progpath, argv, envp);
+		free(progpath);
+		ft_free_tab_char(argv);
+		ft_free_tab_char(envp);
+		ft_exit_child(data); // FIXME: utile ?
+	}
+	close(data->fd[0]);
+	close(data->fd[1]);
+	return (father);
+}
+
+int	ft_forkexe( t_data *data, char *progpath, char **argv)
+{
+	char	**envp;
+	pid_t	father;
+
+	dbg_display_cmdtab(data->cmdtab);
+	father = fork();
+	if (father > 0)
+		waitpid(father, NULL, 0);
+	if (father == 0)
+	{
+		envp = ft_env_convert_envlst_to_tab(data->env);
+		execve(progpath, argv, envp);
+		free(progpath);
+		ft_free_tab_char(argv);
+		ft_free_tab_char(envp);
+		ft_exit_child(data); // FIXME: utile ?
+	}
+	return (father);
+}
+
+int ft_cmdtab_do_you_have_pipe(t_cmdtab *cmdtab)
+{
+	int	i;
+
+	i = 0;
+	while (cmdtab[i].lst)
+	{
+		ft_putstr("cmdtab[");
+		ft_putnbr(i);
+		ft_putstr("] = ");
+		dbg_lstdisplay_color_type(cmdtab[i].lst);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
 	char	**argv;
-	char	**envp;
 	char	*progpath;
-	pid_t	father;
 	int		ret;
 	int		i;
 
 	// dbg_display_argv(argv);
 	i = 0;
 	// dbg_display_cmdtab(cmdtab);
+	pipe(data->fd);
 	while(cmdtab[i].lst)
 	{
 		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
@@ -140,23 +182,9 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
 		ret = ft_check_is_builtin(data, argv);
 		if (!progpath && ret == 1)
-			ft_command_not_found_message(data);
+			ft_command_not_found_message(argv);
 		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
-		{
-			father = fork();
-			if (father > 0)
-				waitpid(father, NULL, 0);
-			if (father == 0)
-			{
-				envp = ft_env_convert_envlst_to_tab(data->env);
-				execve(progpath, argv, envp);
-				free(progpath);
-				ft_free_tab_char(argv);
-				ft_free_tab_char(envp);
-
-				ft_exit_child(data); // FIXME: utile ?
-			}
-		}
+			ft_forkexe(data, progpath, argv);	
 		free(progpath);
 		i++;
 		ft_free_tab_char(argv);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 21:13:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:46:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	t_envlst	*env;	//contient tout l'environnement sous forme de liste
 	t_cmdtab	*cmdtab; //toutes les commandes sont stockées dans un tableau de list
 	t_list		*cmdtoparse; //contient toute la ligne de commande split en mot
+	int			fd[2];
 }				t_data;
 
 #endif
