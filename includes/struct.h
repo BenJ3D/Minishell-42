@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/26 19:46:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:32:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls ->
 }					t_list;
 
 typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
-{											//exemple si buffer = ls -all | cat -e
-	t_list	*lst;							//    cmdtab[0].lst = ls -> -all -> (pipe)
-}				t_cmdtab;					//    cmdtab[1].lst = cat -> -e -> (null)
+{									//exemple si buffer = ls -all | cat -e
+	t_list	*lst;					//    cmdtab[0].lst = ls -> -all -> (pipe)
+}				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
 
 
 
 typedef struct s_data
 {
-	char		*pgr_name; //le nom de notre programe afficher dans notre prompt
-	char		*line;		//line pour le prompt
-	char		*buffer;	//buffer pour readline
-	t_envlst	*env;	//contient tout l'environnement sous forme de liste
-	t_cmdtab	*cmdtab; //toutes les commandes sont stockées dans un tableau de list
-	t_list		*cmdtoparse; //contient toute la ligne de commande split en mot
-	int			fd[2];
+	char		*pgr_name; 			//le nom de notre programe afficher dans notre prompt
+	char		*line;				//\*line pour le prompt
+	char		*buffer;			//buffer pour readline
+	t_envlst	*env;				//contient tout l'environnement sous forme de liste
+	t_cmdtab	*cmdtab; 			//toutes les commandes sont stockées dans un tableau de list
+	t_list		*cmdtoparse; 		//contient toute la ligne de commande split en mot
+	int			fd[2]; 				//pour pipe
 }				t_data;
 
 #endif

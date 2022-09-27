@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/26 17:52:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:46:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		prompt_minishell(char **av, t_data *data);
 /* FT PARSING */
 int			ft_parsing_prompt(t_data *data, char *buffer);
 char		**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd);
+int			ft_count_pipe(char *buffer);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);

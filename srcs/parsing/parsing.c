@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 01:38:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:14:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <./../includes/minishell.h>
 
-static int	ft_count_pipe(char *buffer) //ft pour test sans parsing
+int	ft_count_pipe(char *buffer) //ft pour test sans parsing
 {
 	int	i;
 	int	len;
@@ -44,7 +44,14 @@ static int	ft_strlen_next_word(char *str)
 	return (i);
 }
 
-static int	ft_define_cmd_type(t_list *lst) // FIXME: 32 lignes !!
+/**
+ * @brief donne un type a chaque commande, pour faciliter le parsing en execve
+ * ATTENTION : les erreurs de syntax doivent deja etre gerer en amont, 
+ * sinon risque de SEGV
+ * @param lst la lst avec toutes les commandes du buffer pas encore split
+ * @return int 
+ */
+static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 {
 	t_list	*tmp;
 
@@ -68,6 +75,14 @@ static int	ft_define_cmd_type(t_list *lst) // FIXME: 32 lignes !!
 				tmp->type = IN2;
 			else
 				tmp->type = IN1;
+			if (tmp->next)
+			{
+				if (tmp->type == IN1)
+					tmp->next->type = INFILE;
+				else
+					tmp->next->type = INQUOTE;
+				tmp = tmp->next;
+			}
 		}
 		else if (tmp->str[0] == '|')
 		{
@@ -198,7 +213,6 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	while (lst)
 	{
 		// if (lst->type == PIPE) //TODO:
-			
 		if (lst->type == CMD || lst->type == ARG)
 			argv[y] = ft_strdup(lst->str);
 		y++;

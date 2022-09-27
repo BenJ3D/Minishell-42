@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 01:30:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:19:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ int	ft_check_is_builtin(t_data	*data, char **argv)
 	return (0);
 }
 
-int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi)
+int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi) //TODO:
 {
 	char	**envp;
 	pid_t	father;
+	int		savefd;
 
+	savefd = dup(STDOUT_FILENO);
 	father = fork();
 	if (father > 0)
 		waitpid(father, NULL, 0);
@@ -122,6 +124,7 @@ int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi)
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
 	}
+	dup2(savefd, STDOUT_FILENO);
 	close(data->fd[0]);
 	close(data->fd[1]);
 	return (father);
@@ -145,6 +148,8 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv)
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
 	}
+	close(data->fd[0]);
+	close(data->fd[1]);
 	return (father);
 }
 

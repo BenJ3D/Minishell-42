@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/26 18:54:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:13:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define IN2 4	//	<<
 # define OUT1 5	//	>
 # define OUT2 6 //	>>
+# define INFILE 7 // le nom du fichier
+# define INQUOTE 8 // les characteres de fin de quote
 
 # define COLOR_BLUE		"\001\033[0;34m\002"
 # define COLOR_NONE		"\001\033[0;37m\002"
