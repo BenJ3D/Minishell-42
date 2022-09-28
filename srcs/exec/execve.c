@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 18:19:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:09:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,25 +106,32 @@ int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi) //TODO
 {
 	char	**envp;
 	pid_t	father;
-	int		savefd;
+	int		sfdout;
+	int		sfdin;
 
-	savefd = dup(STDOUT_FILENO);
+	sfdout = dup(STDOUT_FILENO);
+	sfdin = dup(STDOUT_FILENO);
 	father = fork();
 	if (father > 0)
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
+		printf("Child with pipe %s\n", progpath);
 		dup2(data->fd[1], STDOUT_FILENO);
+		dup2(data->fd[0], STDIN_FILENO);
 		close(data->fd[0]);
 		close(data->fd[1]);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		execve(progpath, argv, envp);
+		puts("fail execve 1 \n");
 		free(progpath);
 		ft_free_tab_char(argv);
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
+		dup2(STDOUT_FILENO, sfdout);
+		dup2(STDIN_FILENO, sfdin);
 	}
-	dup2(savefd, STDOUT_FILENO);
+	printf("prog %s, fd out = %s\n", progpath, data->fd[0]);
 	close(data->fd[0]);
 	close(data->fd[1]);
 	return (father);
@@ -189,7 +196,14 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		if (!progpath && ret == 1)
 			ft_command_not_found_message(argv);
 		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
-			ft_forkexe(data, progpath, argv);	
+		{
+			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
+			{
+				ft_forkexe_pipe(data, progpath, argv, 0);
+			}
+			else
+				ft_forkexe(data, progpath, argv);
+		}
 		free(progpath);
 		i++;
 		ft_free_tab_char(argv);

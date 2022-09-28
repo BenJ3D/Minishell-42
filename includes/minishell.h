@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/09/27 18:46:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:33:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
 int			ft_command_not_found_message(char **argv);
 int			ft_check_is_builtin(t_data	*data, char **argv);
 
+/* FT EXECVE UTILS*/
+int			ft_check_if_cmd_has_pipe(t_list *lst);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);

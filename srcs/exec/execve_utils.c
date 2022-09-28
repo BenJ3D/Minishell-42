@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_void.c                                  :+:      :+:    :+:   */
+/*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 14:27:57 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/09/28 17:41:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <./../includes/minishell.h>
 
-t_lst_void	*ft_lstlast_void(t_lst_void *lst)
+/**
+ * @brief return 1 si pipe detecté dans la commande
+ * 
+ * @param lst 
+ * @return int 
+ */
+int	ft_check_if_cmd_has_pipe(t_list *lst)
 {
-	if (lst)
-		while (lst->next)
-			lst = lst->next;
-	return (lst);
+	t_list	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 16:21:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:20:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define FALSE 0
 
 # define SPACES " \t\n\r\v\f"
+
+# define USER_MAX_LEN 16
 
 # define DOUBLE_QUOTE 34
 # define SIMPLE_QUOTE 39

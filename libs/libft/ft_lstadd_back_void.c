@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_back_void.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:34:55 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 18:05:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back_void(t_lst **alst, t_lst *new)
+void	ft_lstadd_back_void(t_lst_void **alst, t_lst_void *new)
 {
-	t_lst	*lst1;
+	t_lst_void	*lst1;
 
 	if (*alst == NULL)
 		*alst = new;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 18:58:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:19:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*prompt_update(t_envlst *env, char *prgname)
 {
 	char	*line;
 	char	*user;
+	char	usertmp[USER_MAX_LEN];
 	
 	if (!prgname)
 		prgname = ft_strdup("minishell");
@@ -33,6 +34,12 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	else
 	{
 		user = ft_env_getstr_env_value(env, "USER");
+		if (ft_strlen(user) > (USER_MAX_LEN))
+		{
+			ft_strlcpy(usertmp, user, USER_MAX_LEN);
+			free (user);
+			user = ft_strdup(usertmp);
+		}
 		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
 					COLOR_GREEN, user,
 					COLOR_CYAN, prgname, COLOR_NONE);

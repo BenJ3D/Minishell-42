@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_void.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:46:12 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 18:04:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear_void(t_lst **lst, void (*del)(void*))
+void	ft_lstclear_void(t_lst_void **lst, void (*del)(void*))
 {
-	t_lst	*tmp;
+	t_lst_void	*tmp;
 
 	if (lst)
 	{

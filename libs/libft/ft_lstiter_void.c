@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter_void.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
-/*   Updated: 2022/09/17 18:05:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter_void(t_lst *lst, void (*f)(void *))
+void	ft_lstiter_void(t_lst_void *lst, void (*f)(void *))
 {
-	t_lst	*lst1;
+	t_lst_void	*lst1;
 
 	if (!lst || !f)
 		return ;

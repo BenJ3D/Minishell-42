@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_void.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:43:51 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/17 18:05:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lstnew_void(void *content)
+t_lst_void	*ft_lstnew_void(void *content)
 {
-	t_lst	*tmp;
+	t_lst_void	*tmp;
 
-	tmp = (t_lst *)malloc(sizeof(*tmp));
+	tmp = (t_lst_void *)malloc(sizeof(*tmp));
 	if (!tmp)
 		return (NULL);
 	tmp->content = content;
