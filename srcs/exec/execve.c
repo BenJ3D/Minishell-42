@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 19:06:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:34:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,27 +106,16 @@ int	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pipe)
 {
 	char	**envp;
 	pid_t	father;
-	int		sfdout;
-	int		sfdin;
 
-	sfdout = dup(STDOUT_FILENO);
-	sfdin = dup(STDOUT_FILENO);
 	father = fork();
 	if (father > 0)
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
-		dup2(data->fd[1], STDOUT_FILENO);
-		if (pipe == 1)
-		{
-			dup2(data->fd[0], STDIN_FILENO);
-			close(data->fd[0]);
-		}
+		close(data->fd[0]);
 		close(data->fd[1]);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		execve(prgpath, argv, envp);
-		dup2(STDOUT_FILENO, sfdout);
-		dup2(STDIN_FILENO, sfdin);
 		free(prgpath);
 		ft_free_tab_char(argv);
 		ft_free_tab_char(envp);
@@ -147,8 +136,6 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
-		// if (pipe == 1)
-		// 	dup2(data->fd[0], STDIN_FILENO);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		execve(progpath, argv, envp);
 		free(progpath);
@@ -197,25 +184,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		if (!progpath && ret == 1)
 			ft_command_not_found_message(argv);
 		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
-		{
-			// if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-			// {
-			// 	// if (i > 0)
-			// 	// 	ft_forkexe_pipe(data, progpath, argv, 0, \
-			// 	// 		ft_check_if_cmd_has_pipe(cmdtab[i - 1].lst));
-			// 	// else
-			// 		ft_forkexe_pipe(data, progpath, argv, 0, 0);
-			// }
-			// else
-			// {
-				// if (i > 0)
-				// 	ft_forkexe(data, progpath, argv, \
-				// 		ft_check_if_cmd_has_pipe(cmdtab[i - 1].lst));
-				// else
-				// 	ft_forkexe(data, progpath, argv, 0);
-			// }
 			ft_forkexe(data, progpath, argv, 0);
-		}
 		free(progpath);
 		i++;
 		ft_free_tab_char(argv);
