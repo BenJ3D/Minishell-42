@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 18:13:44 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:05:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,38 @@ int	main(int ac, char **av, char **envp)
 	// printf("%s\n", str);
 
 
-////////////////////TEST PIPE/////////////////////
+////////////////////PIPE TEST /////////////////////
+	// printf("%sPIPE TEST : ls -all | cat -e %s\n", COLOR_RED, COLOR_CYAN);
+	// int		fd[2];
+	// pipe(fd);
+	// int pid1 = fork();
+	
+	// if (pid1 == 0)
+	// {
+	// 	dup2(fd[1], STDOUT_FILENO);
+	// 	close(fd[1]);
+	// 	close(fd[0]);
+	// 	execlp("ls", "ls", "-all", NULL);
+	// 	exit(0);
+	// }
 
-	int		fd[2];
-	pipe(fd);
-	int pid1 = fork();
 	
-	if (pid1 == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execlp("ls", "ls", "-all", NULL);
-		exit(0);
-	}
+	// waitpid(pid1, NULL, 0);
+	// int pid2 = fork();
+	
+	// if (pid2 == 0)
+	// {
+	// 	dup2(fd[0], STDIN_FILENO);
+	// 	close(fd[1]);
+	// 	close(fd[0]);
+	// 	execlp("cat", "cat", "-e", NULL);
+	// 	exit(0);
+	// }
 
+	// close(fd[0]);
+	// close(fd[1]);
 	
-	waitpid(pid1, NULL, 0);
-	int pid2 = fork();
-	
-	if (pid2 == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execlp("cat", "cat", "-e", NULL);
-		exit(0);
-	}
-
-	close(fd[0]);
-	close(fd[1]);
-	
-	waitpid(pid2, NULL, 0);
+	// waitpid(pid2, NULL, 0);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

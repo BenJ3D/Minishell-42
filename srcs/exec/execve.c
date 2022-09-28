@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 18:09:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:06:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_check_is_builtin(t_data	*data, char **argv)
 	return (0);
 }
 
-int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi) //TODO:
+int	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pipe) //TODO:
 {
 	char	**envp;
 	pid_t	father;
@@ -116,38 +116,39 @@ int	ft_forkexe_pipe( t_data *data, char *progpath, char **argv, int redi) //TODO
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
-		printf("Child with pipe %s\n", progpath);
 		dup2(data->fd[1], STDOUT_FILENO);
-		dup2(data->fd[0], STDIN_FILENO);
-		close(data->fd[0]);
+		if (pipe == 1)
+		{
+			dup2(data->fd[0], STDIN_FILENO);
+			close(data->fd[0]);
+		}
 		close(data->fd[1]);
 		envp = ft_env_convert_envlst_to_tab(data->env);
-		execve(progpath, argv, envp);
-		puts("fail execve 1 \n");
-		free(progpath);
+		execve(prgpath, argv, envp);
+		dup2(STDOUT_FILENO, sfdout);
+		dup2(STDIN_FILENO, sfdin);
+		free(prgpath);
 		ft_free_tab_char(argv);
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
-		dup2(STDOUT_FILENO, sfdout);
-		dup2(STDIN_FILENO, sfdin);
 	}
-	printf("prog %s, fd out = %s\n", progpath, data->fd[0]);
 	close(data->fd[0]);
 	close(data->fd[1]);
 	return (father);
 }
 
-int	ft_forkexe( t_data *data, char *progpath, char **argv)
+int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 {
 	char	**envp;
 	pid_t	father;
 
-	dbg_display_cmdtab(data->cmdtab);
 	father = fork();
 	if (father > 0)
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
+		// if (pipe == 1)
+		// 	dup2(data->fd[0], STDIN_FILENO);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		execve(progpath, argv, envp);
 		free(progpath);
@@ -197,12 +198,23 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			ft_command_not_found_message(argv);
 		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
 		{
-			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-			{
-				ft_forkexe_pipe(data, progpath, argv, 0);
-			}
-			else
-				ft_forkexe(data, progpath, argv);
+			// if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
+			// {
+			// 	// if (i > 0)
+			// 	// 	ft_forkexe_pipe(data, progpath, argv, 0, \
+			// 	// 		ft_check_if_cmd_has_pipe(cmdtab[i - 1].lst));
+			// 	// else
+			// 		ft_forkexe_pipe(data, progpath, argv, 0, 0);
+			// }
+			// else
+			// {
+				// if (i > 0)
+				// 	ft_forkexe(data, progpath, argv, \
+				// 		ft_check_if_cmd_has_pipe(cmdtab[i - 1].lst));
+				// else
+				// 	ft_forkexe(data, progpath, argv, 0);
+			// }
+			ft_forkexe(data, progpath, argv, 0);
 		}
 		free(progpath);
 		i++;
