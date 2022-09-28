@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/27 19:14:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:23:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
+			tmp->next->type = OUTFILE;
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<')
 		{
