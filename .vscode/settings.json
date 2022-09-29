@@ -11,5 +11,6 @@
 		"struct.h": "c",
 		"_pthread_types.h": "c"
 	},
-	"git.postCommitCommand": "push"
+	"git.postCommitCommand": "push",
+	"C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

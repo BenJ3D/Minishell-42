@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 19:05:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:10:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,58 @@ int	main(int ac, char **av, char **envp)
 
 
 ////////////////////PIPE TEST /////////////////////
-	// printf("%sPIPE TEST : ls -all | cat -e %s\n", COLOR_RED, COLOR_CYAN);
-	// int		fd[2];
-	// pipe(fd);
-	// int pid1 = fork();
+	printf("%sPIPE TEST : ls -all | cat -e | cat -e %s\n", COLOR_RED, COLOR_CYAN);
+	int		fd1[2];
+	int		fd2[2];
+	int		fd3[2];
 	
-	// if (pid1 == 0)
-	// {
-	// 	dup2(fd[1], STDOUT_FILENO);
-	// 	close(fd[1]);
-	// 	close(fd[0]);
-	// 	execlp("ls", "ls", "-all", NULL);
-	// 	exit(0);
-	// }
+	pipe(fd1);
+	pipe(fd2);
+	
+	int pid1 = fork();
+	
+	if (pid1 == 0)
+	{
+		close(fd2[0]);
+		close(fd2[1]);
+		dup2(fd1[1],1); 
+		execlp("ls", "ls", "-all", NULL);
+		exit(0);
+	}
+		close(fd1[1]);
+	
+	int pid2 = fork();
+	
+	if (pid2 == 0)
+	{
+		dup2(fd1[0], 0);
+		close(fd1[0]);
+		dup2(fd2[1], 1);
+		execlp("cat", "cat", "-e", NULL);
+		exit(0);
+	}
+	
+		close(fd2[1]);
+	
+	int pid3 = fork();
+	
+	if (pid3 == 0)
+	{
+		dup2(fd2[0], 0);
+		close(fd2[0]);
+	
+		execlp("cat", "cat", "-e", NULL);
+		exit(0);
+	}
 
+	close(fd1[0]);
+	close(fd1[1]);
+	close(fd2[0]);
+	close(fd2[1]);
 	
-	// waitpid(pid1, NULL, 0);
-	// int pid2 = fork();
-	
-	// if (pid2 == 0)
-	// {
-	// 	dup2(fd[0], STDIN_FILENO);
-	// 	close(fd[1]);
-	// 	close(fd[0]);
-	// 	execlp("cat", "cat", "-e", NULL);
-	// 	exit(0);
-	// }
-
-	// close(fd[0]);
-	// close(fd[1]);
-	
-	// waitpid(pid2, NULL, 0);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	waitpid(pid3, NULL, 0);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

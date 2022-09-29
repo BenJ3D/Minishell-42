@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 18:13:44 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:22:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_check_is_builtin(t_data	*data, char **argv)
 	return (0);
 }
 
-int	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pipe) //TODO:
+pid_t	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pipe) //TODO:
 {
 	char	**envp;
 	pid_t	father;
@@ -133,7 +133,10 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 
 	father = fork();
 	if (father > 0)
-		waitpid(father, NULL, 0);
+	{
+		
+		// waitpid(father, NULL, 0);
+	}
 	if (father == 0)
 	{
 		envp = ft_env_convert_envlst_to_tab(data->env);
@@ -143,36 +146,21 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
 	}
-	close(data->fd[0]);
-	close(data->fd[1]);
+	// close(data->fd[0]);
+	// close(data->fd[1]);
 	return (father);
-}
-
-int ft_cmdtab_do_you_have_pipe(t_cmdtab *cmdtab)
-{
-	int	i;
-
-	i = 0;
-	while (cmdtab[i].lst)
-	{
-		ft_putstr("cmdtab[");
-		ft_putnbr(i);
-		ft_putstr("] = ");
-		dbg_lstdisplay_color_type(cmdtab[i].lst);
-		i++;
-	}
-	return (0);
 }
 
 int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
-	while(cmdtab[i])
-	{
-		
-	}
+	// i = 0;
+	// while(cmdtab[i].lst)
+	// {
+	// 	i++;
+	// }
+	return (0);
 }
 
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
@@ -185,7 +173,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	// dbg_display_argv(argv);
 	i = 0;
 	dbg_display_cmdtab(cmdtab);
-	pipe(data->fd);
+	// pipe(data->fd);
 	while(cmdtab[i].lst)
 	{
 		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
@@ -200,6 +188,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		i++;
 		ft_free_tab_char(argv);
 	}
+	// waitpid(-1, NULL, 0);
+	
 	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
 }

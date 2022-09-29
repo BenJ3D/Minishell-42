@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 16:23:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:16:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,20 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 	return (cmd);
 }
 
+void	ft_init_cmdtab_value(t_cmdtab *cmdtab)
+{
+	// int	i;
+	
+	// while (cmdtab[i])
+	// {
+	// 	cmdtab->pipein = 0;
+	// 	cmdtab->pipeout = 0;
+	// 	cmdtab->redirection = 0;
+	// 	cmdtab->rediarg = NULL;
+	// }
+	
+}
+
 /**
  * @brief 
  * 
@@ -146,22 +160,31 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 {
 	t_list		*tmp;
 	t_cmdtab	*cmdtab;
+	char		*str;
 	int			i;
 	
 	tmp = lst;
-	cmdtab = ft_calloc(nbrpipe + 2, sizeof(cmdtab));
+	cmdtab = ft_calloc(nbrpipe + 2, sizeof(t_cmdtab));
 	i = 0;
+	// ft_init_cmdtab_value(cmdtab);
 	cmdtab[i++].lst = lst;
+	// cmdtab[i++].lst->type = 0;
 	while(tmp)
 	{
 		if (tmp->str[0] == '|')
 		{
 			cmdtab[i].lst = tmp->next;
 			tmp->next = NULL;
+			// if (cmdtab->lst)
+			// 	cmdtab->lst->type = 0;
 			tmp = cmdtab[i++].lst;
 		}
 		else
+		{
+			// if (cmdtab[i].lst)
+			// 	cmdtab[i].lst->type = 0;
 			tmp = tmp->next;
+		}
 	}
 	return (cmdtab);
 }

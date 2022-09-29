@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 17:40:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:08:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls ->
 
 typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
 {									//exemple si buffer = ls -all | cat -e
-	t_list	*lst;
 	int		pipein;
 	int		pipeout;
 	int		redirection;
-	char	*rediarg;
 	int		fd[2];					//    cmdtab[0].lst = ls -> -all -> (pipe)
+	char	*rediarg;
+	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
 
 
