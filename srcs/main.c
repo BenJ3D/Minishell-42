@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 22:10:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:13:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av, char **envp)
 		exit(0);
 	}
 		close(fd1[1]);
-	
+
 	int pid2 = fork();
 	
 	if (pid2 == 0)
@@ -86,7 +86,6 @@ int	main(int ac, char **av, char **envp)
 	{
 		dup2(fd2[0], 0);
 		close(fd2[0]);
-	
 		execlp("cat", "cat", "-e", NULL);
 		exit(0);
 	}
