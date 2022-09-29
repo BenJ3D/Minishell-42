@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 20:22:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:49:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ pid_t	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pip
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
-		close(data->fd[0]);
-		close(data->fd[1]);
+		// close(data->fd[0]);
+		// close(data->fd[1]);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		execve(prgpath, argv, envp);
 		free(prgpath);
@@ -121,8 +121,8 @@ pid_t	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pip
 		ft_free_tab_char(envp);
 		ft_exit_child(data); // FIXME: utile ?
 	}
-	close(data->fd[0]);
-	close(data->fd[1]);
+	// close(data->fd[0]);
+	// close(data->fd[1]);
 	return (father);
 }
 
@@ -135,7 +135,7 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 	if (father > 0)
 	{
 		
-		// waitpid(father, NULL, 0);
+		waitpid(father, NULL, 0);
 	}
 	if (father == 0)
 	{
