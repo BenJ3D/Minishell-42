@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 20:50:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:25:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_env_extract_key_name(char *str)
 	while (str[len] != '=')
 		len++;
 	len++;
-	tmp = ft_calloc(len, sizeof(tmp));
+	tmp = ft_calloc(len, sizeof(char));
 	i = 0;
 	while (str[i] != '=')
 	{
@@ -64,7 +64,7 @@ char	*ft_env_extract_value_content(char *str)
 	while (str[i] != '=')
 		i++;
 	i++;
-	tmp = ft_calloc((ft_strlen(str) - i) + 1, sizeof(tmp));
+	tmp = ft_calloc((ft_strlen(str) - i) + 1, sizeof(char));
 	y = 0;
 	while (str[i])
 	{

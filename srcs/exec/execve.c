@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 22:49:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:09:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		free(progpath);
 		i++;
 		ft_free_tab_char(argv);
+	
 	}
 	// waitpid(-1, NULL, 0);
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 19:16:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:27:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 		if (buffer[bufi] == '\0')
 			return (cmd);
 		len = ft_strlen_next_word(buffer + bufi);
-		str = ft_calloc(len + 1, sizeof(str));
+		str = ft_calloc(len + 1, sizeof(char));
 		if (!str)
 			return (NULL);
 		i = 0;
@@ -232,7 +232,7 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	
 
 	nbword = ft_lstsize(cmd); //FIXME: ft pour calculer le nombre de mot cmd+arg sans les redirections et pipe
-	argv = ft_calloc(nbword + 1, sizeof(argv));
+	argv = ft_calloc(nbword + 1, sizeof(char**));
 	lst = cmd;
 	y = 0;
 	while (lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 22:09:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:25:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 	t_envlst	*tmp;
 	
 	tmp = env;
-	tab = ft_calloc(ft_env_lstsize(tmp) + 1, sizeof(tmp));
+	tab = ft_calloc(ft_env_lstsize(tmp) + 1, sizeof(t_envlst));
 	i = 0;
 	while (tmp)
 	{

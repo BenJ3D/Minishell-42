@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/22 02:46:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:22:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_main_unset(t_envlst *env, char *key)
 {
 	t_envlst	*tmp;
 	char		*ptr;
-	
+
 	if (key[0] == '\0')
 		return (-1);
 	tmp = env;
