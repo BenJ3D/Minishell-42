@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 01:06:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 01:35:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,10 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 {
 	char	**envp;
 	pid_t	father;
-
-	if ((cmdtab[ex->i].isbuilt <= 0) ||  cmdtab[ex->i].pipeout == 1)
+	
+	father = -2;
+	if ((cmdtab[ex->i].isbuilt <= 0) ||  cmdtab[ex->i].pipeout == 1 
+	 											||  cmdtab[ex->i].pipein == 1)
 		father = fork();
 	if (father == 0)
 	{
@@ -186,7 +188,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		ft_free_tab_char(envp);
 		ft_exit(data); // FIXME: utile ?
 	}
-	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0)
+	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
 		ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 	if (cmdtab[ex->i].pipeout == 1)
 		close(cmdtab[ex->i + 1].fd[1]);
@@ -250,7 +252,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ret = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
 		if (!ex.progpath && ret <= 0)
 			ft_command_not_found_message(ex.argv, data);
-		else if (ex.progpath || ret >= 0)
+		else
 			child = ft_forkexe(data, &ex, cmdtab);
 		free(ex.progpath);
 		ex.i++;

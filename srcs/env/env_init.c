@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/30 19:25:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:48:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,38 +178,38 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 ////////////////////////////     ENV TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-/**
- * @brief fonction test pour debug le split env
- * 
- * @param env
- * @param key
- * @return int
- */
-int	env_test_read(char **env, const char *key)
-{
-	char *value;
-	int i;
-	int ret;
+// /**
+//  * @brief fonction test pour debug le split env
+//  * 
+//  * @param env
+//  * @param key
+//  * @return int
+//  */
+// int	env_test_read(char **env, const char *key)
+// {
+// 	char *value;
+// 	int i;
+// 	int ret;
 
-	ret = 0;
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], key, ft_strlen(key)))
-			break ;
-		i++;
-	}
-	if (!env[i])
-	{
-		perror("Aucune variable environnement de ce nom");
-		return (2);
-	}
-	value = ft_strdup(env[i]);
-	i = 1;
-	while(value[i - 1] != '=')
-		i++;
-	printf("env %s : %s\n", key, value + i);
-	free(value);
-	return (i);
-}
+// 	ret = 0;
+// 	i = 0;
+// 	while (env[i])
+// 	{
+// 		if (!ft_strncmp(env[i], key, ft_strlen(key)))
+// 			break ;
+// 		i++;
+// 	}
+// 	if (!env[i])
+// 	{
+// 		perror("Aucune variable environnement de ce nom");
+// 		return (2);
+// 	}
+// 	value = ft_strdup(env[i]);
+// 	i = 1;
+// 	while(value[i - 1] != '=')
+// 		i++;
+// 	printf("env %s : %s\n", key, value + i);
+// 	free(value);
+// 	return (i);
+// }
 

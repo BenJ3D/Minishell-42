@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 06:06:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:52:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,195 +78,195 @@ void	prompt_minishell(char **av, t_data *data)
 
 
 
-/**
- * @brief prompt coder en dur pour tests execs
- * 
- * @param av 
- * @param env 
- */
-void prompt_basic_test(char **av, t_data *data)
-{
-	pid_t	child;
+// /**
+//  * @brief prompt coder en dur pour tests execs
+//  * 
+//  * @param av 
+//  * @param env 
+//  */
+// void prompt_basic_test(char **av, t_data *data)
+// {
+// 	pid_t	child;
 	
-	data->buffer = NULL;
-	data->line = prompt_update(data->env, data->pgr_name);
-	data->buffer = readline(data->line);
+// 	data->buffer = NULL;
+// 	data->line = prompt_update(data->env, data->pgr_name);
+// 	data->buffer = readline(data->line);
 
-	char **args;
-	args = ft_calloc(4, sizeof(char));
-	args[0]= ft_strdup("ls");
-	args[1]= ft_strdup("-all");
-	// args[2]= ft_strdup("-all");
+// 	char **args;
+// 	args = ft_calloc(4, sizeof(char));
+// 	args[0]= ft_strdup("ls");
+// 	args[1]= ft_strdup("-all");
+// 	// args[2]= ft_strdup("-all");
 	
-	while ((data->buffer))
-	{ 
-		if (data->buffer[0] != '\0')
-			add_history(data->buffer);
-		if (!ft_strncmp(data->buffer, "ls", 3))
-		{
-			child = fork();
-			if (child == 0)
-				execve("/bin/ls", args, NULL); //TODO:TODO:
-			//if (child > 0)
-			//	printf("Child pid = %i\n", child);
-			wait(0);
-		}
-		else if (!ft_strncmp(data->buffer, "env", 4))
-		{
-			ft_builtin_env(data->env);
-		}
+// 	while ((data->buffer))
+// 	{ 
+// 		if (data->buffer[0] != '\0')
+// 			add_history(data->buffer);
+// 		if (!ft_strncmp(data->buffer, "ls", 3))
+// 		{
+// 			child = fork();
+// 			if (child == 0)
+// 				execve("/bin/ls", args, NULL); //TODO:TODO:
+// 			//if (child > 0)
+// 			//	printf("Child pid = %i\n", child);
+// 			wait(0);
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "env", 4))
+// 		{
+// 			ft_builtin_env(data->env);
+// 		}
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////      EXPORT TEST     //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(data->buffer, "export BEN", 11))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 		else if (!ft_strncmp(data->buffer, "export BEN", 11))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("BEN=BENEBI");
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = ft_strdup("BEN=BENEBI");
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-		}
-		else if (!ft_strncmp(data->buffer, "export =BEN", 12))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "export =BEN", 12))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("=BENEBI");
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = ft_strdup("=BENEBI");
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);}
-		else if (!ft_strncmp(data->buffer, "export3", 8))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);}
+// 		else if (!ft_strncmp(data->buffer, "export3", 8))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("BENEBI");
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = ft_strdup("BENEBI");
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);}
-		else if (!ft_strncmp(data->buffer, "export", 7))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);}
+// 		else if (!ft_strncmp(data->buffer, "export", 7))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("");
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = ft_strdup("");
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-		}
-		else if (!ft_strncmp(data->buffer, "export5", 8))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "export5", 8))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = NULL;
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = NULL;
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-		}
-		else if (!ft_strncmp(data->buffer, "export USER", 12))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "export USER", 12))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("export");
-			tabexport[1] = ft_strdup("USER=benji42");
+// 			tabexport[0] = ft_strdup("export");
+// 			tabexport[1] = ft_strdup("USER=benji42");
 			
-			ft_builtin_export(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-			}
+// 			ft_builtin_export(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 			}
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////      UNSET TEST    //////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(data->buffer, "unset", 6))
-		{
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////      UNSET TEST    //////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// 		else if (!ft_strncmp(data->buffer, "unset", 6))
+// 		{
 			
-		}
-		else if (!ft_strncmp(data->buffer, "unset BEN", 10))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "unset BEN", 10))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("unset");
-			tabexport[1] = ft_strdup("BEN");
+// 			tabexport[0] = ft_strdup("unset");
+// 			tabexport[1] = ft_strdup("BEN");
 			
-			ft_builtin_unset(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-		}
-		else if (!ft_strncmp(data->buffer, "unset USER", 11))
-		{
-			char **tabexport = ft_calloc(3, sizeof(tabexport));
+// 			ft_builtin_unset(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "unset USER", 11))
+// 		{
+// 			char **tabexport = ft_calloc(3, sizeof(tabexport));
 
-			tabexport[0] = ft_strdup("unset");
-			tabexport[1] = ft_strdup("USER");
+// 			tabexport[0] = ft_strdup("unset");
+// 			tabexport[1] = ft_strdup("USER");
 			
-			ft_builtin_unset(data->env, tabexport);
-			free (tabexport[0]);
-			free (tabexport[1]);
-			free (tabexport);
-		}
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////      CD TEST    //////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(data->buffer, "testcd", 8))
-		{
-			setenv("PWD", "/home/ben/projet/", 1);
-			printf("PWD = %s\n", getenv("PWD"));
-			printf("OLDPWD = %s\n", getenv("OLDPWD"));
-		}
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////      PWD TEST    //////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-		else if (!ft_strncmp(data->buffer, "pwd", 8))
-		{
-			printf("%s\n", getenv("PWD"));
-		}
-		else if (!ft_strncmp(data->buffer, "rmm", 8))
-		{
-			unlink("adieu"); // supprime un fichier
-		}
-		else if (data->buffer[0] != '\0')
-		{
-			char *line2;
+// 			ft_builtin_unset(data->env, tabexport);
+// 			free (tabexport[0]);
+// 			free (tabexport[1]);
+// 			free (tabexport);
+// 		}
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////      CD TEST    //////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// 		else if (!ft_strncmp(data->buffer, "testcd", 8))
+// 		{
+// 			setenv("PWD", "/home/ben/projet/", 1);
+// 			printf("PWD = %s\n", getenv("PWD"));
+// 			printf("OLDPWD = %s\n", getenv("OLDPWD"));
+// 		}
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////      PWD TEST    //////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
+// 		else if (!ft_strncmp(data->buffer, "pwd", 8))
+// 		{
+// 			printf("%s\n", getenv("PWD"));
+// 		}
+// 		else if (!ft_strncmp(data->buffer, "rmm", 8))
+// 		{
+// 			unlink("adieu"); // supprime un fichier
+// 		}
+// 		else if (data->buffer[0] != '\0')
+// 		{
+// 			char *line2;
 			
-			line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n", 
-				COLOR_CYAN, COLOR_PURPLE, data->buffer, COLOR_RED, COLOR_NONE);
-			ft_putstr_fd(line2, 2);
-			free (line2);
-		}
-		free(data->buffer);
-		data->buffer = NULL;
-		free(data->line);
-		data->line = prompt_update(data->env, data->pgr_name);
-		// rl_on_new_line();
-		data->buffer = readline(data->line);
-	}
-	if (data->line)
-		free(data->line);
-	free(data->buffer);
-	rl_on_new_line();
-	write(1, "exit13\n", 8);
-}
+// 			line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n", 
+// 				COLOR_CYAN, COLOR_PURPLE, data->buffer, COLOR_RED, COLOR_NONE);
+// 			ft_putstr_fd(line2, 2);
+// 			free (line2);
+// 		}
+// 		free(data->buffer);
+// 		data->buffer = NULL;
+// 		free(data->line);
+// 		data->line = prompt_update(data->env, data->pgr_name);
+// 		// rl_on_new_line();
+// 		data->buffer = readline(data->line);
+// 	}
+// 	if (data->line)
+// 		free(data->line);
+// 	free(data->buffer);
+// 	rl_on_new_line();
+// 	write(1, "exit13\n", 8);
+// }
