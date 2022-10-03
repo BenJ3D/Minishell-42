@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/30 19:27:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 04:42:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,8 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	
 	tmp = lst;
 	cmdtab = ft_calloc(nbrpipe + 2, sizeof(t_cmdtab));
+	if (!cmdtab)
+		return (NULL);
 	i = 0;
 	// ft_init_cmdtab_value(cmdtab);
 	cmdtab[i++].lst = lst;
@@ -232,7 +234,10 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	
 
 	nbword = ft_lstsize(cmd); //FIXME: ft pour calculer le nombre de mot cmd+arg sans les redirections et pipe
-	argv = ft_calloc(nbword + 1, sizeof(char**));
+	argv = ft_calloc(nbword + 1, sizeof(char **));
+	// argv = (char **)malloc(nbword + 1 * sizeof(char *));
+	if (!argv)
+		return (NULL);
 	lst = cmd;
 	y = 0;
 	while (lst)

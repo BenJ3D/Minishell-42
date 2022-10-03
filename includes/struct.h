@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 19:08:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:07:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls ->
 	char			*str;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct	s_execarg //pour gagner des lignes // norme..
+{
+	int		i;
+	char	**argv;
+	char	*progpath;
+}				t_execarg;
+
 
 typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
 {									//exemple si buffer = ls -all | cat -e

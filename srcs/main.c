@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/29 22:50:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:31:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ int	main(int ac, char **av, char **envp)
 	
 	if (pid1 == 0)
 	{
-		close(fd2[0]);
-		close(fd2[1]);
+		// close(fd2[0]);
+		// close(fd2[1]);
 		dup2(fd1[1],1); 
+		close(fd1[1]);
 		execlp("ls", "ls", "-all", NULL);
 		exit(0);
 	}
@@ -71,9 +72,9 @@ int	main(int ac, char **av, char **envp)
 	
 	if (pid2 == 0)
 	{
-		dup2(fd1[0], 0);
+		dup2(fd1[0], 0); // in
 		close(fd1[0]);
-		dup2(fd2[1], 1);
+		dup2(fd2[1], 1); //out
 		execlp("cat", "cat", "-e", NULL);
 		exit(0);
 	}

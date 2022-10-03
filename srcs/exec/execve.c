@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/30 19:09:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:41:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ pid_t	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pip
 	return (father);
 }
 
-int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
+int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 {
 	char	**envp;
 	pid_t	father;
@@ -134,18 +134,26 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 	father = fork();
 	if (father > 0)
 	{
-		
 		waitpid(father, NULL, 0);
 	}
 	if (father == 0)
 	{
+		if (cmdtab[ex->i].pipeout == 1)
+			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
+		if (cmdtab[ex->i].pipein == 1)
+		{
+			dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
+			close(cmdtab[ex->i].fd[0]);
+		}
 		envp = ft_env_convert_envlst_to_tab(data->env);
-		execve(progpath, argv, envp);
-		free(progpath);
-		ft_free_tab_char(argv);
+		execve(ex->progpath, ex->argv, envp);
+		free(ex->progpath);
+		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);
-		ft_exit_child(data); // FIXME: utile ?
+		ft_exit(data); // FIXME: utile ?
 	}
+	if (cmdtab[ex->i].pipeout == 1)
+		close(cmdtab[ex->i + 1].fd[1]);
 	// close(data->fd[0]);
 	// close(data->fd[1]);
 	return (father);
@@ -153,43 +161,66 @@ int	ft_forkexe( t_data *data, char *progpath, char **argv, int pipe)
 
 int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
-	// while(cmdtab[i].lst)
-	// {
-	// 	i++;
-	// }
+	i = 0;
+	while(cmdtab[i].lst)
+	{
+				cmdtab[i].pipeout = 0;
+				cmdtab[i++].pipein = 0;
+	}
+	i = 0;
+	while(cmdtab[i].lst)
+	{
+		if (i > 0)
+		{
+				cmdtab[i].pipein = 1;
+			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
+				cmdtab[i].pipeout = 1;
+		}
+		else 
+		{
+				cmdtab[i].pipein = 0;
+			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
+				cmdtab[i].pipeout = 1;
+		}
+		i++;
+	}
 	return (0);
 }
 
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
-	char	**argv;
-	char	*progpath;
-	int		ret;
-	int		i;
+	t_execarg	ex;
+	int			ret;
+	pid_t		child;
 
 	// dbg_display_argv(argv);
-	i = 0;
-	dbg_display_cmdtab(cmdtab);
+	ex.i = 0;
+	//dbg_display_cmdtab(cmdtab);
 	// pipe(data->fd);
-	while(cmdtab[i].lst)
+	ft_cmdtab_init_info(cmdtab);
+	while(cmdtab[ex.i].lst)
 	{
-		argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[i].lst); //TODO:
+		if (ft_check_if_cmd_has_pipe(cmdtab[ex.i].lst))
+		{
+			if (ex.i == 0)
+				pipe(cmdtab[ex.i].fd);
+			pipe(cmdtab[ex.i + 1].fd);
+		}
+		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst); //TODO:
 		// dbg_display_argv(argv);
-		progpath = ft_check_if_prog_exist_in_pathenv(argv[0], data->env);
-		ret = ft_check_is_builtin(data, argv);
-		if (!progpath && ret == 1)
-			ft_command_not_found_message(argv);
-		else if (progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
-			ft_forkexe(data, progpath, argv, 0);
-		free(progpath);
-		i++;
-		ft_free_tab_char(argv);
-	
+		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
+		ret = ft_check_is_builtin(data, ex.argv);
+		if (!ex.progpath && ret == 1)
+			ft_command_not_found_message(ex.argv);
+		else if (ex.progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
+			child = ft_forkexe(data, &ex, cmdtab);
+		free(ex.progpath);
+		ex.i++;
+		ft_free_tab_char(ex.argv);
 	}
-	// waitpid(-1, NULL, 0);
+	waitpid(child, NULL, 0);
 	
 	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
