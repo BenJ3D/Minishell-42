@@ -11,7 +11,7 @@
 			"program": "${workspaceFolder}/minishell",
 			"args": [],
 			"cwd": "${workspaceFolder}",
-			"preLaunchTask": "build"
+			"preLaunchTask": "build"			
 		}
 	]
 }

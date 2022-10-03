@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 07:13:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:00:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	return (NULL);
 }
 
-int	ft_command_not_found_message(char **argv)
+int	ft_command_not_found_message(char **argv, t_data *data)
 {
 	char *line2;
 
 	if (argv[0] != NULL)
 	{
 
-		line2 = ft_strjoin_max("%sMiniHell: %s%s: %scommand not found%s\n",
-							   COLOR_CYAN, COLOR_PURPLE, argv[0], 
-							   COLOR_RED, COLOR_NONE);
+		line2 = ft_strjoin_max("%s%s: %s%s: %scommand not found%s\n",
+								COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
+								argv[0], COLOR_RED, COLOR_NONE);
 		ft_putstr_fd(line2, 2);
 		free(line2);
 	}
@@ -73,81 +73,86 @@ int	ft_command_not_found_message(char **argv)
 	return (0);
 }
 
+int	ft_create_fork_pipe_out();
+
 /**
  * @brief //TODO: check parmit une liste si il y a une builtin
  * 
  * @return int 
  */
-int	ft_check_is_builtin(t_data	*data, char **argv, \
+int	ft_check_is_builtin_with_pipe(t_data *data, char **argv, \
 												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
 {
 	pid_t	father;
-	int		bool;
 	
-	bool = 0;
-	// if (cmdtab[ex->i].pipeout == 1)
-	// {
-	// 	bool = 1;
-	// 	father = fork();
-	// 	dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
-	// 	close(cmdtab[ex->i].fd[1]);
-	// 	close(cmdtab[ex->i].fd[0]);
-	// }
+	father = fork();
+	if (father == 0 && cmdtab[ex->i].pipeout == 1)
+	{
+		printf("pid :%i\n", getpid());
+		dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
+		close(cmdtab[ex->i].fd[1]);
+		close(cmdtab[ex->i].fd[0]);
+	}
 	if (*argv ==  NULL)
 		return (0);
-	else if (!ft_strncmp(argv[0], "cd", 3))
+	else if (father == 0 && !ft_strncmp(argv[0], "cd", 3))
 		ft_builtin_cd(data->env, argv);
-	else if (!ft_strncmp(argv[0], "echo", 5))
+	else if (father == 0 && !ft_strncmp(argv[0], "echo", 5))
 		ft_builtin_echo(argv);
-	else if (!ft_strncmp(argv[0], "env", 4))
+	else if (father == 0 && !ft_strncmp(argv[0], "env", 4))
 		ft_builtin_env(data->env);
-	else if (!ft_strncmp(argv[0], "exit", 5))
+	else if (father == 0 && !ft_strncmp(argv[0], "exit", 5))
 		ft_exit(data);
-	else if (!ft_strncmp(argv[0], "export", 7))
+	else if (father == 0 && !ft_strncmp(argv[0], "export", 7))
 		ft_builtin_export(data->env, argv);
-	else if (!ft_strncmp(argv[0], "pwd", 4))
+	else if (father == 0 && !ft_strncmp(argv[0], "pwd", 4))
 		ft_builtin_pwd(data->env, argv);
-	else if (!ft_strncmp(argv[0], "unset", 6))
+	else if (father == 0 && !ft_strncmp(argv[0], "unset", 6))
 		ft_builtin_unset(data->env, argv);
 	else
 	{
-		// if (father == 0)
-		// 	ft_exit(data);
-		// if (cmdtab[ex->i].pipeout == 1)
-		// 	close(cmdtab[ex->i + 1].fd[1]);
+		if (father == 0)
+			ft_exit(data);
+		close(cmdtab[ex->i + 1].fd[1]);
 		return (1);
 	}
-	// if (father == 0)
-	// 		ft_exit(data);
-	// if (cmdtab[ex->i].pipeout == 1)
-	// 	close(cmdtab[ex->i + 1].fd[1]);
-	// close(cmdtab[ex->i].fd[1]);
-	// close(cmdtab[ex->i].fd[0]);
+	if (father == 0)
+			ft_exit(data);
+	close(cmdtab[ex->i + 1].fd[1]);
 	return (0);
 }
+/**
+ * @brief //TODO: check parmit une liste si il y a une builtin
+ * 
+ * @return int 
+ */
+int	ft_check_is_builtin(t_data *data, char **argv, \
+												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
+{	
+	int	ret;
 
-pid_t	ft_forkexe_pipe( t_data *data, char *prgpath, char **argv, int rd, int pipe) //TODO:
-{
-	char	**envp;
-	pid_t	father;
-
-	father = fork();
-	if (father > 0)
-		waitpid(father, NULL, 0);
-	if (father == 0)
-	{
-		// close(data->fd[0]);
-		// close(data->fd[1]);
-		envp = ft_env_convert_envlst_to_tab(data->env);
-		execve(prgpath, argv, envp);
-		free(prgpath);
-		ft_free_tab_char(argv);
-		ft_free_tab_char(envp);
-		ft_exit_child(data); // FIXME: utile ?
-	}
-	// close(data->fd[0]);
-	// close(data->fd[1]);
-	return (father);
+	ret = 0;
+	if (*argv ==  NULL)
+		return (0);
+	if (cmdtab[ex->i].pipeout == 1)
+		ret = ft_check_is_builtin_with_pipe(data, argv, cmdtab, ex);
+	if (!ft_strncmp(argv[0], "cd", 3) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_cd(data->env, argv);
+	else if (!ft_strncmp(argv[0], "echo", 5) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_echo(argv);
+	else if (!ft_strncmp(argv[0], "env", 4) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_env(data->env);
+	else if (!ft_strncmp(argv[0], "exit", 5) && cmdtab[ex->i].pipeout == 0)
+		ft_exit(data);
+	else if (!ft_strncmp(argv[0], "export", 7) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_export(data->env, argv);
+	else if (!ft_strncmp(argv[0], "pwd", 4) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_pwd(data->env, argv);
+	else if (!ft_strncmp(argv[0], "unset", 6) && cmdtab[ex->i].pipeout == 0)
+		ft_builtin_unset(data->env, argv);
+	else
+		return (1);
+	return (ret);
 }
 
 int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
@@ -156,10 +161,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	pid_t	father;
 
 	father = fork();
-	if (father > 0)
-	{
-		// waitpid(father, NULL, 0);
-	}
 	if (father == 0)
 	{
 		if (cmdtab[ex->i].pipeout == 1)
@@ -237,7 +238,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		ret = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
 		if (!ex.progpath && ret == 1)
-			ft_command_not_found_message(ex.argv);
+			ft_command_not_found_message(ex.argv, data);
 		else if (ex.progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
 			child = ft_forkexe(data, &ex, cmdtab);
 		free(ex.progpath);

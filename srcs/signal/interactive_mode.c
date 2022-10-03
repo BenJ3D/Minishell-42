@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interactive_mode.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/12 15:57:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:13:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	handler_interative(int signum)
 		rl_replace_line("", 0); //TODO: implicit declaration C99 ??
 		rl_on_new_line();
 		rl_redisplay();
+
 	}
 	else if (signum == SIGQUIT)
 		return ;
