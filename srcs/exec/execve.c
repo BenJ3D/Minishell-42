@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 05:41:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 06:07:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	father = fork();
 	if (father > 0)
 	{
-		waitpid(father, NULL, 0);
+		// waitpid(father, NULL, 0);
 	}
 	if (father == 0)
 	{
@@ -166,8 +166,8 @@ int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
 	i = 0;
 	while(cmdtab[i].lst)
 	{
-				cmdtab[i].pipeout = 0;
-				cmdtab[i++].pipein = 0;
+		cmdtab[i].pipeout = 0;
+		cmdtab[i++].pipein = 0;
 	}
 	i = 0;
 	while(cmdtab[i].lst)
@@ -202,7 +202,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	ft_cmdtab_init_info(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
-		if (ft_check_if_cmd_has_pipe(cmdtab[ex.i].lst))
+		if (cmdtab[ex.i].pipeout)
 		{
 			if (ex.i == 0)
 				pipe(cmdtab[ex.i].fd);
@@ -220,8 +220,14 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.i++;
 		ft_free_tab_char(ex.argv);
 	}
+	while (cmdtab[ex.i].lst)
+	{
+		close(cmdtab[ex.i].fd[0]);
+		close(cmdtab[ex.i].fd[1]);
+		ex.i++;
+	}
 	waitpid(child, NULL, 0);
-	
+	ex.i = 0;
 	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
 }

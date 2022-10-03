@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/29 19:13:39 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/10/03 06:14:11 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=1
+DEBUG=2
 
 ifeq ($(DEBUG), 0)
 CC = gcc $(CFLAGS)
