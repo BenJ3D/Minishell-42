@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 04:42:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 07:10:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	if (pipe == 0)
 		pipe++;
 	i = 0;
-	data->cmdtoparse = NULL;
 	bufi = 0;
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
+	//TODO: gerer les erreurs de syntaxes
 	ft_define_cmd_type(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);

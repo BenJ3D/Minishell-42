@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 06:07:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/03 07:13:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	char		*pathhascheck;
 	int			i;
 
-	pathhascheck = NULL;
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
 	if (!envpaths)
 		return (NULL);
@@ -79,8 +78,21 @@ int	ft_command_not_found_message(char **argv)
  * 
  * @return int 
  */
-int	ft_check_is_builtin(t_data	*data, char **argv)
+int	ft_check_is_builtin(t_data	*data, char **argv, \
+												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
 {
+	pid_t	father;
+	int		bool;
+	
+	bool = 0;
+	// if (cmdtab[ex->i].pipeout == 1)
+	// {
+	// 	bool = 1;
+	// 	father = fork();
+	// 	dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
+	// 	close(cmdtab[ex->i].fd[1]);
+	// 	close(cmdtab[ex->i].fd[0]);
+	// }
 	if (*argv ==  NULL)
 		return (0);
 	else if (!ft_strncmp(argv[0], "cd", 3))
@@ -97,8 +109,20 @@ int	ft_check_is_builtin(t_data	*data, char **argv)
 		ft_builtin_pwd(data->env, argv);
 	else if (!ft_strncmp(argv[0], "unset", 6))
 		ft_builtin_unset(data->env, argv);
-	else 
+	else
+	{
+		// if (father == 0)
+		// 	ft_exit(data);
+		// if (cmdtab[ex->i].pipeout == 1)
+		// 	close(cmdtab[ex->i + 1].fd[1]);
 		return (1);
+	}
+	// if (father == 0)
+	// 		ft_exit(data);
+	// if (cmdtab[ex->i].pipeout == 1)
+	// 	close(cmdtab[ex->i + 1].fd[1]);
+	// close(cmdtab[ex->i].fd[1]);
+	// close(cmdtab[ex->i].fd[0]);
 	return (0);
 }
 
@@ -211,7 +235,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst); //TODO:
 		// dbg_display_argv(argv);
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
-		ret = ft_check_is_builtin(data, ex.argv);
+		ret = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
 		if (!ex.progpath && ret == 1)
 			ft_command_not_found_message(ex.argv);
 		else if (ex.progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
