@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 17:20:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:21:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@
 # define INFILE 7 // le nom du fichier
 # define INQUOTE 8 // les characteres de fin de quote
 # define OUTFILE 9 // le nom du fichier de sortie
+
+# define NO_BUILTIN 0
+# define BUILT_CD 1
+# define BUILT_ECHO 2
+# define BUILT_ENV 3
+# define BUILT_EXPORT 4
+# define BUILT_UNSET 5
+# define BUILT_PWD 6
+# define BUILT_EXIT 7
+
 
 # define COLOR_BLUE		"\001\033[0;34m\002"
 # define COLOR_NONE		"\001\033[0;37m\002"

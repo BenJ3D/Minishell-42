@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/03 21:56:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:41:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			ft_count_pipe(char *buffer);
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
 int			ft_command_not_found_message(char **argv, t_data *data);
 int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
