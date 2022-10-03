@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 00:41:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 01:06:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
  */
 char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO: norm
 {
-	char		*envpaths;
-	char		**pathsplit;
-	char		*pathhascheck;
-	int			i;
+	char	*envpaths;
+	char	**pathsplit;
+	char	*pathhascheck;
+	int		i;
 
 	envpaths = ft_env_getstr_env_value(envlst, "PATH");
 	if (!envpaths)
@@ -84,7 +84,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
 {
 	if (*argv ==  NULL)
-		return (0);
+		return (-1);
 	else if (cmdtab[ex->i].isbuilt == BUILT_CD)
 		ft_builtin_cd(data->env, argv);
 	else if (cmdtab[ex->i].isbuilt == BUILT_ECHO)
@@ -94,7 +94,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXIT)
 		ft_exit(data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXPORT)
-		ft_builtin_export(data->env, argv);
+		ft_builtin_export(data->env, argv, data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_PWD)
 		ft_builtin_pwd(data->env, argv);
 	else if (cmdtab[ex->i].isbuilt == BUILT_UNSET)
@@ -127,7 +127,6 @@ int	ft_check_is_builtin(t_data *data, char **argv, t_cmdtab *cmdtab, t_execarg *
 		cmdtab[ex->i].isbuilt = BUILT_EXIT;
 	else
 		cmdtab[ex->i].isbuilt = NO_BUILTIN;
-	
 	return (cmdtab[ex->i].isbuilt);
 }
 
@@ -169,7 +168,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	char	**envp;
 	pid_t	father;
 
-	father = fork();
+	if ((cmdtab[ex->i].isbuilt <= 0) ||  cmdtab[ex->i].pipeout == 1)
+		father = fork();
 	if (father == 0)
 	{
 		if (cmdtab[ex->i].pipeout == 1)
@@ -186,6 +186,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		ft_free_tab_char(envp);
 		ft_exit(data); // FIXME: utile ?
 	}
+	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0)
+		ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 	if (cmdtab[ex->i].pipeout == 1)
 		close(cmdtab[ex->i + 1].fd[1]);
 	// close(data->fd[0]);
@@ -246,9 +248,9 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst); //TODO:
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		ret = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
-		if (!ex.progpath && ret == 1)
+		if (!ex.progpath && ret <= 0)
 			ft_command_not_found_message(ex.argv, data);
-		else if (ex.progpath && ret == 1) // ret 1 pour ne pas faire la buitin + le prog trouver
+		else if (ex.progpath || ret >= 0)
 			child = ft_forkexe(data, &ex, cmdtab);
 		free(ex.progpath);
 		ex.i++;
