@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 00:17:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:50:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		fd[2];					//    cmdtab[0].lst = ls -> -all -> (pipe)
 	char	*rediarg;
 	t_list	*lst;
+	pid_t	pid;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
 
 
