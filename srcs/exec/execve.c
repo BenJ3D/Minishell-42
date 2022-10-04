@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 01:35:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 02:22:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 	if (cmdtab[ex->i].pipeout == 1)
 		close(cmdtab[ex->i + 1].fd[1]);
-	// close(data->fd[0]);
-	// close(data->fd[1]);
 	return (father);
 }
 
@@ -235,11 +233,18 @@ int	ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 	return (0);
 }
 
+int	ft_redirection(t_data *data, t_cmdtab *s_cmdtab, t_execarg *ex)
+{
+	
+	return (0);
+}
+
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
 	t_execarg	ex;
 	int			ret;
 	pid_t		child;
+	int			status;
 
 	ex.i = 0;
 	ft_cmdtab_init_info(cmdtab);
@@ -264,7 +269,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		close(cmdtab[ex.i].fd[1]);
 		ex.i++;
 	}
-	waitpid(child, NULL, 0);
+	waitpid(child, &status, 0);
 	ex.i = 0;
 	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);

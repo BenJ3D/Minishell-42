@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 00:21:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 02:08:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@
 # define BUILT_EXIT 7
 
 
-# define COLOR_BLUE		"\001\033[0;34m\002"
-# define COLOR_NONE		"\001\033[0;37m\002"
+# define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
 # define COLOR_GREEN	"\001\033[0;32m\002"
+# define COLOR_YELLOW	"\001\033[0;33m\002"
+# define COLOR_BLUE		"\001\033[0;34m\002"
 # define COLOR_PURPLE	"\001\033[0;35m\002"
 # define COLOR_CYAN		"\001\033[0;36m\002"
+# define COLOR_NONE		"\001\033[0;37m\002"
 
 #endif
