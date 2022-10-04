@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 02:18:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/04 02:48:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	prompt_minishell(char **av, t_data *data)
 	{ 
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
-		nbpipe = ft_parsing_prompt(data, data->buffer);
-		// dbg_display_cmdtab(data->cmdtab);
-		dbg_lstdisplay_color_type(data->cmdtoparse);
-		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
+		nbpipe = ft_parsing_prompt(data, data->buffer);//TODO: 
+		
+		dbg_display_cmdtab(data->cmdtab);
+		ft_run_execve(data->cmdtab, data);
+		
 		ft_free_cmdtab_lst(nbpipe, data->cmdtab);
 		free(data->line);
 		data->line = prompt_update(data->env, data->pgr_name);
