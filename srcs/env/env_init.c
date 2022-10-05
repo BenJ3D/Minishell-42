@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:13:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ char	*ft_env_extract_key_name(char *str)
 	if (len == 0)
 		return (NULL);
 	len = 0;
-	while (str[len] != '=')
+	while (str[len] != '=' && str[len])
 		len++;
-	len++;
+	len++;//TODO: verifier si np si str[len]=='\0'
 	tmp = ft_calloc(len, sizeof(char));
+	if (!tmp)
+	{
+		perror("malloc");
+		exit(errno);
+	}
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i])
 	{
 		tmp[i] =  str[i];
 		i++;
@@ -61,8 +66,10 @@ char	*ft_env_extract_value_content(char *str)
 	i = 0;
 	if (str[i] == '\0')
 		return (NULL);
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i])
 		i++;
+	if (str[i] == '\0')
+		return (ft_strdup(""));
 	i++;
 	tmp = ft_calloc((ft_strlen(str) - i) + 1, sizeof(char));
 	y = 0;
@@ -115,7 +122,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
 	{
 		tkey = ft_strdup("PWD");
 		tvalue = getcwd(NULL, PATH_MAX);
-		ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+		ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue, 1));
 		free(tkey);
 		free(tvalue);
 	}
@@ -126,7 +133,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
 		{
 			tkey = ft_env_extract_key_name(envp[i]);
 			tvalue = ft_env_extract_value_content(envp[i]);
-			ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
+			ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue, 1));
 			free(tkey);
 			free(tvalue);
 			i++;

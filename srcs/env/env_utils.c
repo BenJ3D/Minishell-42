@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:38:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 	i = 0;
 	while (tmp)
 	{
-		tab[i] = ft_strjoin_max("%s=%s", tmp->key, tmp->value);
+		if (tmp->isenv == 1)
+			tab[i] = ft_strjoin_max("%s=%s", tmp->key, tmp->value);
 		tmp = tmp->next;
 		i++;
 	}
@@ -112,7 +113,8 @@ int		ft_env_lstsize(t_envlst *lst)
 	i = 0;
 	while (tmp)
 	{
-		i++;
+		if (tmp->isenv == 1)
+			i++;
 		tmp = tmp->next;
 	}
 	return (i);

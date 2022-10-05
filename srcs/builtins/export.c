@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:26:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,38 +33,7 @@ int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 	return (0);
 }
 
-/**
- * @brief add var to env with format key=value
- * 
- * @param env 
- * @param str name of futur key
- * @return int 
- */
-static int	ft_main_export(t_envlst *env, char *str, t_data *data)
-{
-	char		*key;
-	char		*value;
-	t_envlst	*ret;
-	
-	key = ft_env_extract_key_name(str);
-	if (ft_check_if_null(key, data) == 1)
-		return (-1);
-	value = ft_env_extract_value_content(str);
-	ret = ft_env_getenv_lst_value(env, key);
-	if (ret)
-	{
-		if (!ft_strequal(env->value, value))
-		{
-			free(ret->value);
-			ret->value = ft_strdup(value);
-		}
-	}
-	else
-		ft_env_lstadd_back(&env, ft_env_lstnew(key, value));
-	free (key);
-	free (value);
-	return (0);
-}
+
 
 /**
  * @brief function print export
@@ -80,7 +49,7 @@ static void	ft_print_export(t_envlst *env)
 	{
 		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(tmp->key, 1);
-		if (tmp->value)
+		if (tmp->value && tmp->isenv == 1)
 		{
 			ft_putchar_fd('=', 1);
 			ft_putchar_fd('"', 1);
@@ -98,7 +67,7 @@ static void	ft_print_export(t_envlst *env)
  * @param key 
  * @return int 
  */
-static int	ft_check_if_null(char *key, t_data *data)
+static int	ft_check_if_key_is_valid(char *key, t_data *data)
 {
 	if (key == NULL)
 	{
@@ -107,5 +76,63 @@ static int	ft_check_if_null(char *key, t_data *data)
 		ft_putstr_fd("not a valid identifier\n", 2);
 		return (1);
 	}
+	return (0);
+}
+
+/**
+ * @brief vérifie si la key est NULL
+ * 
+ * @param key 
+ * @return int 
+ */
+static int	ft_check_if_null(char *key, t_data *data) //TODO: 
+{
+	if (key == NULL)
+	{
+		ft_putstr_fd(data->pgr_name, 2);
+		ft_putstr_fd(" : export : ", 2);
+		ft_putstr_fd("not a valid identifier\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief add var to env with format key=value
+ * 
+ * @param env 
+ * @param str name of futur key
+ * @return int 
+ */
+static int	ft_main_export(t_envlst *env, char *str, t_data *data)
+{
+	char		*key;
+	char		*value;
+	int			isenv;
+	t_envlst	*ret;
+	
+	isenv = 1;
+	key = ft_env_extract_key_name(str);
+	if (key == NULL)
+	{
+		key = ft_strdup(str);
+		value = ft_strdup("");
+		isenv = 0;
+	}
+	else
+		value = ft_env_extract_value_content(str);
+	ret = ft_env_getenv_lst_value(env, key);
+	if (ret)
+	{
+		if (!ft_strequal(env->value, value))
+		{
+			free(ret->value);
+			ret->value = ft_strdup(value);
+		}
+	}
+	else
+		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
+	free (key);
+	free (value);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:33:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-t_envlst	*ft_env_lstnew(char *key, char *value)
+t_envlst	*ft_env_lstnew(char *key, char *value, int isenv)
 {
 	t_envlst	*tmp;
 
@@ -21,6 +21,7 @@ t_envlst	*ft_env_lstnew(char *key, char *value)
 		return (NULL);
 	tmp->key = ft_strdup(key);
 	tmp->value = ft_strdup(value);
+	tmp->isenv = isenv;
 	tmp->next = NULL;
 	return (tmp);
 }

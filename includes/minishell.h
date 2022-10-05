@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/04 00:51:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:12:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char		*ft_env_extract_key_name(char *str);
 char		*ft_env_extract_value_content(char *str);
 
 /* FT ENV LIST */
-t_envlst	*ft_env_lstnew(char *key, char *value);
+t_envlst	*ft_env_lstnew(char *key, char *value, int isenv);
 t_envlst	*ft_env_lstlast(t_envlst *lst);
 int			ft_env_lstsize(t_envlst *lst);
 void		ft_env_init_lst(char **envp, t_data *data);
