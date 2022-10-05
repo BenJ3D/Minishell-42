@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/23 15:08:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 
 int	ft_builtin_echo(char **argv) //TODO: prendre en charge le flag n et les '/"
 {

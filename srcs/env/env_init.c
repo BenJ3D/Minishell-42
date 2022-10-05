@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 00:48:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 
 /**
  * @brief return name key without '='

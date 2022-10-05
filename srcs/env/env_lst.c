@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 23:52:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 
 t_envlst	*ft_env_lstnew(char *key, char *value)
 {

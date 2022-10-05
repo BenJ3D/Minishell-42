@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 02:22:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 
 // ft_lstcmd_to_cmdarg_for_execve
 

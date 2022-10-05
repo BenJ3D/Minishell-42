@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/19 23:41:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {

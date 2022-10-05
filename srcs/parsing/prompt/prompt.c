@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 02:18:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <./../includes/minishell.h>
+#include "./../includes/minishell.h"
 // TODO: faire correspondre les "/path/" du dossier courant comme
 // TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
 		//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
