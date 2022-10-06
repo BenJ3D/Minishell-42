@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 17:13:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:27:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param str 
  * @return char* 
  */
-char	*ft_env_extract_key_name(char *str)
+char	*ft_env_extract_key_name(char *str, int *isenv)
 {
 	int		i;
 	int		len;
@@ -30,7 +30,11 @@ char	*ft_env_extract_key_name(char *str)
 		if (str[i++] == '=')
 			len++;
 	if (len == 0)
-		return (NULL);
+	{
+		*isenv = 0;
+		tmp = ft_strdup(str);
+		return (tmp);
+	}
 	len = 0;
 	while (str[len] != '=' && str[len])
 		len++;
@@ -131,7 +135,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
 		i = 0;
 		while (envp[i])
 		{
-			tkey = ft_env_extract_key_name(envp[i]);
+			tkey = ft_env_extract_key_name(envp[i], (int *)1);
 			tvalue = ft_env_extract_value_content(envp[i]);
 			ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue, 1));
 			free(tkey);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/05 17:12:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:11:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_env_getstr_env_value(t_envlst *env, const char *key);
 int			ft_env_check_if_key_is_valid(t_envlst *env, char *key);
 t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
-char		*ft_env_extract_key_name(char *str);
+char		*ft_env_extract_key_name(char *str, int *isenv);
 char		*ft_env_extract_value_content(char *str);
 
 /* FT ENV LIST */

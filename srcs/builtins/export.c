@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/06 12:16:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:37:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,33 +109,56 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 	char		*key;
 	char		*value;
 	int			isenv;
+	int			b_key;
 	t_envlst	*ret;
 	
-	isenv = 1;
-	key = ft_env_extract_key_name(str);
-	if (key == NULL)
-	{
-		key = ft_strdup(str);
-		value = ft_strdup("");
-		isenv = 0;
-	}
-	else
-		value = ft_env_extract_value_content(str);
-	ret = ft_env_getenv_lst_value(env, key);
-	if (ret)
-	{
-		if (!ft_strequal(env->value, value))
-		{
-			free(ret->value);
-			ret->value = ft_strdup(value);
-		}
-	}
-	else
-		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
+	if (b_key == 1)  //tcheck si une clef existe deja
+		
 	free (key);
 	free (value);
 	return (0);
 }
+// static int	ft_main_export(t_envlst *env, char *str, t_data *data)
+// {
+// 	char		*key;
+// 	char		*value;
+// 	int			isenv;
+// 	int			_bool;
+// 	t_envlst	*ret;
+	
+// 	isenv = TRUE;
+// 	_bool = FALSE;
+// 	key = ft_env_extract_key_name(str, &isenv);
+// 	ret = ft_env_getenv_lst_value(env, key);
+// 	if (key == NULL)
+// 	{
+// 		key = ft_strdup(str);
+// 		_bool = TRUE;
+// 		isenv = FALSE;
+// 	}
+// 	else
+// 	{
+// 		if (ret == NULL || _bool == FALSE)
+// 			value = ft_env_extract_value_content(str);
+// 		else
+// 			value = ft_strdup(ret->value);
+// 	}
+// 	if (ret)
+// 	{
+// 		ret->isenv = isenv;
+// 		if (!ft_strequal(env->value, value))
+// 		{
+// 			free(ret->value);
+// 			ret->value = ft_strdup(value);
+// 			ret->isenv = TRUE;
+// 		}
+// 	}
+// 	else
+// 		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
+// 	free (key);
+// 	free (value);
+// 	return (0);
+// }
 
 int	ft_shlvl_increment(t_envlst *env, char *value)//TODO:TODO:
 {
