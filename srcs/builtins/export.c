@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 20:00:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:16:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 int	ft_shlvl_increment(t_envlst *env, char *value)//TODO:TODO:
 {
 	char		key[6] = "SHLVL";
-	char		*value;
 	int			isenv;
 	t_envlst	*ret;
 
