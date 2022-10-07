@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/06 16:27:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:55:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param str 
  * @return char* 
  */
-char	*ft_env_extract_key_name(char *str, int *isenv)
+char	*ft_env_extract_key_name(char *str, int *isenv) //TODO: norme
 {
 	int		i;
 	int		len;
@@ -31,7 +31,7 @@ char	*ft_env_extract_key_name(char *str, int *isenv)
 			len++;
 	if (len == 0)
 	{
-		*isenv = 0;
+		*isenv = FALSE;
 		tmp = ft_strdup(str);
 		return (tmp);
 	}

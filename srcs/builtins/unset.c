@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:17:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_main_unset(t_envlst *env, char *key)
 	if (key[0] == '\0')
 		return (-1);
 	tmp = env;
-	if (ft_env_check_if_key_is_valid(env, key) < 0)
+	if (ft_env_check_if_key_is_valid(env, key) == FALSE)
 		return (0);
 	while (tmp && tmp->next)
 	{

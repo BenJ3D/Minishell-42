@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/06 18:04:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:18:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	
 	if (!prgname)
 		prgname = ft_strdup("minishell");
-	if (ft_env_check_if_key_is_valid(env, "USER") < 0) //si USER n'existe pas
+	if (ft_env_check_if_key_is_valid(env, "USER") == FALSE) //si USER n'existe pas
 		line = ft_strjoin_max("%s%s>%s$ ",
 				COLOR_CYAN, prgname, COLOR_NONE);
 	else

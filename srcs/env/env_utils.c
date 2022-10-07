@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 19:44:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:16:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key)
 	return (NULL);
 }
 
+
 /**
  * @brief Verifie si une clef (key) est deja presente ou non dans l'env
- * et renvoit sa position dans la liste chained
- * return -1 si la key n'existe pas
  * @param env 
  * @return int 
  */
@@ -50,11 +49,11 @@ int	ft_env_check_if_key_is_valid(t_envlst *env, char *key)
 	while (tmp)
 	{
 		if (ft_strequal(tmp->key, key))
-			return (i);
+			return (TRUE);
 		tmp = tmp->next;
 		i++;
 	}
-	return (-1);
+	return (FALSE);
 }
 
 /**

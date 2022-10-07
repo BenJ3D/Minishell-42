@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/06 16:37:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:54:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	ft_check_if_key_is_valid(char *key, t_data *data)
  * @param key 
  * @return int 
  */
-static int	ft_check_if_null(char *key, t_data *data) //TODO: 
+static int	ft_check_if_null(char *key, t_data *data) //TODO: for parsing
 {
 	if (key == NULL)
 	{
@@ -96,6 +96,8 @@ static int	ft_check_if_null(char *key, t_data *data) //TODO:
 	}
 	return (0);
 }
+
+
 
 /**
  * @brief add var to env with format key=value
@@ -109,13 +111,30 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 	char		*key;
 	char		*value;
 	int			isenv;
-	int			b_key;
-	t_envlst	*ret;
+	t_envlst	*node;
 	
-	if (b_key == 1)  //tcheck si une clef existe deja
-		
+	isenv = TRUE;
+	key = ft_env_extract_key_name(str, &isenv);
+	if (ft_env_check_if_key_is_valid(env, key) == TRUE)  //tcheck si une clef existe deja
+	{
+		node = ft_env_getenv_lst_value(env, key);
+		if (node->isenv != TRUE)
+		{
+			free(node->value);
+			node->value = ft_strdup(ft_env_extract_value_content(str));
+			node->isenv = isenv;
+		}
+	}
+	else
+	{
+		if (isenv == TRUE)
+			value = ft_env_extract_value_content(str);
+		else
+			value = ft_strdup("");
+		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
+		free (value);
+	}
 	free (key);
-	free (value);
 	return (0);
 }
 // static int	ft_main_export(t_envlst *env, char *str, t_data *data)
