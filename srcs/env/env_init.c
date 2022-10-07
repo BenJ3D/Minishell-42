@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 19:55:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/08 01:05:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void	ft_env_init_lst(char **envp, t_data *data)
 		}
 	}
 	data->env = tmp;
+	ft_shlvl_increment(data->env);
 }
 
 //FIXME: verifier si return NULL pose pas de soucis, sinon ft_strdup("");
