@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 19:54:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:50:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static int	ft_check_if_null(char *key, t_data *data) //TODO: for parsing
  * @param str name of futur key
  * @return int 
  */
-static int	ft_main_export(t_envlst *env, char *str, t_data *data)
+static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
 {
 	char		*key;
 	char		*value;
@@ -118,7 +118,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 	if (ft_env_check_if_key_is_valid(env, key) == TRUE)  //tcheck si une clef existe deja
 	{
 		node = ft_env_getenv_lst_value(env, key);
-		if (node->isenv != TRUE)
+		if (isenv == TRUE)
 		{
 			free(node->value);
 			node->value = ft_strdup(ft_env_extract_value_content(str));
