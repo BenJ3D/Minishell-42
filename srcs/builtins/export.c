@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/08 01:19:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/08 01:29:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
 			value = ft_env_extract_value_content(str);
 			node->value = ft_strdup(value);
 			node->isenv = isenv;
+			free (value);
 		}
-		free (value);
 	}
 	else
 	{
