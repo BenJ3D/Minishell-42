@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 19:16:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/08 00:55:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,32 @@ t_envlst	*ft_env_lstlast(t_envlst *lst)
 }
 
 /**
+ * @brief incremente la var env SHLVL a +1
+ * 
+ * @param env 
+ * @return int 
+ */
+int	ft_shlvl_increment(t_envlst *env)
+{
+	t_envlst	*tmp;
+	int			save;
+	
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strequal(tmp->key, "SHLVL") == TRUE)
+		{
+			save = ft_atoi(tmp->value);
+			free (tmp->value);
+			tmp->value = ft_itoa(save + 1);
+			return (0);
+		}
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+/**
  * @brief retourne toutes les key=env sous forme tab**
  * Usage pour execve qui demande un **env param 
  * 
@@ -95,6 +121,7 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 	}
 	return (tab);
 }
+
 
 
 /**

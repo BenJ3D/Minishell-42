@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 23:50:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/08 01:06:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,26 +178,3 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
 // 	free (value);
 // 	return (0);
 // }
-
-int	ft_shlvl_increment(t_envlst *env, char *value)//TODO:TODO:
-{
-	char		key[6] = "SHLVL";
-	int			isenv;
-	t_envlst	*ret;
-
-	value = ft_env_extract_value_content(value);
-	ret = ft_env_getenv_lst_value(env, key);
-	if (ret)
-	{
-		if (!ft_strequal(env->value, value))
-		{
-			free(ret->value);
-			ret->value = ft_strdup(value);
-		}
-	}
-	else
-		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
-	free (key);
-	free (value);
-	return (0);
-}
