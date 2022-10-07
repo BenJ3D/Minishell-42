@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/07 19:12:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 22:11:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		ft_env_lstadd_back(t_envlst **alst, t_envlst *new);
 void		ft_env_lstdelone(t_envlst *lst);
 void		ft_env_lstclear(t_envlst **lst);
 void		ft_env_lstclear_one(t_envlst **lst);
+void		ft_env_lstclear_one_first_element(t_envlst **lst);
 
 /* FT LIST */
 void		ft_lstadd_back(t_list **alst, t_list *new);
