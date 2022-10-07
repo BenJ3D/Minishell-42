@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 23:00:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:19:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ft_free_tab_char(ex.argv);
 		ft_close_pipe(cmdtab, &ex);
 	}
-	printf("ex.i = %i\n", ex.i);
+	// printf("ex.i = %i\n", ex.i);
 	if (ex.i == 1 && cmdtab[0].pipeout == 1)
 	{
 			close(cmdtab[ex.i].fd[0]);
