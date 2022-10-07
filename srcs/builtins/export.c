@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/08 01:29:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/08 01:31:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ static int	ft_check_if_null(char *key, t_data *data) //TODO: for parsing
 
 
 
-/**
+/
+**
  * @brief add var to env with format key=value
  * 
  * @param env 
