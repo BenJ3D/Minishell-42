@@ -1,9 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/ben/projet/minishell'
-make -C./libs/libft/
-mkdir ./objs/ 2> /dev/null || true
-gcc   -g3 -I./includes/ -o objs/main_minishell.o -c srcs/main_minishell.c
-make: Leaving directory '/home/ben/projet/minishell'
- 
-make: *** No rule to make target 'libs/libft/libft.a', needed by 'minishell'.
-

@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_minishell.c                                   :+:      :+:    :+:   */
+/*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/06/21 17:58:32 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/minishell.h>
+#include "./../includes/minishell.h"
 
-int	main(int ac, char **av, char **env)
+/**
+ * @brief return 1 si pipe detecté dans la commande
+ * 
+ * @param lst 
+ * @return int 
+ */
+int	ft_check_if_cmd_has_pipe(t_list *lst)
 {
-	printf("Hello World!\n");
-	ft_putstr("Test libft !\n");
+	t_list	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			return (1);
+		tmp = tmp->next;
+	}
 	return (0);
 }

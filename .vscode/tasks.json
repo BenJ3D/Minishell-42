@@ -1,0 +1,12 @@
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "build",
+            "command": "make",
+            "args": [
+                "DEBUG=2"
+            ],
+            "isShellCommand": true,
+        }

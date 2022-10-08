@@ -5,89 +5,133 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/29 16:05:24 by cfatrane          #+#    #+#              #
-#    Updated: 2022/06/21 18:03:10 by bducrocq         ###   ########.fr        #
+#    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
+#    Updated: 2022/10/08 01:30:25 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Binary 
+#Compiler and Linker
+DEBUG=2
 
-NAME = minishell
+ifeq ($(DEBUG), 0)
+CC = gcc $(CFLAGS)
+MAKELIB = @make DEBUG=0 -C./libs/libft/
+endif
+ifeq ($(DEBUG), 1)  # for sanitize test
+CC = gcc $(SANITIZE) $(LLDBFLAG)
+MAKELIB = @make DEBUG=1 -C./libs/libft/
+endif
+ifeq ($(DEBUG), 2) # for LEAKS test
+CC = gcc $(LLDBFLAG)
+MAKELIB = @make DEBUG=2 -C./libs/libft/
+endif
 
-# Path
+#The Target Binary Program
+NAME        := minishell
 
-SRC_PATH = ./srcs/
+#The Directories, Source, Includes, Objects, Binary and Resources
+SRCDIR      := srcs
+INCDIR      := includes
+BUILDDIR    := obj
+NAMEDIR     := ./
+RESDIR      := lib
+SRCEXT      := c
+DEPEXT      := d
+OBJEXT      := o
 
-OBJ_PATH = ./objs/
+UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux) #sur linux (ou WSL) instal readline : 'apt-get install readline'
+		INC_LIB = -L/usr/local/lib
+		INC_INC = -I/usr/local/include
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		INC_LIB = -L ~/.brew/opt/readline/lib
+		INC_INC = -I ~/.brew/opt/readline/include
+	endif
 
-CPPFLAGS = -I./includes/
+#	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
-HEADER = ./includes/minishell.h
+#Flags, Libraries and Includes
+CFLAGS      := -Wall -Wextra -Werror
+SANITIZE    := -fsanitize=address
+LLDBFLAG    := -g3
+LIBFT_PATH  := ./libs/libft/libft.a
+LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
+# LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
+INC         := -I$(INCDIR)
+INCDEP      := -I$(INCDIR)
+#------------------------------------------------------------------------------#
+#                                  RULES.......................................#
+#------------------------------------------------------------------------------#
+SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) 
 
-LIBFT_PATH	= ./libs/libft/libft.a
+#Defauilt Make
+all: lib $(NAME) cleand
 
-# Name
-
-SRC_NAME =	main_minishell.c		\
-
-OBJ_NAME = $(SRC_NAME:.c=.o)
-
-
-# Files
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-
-# Flags
-
-CC = gcc $(CFLAGS) $(SANITIZE) $(LLDBFLAG)
-
-CFLAGS =# -Wall -Wextra -Werror
-SANITIZE =# -fsanitize=address
-LLDBFLAG = -g3
-
-# Rules
-
-all: lib $(NAME) 
-
-$(NAME): $(LIBFT_PATH) $(OBJ)
-	@echo "\033[34mCreation of $(NAME) ...\033[0m"
-	@$(CC) $(OBJ) $(LIBFT_PATH) -o $@ -lpthread
-	@echo "\033[32m$(NAME) created\n\033[0m"
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) ./Makefile
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CPPFLAGS) -o $@ -c $<
-
-clean:
-	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
-	@make clean -C ./libs/libft/
-	@rm -f $(OBJ)
-	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@echo "\033[31mFiles .o deleted\n\033[0m"
-
-fclean: clean
-	@echo "\033[33mRemoval of $(NAME)...\033[0m"
-	@make fclean -C ./libs/libft/
-	@rm -rf $(NAME)
-	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
-
+#Remake
 re: fclean all
 
-lib:
-	@make -C./libs/libft/
+fix: cleand
 
-norme:
-	norminette ./srcs/
-	norminette ./includes/*.h
+#Copy Resources from Resources Directory to NAME Directory
+resources: directories
+	@cp $(RESDIR)/* $(NAMEDIR)/
 
+lib: directories
+	$(MAKELIB)
+	
+#Make the Directories
+directories:
+	@mkdir -p $(NAMEDIR)
+	@mkdir -p $(BUILDDIR)
+
+dbg:
+
+
+#Clean only Objecst
+clean:
+	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
+	@$(RM) -rf $(BUILDDIR)
+	@make clean -C ./libs/libft/
+	@echo "\033[31mFiles .o deleted\n\033[0m"
+
+#Full Clean, Objects and Binaries
+fclean: clean
+	@echo "\033[33mRemoval of $(NAME)...\033[0m"
+	@$(RM) -rf $(NAME)
+	@make fclean -C ./libs/libft/
+	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
+
+#Clean file *.d
+cleand:
+	@find . -name "*.d" -type f -delete
+
+#Compile and keep the executable only
+b:	lib $(NAME) clean
+
+#compile and keep only the binary
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
 git:
 	@git add .
 	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
 	@git push
 
-.PHONY: all, clean, fclean, re
+#Link
+$(NAME): $(OBJECTS)
+	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
+	@echo "\033[32m$(NAME) created\n\033[0m"
 
-#	@printf "\r\033[K\tCompilation de $(COLOR_PURPLE)$< ==> $@\$(COLOR_NORM)"
+#Compile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includes/*.h 
+	@mkdir -p $(dir $@)
+	$(CC) $(INC) $(INC_INC) -c -o $@ $<
+	@$(CC) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+#Non-File NAMEs
+.PHONY: all re clean fclean

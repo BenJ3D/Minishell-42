@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
-/*   Updated: 2021/11/22 16:15:52 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./../includes/minishell.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_free_all_minishell(t_data *data)
 {
-	t_list	*lst1;
+	ft_env_lstclear(&data->env);
+	free(data->pgr_name);
+	rl_clear_history();
+}
 
-	if (!lst || !f)
-		return ;
-	lst1 = lst;
-	while (lst1)
-	{
-		f(lst1->content);
-		lst1 = lst1->next;
-	}
+
+int	ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab)
+{
+	int	i;
+
+	i = 0;
+	while (i <= pipe)
+		ft_lstclear(&cmdtab[i++].lst);
+	free (cmdtab);
+	return (0);
+}
+
+void	ft_free_tab_char(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free (tab);
 }

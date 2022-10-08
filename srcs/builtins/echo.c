@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 12:21:17 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/24 16:59:29 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./../includes/minishell.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+int	ft_builtin_echo(char **argv) //TODO: prendre en charge le flag n et les '/"
 {
-	new->next = *alst;
-	*alst = new;
+	int	i;
+
+	i = 1;
+	while(argv[i])
+	{
+		ft_putstr(argv[i++]);
+		ft_putchar(' ');
+	}
+	ft_putstr("(echo: WIP)");
+	ft_putchar('\n');
+	return (0);
 }

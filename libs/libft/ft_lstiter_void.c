@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_void.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 12:44:14 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 18:51:01 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_lstiter_void(t_lst_void *lst, void (*f)(void *))
 {
-	size_t	i;
+	t_lst_void	*lst1;
 
-	i = 0;
-	if (!str)
-		return (i);
-	while (str[i])
-		i++;
-	return (i);
+	if (!lst || !f)
+		return ;
+	lst1 = lst;
+	while (lst1)
+	{
+		f(lst1->content);
+		lst1 = lst1->next;
+	}
 }

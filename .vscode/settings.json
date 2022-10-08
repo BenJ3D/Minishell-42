@@ -1,6 +1,16 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode",
+	"makefile.configureOnOpen": false,
 	"files.associations": {
-		"libft.h": "c"
-	}
+		"minishell.h": "c",
+		"includes.h": "c",
+		"readline.h": "c",
+		"libft.h": "c",
+		"define_common.h": "c",
+		"history.h": "c",
+		"errno.h": "c",
+		"struct.h": "c",
+		"_pthread_types.h": "c"
+	},
+	"git.postCommitCommand": "push",
+	"C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

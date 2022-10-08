@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 21:00:06 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/24 16:55:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:02:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	**make_line(char const *s, char c, char **tab_split, size_t nword)
 		while (s[i] == c)
 			i++;
 		if (n < nword)
-		tab_split[n] = ft_substr(s, i, size_or_cntwrd(s, c, i, 0));
+			tab_split[n] = ft_substr(s, i, size_or_cntwrd(s, c, i, 0));
 		if (!tab_split[n])
 			return (free_all(tab_split));
 		while (s[i] && s[i] != c)

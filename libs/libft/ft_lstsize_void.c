@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_void.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 12:44:14 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 18:51:01 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/22 13:51:40 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_lstsize_void(t_lst_void *lst)
 {
 	size_t	i;
 
 	i = 0;
-	if (!str)
-		return (i);
-	while (str[i])
+	while (lst)
+	{
+		lst = lst->next;
 		i++;
+	}
 	return (i);
 }

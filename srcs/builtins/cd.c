@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 12:44:14 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/21 18:51:01 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./../includes/minishell.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_builtin_cd(t_envlst *env, char **argv)
 {
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (i);
-	while (str[i])
-		i++;
-	return (i);
+	// ft_putstr("cd: Work In Progress...\n");
+	chdir(argv[1]);
+	return (0);
 }
