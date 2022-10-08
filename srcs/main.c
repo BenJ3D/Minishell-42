@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/03 21:54:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/09 00:43:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av, char **envp)
 		ft_putstr_fd(" to many arguments\n", 2);
 		return (1);
 	}
+	puts("bienvenue on MiniHell\n");
 	interactive_mode (); //FIXME: pomper sur un autre minishell, a modifier 
 		// ameliorer
 ////////////////////////////////////////////////////////////////////////////////
