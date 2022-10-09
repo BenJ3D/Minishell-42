@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/09 00:41:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:57:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 		free (envpaths);
 		return (NULL);
 	}
+	if(progname[0] == '/')
+		if (!access(progname, X_OK))
+		{
+			pathhascheck = ft_strdup(progname);
+			return (pathhascheck);
+		}
 	pathhascheck = ft_strjoin_max("%s", progname);
-	if (ft_strlen(pathhascheck) >= 3)
+	if (ft_strlen(pathhascheck) >= 3) //tcheck avec repertoire courant
 		if(pathhascheck[0] == '.')
 			if (!access(pathhascheck, X_OK))
 				return (pathhascheck);
