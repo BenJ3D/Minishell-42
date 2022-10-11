@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/09 19:06:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:19:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,9 +249,22 @@ int	ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 	return (0);
 }
 
-int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
+static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 {
-	
+	int	i;
+	int	status;
+
+	i = 0;
+	while (cmdtab[i].lst)
+	{
+		waitpid(cmdtab[i].pid, &status, 0);
+		if (WEXITSTATUS(status))
+		{
+			kill(cmdtab[i].pid, SIGKILL);
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
@@ -290,12 +303,12 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	ft_parent_waitpid(cmdtab, data);
 	// waitpid(-1, &status, 0);
 	ex.i = 0;
-	while (cmdtab[ex.i].lst)
-	{
-			close(cmdtab[ex.i].fd[0]);
-			close(cmdtab[ex.i].fd[1]);
-			ex.i++;
-	}
+	// while (cmdtab[ex.i].lst)
+	// {
+	// 		close(cmdtab[ex.i].fd[0]);
+	// 		close(cmdtab[ex.i].fd[1]);
+	// 		ex.i++;
+	// }
 	
 	// ex.i = 0;
 	// while (cmdtab[ex.i].lst)
