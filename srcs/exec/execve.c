@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/11 15:19:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:22:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,13 +210,13 @@ int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
 	{
 		if (i > 0)
 		{
-				cmdtab[i].pipein = 1;
+			cmdtab[i].pipein = 1;
 			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
 				cmdtab[i].pipeout = 1;
 		}
 		else 
 		{
-				cmdtab[i].pipein = 0;
+			cmdtab[i].pipein = 0;
 			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
 				cmdtab[i].pipeout = 1;
 		}
@@ -257,6 +257,8 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 	i = 0;
 	while (cmdtab[i].lst)
 	{
+		if (cmdtab[i].pipeout == 1)
+			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &status, 0);
 		if (WEXITSTATUS(status))
 		{
@@ -275,6 +277,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	int			status;
 
 	ex.i = 0;
+	cmdtab[ex.i].pid = -1;
 	ft_cmdtab_init_info(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
@@ -290,33 +293,16 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		free(ex.progpath);
 		ex.i++;
 		ft_free_tab_char(ex.argv);
-		ft_close_pipe(cmdtab, &ex);
+		// if (cmdtab[ex.i].pipeout == 1)
+			//ft_close_pipe(cmdtab, &ex);
 	}
-	// printf("ex.i = %i\n", ex.i);
 	if (ex.i == 1 && cmdtab[0].pipeout == 1)
 	{
-			// close(cmdtab[ex.i].fd[0]);
 			close(cmdtab[ex.i].fd[1]);
-			// close(cmdtab[ex.i - 1].fd[0]);
 			close(cmdtab[ex.i - 1].fd[1]);
 	}
-	ft_parent_waitpid(cmdtab, data);
-	// waitpid(-1, &status, 0);
+	if (cmdtab[0].pid > 0)
+		ft_parent_waitpid(cmdtab, data);
 	ex.i = 0;
-	// while (cmdtab[ex.i].lst)
-	// {
-	// 		close(cmdtab[ex.i].fd[0]);
-	// 		close(cmdtab[ex.i].fd[1]);
-	// 		ex.i++;
-	// }
-	
-	// ex.i = 0;
-	// while (cmdtab[ex.i].lst)
-	// {
-	// 	close(cmdtab[ex.i].fd[0]);
-	// 	close(cmdtab[ex.i].fd[1]);
-	// 	ex.i++;
-	// }
-	// ft_free_tab_char(envp); //\\ deplacer dans le if father == 0
 	return (0);
 }
