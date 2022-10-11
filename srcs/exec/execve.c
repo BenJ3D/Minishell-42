@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/11 16:22:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:35:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int	ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (ex->i >= 2)
 	{
-		// close(cmdtab[ex->i - 2].fd[0]);
+		close(cmdtab[ex->i - 2].fd[0]);
 		close(cmdtab[ex->i - 2].fd[1]);
 	}
 	return (0);
@@ -293,8 +293,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		free(ex.progpath);
 		ex.i++;
 		ft_free_tab_char(ex.argv);
-		// if (cmdtab[ex.i].pipeout == 1)
-			//ft_close_pipe(cmdtab, &ex);
+		if (cmdtab[ex.i].pipeout == 1)
+			ft_close_pipe(cmdtab, &ex);
 	}
 	if (ex.i == 1 && cmdtab[0].pipeout == 1)
 	{
