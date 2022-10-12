@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/11 18:13:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:57:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
 // ft_lstcmd_to_cmdarg_for_execve
+
+
 
 /**
  * @brief check dans tous les path présent dans env si un programe existe
@@ -28,14 +30,26 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	char	*pathhascheck;
 	int		i;
 
-	envpaths = ft_env_getstr_env_value(envlst, "PATH");
-	if (!envpaths)
-		return (NULL);
 	if (!progname)
 	{
 		free (envpaths);
 		return (NULL);
 	}
+	if(progname[0] == '/')
+		if (!access(progname, X_OK))
+		{
+			pathhascheck = ft_strdup(progname);
+			return (pathhascheck);
+		}
+	pathhascheck = ft_strjoin_max("%s", progname);
+	if (ft_strlen(pathhascheck) >= 3) //tcheck avec repertoire courant
+		if(pathhascheck[0] == '.')
+			if (!access(pathhascheck, X_OK))
+				return (pathhascheck);
+	free(pathhascheck);
+	envpaths = ft_env_getstr_env_value(envlst, "PATH");
+	if (!envpaths)
+		return (NULL);
 	pathsplit = ft_split(envpaths, ':');
 	i = 0;
 	while (pathsplit[i])
