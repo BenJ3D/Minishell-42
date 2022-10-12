@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/12 13:51:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:20:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	
 	father = -2;
 	errno = 0;
-	if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1)
+	if ((cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1) && \
+			cmdtab[ex->i].isbuilt == TRUE && cmdtab[ex->i].pipein == 0)
 	{
 		if ((father = fork()) == -1)
 		{
@@ -195,8 +196,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			ft_exit(data);
 		}
 	}
-	dbg_display_errno();
-	perror("find error");
+	// dbg_display_errno();
+	// perror("find error");
 	if (father == 0)
 	{
 		if (cmdtab[ex->i].pipeout == 1)
