@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/12 17:29:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:34:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_exit_exit(void)
 {
-	ft_putnbr_fd(errno, 2);
+	// ft_putnbr_fd(errno, 2);
 	exit(errno);
 }
 
