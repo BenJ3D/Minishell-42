@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 19:18:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:15:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	prompt_minishell(char **av, t_data *data)
 	data->buffer = NULL;
 	data->line = prompt_update(data->env, data->pgr_name);
 	data->buffer = readline(data->line);
-	while ((data->buffer))
+	while (data->buffer)
 	{ 
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
