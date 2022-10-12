@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:22:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_builtin_pwd(t_envlst *env, char **argv)
 
 	line = getcwd(NULL, PATH_MAX);
 	ft_putstr(line);
-	ft_putstr("\n");
+	ft_putstr("DEBUG\n");
 	free(line);
 	return (0);
 }
