@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/09 01:57:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:51:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	pid_t	father;
 	
 	father = -2;
-	if ((cmdtab[ex->i].isbuilt <= 0) ||  cmdtab[ex->i].pipeout == 1 
-	 											||  cmdtab[ex->i].pipein == 1)
+	errno = 0;
+	if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1)
 	{
 		if ((father = fork()) == -1)
 		{
@@ -195,6 +195,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			ft_exit(data);
 		}
 	}
+	dbg_display_errno();
+	perror("find error");
 	if (father == 0)
 	{
 		if (cmdtab[ex->i].pipeout == 1)
@@ -208,7 +210,11 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			close(cmdtab[ex->i].fd[1]);
 		}
 		envp = ft_env_convert_envlst_to_tab(data->env);
-		execve(ex->progpath, ex->argv, envp);
+		dbg_display_errno();
+		if (cmdtab[ex->i].isbuilt > 0)
+			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
+		else
+			execve(ex->progpath, ex->argv, envp);
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);
@@ -294,10 +300,7 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &status, 0);
 		if (WEXITSTATUS(status))
-		{
-			puts ("hey\n");
 			kill(cmdtab[i].pid, SIGKILL);
-		}
 		i++;
 	}
 	return (0);
@@ -319,8 +322,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			ft_create_pipe(cmdtab, &ex);
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst); //TODO:
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
-		ret = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
-		if (!ex.progpath && ret <= 0)
+		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
+		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0)
 			ft_command_not_found_message(ex.argv, data);
 		else
 			cmdtab[ex.i].pid = ft_forkexe(data, &ex, cmdtab);
