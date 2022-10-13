@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 14:39:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:56:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 			ft_free_tab_char(envp);
 			ft_exit(data);
 		}
-	return (father)
+	return (father);
 }
 
 int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
@@ -199,8 +199,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	
 	father = -2;
 	errno = 0;
-	if (cmdtab[ex->i].isbuilt == 0 || (cmdtab[ex->i].pipein == 1) \
-												|| (cmdtab[ex->i].pipein == 1))
+	if ((cmdtab[ex->i].pipeout == 1) || (cmdtab[ex->i].pipein == 1) \
+										|| (cmdtab[ex->i].isbuilt == 0))
 		father = ft_createfork(data, ex, envp);
 
 	if (father == 0)
