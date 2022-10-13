@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/08 00:38:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:24:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		dbg_lstdisplay_color(t_list *lst);
 void		dbg_lstdisplay_color_type(t_list *lst);
 void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
+void		dbg_display_errno(void);
 
 /* FT DEBUG BEN A VIRER */
 void		dbg_fork_display_pid(const char *str); //TODO: FIXME:
