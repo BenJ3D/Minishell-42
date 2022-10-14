@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 19:53:04 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:11:48 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,6 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		i;
 	
 	pipe = ft_count_pipe(data, buffer);
-	ft_reset_quotes_checker(data);
 	if (pipe == 0)
 		pipe++;
 	i = 0;
@@ -223,6 +222,10 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
 	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
 	//!mettre verification des quotes dans les str de nodes ici
+	// printf("test\n");
+	// if(!ft_node_quote_checker(data))
+	// 	 exit(43);
+	// printf("ici\n");
 	ft_define_cmd_type(data->cmdtoparse);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
