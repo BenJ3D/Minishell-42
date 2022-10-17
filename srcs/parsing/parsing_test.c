@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 18:34:07 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:40:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
 			printf("amen\n");
+/*						SI C'EST DES DOUBLE QUOTES							*/
 			while (data->d_quotes_switch == 1)
 			{
 				if (buffer[i] == DOUBLE_QUOTE)
@@ -139,6 +140,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				ft_quotes_checker(data, buffer, i);
 				i++;
 			}
+/*						SI C'EST DES SIMPLE QUOTES							*/
 			while (data->s_quotes_switch == 1)
 			{
 				if (buffer[i] == SIMPLE_QUOTE)
@@ -232,10 +234,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			semi_final[pin] = '\0';
 			printf("%s\n", semi_final);
 		}
-	}
-		// else if (buffer[i] == '|')
-		// 	;
-		// else
-		// 	;		
+	}		
 	return (0);
 }
