@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 16:47:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:34:07 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,19 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 	i = 0;
 	len = 0;
 	len_max = ft_strlen_parsing(buffer);
+	printf("%s\n", buffer);
 	semi_final = NULL;
+	ft_reset_quotes_checker(data);
 	while (buffer[i])
 	{
 		ft_quotes_checker(data, buffer, i);
 		str = NULL;
+/*****************************************************************************/	
+/* 							SI LES "" ET LES ''								 */
+/*****************************************************************************/
 		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
+			printf("amen\n");
 			while (data->d_quotes_switch == 1)
 			{
 				if (buffer[i] == DOUBLE_QUOTE)
@@ -116,7 +122,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					pan = 0;
 					while (pan < len)
 					{
-						printf("test\n");
 						value_env[pan] = buffer[pin];
 						pan++;
 						pin++;
@@ -140,7 +145,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					i++;
 				pin = i;
 				len = 0;
-				while (i < len_max&& buffer[i] != SIMPLE_QUOTE)
+				while (i < len_max && buffer[i] != SIMPLE_QUOTE)
 				{
 					len++;
 					i++;
@@ -165,9 +170,12 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				i++;
 			}
 		}
-		i++;
+/*****************************************************************************/	
+/* 									SI $									 */
+/*****************************************************************************/
 		if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && buffer[i] == '$')
 		{
+			printf("ici\n");
 			pin = i;
 			i++;
 			while (buffer[i] && ((buffer[i] >= 'A' && buffer[i] <= 'Z') || buffer[i] == '_'))
@@ -178,11 +186,9 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			if (buffer[i] != '\t' && buffer[i] != '\n' && buffer[i] != '\r' && buffer[i] != '\v' && buffer[i] != '\f' && buffer[i] != '\0')
 			{
 				i = pin;
-				printf("pourquoi\n");
 			}
 			else
 			{
-				printf("test %i\n", len);
 				value_env = malloc(sizeof(char) * len + 1);
 				if (!value_env)
 					exit (37);
@@ -201,13 +207,32 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				free(value_env);
 			}
 		}
-		i++;
-		ft_quotes_checker(data, buffer, i);	
+/*****************************************************************************/	
+/* 									SI NORMAL								 */
+/*****************************************************************************/
+		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
+		{
+			pin = i;
+			len = 0;
+			while (buffer[i] >= 33 && buffer[i] <= 126 && buffer[i] != '$' && buffer[i] != '\'' && buffer[i] != '"')
+			{
+				i++;
+				len++;
+			}
+			semi_final = malloc(sizeof(char) * len + 1);
+			if (!semi_final)
+				return (0);
+				pan = 0;
+			while (pin < i)
+			{
+				semi_final[pan] = buffer[pin];
+				pan++;
+				pin++;
+			}
+			semi_final[pin] = '\0';
+			printf("%s\n", semi_final);
+		}
 	}
-		// else if (buffer[i] == '$')
-		// 	;
-		// else if (buffer[i] == SPACES)
-		// 	;
 		// else if (buffer[i] == '|')
 		// 	;
 		// else
