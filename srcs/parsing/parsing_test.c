@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 18:40:18 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:00:15 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	ft_strlen_parsing(char	*str)
 		i++;
 	return (i);	
 }
+
+
 
 int	ft_total_parsing(t_data	*data, char	*buffer)
 {
@@ -104,7 +106,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					}
 					semi_final[pan] = '\0';
 					printf("%s\n", semi_final);
-					//TODO ranger semi_final dans la liste chainée a la bonne place
 				}
 				if (buffer[i] == '$')
 				{
@@ -137,6 +138,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					ft_quotes_checker(data, buffer, i);
 					i++;
 				}
+				//TODO ranger dans la liste chainée
 				ft_quotes_checker(data, buffer, i);
 				i++;
 			}
@@ -166,7 +168,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					}
 					semi_final[pan] = '\0';
 					printf("%s\n", semi_final);
-					//TODO ranger semi_final dans la liste chainée a la bonne place
+					//TODO ranger dans la liste chainée
 				}
 				ft_quotes_checker(data, buffer, i);
 				i++;
@@ -207,6 +209,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				semi_final = ft_strjoin_parsing(semi_final, value_env);
 				printf("%s\n", semi_final);
 				free(value_env);
+				//TODO ranger dans la liste chainée
 			}
 		}
 /*****************************************************************************/	
@@ -233,6 +236,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			}
 			semi_final[pin] = '\0';
 			printf("%s\n", semi_final);
+			//TODO ranger dans la liste chainée
 		}
 	}		
 	return (0);
