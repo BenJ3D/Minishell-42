@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 19:00:15 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:12:06 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,47 @@ int	ft_strlen_parsing(char	*str)
 	return (i);	
 }
 
-
+static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
+{
+	int		i;
+	int		len;
+	char	*str;
+	t_list *cmd;
+	
+	cmd = NULL;
+	while (buffer[bufi])
+	{
+		while(ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
+			bufi = bufi + 1;
+		if (buffer[bufi] == '\0')
+			return (cmd);
+		len = ft_strlen_next_word(buffer + bufi);
+		str = ft_calloc(len + 1, sizeof(char));
+		if (!str)
+			return (NULL);
+		i = 0;
+		while(len-- > 0)
+			str[i++] = buffer[bufi++];
+		ft_lstadd_back(&cmd, ft_lstnew(str));
+		free(str);
+	}
+	return (cmd);
+}
 
 int	ft_total_parsing(t_data	*data, char	*buffer)
 {
 	int	i;
 	int	len;
 	int	len_max;
-	char	*str;
 	char	*semi_final;
 	int		pin;
 	int		pan;
 	char	*value_env;
+	t_list	*cmd;
 
 	i = 0;
 	len = 0;
+	cmd = NULL;
 	len_max = ft_strlen_parsing(buffer);
 	printf("%s\n", buffer);
 	semi_final = NULL;
@@ -79,7 +105,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 /*****************************************************************************/
 		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
-			printf("amen\n");
 /*						SI C'EST DES DOUBLE QUOTES							*/
 			while (data->d_quotes_switch == 1)
 			{
@@ -99,11 +124,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 						exit(57);
 					pan = 0;
 					while (pin < i)
-					{
-						semi_final[pan] = buffer[pin];
-						pan++;
-						pin++;
-					}
+						semi_final[pan++] = buffer[pin++];
 					semi_final[pan] = '\0';
 					printf("%s\n", semi_final);
 				}
@@ -123,11 +144,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 						exit(58);
 					pan = 0;
 					while (pan < len)
-					{
-						value_env[pan] = buffer[pin];
-						pan++;
-						pin++;
-					}
+						value_env[pan++] = buffer[pin++];
 					value_env[pan] = '\0';
 					printf("%s\n", value_env);
 					value_env = ft_env_getstr_env_value(data->env, value_env);
@@ -135,10 +152,10 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 					semi_final = ft_strjoin_parsing(semi_final, value_env);
 					printf("%s\n", semi_final);
 					free(value_env);
-					ft_quotes_checker(data, buffer, i);
-					i++;
 				}
 				//TODO ranger dans la liste chainée
+				cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
+				free(semi_final);
 				ft_quotes_checker(data, buffer, i);
 				i++;
 			}
@@ -161,16 +178,13 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 						exit(57);
 					pan = 0;
 					while (pin < i)
-					{
-						semi_final[pan] = buffer[pin];
-						pan++;
-						pin++;
-					}
+						semi_final[pan++] = buffer[pin++];
 					semi_final[pan] = '\0';
 					printf("%s\n", semi_final);
 					//TODO ranger dans la liste chainée
 				}
 				ft_quotes_checker(data, buffer, i);
+				free(semi_final);
 				i++;
 			}
 		}
@@ -188,9 +202,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				len++;
 			}
 			if (buffer[i] != '\t' && buffer[i] != '\n' && buffer[i] != '\r' && buffer[i] != '\v' && buffer[i] != '\f' && buffer[i] != '\0')
-			{
 				i = pin;
-			}
 			else
 			{
 				value_env = malloc(sizeof(char) * len + 1);
@@ -199,17 +211,16 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 				pan = 0;
 				pin++;
 				while (pin < i)
-				{
-					value_env[pan] = buffer[pin];
-					pan++;
-					pin++;
-				}
+					value_env[pan++] = buffer[pin++];
 				value_env[pan] = '\0';
 				value_env = ft_env_getstr_env_value(data->env, value_env); 
 				semi_final = ft_strjoin_parsing(semi_final, value_env);
 				printf("%s\n", semi_final);
 				free(value_env);
 				//TODO ranger dans la liste chainée
+				cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
+				free(semi_final);
+				ft_quotes_checker(data, buffer, i);
 			}
 		}
 /*****************************************************************************/	
@@ -237,6 +248,9 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			semi_final[pin] = '\0';
 			printf("%s\n", semi_final);
 			//TODO ranger dans la liste chainée
+			cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
+			free(semi_final);
+			ft_quotes_checker(data, buffer, i);
 		}
 	}		
 	return (0);
