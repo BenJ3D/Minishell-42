@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 13:05:50 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:51:47 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ void		ft_quotes_checker(t_data	*data, char	*str, int i);
 int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
 void		ft_reset_quotes_checker(t_data	*data);
 int			ft_node_quote_checker(t_data	*data);
-int			ft_total_parsing(t_data	*data, char	*buffer);
+t_list		*ft_total_parsing(t_data	*data, char	*buffer);
+/*PARSING TESTS*/
+char		*ft_strjoin_parsing(char	*s1, char *s2);
+int			ft_strlen_parsing(char	*str);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);

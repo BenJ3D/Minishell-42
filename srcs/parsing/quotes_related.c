@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:49:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/17 18:30:06 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:00:48 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	ft_full_prompt_quote_check(t_data	*data, char	*buffer)
 	while (i < len)
 	{
 		ft_quotes_checker(data, buffer, i);
-		printf("%i %i\n", data->s_quotes_switch, data->d_quotes_switch);
 		i++;
 	}
 	if (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)

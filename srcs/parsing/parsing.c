@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/17 18:30:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:52:10 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
 		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
 			len++;
 	}
-	printf("len : %i\n", len);
 	return (len);
 }
 
@@ -218,7 +217,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		exit(42);
 		return (0);
 	}
-	ft_total_parsing(data, buffer);
+	data->cmdtoparse = ft_total_parsing(data, buffer);
 	exit (10);
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
 	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
