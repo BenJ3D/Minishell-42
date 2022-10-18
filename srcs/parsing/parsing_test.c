@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/18 14:51:35 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:59:40 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,11 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 					value_env = ft_env_getstr_env_value(data->env, value_env);
 					semi_final = ft_strjoin_parsing(semi_final, value_env);
 					free(value_env);
+					value_env = NULL;
 				}
 				printf("1 %s\n", semi_final);
-				//TODO ranger dans la liste chainée
 				cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
 				free(semi_final);
-				semi_final = NULL;
 				ft_quotes_checker(data, buffer, i);
 				i++;
 			}
@@ -109,13 +108,11 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 					while (pin < i)
 						semi_final[pan++] = buffer[pin++];
 					semi_final[pan] = '\0';
-					//TODO ranger dans la liste chainée
 				}
 				ft_quotes_checker(data, buffer, i);
 				printf("2 %s\n", semi_final);
 				cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
 				free(semi_final);
-				semi_final = NULL;
 				i++;
 			}
 		}
@@ -147,10 +144,8 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 				semi_final = ft_strjoin_parsing(semi_final, value_env);
 				free(value_env);
 				printf("3 %s\n", semi_final);
-				//TODO ranger dans la liste chainée
 				cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
 				free(semi_final);
-				semi_final = NULL;
 				ft_quotes_checker(data, buffer, i);
 			}
 			i++;
@@ -179,10 +174,8 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 			}
 			semi_final[pin] = '\0';
 			printf("4 %s\n", semi_final);
-			//TODO ranger dans la liste chainée
 			cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
 			free(semi_final);
-			semi_final = NULL;
 			ft_quotes_checker(data, buffer, i);
 			i++;
 		}
