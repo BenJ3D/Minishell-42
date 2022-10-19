@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 19:01:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:44:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	if (father == 0)
 	{
 		ft_forkexe_dup_if_pipes(cmdtab, ex);
+		ft_redirection(data, cmdtab, ex);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		if (cmdtab[ex->i].isbuilt > 0)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
@@ -268,8 +269,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		free(ex.progpath);
 		ex.i++;
 		ft_free_tab_char(ex.argv);
-		// if (cmdtab[ex.i].pipein == 1)
-		// 	ft_close_pipe(cmdtab, &ex);
+		if (cmdtab[ex.i].pipein == 1)
+			ft_close_pipe(cmdtab, &ex);
 	}
 	if (ex.i == 1 && cmdtab[0].pipeout == 1)
 	{

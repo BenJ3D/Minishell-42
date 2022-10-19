@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 20:36:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:46:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex)
 	{
 		perror(cmdtab[ex->i].rediarg);
 		return (errno);
+	}
+	else
+	{
+		dup2(cmdtab[ex->i].fdredi, STDIN_FILENO);
+		close(cmdtab[ex->i].fdredi);
 	}
 	return (0);
 }
