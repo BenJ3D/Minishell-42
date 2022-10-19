@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 17:40:59 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:02:12 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_data
 	int			savefd[2];			//pour pipe
 	int			s_quotes_switch;
 	int			d_quotes_switch;
+	int			i;
 }				t_data;
 
 #endif
