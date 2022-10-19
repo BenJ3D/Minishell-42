@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/19 13:50:47 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:21:13 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*ft_strjoin_parsing(char	*s1, char *s2)
 			a++;
 	}
 	s3[b] = '\0';
-	free (s1);
+	if (s1[0] != '\0')
+		free(s1);
 	return (s3);
 }
 
