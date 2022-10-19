@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 10:50:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:10:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	ft_init_minishell(t_data *data)
 {
 	data->pgr_name = ft_strdup("MiniHell");
+	data->savefd[0] = dup(STDIN_FILENO);
+	data->savefd[1] = dup(STDOUT_FILENO);
 }
 
 

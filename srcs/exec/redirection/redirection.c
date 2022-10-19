@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 22:47:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:24:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	else if (cmdtab[ex->i].reditype == IN2)
 	{
 		// printf("dupredi IN2\n");
-		
+		dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
 		ft_redi_in2(cmdtab, ex, data);
 	}
 	return (0);

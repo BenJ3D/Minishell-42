@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 23:03:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:31:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 	}
 	if (cmdtab[ex->i].pidredi == 0)
 	{
-		puts("OK\n");
-		close(cmdtab[ex->i].fdredipipe[0]);
+		// close(cmdtab[ex->i].fdredipipe[0]);
 		ft_heredoc(data, cmdtab, ex);
 		exit(0);
 	}
@@ -57,8 +56,8 @@ int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with p
 		buf = readline("heredoc> ");
 	}
 	ft_putstr_fd("SORTI HEREDOCS\n", 2);
-	// write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
-	ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
+	write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
+	// ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
 	close (cmdtab[ex->i].fdredipipe[1]);
 	free (buf);
 	free (line);
