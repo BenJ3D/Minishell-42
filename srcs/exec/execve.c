@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 23:28:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 00:04:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	else
 	{
 		ft_forkexe_father_close_pipes(cmdtab, ex);
-		dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
+		// dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
 	}
 	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
 	{
@@ -229,7 +229,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		{
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 			dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
-			if (cmdtab[ex->i].pipeout == 1)
+			if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1 )
 				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 		}
 	}
@@ -254,7 +254,7 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &status, 0);
 		if (WEXITSTATUS(status))
-			kill(cmdtab[i].pid, SIGKILL);
+			kill(cmdtab[i].pid, SIGKILL);//TODO:
 		i++;
 	}
 	return (0);
@@ -303,7 +303,6 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.i++;
 	}
 
-	
 	if (cmdtab[0].pid > 0)
 		ft_parent_waitpid(cmdtab, data);
 	return (0);
