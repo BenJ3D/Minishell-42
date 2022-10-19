@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/12 13:24:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:31:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,26 @@ int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg 
 int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+
+/* FT EXECVE PIPES */
+int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_forkexe_father_close_pipes(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_pipe_init_cmdtab_pipe_in_out(t_cmdtab *cmdtab);
+int			ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
+
 
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
+
+/* FT REDIRECTIONS*/
+int			ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);

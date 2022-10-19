@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/17 19:48:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:35:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		isbuilt;				//si isbuilt > 0 : c'est une builtin
 	int		pipein;
 	int		pipeout;
-	int		redirection;
+	int		reditype;
 	char	*rediarg;
 	pid_t	pidredi;
 	int		redinbr;				//compte le nombre de redi pour while jusqu'a 0

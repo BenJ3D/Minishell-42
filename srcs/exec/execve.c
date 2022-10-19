@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 16:03:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:01:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 	return (father);
 }
 
+
 int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 {
 	char	**envp;
@@ -205,18 +206,8 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 
 	if (father == 0)
 	{
-		if (cmdtab[ex->i].pipeout == 1)
-		{
-			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
-			close(cmdtab[ex->i + 1].fd[0]);
-		}
-		if (cmdtab[ex->i].pipein == 1)
-		{
-			dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
-			close(cmdtab[ex->i].fd[1]);
-		}
+		ft_forkexe_dup_if_pipes(cmdtab, ex);
 		envp = ft_env_convert_envlst_to_tab(data->env);
-		dbg_display_errno();
 		if (cmdtab[ex->i].isbuilt > 0)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
@@ -228,64 +219,11 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	}
 	else
 	{
-		if (cmdtab[ex->i].pipeout == 1)
-			close(cmdtab[ex->i + 1].fd[1]);
-		if (cmdtab[ex->i].pipeout == 0 && ex->i > 1)
-			close(cmdtab[ex->i].fd[1]);
-		if (cmdtab[ex->i].pipein == 1)
-			close(cmdtab[ex->i].fd[0]);
+		ft_forkexe_father_close_pipes(cmdtab, ex);
+		if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
+			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 	}
-	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
-		ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 	return (father);
-}
-
-int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
-{
-	int	i;
-
-	i = 0;
-	while(cmdtab[i].lst)
-	{
-		cmdtab[i].pipeout = 0;
-		cmdtab[i++].pipein = 0;
-	}
-	i = 0;
-	while(cmdtab[i].lst)
-	{
-		if (i > 0)
-		{
-			cmdtab[i].pipein = 1;
-			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-				cmdtab[i].pipeout = 1;
-		}
-		else 
-		{
-			cmdtab[i].pipein = 0;
-			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-				cmdtab[i].pipeout = 1;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex)
-{
-	if (ex->i == 0)
-		pipe(cmdtab[ex->i].fd);
-	pipe(cmdtab[ex->i + 1].fd);
-	return (0);
-}
-
-int	ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex)
-{
-	if (ex->i >= 2)
-	{
-		// close(cmdtab[ex->i - 2].fd[0]);
-		close(cmdtab[ex->i - 2].fd[1]);
-	}
-	return (0);
 }
 
 static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
@@ -315,7 +253,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 
 	ex.i = 0;
 	cmdtab[ex.i].pid = -1;
-	ft_cmdtab_init_info(cmdtab);
+	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)
@@ -330,8 +268,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		free(ex.progpath);
 		ex.i++;
 		ft_free_tab_char(ex.argv);
-		if (cmdtab[ex.i].pipein == 1)
-			ft_close_pipe(cmdtab, &ex);
+		// if (cmdtab[ex.i].pipein == 1)
+		// 	ft_close_pipe(cmdtab, &ex);
 	}
 	if (ex.i == 1 && cmdtab[0].pipeout == 1)
 	{
