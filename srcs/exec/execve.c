@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 14:56:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:03:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,12 +275,6 @@ int	ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 	if (ex->i == 0)
 		pipe(cmdtab[ex->i].fd);
 	pipe(cmdtab[ex->i + 1].fd);
-	return (0);
-}
-
-int	ft_redirection(t_data *data, t_cmdtab *s_cmdtab, t_execarg *ex)
-{
-	
 	return (0);
 }
 

@@ -36,9 +36,13 @@ int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
 int			ft_command_not_found_message(char **argv, t_data *data);
 int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
+int			ft_check_if_cmd_has_redirection(t_list *lst);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);
