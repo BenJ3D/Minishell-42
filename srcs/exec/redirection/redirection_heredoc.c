@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 00:10:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:35:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@ int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 	}
 	if (cmdtab[ex->i].pidredi == 0)
 	{
-		close(cmdtab[ex->i].fdredipipe[0]);
+		// close(cmdtab[ex->i].fdredipipe[0]);
 		ft_heredoc(data, cmdtab, ex);
 		exit(0);
 	}
 	else
 	{
-		close(cmdtab[ex->i].fdredipipe[1]);
-		
-		dup2(cmdtab[ex->i].fdredipipe[0], STDIN_FILENO); //TODO:TODO:
+		// close(cmdtab[ex->i].fdredipipe[1]);
+		// dup2(cmdtab[ex->i].fdredipipe[0], STDIN_FILENO); //TODO:TODO:
 		close(cmdtab[ex->i].fdredipipe[0]);
 		waitpid(cmdtab[ex->i].pidredi, NULL, 0);
-		dup2(data->savefd[0], STDIN_FILENO); //TODO:TODO:
+		// dup2(data->savefd[0], STDIN_FILENO); //TODO:TODO:
 	}
 	return (0);
 }
@@ -58,7 +57,7 @@ int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with p
 		free (buf);
 		buf = readline("heredoc> ");
 	}
-	ft_putstr_fd("SORTI HEREDOCS\n", 2);
+	ft_putstr_fd("SORTIE HEREDOCS\n", 2);
 	write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
 	// ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
 	close (cmdtab[ex->i].fdredipipe[1]);

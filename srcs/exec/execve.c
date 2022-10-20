@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 00:04:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:36:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,12 +207,16 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	if (father == 0)
 	{
 		ft_forkexe_dup_if_pipes(cmdtab, ex);
-		ft_redirection(data, cmdtab, ex);
+		if (ft_redirection(data, cmdtab, ex))
+			exit (errno);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		if (cmdtab[ex->i].isbuilt > 0)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
+		{
+			printf("exec no bultin\n");
 			execve(ex->progpath, ex->argv, envp);
+		}
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 23:24:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:34:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
 {
 	t_list	*tmp;
+	int		ret;
 
 	tmp = cmdtab[ex->i].lst;
 	while (tmp)
@@ -25,7 +26,8 @@ int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
 				free (cmdtab[ex->i].rediarg);
 			cmdtab[ex->i].reditype = tmp->type;
 			cmdtab[ex->i].rediarg = ft_strdup(tmp->next->str);
-			ft_dupredi(data, cmdtab, ex);
+			if ((ret = ft_dupredi(data, cmdtab, ex)))
+				return (ret);
 		}
 		tmp = tmp->next;
 	}	
@@ -34,27 +36,28 @@ int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
 
 int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 {
+	int	ret;
 	if (cmdtab[ex->i].reditype == OUT1)
 	{
 		// printf("dupredi OUT1\n");
-		ft_redi_out1(cmdtab, ex);
+		ret = ft_redi_out1(cmdtab, ex);
 	}
 	else if (cmdtab[ex->i].reditype == OUT2)
 	{
 		// printf("dupredi OUT1\n");
-		ft_redi_out2(cmdtab, ex);
+		ret = ft_redi_out2(cmdtab, ex);
 	}
 	else if (cmdtab[ex->i].reditype == IN1)
 	{
 		// printf("dupredi IN1\n");
-		ft_redi_in1(cmdtab, ex);
+		ret = ft_redi_in1(cmdtab, ex);
 	}
 	else if (cmdtab[ex->i].reditype == IN2)
 	{
 		// printf("dupredi IN2\n");
-		dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
-		ft_redi_in2(cmdtab, ex, data);
+		// dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
+		ret = ft_redi_in2(cmdtab, ex, data);
 	}
-	return (0);
+	return (ret);
 }
 
