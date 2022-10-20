@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 03:05:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:29:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*prompt_update(t_envlst *env, char *prgname)
 			free (user);
 			user = ft_strdup(usertmp);
 		}
-		line = ft_strjoin_max("%s- %s -%s <%s>%s$ ",
+		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
 					COLOR_GREEN, user,
 					COLOR_CYAN, prgname, COLOR_NONE);
 		free (user);
