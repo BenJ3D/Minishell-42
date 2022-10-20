@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/19 19:48:44 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:11:59 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			free(value_env);
 			return (NULL);
 		}
+		printf("%s\n", value_env);
 		if (semi_final != NULL)
 		{
 			semi_final = ft_strjoin_parsing(semi_final, value_env);
@@ -74,7 +75,6 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 			len++;
 			data->i++;
 		}
-		printf("test %c\n", buffer[data->i]);
 		if (len != 0)
 		{
 			semi_final = malloc(sizeof(char) * len + 1);
@@ -87,6 +87,8 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 		}
 		if (buffer[data->i] == '$')
 			semi_final = ft_double_quotes_env(data, buffer, semi_final);
+		printf("%c %i\n", buffer[data->i], len);
+		printf("%s\n", semi_final);
 		if (semi_final != NULL)
 		{	
 			printf("1 %s\n", semi_final);
