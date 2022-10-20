@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 03:46:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:10:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,21 @@ int	ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (cmdtab[ex->i].pipeout == 1)
 	{
-		dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0) //FIXME:FIXME:
+			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
+		else
+			close(cmdtab[ex->i + 1].fd[1]);
 		close(cmdtab[ex->i + 1].fd[0]);
 	}
 	if (cmdtab[ex->i].pipein == 1)
 	{
-		dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0) //FIXME:FIXME:
+		{
+			// ft_putstr_fd("dup2 fd0 , STDIN if pipein\n", 2);
+			dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
+		}
+		else
+			close(cmdtab[ex->i].fd[0]);
 		close(cmdtab[ex->i].fd[1]);
 	}
 	return (0);

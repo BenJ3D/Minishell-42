@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/19 19:31:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 23:33:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);

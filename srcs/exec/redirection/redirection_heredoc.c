@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 18:48:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:03:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with p
 		free (buf);
 		buf = readline("heredoc> ");
 	}
-	ft_putstr_fd("SORTIE HEREDOCS\n", 2);
-	write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
-	// ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
+	// write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
+	ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
 	close (cmdtab[ex->i].fdredipipe[1]);
 	free (buf);
 	free (line);

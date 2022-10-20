@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 19:05:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 23:41:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	else if (cmdtab[ex->i].reditype == IN2)
 	{
 		// dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
+		// close(cmdtab)
 		ret = ft_redi_in2(cmdtab, ex, data);
 	}
 	return (ret);
@@ -59,6 +60,8 @@ int	ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex)
 	while (tmp)
 	{
 		if (tmp->type == IN2) //TODO:
-
+			return (1);
+		tmp = tmp->next;
 	}
+	return (0);
 }

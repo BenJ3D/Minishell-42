@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 19:04:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 23:39:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,9 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
 		{
-			if (cmdtab[ex->i].fdredi[])//TODO:TODO:
+			// if (cmdtab[ex->i].pipein == 1)
+			// 	if (ft_redi_cmdtab_has_heredoc(cmdtab, ex))//TODO:TODO: ft check if in2 in cmdtab
+			// 		puts("OUIII \n");
 			execve(ex->progpath, ex->argv, envp);
 		}
 		free(ex->progpath);
@@ -189,14 +191,14 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	else
 	{
 		ft_forkexe_father_close_pipes(cmdtab, ex);
-		// dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
+		// dup2(data->savefd[1], STDOUT_FILENO); //TODO
 	}
 	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
 	{
 		if (ft_redirection(data, cmdtab, ex) == 0)
 		{
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
-			dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
+			dup2(data->savefd[1], STDOUT_FILENO); //TODO:
 			if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1 )
 				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 		}

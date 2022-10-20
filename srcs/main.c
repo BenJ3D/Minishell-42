@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 18:28:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 23:10:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ int	main(int ac, char **av, char **envp)
 		close(p[1]);
 		dup2(p[0], STDIN_FILENO);
 		execlp("/bin/cat", "cat", "-e", NULL);
-
+		perror("minishell");
+		exit(errno);
 	}
 	
 	close(p[0]);
