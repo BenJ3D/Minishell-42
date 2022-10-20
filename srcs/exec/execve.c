@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 03:36:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:48:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
 		{
-			printf("exec no bultin\n");
+			// printf("exec no bultin\n");
 			execve(ex->progpath, ex->argv, envp);
 		}
 		free(ex->progpath);
