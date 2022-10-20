@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/20 23:33:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 01:28:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "define_common.h"
 # include "includes.h"
 # include "struct.h"
+
+int	g_status;
 
 /* FT TEST */
 int			test_execve_ls_fork(char **av);

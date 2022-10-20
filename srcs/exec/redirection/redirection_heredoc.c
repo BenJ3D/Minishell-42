@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 00:03:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 01:34:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 		dup2(cmdtab[ex->i].fdredipipe[0], STDIN_FILENO); //TODO:TODO:
 		close(cmdtab[ex->i].fdredipipe[1]);
 		close(cmdtab[ex->i].fdredipipe[0]);
-		waitpid(cmdtab[ex->i].pidredi, NULL, 0);
+		waitpid(-1, &g_status, 0);
 		// dup2(data->savefd[0], STDIN_FILENO); //TODO:TODO:
 	}
 	return (0);
@@ -45,27 +45,27 @@ int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with p
 	char	*buf;
 	char	*line;
 	char	*intro;
+	char	*prompt;
 	
 	rl_on_new_line();
-	intro = ft_strjoin_max("Enter \"%s%s%s\" to complete the heredoc\n", \
+	prompt = ft_strjoin_max("heredocs %s%s%s> ", \
 								COLOR_RED, cmdtab[ex->i].rediarg, COLOR_NONE);
-	ft_putstr_fd(intro, 1);
 	rl_on_new_line();
 	line = ft_strdup("");
-	buf = readline("heredoc> ");
+	buf = readline(prompt);
 	while (ft_strequal(buf, cmdtab[ex->i].rediarg) != 1)
 	{
 		line = ft_strjoin(line, buf);
 		line = ft_strjoin(line, "\n");
 		free (buf);
-		buf = readline("heredoc> ");
+		buf = readline(prompt);
 	}
 	// write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
 	ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
 	close (cmdtab[ex->i].fdredipipe[1]);
 	free (buf);
 	free (line);
-	free (intro);
+	free (prompt);
 	return (0);
 }
 
