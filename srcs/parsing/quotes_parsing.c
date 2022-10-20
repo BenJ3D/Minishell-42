@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/20 12:11:59 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:50:19 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			free(value_env);
 			return (NULL);
 		}
-		printf("%s\n", value_env);
+		printf("ici %s\n", value_env);
 		if (semi_final != NULL)
 		{
+			printf("%s\n", semi_final);
 			semi_final = ft_strjoin_parsing(semi_final, value_env);
 			free(value_env);
 		}
 		else
+		{
+			printf("test\n");	
 			return (value_env);
+		}
 	}
 	return (semi_final);
 }
@@ -63,6 +67,7 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 	int	len;
 	char	*semi_final;
 
+	semi_final = NULL;
 	while (data->d_quotes_switch == 1 && buffer[data->i] != '\0')
 	{
 		if (buffer[data->i] == DOUBLE_QUOTE)
@@ -85,14 +90,14 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
+		printf("semi_final %s\n", semi_final);
 		if (buffer[data->i] == '$')
 			semi_final = ft_double_quotes_env(data, buffer, semi_final);
-		printf("%c %i\n", buffer[data->i], len);
-		printf("%s\n", semi_final);
 		if (semi_final != NULL)
 		{	
 			printf("1 %s\n", semi_final);
 			cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
+			printf("%s\n", semi_final);
 			free(semi_final);
 		}
 		else
