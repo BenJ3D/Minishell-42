@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 03:39:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:50:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,14 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	return (ret);
 }
 
+int	ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex)
+{
+	t_list *tmp;
+	
+	tmp = cmdtab[ex->i].lst;
+	while (tmp)
+	{
+		if ()
+
+	}
+}
