@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 15:33:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:48:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		fdsave[2];				//    cmdtab[0].lst = ls -> -all -> (pipe)
 	int		fdredi;					//  file descriptor if redirection
 	int		fdredierr;				//  1 if file (fdredi) not exist
-	char	*heredoc;
+	char	*heredoc;				//contient tout le heredocs
 	int		hdcpipe[2];				//pipe pour un heredocs par cmd
 	pid_t	pid;
 	t_list	*lst;

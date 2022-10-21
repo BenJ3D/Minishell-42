@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/20 23:10:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:38:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,34 +104,76 @@ int	main(int ac, char **av, char **envp)
 
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
 	int p[2];
-	int	b;
-	pid_t fat[4];
-
-	b = 0;
+	int	hdc_fd;
+	char hdc_path[] = "/tmp/minishell/hdctmp1";
+	char buf[1];
+	pid_t fat;
+	
+	hdc_fd = open(hdc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	pipe(p);
-	fat[0] = fork();
-	if (fat[0] == 0) // = child process
+	fat = fork();
+	if (fat == 0)
 	{
-		close(p[0]);
-		ft_putstr_fd("Bien le bonjour\n", p[1]);
-		close(p[1]);
-		exit(0);
-	}
-	fat[1] = fork();
-	if (fat[1] == 0) // = child process
-	{
-		close(p[1]);
-		dup2(p[0], STDIN_FILENO);
-		execlp("/bin/cat", "cat", "-e", NULL);
-		perror("minishell");
-		exit(errno);
+		ft_heredoc_create("EOL", p);
+		exit (0);
 	}
 	
-	close(p[0]);
-	close(p[1]);
-	waitpid(fat[0], NULL, 0);
-	waitpid(fat[1], NULL, 0);
-	printf("toute chose a une fin\n");
+	close (p[1]);
+	waitpid(fat, NULL, 0);
+	ft_putstr("TEST heredocs pipe\n");
+	
+	while()
+	int ret = read(p[0], buf, 1);
+	printf("ret = %i\n", ret);
+	printf("buf = %s\n", buf);
+	// ft_putstr(buf);
+	ft_putstr("grr\n");
+	close (p[0]);
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+///////////////////////////////  HEREDOCS TEST /////////////////////////////////
+	// int p[2];
+	// int	b;
+	// pid_t fat[4];
+
+	// b = 0;
+	// pipe(p);
+	// fat[0] = fork();
+	// if (fat[0] == 0) // = child process
+	// {
+	// 	close(p[0]);
+	// 	ft_putstr_fd("Bien le bonjour\n", p[1]);
+	// 	close(p[1]);
+	// 	exit(0);
+	// }
+	// fat[1] = fork();
+	// if (fat[1] == 0) // = child process
+	// {
+	// 	close(p[1]);
+	// 	dup2(p[0], STDIN_FILENO);
+	// 	execlp("/bin/cat", "cat", "-e", NULL);
+	// 	perror("minishell");
+	// 	exit(errno);
+	// }
+	
+	// close(p[0]);
+	// close(p[1]);
+	// waitpid(fat[0], NULL, 0);
+	// waitpid(fat[1], NULL, 0);
+	// printf("toute chose a une fin\n");
 
 	// exit(0);
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +189,3 @@ int	main(int ac, char **av, char **envp)
 	ft_exit(&data);
 	return (0);
 }
-
-
-
