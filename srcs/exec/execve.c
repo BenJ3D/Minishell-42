@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 01:16:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:20:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
 		{
-			// if (cmdtab[ex->i].pipein == 1)
-			// 	if (ft_redi_cmdtab_has_heredoc(cmdtab, ex))//TODO:TODO: ft check if in2 in cmdtab
-			// 		puts("OUIII \n");
 			execve(ex->progpath, ex->argv, envp);
 		}
 		free(ex->progpath);

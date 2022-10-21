@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 00:10:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:30:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (cmdtab[ex->i].pipeout == 1)
 	{
-		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0) //FIXME:FIXME:
+	 	if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0)//FIXME:FIXME:
 			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
 		else
 			close(cmdtab[ex->i + 1].fd[1]);

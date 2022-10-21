@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 02:04:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:33:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		fdsave[2];				//    cmdtab[0].lst = ls -> -all -> (pipe)
 	int		fdredi;					//  file descriptor if redirection
 	int		fdredierr;				//  1 if file (fdredi) not exist
+	char	*heredoc;
+	int		hdcpipe[2];				//pipe pour un heredocs par cmd
 	pid_t	pid;
 	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
@@ -69,7 +71,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 typedef struct s_data
 {
 	char		*pgr_name; 			//le nom de notre programe afficher dans notre prompt
-	char		*line;				//\*line pour le prompt
+	char		*line;				//*line pour le prompt
 	char		*buffer;			//buffer pour readline
 	t_envlst	*env;				//contient tout l'environnement sous forme de liste
 	t_cmdtab	*cmdtab; 			//toutes les commandes sont stockées dans un tableau de list
