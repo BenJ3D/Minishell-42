@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/21 01:28:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 01:40:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
 
 /* FT REDIRECTIONS*/
-int			ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex, int *fd);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);

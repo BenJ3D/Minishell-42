@@ -6,41 +6,44 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 01:34:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 02:13:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-
-
-
 int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 {
-	pipe(cmdtab[ex->i].fdredipipe);
-	if ((cmdtab[ex->i].pidredi = fork()) == -1)
+	int fdredipipe[2];
+	pid_t	pid;
+	pipe(fdredipipe);
+	if ((pid = fork()) == -1)
 	{
 		perror("minishell: fork");
 		exit(errno);
 	}
-	if (cmdtab[ex->i].pidredi == 0)
+	printf("pid = %i\n", pid);
+	if (pid == 0)
 	{
 		// close(cmdtab[ex->i].fdredipipe[0]);
-		ft_heredoc(data, cmdtab, ex);
+		ft_heredoc(data, cmdtab, ex, fdredipipe);
 		exit(errno);
 	}
 	else
 	{
-		dup2(cmdtab[ex->i].fdredipipe[0], STDIN_FILENO); //TODO:TODO:
-		close(cmdtab[ex->i].fdredipipe[1]);
-		close(cmdtab[ex->i].fdredipipe[0]);
-		waitpid(-1, &g_status, 0);
+		dup2(fdredipipe[0], STDIN_FILENO); //TODO:TODO:
+		close(fdredipipe[1]);
+		close(fdredipipe[0]);
+		waitpid(pid, &g_status, 0);
+		// if (WIFEXITED(g_status))
+		// 	data->ret = WEXITSTATUS(g_status);
+		// kill(pid, SIGTERM);
 		// dup2(data->savefd[0], STDIN_FILENO); //TODO:TODO:
 	}
 	return (0);
 }
 
-int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with pipe
+int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex, int *fdredipipe) // TODO: V2 with pipe
 {
 	char	*buf;
 	char	*line;
@@ -61,8 +64,8 @@ int	ft_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) // TODO: V2 with p
 		buf = readline(prompt);
 	}
 	// write(cmdtab[ex->i].fdredipipe[1], line, ft_strlen(line));
-	ft_putstr_fd(line, cmdtab[ex->i].fdredipipe[1]);
-	close (cmdtab[ex->i].fdredipipe[1]);
+	ft_putstr_fd(line, fdredipipe[1]);
+	close (fdredipipe[1]);
 	free (buf);
 	free (line);
 	free (prompt);

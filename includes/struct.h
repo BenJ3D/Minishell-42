@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 20:35:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/21 02:04:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		reditype;
 	char	*rediarg;
 	pid_t	pidredi;
+	pid_t	*multiredi;
 	int		redinbr;				//compte le nombre de redi pour while jusqu'a 0
 	int		fdredipipe[2];
 	int		fd[2];					//    cmdtab[0].lst = ls -> -all -> (pipe)
@@ -76,6 +77,7 @@ typedef struct s_data
 	int			nbpipes;
 	int			fd[2];				//pour pipe
 	int			savefd[2];				//pour pipe
+	int 		ret;					//test pour heredocs
 }				t_data;
 
 #endif
