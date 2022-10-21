@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/19 19:13:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:59:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 		!= '$' && buffer[data->i] != '\'' && buffer[data->i] != '"')
 		data->i++;
 	pin = data->i;
-	while (buffer[data->i] != '\0' && buffer[data->i] >= 33 && buffer[data->i] <= 126 && buffer[data->i] \
-		!= '$' && buffer[data->i] != '\'' && buffer[data->i] != '"')
+	while (buffer[data->i] != '\0' && buffer[data->i] >= 33 && buffer[data->i] <= 126)
 	{
 		data->i++;
 		len++;
@@ -36,11 +35,22 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 		if (!semi_final)
 			return (0);
 		pan = 0;
-		while (pan < len)
+		while (pan < len && pin < data->i)
 		{
-			semi_final[pan] = buffer[pin];
-			pan++;
-			pin++;
+			ft_quotes_checker(data, buffer, data->i);
+			if (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
+				pin++;
+			else
+			{
+				if (buffer[pin] == '"' || buffer[pin] == '\'')
+					pin++;
+				else
+				{
+					semi_final[pan] = buffer[pin];
+					pan++;
+					pin++;
+				}
+			}
 		}
 		semi_final[pan] = '\0';
 		printf("4 %s\n", semi_final);
@@ -61,6 +71,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer)
 
 	pin = data->i;
 	data->i++;
+	len = 0;
 	while (buffer[data->i] && (buffer[data->i] >= 33 && buffer[data->i] <= 126))
 	{
 		data->i++;
@@ -85,6 +96,6 @@ t_list	*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer)
 		ft_quotes_checker(data, buffer, data->i);
 	}
 	else
-		; //TODO faire en sorte que ca prennet le $ en compte pour l'imprimer
+		 cmd = ft_buffercmd_in_lst("$", cmd, data);
 	return (cmd);
 }
