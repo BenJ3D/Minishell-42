@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/21 13:59:18 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:05:10 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 		!= '$' && buffer[data->i] != '\'' && buffer[data->i] != '"')
 		data->i++;
 	pin = data->i;
-	while (buffer[data->i] != '\0' && buffer[data->i] >= 33 && buffer[data->i] <= 126)
+	while (buffer[data->i] != '\0' && buffer[data->i] >= 33 && buffer[data->i] \
+		<= 126 && (buffer[data->i] != '>' && buffer[data->i] != '<'))
 	{
 		data->i++;
 		len++;

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 15:56:20 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:04:50 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,11 +218,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		return (0);
 	}
 	data->cmdtoparse = ft_total_parsing(data, buffer);
-	//data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
 	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
-	//!mettre verification des quotes dans les str de nodes ici
-	// if(!ft_node_quote_checker(data))
-	// 	 exit(43);
 	ft_define_cmd_type(data->cmdtoparse);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
