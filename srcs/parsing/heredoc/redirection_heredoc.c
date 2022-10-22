@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 22:15:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 22:33:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,11 @@ int	ft_redi_in1v2(int hdc_fd)
 int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 {
 	char	*buf;
-	char	*heredoc;
 	char	*prompt;
 	
 	rl_on_new_line();
 	prompt = ft_strjoin_max("heredoc %s%s%s> ", COLOR_RED, token, COLOR_NONE);
 	rl_on_new_line();
-	heredoc = ft_strdup("");
 	buf = readline(prompt);
 	while (ft_strequal(buf, token) != 1)
 	{
