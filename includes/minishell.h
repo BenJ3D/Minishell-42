@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/21 18:42:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 20:52:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg 
 int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_heredoc_init(t_cmdtab *cmdtab);
 
 /* FT EXECVE PIPES */
 int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
@@ -54,7 +55,7 @@ int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
 
 /* FT REDIRECTIONS*/
-int			ft_heredoc_create(char *token, int *pipe);
+int			ft_heredoc_create(char *token, int fd);
 // char		*ft_heredoc_create(char *token, int *pipe);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);

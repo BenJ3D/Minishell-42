@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/04 02:08:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:04:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 
 # define READ 0
 # define WRITE 1
+
+# define PATH_HEREDOC "/tmp/.hdctmp1"
+# define BUFFER_SIZE 10
+
+
 
 # define CMD 0
 # define ARG 1

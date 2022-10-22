@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/21 17:48:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 20:34:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	int		fdredierr;				//  1 if file (fdredi) not exist
 	char	*heredoc;				//contient tout le heredocs
 	int		hdcpipe[2];				//pipe pour un heredocs par cmd
+	int		hdcfd;				//fd pour open un tmp pour heredocs par cmd
 	pid_t	pid;
 	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
@@ -80,6 +81,7 @@ typedef struct s_data
 	int			fd[2];				//pour pipe
 	int			savefd[2];				//pour pipe
 	int 		ret;					//test pour heredocs
+	char		*heredocpath;
 }				t_data;
 
 #endif
