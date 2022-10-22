@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 20:52:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:45:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		dbg_display_errno(void);
 
 /* FT DEBUG BEN A VIRER */
 void		dbg_fork_display_pid(const char *str); //TODO: FIXME:
+int			ft_redi_in1v2(int fd);
 
 /* FT AART */
 void		handler_interative(int signum);

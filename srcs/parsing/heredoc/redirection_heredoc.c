@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 21:04:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 22:15:37 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,40 @@ int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 // 	free (prompt);
 // 	return (0);
 // }
+
+// int	ft_redi_in1v2(int fd3)
+// {
+// 	int	fd;
+	
+// 	if ((fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
+// 	{
+// 		perror(PATH_HEREDOC);
+// 		return (errno);
+// 	}
+// 	else
+// 	{
+// 		dup2(fd, STDIN_FILENO);
+// 		close(fd);
+// 	}
+// 	return (0);
+// }
+
+int	ft_redi_in1v2(int hdc_fd)
+{
+	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
+	{
+		perror(PATH_HEREDOC);
+		return (errno);
+	}
+	else
+	{
+		dup2(hdc_fd, STDIN_FILENO);
+		close(hdc_fd);
+	}
+	return (0);
+}
+
+
 /**
  * @brief lancer un readline pour faire le heredoc
  * 
@@ -86,10 +120,8 @@ int	ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data	*data)
 int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 {
 	char	*buf;
-	char	buffer[BUFFER_SIZE];
 	char	*heredoc;
 	char	*prompt;
-	
 	
 	rl_on_new_line();
 	prompt = ft_strjoin_max("heredoc %s%s%s> ", COLOR_RED, token, COLOR_NONE);
@@ -103,15 +135,14 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 		free (buf);
 		buf = readline(prompt);
 	}
-	while(read(fd, buffer, BUFFER_SIZE) > 0)
-	{
-			write(STDOUT_FILENO, buffer, BUFFER_SIZE);
-	}
 	if (buf)
 		free (buf);
 	free (prompt);
 	return (0);
 }
+
+
+
 
 int	ft_heredoc_init(t_cmdtab *cmdtab)
 {
