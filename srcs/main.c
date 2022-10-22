@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 22:16:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/22 22:24:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int	main(int ac, char **av, char **envp)
 	}
 	waitpid(fat, NULL, 0);
 	close(hdc_fd);
+	hdc_fd = open(PATH_HEREDOC, O_CREAT | O_RDONLY);
 
 	fat = fork();
 	if (fat == 0)
