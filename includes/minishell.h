@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 21:45:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:07:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg 
 int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_heredoc_init(t_cmdtab *cmdtab);
+int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
 
 /* FT EXECVE PIPES */
 int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
@@ -61,7 +61,7 @@ int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_redi_in2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_redi_in2(int hdc_fd);
 int			ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex);
 
 /* FT BUILTIN */

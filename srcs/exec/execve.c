@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 19:32:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/23 02:59:34 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,14 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	ex.i = 0;
 	cmdtab[ex.i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
-	ft_heredoc_init(cmdtab);
+	ft_heredoc_init(cmdtab, data);
+	
+	while(cmdtab[ex.i].lst)
+	{
+		printf("cmdtab[%i].hdcfd = %i\n", ex.i, cmdtab[ex.i].hdcfd);
+		ex.i++;
+	}
+	ex.i = 0;
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)

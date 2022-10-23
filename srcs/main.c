@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 22:24:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/23 02:19:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,46 +103,46 @@ int	main(int ac, char **av, char **envp)
 	// waitpid(pid3, NULL, 0);
 
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
-	int		p[2];
-	int		hdc_fd;
-	char	buffer[BUFFER_SIZE];
-	// char hdc_path[] = PATH_HEREDOC;
-	char buf[1];
-	pid_t fat;
+	// int		p[2];
+	// int		hdc_fd;
+	// char	buffer[BUFFER_SIZE];
+	// // char hdc_path[] = PATH_HEREDOC;
+	// char buf[1];
+	// pid_t fat;
 	
-	hdc_fd = open(PATH_HEREDOC, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	fat = fork();
-	if (fat == 0)
-	{
-		ft_heredoc_create("EOL", hdc_fd);
-		exit (0);
-	}
-	waitpid(fat, NULL, 0);
-	close(hdc_fd);
-	hdc_fd = open(PATH_HEREDOC, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	fat = fork();
-	if (fat == 0)
-	{
-		ft_heredoc_create("out", hdc_fd);
-		exit (0);
-	}
-	waitpid(fat, NULL, 0);
-	close(hdc_fd);
-	hdc_fd = open(PATH_HEREDOC, O_CREAT | O_RDONLY);
+	// hdc_fd = open(PATH_HEREDOC, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	// fat = fork();
+	// if (fat == 0)
+	// {
+	// 	ft_heredoc_create("EOL", hdc_fd);
+	// 	exit (0);
+	// }
+	// waitpid(fat, NULL, 0);
+	// close(hdc_fd);
+	// hdc_fd = open(PATH_HEREDOC, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	// fat = fork();
+	// if (fat == 0)
+	// {
+	// 	ft_heredoc_create("out", hdc_fd);
+	// 	exit (0);
+	// }
+	// waitpid(fat, NULL, 0);
+	// close(hdc_fd);
+	// hdc_fd = open(PATH_HEREDOC, O_CREAT | O_RDONLY);
 
-	fat = fork();
-	if (fat == 0)
-	{
+	// fat = fork();
+	// if (fat == 0)
+	// {
 	
-		ft_redi_in1v2(hdc_fd);
-		ft_putstr_fd("Start cat -e\n", 2);
-		execlp("/bin/cat", "cat", "-e", NULL);
-		exit(0);
-	}
+	// 	ft_redi_in1v2(hdc_fd);
+	// 	ft_putstr_fd("Start cat -e\n", 2);
+	// 	execlp("/bin/cat", "cat", "-e", NULL);
+	// 	exit(0);
+	// }
 	
-	waitpid(fat, NULL, 0);
-	ft_putstr("TEST heredocs pipe\n");
-	unlink(PATH_HEREDOC);
+	// waitpid(fat, NULL, 0);
+	// ft_putstr("TEST heredocs pipe\n");
+	// unlink(PATH_HEREDOC);
 
 	
 

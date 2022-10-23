@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 19:38:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:08:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	else if (cmdtab[ex->i].reditype == IN1)
 		ret = ft_redi_in1(cmdtab, ex);
 	else if (cmdtab[ex->i].reditype == IN2)
-		ret = ft_redi_in2(cmdtab, ex, data);
+		ret = ft_redi_in2(cmdtab[ex->i].hdcfd);
 	return (ret);
 }
