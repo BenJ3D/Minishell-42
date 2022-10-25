@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:59:56 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 18:13:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:40:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void		ft_lstadd_back_void(t_lst_void **alst, t_lst_void *new);
 void		ft_lstdelone_void(t_lst_void *lst, void (*del)(void *));
 void		ft_lstclear_void(t_lst_void **lst, void (*del)(void *));
 void		ft_lstiter_void(t_lst_void *lst, void (*f)(void *));
-t_lst_void	*ft_lstmap_void(t_lst_void *lst, void *(*f)(void *), void (*del)(void *));
+t_lst_void	*ft_lstmap_void(t_lst_void *lst, void *(*f)(void *), \
+														void (*del)(void *));
 char		*ft_strtrim_void(char const *s1, char const *set);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/23 03:28:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:31:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_redi_in2(int hdc_fd)
 {
+	printf("redi int 2 hdcfd = %i\n", hdc_fd);
 	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
 	{
 		perror(PATH_HEREDOC);
@@ -166,6 +167,7 @@ int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
 			}
 			tmp = tmp->next;
 		}
+		unlink (PATH_HEREDOC);
 		i++;
 	}
 	return (0);

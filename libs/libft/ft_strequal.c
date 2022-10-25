@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 18:17:06 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/10 23:59:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:39:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	ft_strequal(const char *s1, const char *s2)
 	while ((str1[i] || str2[i]) && str1[i] == str2[i])
 		i++;
 	if (i == ft_strlen(str1))
-		return(1);
+		return (1);
 	return (0);
 }
