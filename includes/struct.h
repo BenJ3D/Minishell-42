@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 20:34:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:08:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	char	*heredoc;				//contient tout le heredocs
 	int		hdcpipe[2];				//pipe pour un heredocs par cmd
 	int		hdcfd;				//fd pour open un tmp pour heredocs par cmd
+	char	*hdcpath;			//path du tmp file poru les ehredocs par commande
 	pid_t	pid;
 	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)

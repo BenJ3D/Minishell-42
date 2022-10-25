@@ -6,18 +6,18 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 19:31:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:55:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_redi_in2(int hdc_fd)
+int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex)
 {
 	printf("redi int 2 hdcfd = %i\n", hdc_fd);
-	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
+	if ((hdc_fd = open(cmdtab[ex->i].hdcpath, O_RDONLY)) < 0)
 	{
-		perror(PATH_HEREDOC);
+		perror(cmdtab[ex->i].hdcpath);
 		return (errno);
 	}
 	else
@@ -28,71 +28,20 @@ int	ft_redi_in2(int hdc_fd)
 	return (0);
 }
 
-
-// /**
-//  * @brief lancer un readline pour faire le heredoc
-//  * 
-//  * @param token // delimiter
-//  * @param pipe //pipe de la cmdtab[ex->i]
-//  * @return int 
-//  */
-// int	ft_heredoc_create(char *token, int *pipe) // TODO: V3 
+// int	ft_redi_in1v2(int hdc_fd)
 // {
-// 	char	*buf;
-// 	char	*heredoc;
-// 	char	*prompt;
-	
-// 	close (pipe[0]);
-// 	rl_on_new_line();
-// 	prompt = ft_strjoin_max("heredoc %s%s%s> ", COLOR_RED, token, COLOR_NONE);
-// 	rl_on_new_line();
-// 	heredoc = ft_strdup("");
-// 	buf = readline(prompt);
-// 	while (ft_strequal(buf, token) != 1)
-// 	{
-// 		heredoc = ft_strjoin(heredoc, buf);
-// 		heredoc = ft_strjoin(heredoc, "\n");
-// 		free (buf);
-// 		buf = readline(prompt);
-// 	}
-// 	ft_putstr_fd(heredoc, 1);
-// 	ft_putstr_fd(heredoc, pipe[1]);
-// 	free (buf);
-// 	free (prompt);
-// 	return (0);
-// }
-
-// int	ft_redi_in1v2(int fd3)
-// {
-// 	int	fd;
-	
-// 	if ((fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
+// 	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
 // 	{
 // 		perror(PATH_HEREDOC);
 // 		return (errno);
 // 	}
 // 	else
 // 	{
-// 		dup2(fd, STDIN_FILENO);
-// 		close(fd);
+// 		dup2(hdc_fd, STDIN_FILENO);
+// 		close(hdc_fd);
 // 	}
 // 	return (0);
 // }
-
-int	ft_redi_in1v2(int hdc_fd)
-{
-	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
-	{
-		perror(PATH_HEREDOC);
-		return (errno);
-	}
-	else
-	{
-		dup2(hdc_fd, STDIN_FILENO);
-		close(hdc_fd);
-	}
-	return (0);
-}
 
 
 /**
@@ -135,14 +84,19 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 
 int	ft_heredoc_openfd(t_cmdtab *cmdtab, int i)
 {
-		if (cmdtab[i].hdcfd > 0) //si deja eu un autre heredocs
-			close(cmdtab[i].hdcfd);
-		if ((cmdtab[i].hdcfd = open(PATH_HEREDOC, O_CREAT | O_TRUNC \
-												| O_WRONLY, 0644)) < 0)
-		{
-			perror("open");
-			exit(errno);
-		}
+	char	*pathtmp;
+
+	pathtmp = ft_strjoin_max("%s%s", PATH_HEREDOC, ft_itoa(i));
+	cmdtab[i].hdcpath = ft_strdup(pathtmp);
+	free (pathtmp);
+	if (cmdtab[i].hdcfd > 0) //si deja eu un autre heredocs
+		close(cmdtab[i].hdcfd);
+	if ((cmdtab[i].hdcfd = open(cmdtab[i].hdcpath, O_CREAT | O_TRUNC \
+											| O_WRONLY, 0644)) < 0)
+	{
+		perror("open");
+		exit(errno);
+	}
 	return (0);
 }
 
@@ -206,6 +160,14 @@ int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
 // 	return (0);
 // }
 
+
+/**
+ * @brief return 1 si heredocs detecte dans la commande
+ * 
+ * @param cmdtab 
+ * @param ex 
+ * @return int 
+ */
 int	ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	t_list *tmp;
