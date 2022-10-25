@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 22:00:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:03:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	ex.i = 0; //TODO: test
 	while(cmdtab[ex.i].lst)
 	{
-		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex))
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex))//fermeture hdc fd et del tmp file
 		{
 			close(cmdtab[ex.i].hdcfd);
 			unlink(cmdtab[ex.i].hdcpath);
