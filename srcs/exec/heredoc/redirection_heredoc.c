@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 21:55:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:37:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex)
 {
-	printf("redi int 2 hdcfd = %i\n", hdc_fd);
+	// printf("redi int 2 hdcfd = %i\n", hdc_fd);
 	if ((hdc_fd = open(cmdtab[ex->i].hdcpath, O_RDONLY)) < 0)
 	{
 		perror(cmdtab[ex->i].hdcpath);
