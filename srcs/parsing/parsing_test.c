@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 18:43:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:01:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 				return (NULL);
 			}
 		}
-		if (buffer[data->i] && buffer[data->i] < 33 && buffer[data->i] > 126 && buffer[data->i] != '|')
+		if (buffer[data->i] && (buffer[data->i] < 33 || buffer[data->i] > 126) && (buffer[data->i] != '|'))
 		{
 			printf("ici\n");
 			data->i++;

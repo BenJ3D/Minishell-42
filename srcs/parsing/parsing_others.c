@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 18:44:40 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:44:41 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 	}
 	if (len != 0)
 	{
-		semi_final = malloc(sizeof(char) * len + 1);
-		if (!semi_final)
-			return (0);
+		semi_final = ft_calloc(sizeof(char) ,  len + 1);
 		pan = 0;
 		while (pan < len && pin < data->i)
 		{

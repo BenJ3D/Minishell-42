@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/20 14:50:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:45:56 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	}
 	if (len != 0)
 	{
-		value_env = malloc(sizeof(char) * len + 1);
+		value_env = ft_calloc(sizeof(char) , len + 1);
 		if (!value_env)
 			exit(58);
 		pan = 0;

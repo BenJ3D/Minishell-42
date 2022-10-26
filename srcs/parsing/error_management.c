@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:14:49 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 19:07:32 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:47:01 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	free_the_birds(t_list	*cmd)
 
 void	error_management(t_data	*data, char *buffer, t_list	*cmd)
 {
-	printf("Syntax Error\n");
+	ft_putstr_fd("Syntax Error\n", 2);
 	free_the_birds(cmd);
 }
