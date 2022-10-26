@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 15:30:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:52:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,12 +248,12 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	cmdtab[ex.i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab, data);
-	while(cmdtab[ex.i].lst)
-	{
-		printf("cmdtab[%i].hdcfd = %i\n", ex.i, cmdtab[ex.i].hdcfd);
-		ex.i++;
-	}
-	ex.i = 0;
+	// while(cmdtab[ex.i].lst)
+	// {
+	// 	printf("cmdtab[%i].hdcfd = %i\n", ex.i, cmdtab[ex.i].hdcfd);
+	// 	ex.i++;
+	// }
+	// ex.i = 0;
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)

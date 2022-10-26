@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 15:28:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:26:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_init_minishell(t_data *data)
 	data->savefd[0] = dup(STDIN_FILENO);
 	data->savefd[1] = dup(STDOUT_FILENO);
 }
-
 
 int	main(int ac, char **av, char **envp)
 {
@@ -155,6 +154,7 @@ int	main(int ac, char **av, char **envp)
 	// test = NULL;
 	// free (test);
 
+////////////////////////////////  ERRNO TEST  //////////////////////////////////
 	// errno = 0;
 	// g_status = errno;
 	// ft_putnbr(g_status);
@@ -165,11 +165,10 @@ int	main(int ac, char **av, char **envp)
 	// 	errno = 42;
 	// 	ft_putnbr(errno);
 	// 	puts("\nend of child\n");
-	// 	exit(errno);
+	// 	exit(39);
 	// }
 	// waitpid(pid, &g_status, 0);
-	// errno = g_status;
-	// ft_putnbr(errno);
+	// ft_putnbr(g_status % 255);
 	// puts("\n");
 
 
