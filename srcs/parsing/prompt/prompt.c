@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-// TODO: faire correspondre les "/path/" du dossier courant comme
-// TODO: le vrai bash avec "~/" ==> voir getenv("HOME") et getcwd()
-		//en faite cest le bash linux qui fait ça, pas sur mac donc optionnel
 
 /**
  * @brief update data->line prompt
@@ -60,8 +57,7 @@ void	prompt_minishell(char **av, t_data *data)
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
 		nbpipe = ft_parsing_prompt(data, data->buffer);
-		// dbg_display_cmdtab(data->cmdtab);
-		// dbg_lstdisplay_color_type(data->cmdtoparse);
+		dbg_display_cmdtab(data->cmdtab);
 		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
 		ft_free_cmdtab_lst(nbpipe, data->cmdtab);
 		free(data->line);

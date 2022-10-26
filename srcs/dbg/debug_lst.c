@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:59:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	dbg_lstdisplay_color(t_list *lst)
 	while(tmp)
 	{
 		ft_putstr(tmp->str);
-		ft_putstr("(");
-		ft_putnbr(tmp->type);
-		ft_putstr(")");
+		// ft_putstr("(");
+		// ft_putnbr(tmp->type);
+		// ft_putstr(")");
 		ft_putstr(COLOR_RED);
 		ft_putstr(" -> ");
 		ft_putstr(COLOR_NONE);

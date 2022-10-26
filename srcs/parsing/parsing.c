@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/12 16:00:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_count_pipe(char *buffer) //ft pour test sans parsing
 static int	ft_strlen_next_word(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (str[i] == '|')
 		return (1);
@@ -102,7 +102,7 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 }
 
 /**
- * @brief split tout le buffer en plusieurs cmd dans une liste 
+ * @brief split tout le buffer en plusieurs cmd dans une liste chainé
  * 
  * @param lst 
  * @param buffer 
@@ -212,6 +212,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
 	//TODO: gerer les erreurs de syntaxes
 	ft_define_cmd_type(data->cmdtoparse);
+	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
