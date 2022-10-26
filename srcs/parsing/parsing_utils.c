@@ -6,11 +6,64 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 16:09:11 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:37:43 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO: a normer !!
+{
+	t_list	*tmp;
+
+	if (!lst)
+		return (-1);
+	tmp = lst;
+	if (data->first_cmd == 0)
+	{
+		if (tmp->str[0] == '>')
+		{
+			if (tmp->str[1] == '>')
+				tmp->type = OUT2;
+			else
+				tmp->type = OUT1;
+			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+			tmp = tmp->next;
+		}
+		else if (tmp->str[0] == '<')
+		{
+			if (tmp->str[1] == '<')
+				tmp->type = IN2;
+			else
+				tmp->type = IN1;
+		}
+		else
+			tmp->type = CMD;
+		data->first_cmd = 1;
+	}
+	else
+	{
+		if (tmp->str[0] == '>')
+		{
+			if (tmp->str[1] == '>')
+				tmp->type = OUT2;
+			else
+				tmp->type = OUT1;
+		}
+		else if (tmp->str[0] == '<')
+		{
+			if (tmp->str[1] == '<')
+				tmp->type = IN2;
+			else
+				tmp->type = IN1;
+		}
+		else if (tmp->str[0] == '|')
+			tmp->type = PIPE;
+		else
+			tmp->type = ARG;
+	}
+	return (0);
+}
 
 char	*ft_strjoin_parsing(char	*s1, char *s2)
 {
@@ -86,6 +139,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
+	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }
 
@@ -113,5 +167,6 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
+	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 16:02:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:28:51 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_data
 	int			s_quotes_switch;
 	int			d_quotes_switch;
 	int			i;
+	int			first_cmd;
 }				t_data;
 
 #endif

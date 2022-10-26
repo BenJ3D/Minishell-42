@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 17:05:47 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:29:27 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 	t_list	*cmd;
 	int		pin;
 
+	data->first_cmd = 0;
 	cmd = NULL;
 	data->i = 0;
 	len_max = ft_strlen_parsing(buffer);
