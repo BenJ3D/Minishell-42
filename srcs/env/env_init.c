@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 10:57:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:11:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ char	*ft_env_extract_key_name(char *str, int *isenv) //TODO: norme
 		len++;
 	len++;//TODO: verifier si np si str[len]=='\0'
 	tmp = ft_calloc(len, sizeof(char));
-	if (!tmp)
-	{
-		perror("malloc");
-		exit(errno);
-	}
 	i = 0;
 	while (str[i] != '=' && str[i])
 	{

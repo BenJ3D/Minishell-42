@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 14:56:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:52:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 /**
  * @brief check dans tous les path présent dans env si un programe existe
  * 
- * @param progname 
- * @param envlst 
+ * @param progname
+ * @param envlst
  * @return char* return le path complet si il existe, null à l'inverse
  */
 char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO: norm
@@ -87,8 +87,6 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 	return (0);
 }
 
-int	ft_create_fork_pipe_out();
-
 /**
  * @brief //TODO: check parmit une liste si il y a une builtin
  * 
@@ -144,39 +142,6 @@ int	ft_check_is_builtin(t_data *data, char **argv, t_cmdtab *cmdtab, t_execarg *
 	return (cmdtab[ex->i].isbuilt);
 }
 
-// /**
-//  * @brief //TODO: check parmit une liste si il y a une builtin
-//  * 
-//  * @return int 
-//  */
-// int	ft_check_is_builtin(t_data *data, char **argv, \
-// 												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
-// {	
-// 	int	ret;
-// 	ret = 0;
-// 	if (*argv ==  NULL)
-// 		return (0);
-// 	if (cmdtab[ex->i].pipeout == 1)
-// 		ret = ft_check_is_builtin_with_pipe(data, argv, cmdtab, ex);
-// 	if (!ft_strncmp(argv[0], "cd", 3) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_cd(data->env, argv);
-// 	else if (!ft_strncmp(argv[0], "echo", 5) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_echo(argv);
-// 	else if (!ft_strncmp(argv[0], "env", 4) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_env(data->env);
-// 	else if (!ft_strncmp(argv[0], "exit", 5) && cmdtab[ex->i].pipeout == 0)
-// 		ft_exit(data);
-// 	else if (!ft_strncmp(argv[0], "export", 7) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_export(data->env, argv);
-// 	else if (!ft_strncmp(argv[0], "pwd", 4) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_pwd(data->env, argv);
-// 	else if (!ft_strncmp(argv[0], "unset", 6) && cmdtab[ex->i].pipeout == 0)
-// 		ft_builtin_unset(data->env, argv);
-// 	else
-// 		return (1);
-// 	return (ret);
-// }
-
 pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 {
 	pid_t	father;
@@ -205,22 +170,16 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 
 	if (father == 0)
 	{
-		if (cmdtab[ex->i].pipeout == 1)
-		{
-			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
-			close(cmdtab[ex->i + 1].fd[0]);
-		}
-		if (cmdtab[ex->i].pipein == 1)
-		{
-			dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
-			close(cmdtab[ex->i].fd[1]);
-		}
+		ft_forkexe_dup_if_pipes(cmdtab, ex);
+		if (ft_redirection(data, cmdtab, ex))
+			exit (errno);
 		envp = ft_env_convert_envlst_to_tab(data->env);
-		dbg_display_errno();
 		if (cmdtab[ex->i].isbuilt > 0)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 		else
+		{
 			execve(ex->progpath, ex->argv, envp);
+		}
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);
@@ -228,70 +187,26 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	}
 	else
 	{
-		if (cmdtab[ex->i].pipeout == 1)
-			close(cmdtab[ex->i + 1].fd[1]);
-		if (cmdtab[ex->i].pipeout == 0 && ex->i > 1)
-			close(cmdtab[ex->i].fd[1]);
-		if (cmdtab[ex->i].pipein == 1)
-			close(cmdtab[ex->i].fd[0]);
+		ft_forkexe_father_close_pipes(cmdtab, ex);
+		// dup2(data->savefd[1], STDOUT_FILENO); //TODO
 	}
 	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
-		ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
-	return (father);
-}
-
-int	ft_cmdtab_init_info(t_cmdtab *cmdtab)
-{
-	int	i;
-
-	i = 0;
-	while(cmdtab[i].lst)
 	{
-		cmdtab[i].pipeout = 0;
-		cmdtab[i++].pipein = 0;
-	}
-	i = 0;
-	while(cmdtab[i].lst)
-	{
-		if (i > 0)
+		if (ft_redirection(data, cmdtab, ex) == 0)
 		{
-			cmdtab[i].pipein = 1;
-			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-				cmdtab[i].pipeout = 1;
+			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
+			dup2(data->savefd[1], STDOUT_FILENO); //TODO:
+			if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1 )
+				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 		}
-		else 
-		{
-			cmdtab[i].pipein = 0;
-			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
-				cmdtab[i].pipeout = 1;
-		}
-		i++;
 	}
-	return (0);
-}
-
-int	ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex)
-{
-	if (ex->i == 0)
-		pipe(cmdtab[ex->i].fd);
-	pipe(cmdtab[ex->i + 1].fd);
-	return (0);
-}
-
-int	ft_redirection(t_data *data, t_cmdtab *s_cmdtab, t_execarg *ex)
-{
+		// dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
+		// if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
+		// 	ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
+		// dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
+		// close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 	
-	return (0);
-}
-
-int	ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex)
-{
-	if (ex->i >= 2)
-	{
-		// close(cmdtab[ex->i - 2].fd[0]);
-		close(cmdtab[ex->i - 2].fd[1]);
-	}
-	return (0);
+	return (father);
 }
 
 static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
@@ -306,9 +221,19 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &status, 0);
 		if (WEXITSTATUS(status))
-			kill(cmdtab[i].pid, SIGKILL);
+			kill(cmdtab[i].pid, SIGKILL);//TODO:
 		i++;
 	}
+	return (0);
+}
+
+int	ft_init_cmd(t_cmdtab *cmdtab)
+{
+	int	i;
+
+	i = 0;
+	while(cmdtab[i].lst)
+		cmdtab[i++].hdcpath = NULL;
 	return (0);
 }
 
@@ -321,7 +246,14 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 
 	ex.i = 0;
 	cmdtab[ex.i].pid = -1;
-	ft_cmdtab_init_info(cmdtab);
+	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
+	ft_heredoc_init(cmdtab, data);
+	// while(cmdtab[ex.i].lst)
+	// {
+	// 	printf("cmdtab[%i].hdcfd = %i\n", ex.i, cmdtab[ex.i].hdcfd);
+	// 	ex.i++;
+	// }
+	// ex.i = 0;
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)
@@ -355,8 +287,18 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.i++;
 	}
 
-	
 	if (cmdtab[0].pid > 0)
 		ft_parent_waitpid(cmdtab, data);
+	ex.i = 0; //TODO: test
+	while(cmdtab[ex.i].lst)
+	{
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex))//fermeture hdc fd et del tmp file
+		{
+			close(cmdtab[ex.i].hdcfd);
+			unlink(cmdtab[ex.i].hdcpath);
+			free(cmdtab[ex.i].hdcpath);
+		}
+		ex.i++;
+	}
 	return (0);
 }

@@ -6,13 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 16:16:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/28 17:30:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:39:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst_void	*ft_lstmap_void(t_lst_void *lst, void *(*f)(void *), void (*del)(void *))
+t_lst_void	*ft_lstmap_void(t_lst_void *lst, void *(*f)(void *), \
+															void (*del)(void *))
 {
 	t_lst_void	*tmp1;
 	t_lst_void	*tmp2;
