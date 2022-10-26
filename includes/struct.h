@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 21:08:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:28:51 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ typedef struct s_data
 	t_list		*cmdtoparse; 		//contient toute la ligne de commande split en mot
 	int			nbpipes;
 	int			fd[2];				//pour pipe
-	int			savefd[2];				//pour pipe
+	int			s_quotes_switch;
+	int			d_quotes_switch;
+	int			i;
+	int			first_cmd;
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
 }				t_data;
