@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 12:37:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:06:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex)
 {
-	// printf("redi int 2 hdcfd = %i\n", hdc_fd);
 	if ((hdc_fd = open(cmdtab[ex->i].hdcpath, O_RDONLY)) < 0)
 	{
 		perror(cmdtab[ex->i].hdcpath);
@@ -57,12 +56,13 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 	char	*prompt;
 	pid_t	father;
 	
+	buf = NULL;
+	prompt = ft_strjoin_max("heredoc %s%s%s> ", COLOR_RED, token, COLOR_NONE);
 	father = fork();
 	if(father == 0)
 	{
 		errno = 0;
 		rl_on_new_line();
-		prompt = ft_strjoin_max("heredoc %s%s%s> ", COLOR_RED, token, COLOR_NONE);
 		rl_on_new_line();
 		buf = readline(prompt);
 		while (ft_strequal(buf, token) != 1)
@@ -72,11 +72,11 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 			free(buf);
 			buf = readline(prompt);
 		}
-		if (buf)
-			free(buf);
-		free(prompt);
+		free(buf);
 		exit (errno);
 	}
+	free(buf);
+	free(prompt);
 	waitpid(father, NULL, 0);
 	return (0);
 }
@@ -85,8 +85,13 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 int	ft_heredoc_openfd(t_cmdtab *cmdtab, int i)
 {
 	char	*pathtmp;
+	char	*itoatmp;
 
-	pathtmp = ft_strjoin_max("%s%s", PATH_HEREDOC, ft_itoa(i));
+	itoatmp = ft_itoa(i);
+	pathtmp = ft_strjoin_max("%s%s", PATH_HEREDOC, itoatmp);
+	free (itoatmp);
+	if (cmdtab[i].hdcpath != NULL) // TODO:
+		free (cmdtab[i].hdcpath);
 	cmdtab[i].hdcpath = ft_strdup(pathtmp);
 	free (pathtmp);
 	if (cmdtab[i].hdcfd > 0) //si deja eu un autre heredocs
@@ -116,12 +121,11 @@ int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
 			if (tmp->type == IN2)
 			{
 				ft_heredoc_openfd(cmdtab, i);
-				printf("cmdtabi = %i hdcfd = %i\n", i, cmdtab[i].hdcfd);
+				// printf("cmdtabi = %i hdcfd = %i\n", i, cmdtab[i].hdcfd);
 				ft_heredoc_create(tmp->next->str, cmdtab[i].hdcfd);
 			}
 			tmp = tmp->next;
 		}
-		unlink (PATH_HEREDOC);
 		i++;
 	}
 	return (0);

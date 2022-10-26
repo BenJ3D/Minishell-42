@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 22:03:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:30:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,16 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 			kill(cmdtab[i].pid, SIGKILL);//TODO:
 		i++;
 	}
+	return (0);
+}
+
+int	ft_init_cmd(t_cmdtab *cmdtab)
+{
+	int	i;
+
+	i = 0;
+	while(cmdtab[i].lst)
+		cmdtab[i++].hdcpath = NULL;
 	return (0);
 }
 

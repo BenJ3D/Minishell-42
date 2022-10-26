@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 12:36:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:28:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	main(int ac, char **av, char **envp)
 
 	// if (ac > 1)
 	// {
-	// 	ft_putstr_fd(av[0], 2);
-	// 	ft_putstr_fd(" to many arguments\n", 2);
-	// 	return (1);
+		// ft_putstr_fd(av[0], 2);
+		// ft_putstr_fd(" to many arguments\n", 2);
+		// return (1);
 	// }
-	interactive_mode (); //FIXME: pomper sur un autre minishell, a modifier 
+
+	interactive_mode (); //FIXME: pompe sur un autre minishell, a modifier 
 		// ameliorer
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,16 +147,30 @@ int	main(int ac, char **av, char **envp)
 
 	
 
-
+	// execve("./srcs", NULL, envp); //TODO:
+	// perror("minishell");
 
 	// char *test;
 
 	// test = NULL;
 	// free (test);
 
-
-
-
+	// errno = 0;
+	// g_status = errno;
+	// ft_putnbr(g_status);
+	// puts("\n");
+	// pid_t pid = fork();
+	// if (pid == 0)
+	// {
+	// 	errno = 42;
+	// 	ft_putnbr(errno);
+	// 	puts("\nend of child\n");
+	// 	exit(errno);
+	// }
+	// waitpid(pid, &g_status, 0);
+	// errno = g_status;
+	// ft_putnbr(errno);
+	// puts("\n");
 
 
 
