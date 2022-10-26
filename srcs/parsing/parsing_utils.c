@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/19 18:21:13 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:09:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin_parsing(char	*s1, char *s2)
 	b = 0;
 	a = 0;
 	len = ft_strlen((const char *)s1) + ft_strlen((const char *)s2);
-	s3 = malloc(sizeof(char) * len + 1);
+	s3 = ft_calloc(sizeof(char), len + 1);
 	if (!s3)
 		return (NULL);
 	while (s1 && s1[b] != '\0')

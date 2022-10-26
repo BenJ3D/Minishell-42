@@ -6,11 +6,33 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 16:04:50 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:51:03 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+void	ft_cmf_first_type(t_list	*tmp)
+{
+	if (tmp->str[0] == '>')
+	{
+		if (tmp->str[1] == '>')
+			tmp->type = OUT2;
+		else
+			tmp->type = OUT1;
+		tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+		tmp = tmp->next;
+	}
+	else if (tmp->str[0] == '<')
+	{
+		if (tmp->str[1] == '<')
+			tmp->type = IN2;
+		else
+			tmp->type = IN1;
+	}
+	else
+		tmp->type = CMD;
+}
 
 int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
 {
@@ -61,7 +83,9 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 	if (!lst)
 		return (-1);
 	tmp = lst;
-	tmp->type = CMD;
+	ft_cmf_first_type(tmp);
+	printf("%d\n", lst->type);
+	//tmp->type = CMD;
 	tmp = tmp->next;
 	while (tmp)
 	{

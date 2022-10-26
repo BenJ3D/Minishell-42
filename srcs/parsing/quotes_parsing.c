@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 11:45:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:03:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
+char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	*cmd)
 {
 	int	len;
 	int	pin;
@@ -32,29 +32,23 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	if (len != 0)
 	{
 		value_env = ft_calloc(sizeof(char) , len + 1);
-		if (!value_env)
-			exit(58);
 		pan = 0;
 		while (pan < len)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		value_env = ft_env_getstr_env_value(data->env, value_env);
-		if (!value_env)
+		if (cmd->type != IN1 && cmd->type != IN2)
 		{
-			free(value_env);
-			return (NULL);
+			value_env = ft_env_getstr_env_value(data->env, value_env);
+			if (!value_env)
+			{
+				free(value_env);
+				return (NULL);
+			}
 		}
-		printf("ici %s\n", value_env);
 		if (semi_final != NULL)
 		{
-			printf("%s\n", semi_final);
 			semi_final = ft_strjoin_parsing(semi_final, value_env);
 			free(value_env);
-		}
-		else
-		{
-			printf("test\n");	
-			return (value_env);
 		}
 	}
 	return (semi_final);
@@ -82,7 +76,7 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 		}
 		if (len != 0)
 		{
-			semi_final = malloc(sizeof(char) * len + 1);
+			semi_final = ft_calloc(sizeof(char), len + 1);
 			if (!semi_final)
 				exit(57);
 			pan = 0;
@@ -92,9 +86,9 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 		}
 		printf("semi_final %s\n", semi_final);
 		if (buffer[data->i] == '$')
-			semi_final = ft_double_quotes_env(data, buffer, semi_final);
+			semi_final = ft_double_quotes_env(data, buffer, semi_final, cmd);
 		if (semi_final != NULL)
-		{	
+		{
 			printf("1 %s\n", semi_final);
 			cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
 			printf("%s\n", semi_final);
@@ -125,7 +119,7 @@ t_list	*ft_simple_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 	}
 	if (len != 0)
 	{
-		semi_final = malloc(sizeof(char) * len + 1);
+		semi_final = ft_calloc(sizeof(char), len + 1);
 		if (!semi_final)
 			exit(57);
 		pan = 0;

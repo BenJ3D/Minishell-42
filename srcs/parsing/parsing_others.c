@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 11:44:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:03:25 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,19 @@ t_list	*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer)
 	}
 	if (len != 0)
 	{
-		value_env = malloc(sizeof(char) * len + 1);
-		if (!value_env)
-			exit (37);
+		value_env = ft_calloc(sizeof(char), len + 1);
 		pan = 0;
 		pin++;
 		while (pin < data->i)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		value_env = ft_env_getstr_env_value(data->env, value_env); 
-		if (!value_env)
-			return (cmd);
+		if (cmd->type != IN1 && cmd->type != IN2)
+		{
+			printf("test\n");
+			value_env = ft_env_getstr_env_value(data->env, value_env); 
+			if (!value_env)
+				return (cmd);
+		}
 		cmd = ft_buffercmd_in_lst(value_env, cmd, data);
 		printf("3 %s\n", value_env);
 		free(value_env);

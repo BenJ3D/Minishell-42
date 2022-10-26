@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 12:01:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:05:47 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 	ft_reset_quotes_checker(data);
 	while (buffer[data->i])
 	{
-		printf("test '%c'\n", buffer[data->i]);
 		ft_quotes_checker(data, buffer, data->i);
 		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
@@ -125,10 +124,7 @@ t_list	*ft_total_parsing(t_data	*data, char	*buffer)
 			}
 		}
 		if (buffer[data->i] && (buffer[data->i] < 33 || buffer[data->i] > 126) && (buffer[data->i] != '|'))
-		{
-			printf("ici\n");
 			data->i++;
-		}
 	}
 	if (cmd == NULL)
 	{

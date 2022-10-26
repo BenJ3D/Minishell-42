@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:49:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/18 14:00:48 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:02:50 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int		ft_node_quote_checker(t_data	*data)
 	begin = data->cmdtoparse;
 	while (begin)
 	{
-		printf("%s\n", begin->str);
 		while (begin->str[i])
 		{
-			printf("test\n");
 			ft_quotes_checker(data, begin->str, i);
 			i++;
 		}
