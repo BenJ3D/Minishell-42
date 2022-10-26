@@ -18,6 +18,8 @@
 # include "includes.h"
 # include "struct.h"
 
+int	g_status;
+
 /* FT TEST */
 int			test_execve_ls_fork(char **av);
 void		prompt_basic_test(char **av, t_data *data);
@@ -50,9 +52,31 @@ int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
 int			ft_command_not_found_message(char **argv, t_data *data);
 int			ft_check_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
+
+/* FT EXECVE PIPES */
+int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_forkexe_father_close_pipes(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_pipe_init_cmdtab_pipe_in_out(t_cmdtab *cmdtab);
+int			ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
+
 
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
+int			ft_check_if_cmd_has_redirection(t_list *lst);
+
+/* FT REDIRECTIONS*/
+int			ft_heredoc_create(char *token, int fd);
+// char		*ft_heredoc_create(char *token, int *pipe);
+int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);
@@ -108,9 +132,11 @@ void		dbg_lstdisplay_color(t_list *lst);
 void		dbg_lstdisplay_color_type(t_list *lst);
 void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
+void		dbg_display_errno(void);
 
 /* FT DEBUG BEN A VIRER */
 void		dbg_fork_display_pid(const char *str); //TODO: FIXME:
+int			ft_redi_in1v2(int fd);
 
 /* FT AART */
 void		handler_interative(int signum);
