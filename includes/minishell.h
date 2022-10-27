@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 18:52:53 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:19:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,9 @@ int			ft_redi_in1v2(int fd);
 /* FT AART */
 void		handler_interative(int signum);
 void		interactive_mode(void);
+
+// avoid compilation crash
+void	rl_replace_line(const char *text, int clear_undo);
+void	rl_clear_history(void);
 
 #endif
