@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 18:00:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:31:27 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,23 @@ static int	ft_strlen_next_word(char *str)
 	return (i);
 }
 
+static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
+{
+	int		i;
+	char	c;
+
+	if (data->s_quotes_switch == 1)
+		c = '\'';
+	else
+		c = '"';
+	i = 0;
+	if (str[i] == '|')
+		return (1);
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
+
 int	ft_strlen_parsing(char	*str)
 {
 	int	i;
@@ -152,11 +169,13 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 	int		bufi;
 
 	bufi = 0;
+	printf("%s\n", buffer);
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
 			return (cmd);
-		len = ft_strlen_next_word(buffer);
+		len = ft_strlen_next_word_quotes(data, buffer);
+		printf("len %d\n", len);
 		str = ft_calloc(len + 1, sizeof(char));
 		if (!str)
 			return (NULL);
