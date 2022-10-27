@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 17:58:39 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:15:25 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,15 @@ char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
 t_list		*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data);
-t_list		*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int	len_max);
-t_list		*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer);
+t_list		*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int len_max);
+t_list		*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char *buffer);
 t_list		*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer);
 void		error_management(t_data	*data, char *buffer, t_list	*cmd);
 int			ft_redirection_files_check(t_data	*data, char	*buffer);
 int			ft_pipes_spaces_check(t_data	*data, char	*buffer);
 t_list		*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd);
 t_list		*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd);
+char		*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	*cmd);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
