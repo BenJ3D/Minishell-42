@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/10/19 18:18:03 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/10/27 17:29:40 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

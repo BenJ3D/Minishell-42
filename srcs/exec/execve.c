@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 13:21:18 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:31:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	int		i;
 
 	if (!progname)
-	{
-		free (envpaths);
 		return (NULL);
-	}
 	if(progname[0] == '/')
 		if (!access(progname, X_OK))
 		{
@@ -248,12 +245,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	cmdtab[ex.i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab, data);
-	// while(cmdtab[ex.i].lst)
-	// {
-	// 	printf("cmdtab[%i].hdcfd = %i\n", ex.i, cmdtab[ex.i].hdcfd);
-	// 	ex.i++;
-	// }
-	// ex.i = 0;
+	dbg_display_cmdtab(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)
