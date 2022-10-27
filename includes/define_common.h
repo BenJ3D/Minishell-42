@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/22 21:04:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:15:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@
 # define IN2 4	//	<<
 # define OUT1 5	//	>
 # define OUT2 6 //	>>
-# define INFILE 7 // le nom du fichier
+# define INFILE 7 // le nom du fichier si entrée
 # define INQUOTE 8 // les characteres de fin de quote
-# define OUTFILE 9 // le nom du fichier de sortie
+# define OUTFILE 9 // le nom du fichier si sortie
 
 # define NO_BUILTIN 0
 # define BUILT_CD 1

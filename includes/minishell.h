@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/25 21:21:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:19:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,21 @@ void		prompt_minishell(char **av, t_data *data);
 /* FT PARSING */
 int			ft_parsing_prompt(t_data *data, char *buffer);
 char		**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd);
-int			ft_count_pipe(char *buffer);
+int			ft_count_pipe(t_data	*data, char *buffer);
+void		ft_quotes_checker(t_data	*data, char	*str, int i);
+int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
+void		ft_reset_quotes_checker(t_data	*data);
+int			ft_node_quote_checker(t_data	*data);
+t_list		*ft_total_parsing(t_data	*data, char	*buffer);
+/*PARSING TESTS*/
+char		*ft_strjoin_parsing(char	*s1, char *s2);
+int			ft_strlen_parsing(char	*str);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data);
+t_list		*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int	len_max);
+t_list		*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer);
+t_list		*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer);
+void		error_management(t_data	*data, char *buffer, t_list	*cmd);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
@@ -127,5 +141,9 @@ int			ft_redi_in1v2(int fd);
 /* FT AART */
 void		handler_interative(int signum);
 void		interactive_mode(void);
+
+// avoid compilation crash
+void	rl_replace_line(const char *text, int clear_undo);
+void	rl_clear_history(void);
 
 #endif

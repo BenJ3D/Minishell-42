@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 17:26:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:54:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	ft_init_minishell(t_data *data)
 {
 	data->pgr_name = ft_strdup("MiniHell");
+	data->s_quotes_switch = 0;
+	data->d_quotes_switch = 0;
 	data->savefd[0] = dup(STDIN_FILENO);
 	data->savefd[1] = dup(STDOUT_FILENO);
 }
@@ -171,11 +173,6 @@ int	main(int ac, char **av, char **envp)
 	// ft_putnbr(g_status % 255);
 	// puts("\n");
 
-
-
-
-
-	
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
 	// int p[2];
 	// int	b;

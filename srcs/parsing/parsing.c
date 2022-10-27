@@ -3,16 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/12 16:00:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:51:03 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_count_pipe(char *buffer) //ft pour test sans parsing
+void	ft_cmf_first_type(t_list	*tmp)
+{
+	if (tmp->str[0] == '>')
+	{
+		if (tmp->str[1] == '>')
+			tmp->type = OUT2;
+		else
+			tmp->type = OUT1;
+		tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+		tmp = tmp->next;
+	}
+	else if (tmp->str[0] == '<')
+	{
+		if (tmp->str[1] == '<')
+			tmp->type = IN2;
+		else
+			tmp->type = IN1;
+	}
+	else
+		tmp->type = CMD;
+}
+
+int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
 {
 	int	i;
 	int	len;
@@ -20,8 +42,11 @@ int	ft_count_pipe(char *buffer) //ft pour test sans parsing
 	i = 0;
 	len = 0;
 	while(buffer[i])
-		if (buffer[i++] == '|')
+	{
+		ft_quotes_checker(data, buffer, i);
+		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
 			len++;
+	}
 	return (len);
 }
 
@@ -58,7 +83,9 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 	if (!lst)
 		return (-1);
 	tmp = lst;
-	tmp->type = CMD;
+	ft_cmf_first_type(tmp);
+	printf("%d\n", lst->type);
+	//tmp->type = CMD;
 	tmp = tmp->next;
 	while (tmp)
 	{
@@ -68,7 +95,7 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE;
+			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
 			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<')
@@ -204,13 +231,18 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		bufi;
 	int		i;
 	
-	pipe = ft_count_pipe(buffer);
+	pipe = ft_count_pipe(data, buffer);
 	if (pipe == 0)
 		pipe++;
 	i = 0;
 	bufi = 0;
-	data->cmdtoparse = ft_split_buffercmd_in_lst(buffer, 0);
-	//TODO: gerer les erreurs de syntaxes
+	if (!ft_full_prompt_quote_check(data, buffer))
+	{
+		exit(42);
+		return (0);
+	}
+	data->cmdtoparse = ft_total_parsing(data, buffer);
+	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
 	ft_define_cmd_type(data->cmdtoparse);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
