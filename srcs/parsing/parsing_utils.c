@@ -6,13 +6,40 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 17:37:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:09:27 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO: a normer !!
+int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
+{
+	int	pin;
+
+	pin = 0;
+	while (buffer[pin] < 33 || buffer[pin] > 126 && buffer[pin] != '\0')
+	{
+		if (buffer[pin] == '|')
+			return (0);
+	}
+	return (1);
+}
+
+int	ft_redirection_files_check(t_data	*data, char	*buffer)
+{
+	int	pin;
+
+	pin = 0;
+	while (buffer[pin] < 33 || buffer[pin] > 126 && buffer[pin] != '\0')
+	{
+		if (buffer[pin] == '|' || buffer[pin] == '<' || buffer[pin] == '>')
+			return (0);
+		pin++;
+	}
+	return (1);
+}
+
+static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 {
 	t_list	*tmp;
 
@@ -27,7 +54,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO:
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+			tmp->next->type = OUTFILE;
 			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<')
@@ -114,7 +141,7 @@ int	ft_strlen_parsing(char	*str)
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-	return (i);	
+	return (i);
 }
 
 t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
@@ -134,7 +161,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 		if (!str)
 			return (NULL);
 		i = 0;
-		while(len-- > 0)
+		while (len-- > 0)
 			str[i++] = buffer[bufi++];
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
@@ -153,7 +180,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 	bufi = 0;
 	while (buffer[bufi])
 	{
-		while(ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
+		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
 			return (cmd);
@@ -162,7 +189,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 		if (!str)
 			return (NULL);
 		i = 0;
-		while(len-- > 0)
+		while (len-- > 0)
 			str[i++] = buffer[bufi++];
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);

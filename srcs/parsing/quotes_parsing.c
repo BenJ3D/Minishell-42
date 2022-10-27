@@ -6,59 +6,17 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 17:03:36 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:58:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	*cmd)
-{
-	int	len;
-	int	pin;
-	int	pan;
-	char	*value_env;
-
-	len = 0;
-	data->i++;
-	pin = data->i;
-	value_env = NULL;
-	while (buffer[data->i] && ((buffer[data->i] >= 'A' && buffer[data->i] <= \
-		'Z') || buffer[data->i] == '_') && buffer[data->i] != DOUBLE_QUOTE)
-	{
-		data->i++;
-		len++;
-	}
-	if (len != 0)
-	{
-		value_env = ft_calloc(sizeof(char) , len + 1);
-		pan = 0;
-		while (pan < len)
-			value_env[pan++] = buffer[pin++];
-		value_env[pan] = '\0';
-		if (cmd->type != IN1 && cmd->type != IN2)
-		{
-			value_env = ft_env_getstr_env_value(data->env, value_env);
-			if (!value_env)
-			{
-				free(value_env);
-				return (NULL);
-			}
-		}
-		if (semi_final != NULL)
-		{
-			semi_final = ft_strjoin_parsing(semi_final, value_env);
-			free(value_env);
-		}
-	}
-	return (semi_final);
-}
-
 t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 {
-	int	pin;
-	int	pan;
-	int	len;
+	int		pin;
+	int		pan;
+	int		len;
 	char	*semi_final;
 
 	semi_final = NULL;
@@ -103,9 +61,9 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 
 t_list	*ft_simple_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 {
-	int	pin;
-	int	pan;
-	int	len;
+	int		pin;
+	int		pan;
+	int		len;
 	char	*semi_final;
 
 	if (buffer[data->i] == SIMPLE_QUOTE)
@@ -134,7 +92,7 @@ t_list	*ft_simple_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 	return (cmd);
 }
 
-t_list	*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int	len_max)
+t_list	*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int len_max)
 {
 	if (data->d_quotes_switch == 1)
 		cmd = ft_double_quotes(data, cmd, buffer, len_max);

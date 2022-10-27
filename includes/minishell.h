@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/22 18:52:53 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:31:58 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_list		*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int	len_max);
 t_list		*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer);
 t_list		*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer);
 void		error_management(t_data	*data, char *buffer, t_list	*cmd);
+int			ft_redirection_files_check(t_data	*data, char	*buffer);
+int			ft_pipes_spaces_check(t_data	*data, char	*buffer);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
