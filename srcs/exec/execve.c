@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 16:09:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:31:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO
 	int		i;
 
 	if (!progname)
-	{
-		free (envpaths);
 		return (NULL);
-	}
 	if(progname[0] == '/')
 		if (!access(progname, X_OK))
 		{
