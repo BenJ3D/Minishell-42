@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 11:09:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:00:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
 	int	pin;
 
 	pin = 0;
-	while (buffer[pin] < 33 || buffer[pin] > 126 && buffer[pin] != '\0')
+	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
 	{
 		if (buffer[pin] == '|')
 			return (0);
@@ -30,7 +30,7 @@ int	ft_redirection_files_check(t_data	*data, char	*buffer)
 	int	pin;
 
 	pin = 0;
-	while (buffer[pin] < 33 || buffer[pin] > 126 && buffer[pin] != '\0')
+	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
 	{
 		if (buffer[pin] == '|' || buffer[pin] == '<' || buffer[pin] == '>')
 			return (0);
@@ -166,6 +166,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
+	cmd->heavy = 1;
 	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }
@@ -194,6 +195,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
+	cmd->heavy = 0;
 	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }

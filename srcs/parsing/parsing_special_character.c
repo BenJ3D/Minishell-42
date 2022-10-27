@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 11:44:26 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:59:43 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 	return (i);
 }
 
-static t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
+t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
 {
 	int	len;
 
@@ -53,7 +53,7 @@ static t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
 	return (cmd);
 }
 
-static t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
+t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
 {
 	int	len;
 
