@@ -33,6 +33,7 @@ typedef struct	s_envlst
 typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls -> -all -> (pipe) -> cat -> -e -> (null))
 {
 	int				type;
+	int				heavy;
 	char			*str;
 	struct s_list	*next;
 }					t_list;

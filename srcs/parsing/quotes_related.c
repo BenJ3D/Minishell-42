@@ -6,12 +6,11 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:49:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 17:02:50 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:11:20 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-
 
 void	ft_reset_quotes_checker(t_data	*data)
 {
@@ -33,11 +32,11 @@ void	ft_quotes_checker(t_data	*data, char	*str, int i)
 		if (data->d_quotes_switch == 0)
 			data->d_quotes_switch = 1;
 		else if (data->d_quotes_switch == 1)
-			data->d_quotes_switch = 0;	
+			data->d_quotes_switch = 0;
 	}
 }
 
-int		ft_node_quote_checker(t_data	*data)
+int	ft_node_quote_checker(t_data	*data)
 {
 	t_list	*begin;
 	int		i;
