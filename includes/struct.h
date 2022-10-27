@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 21:08:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:04:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ typedef struct s_data
 	int			nbpipes;
 	int			fd[2];				//pour pipe
 	int			savefd[2];				//pour pipe
+	int			s_quotes_switch;
+	int			d_quotes_switch;
+	int			i;
+	int			first_cmd;
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
 }				t_data;
