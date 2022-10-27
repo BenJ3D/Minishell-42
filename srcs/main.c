@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/13 19:27:24 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:54:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,11 +173,6 @@ int	main(int ac, char **av, char **envp)
 	// ft_putnbr(g_status % 255);
 	// puts("\n");
 
-
-
-
-
-	
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
 	// int p[2];
 	// int	b;
