@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 18:08:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:32:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	prompt_minishell(char **av, t_data *data)
 		free(data->line);
 	free(data->buffer);
 	rl_on_new_line();
+	rl_replace_line("exit", 5);
+
 }
 
 
