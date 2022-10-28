@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 02:22:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,42 @@ void	ft_lstclear(t_list **lst)
 			ft_lstdelone(*lst);
 			(*lst) = tmp;
 		}
+	}
+}
+
+void ft_create_tab_whith_list(t_list *lst, char **tab)//copilote idée TODO:
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		tab[i] = ft_strdup(lst->str);
+		lst = lst->next;
+		i++;
+	}
+}
+
+void ft_sorttab(char **tab)//copilote idée TODO:
+{
+	int i;
+	int j;
+	char *tmp;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = i + 1;
+		while (tab[j])
+		{
+			if (ft_strcmp(tab[i], tab[j]) > 0)
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
+		i++;
 	}
 }
