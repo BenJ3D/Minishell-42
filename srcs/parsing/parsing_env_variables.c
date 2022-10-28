@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 18:16:49 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:05:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	*cmd)
+char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 {
 	int		len;
 	int		pin;
@@ -36,7 +36,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	
 		while (pan < len)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		if (cmd->type != IN1 && cmd->type != IN2)
+		if (data->cmdtoparse->type != IN1 && data->cmdtoparse->type != IN2)
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
 			if (!value_env)
@@ -54,14 +54,14 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final, t_list	
 	return (semi_final);
 }
 
-t_list	*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer)
+t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 {
 	int		pin;
 	int		pan;
 	int		len;
 	char	*value_env;
 
-	if (cmd->str[0] != '<')
+	if (data->cmdtoparse->str[0] != '<')
 		data->i++;
 	pin = data->i;
 	len = 0;
@@ -77,17 +77,17 @@ t_list	*ft_parsing_env_variable(t_data	*data, t_list	*cmd, char	*buffer)
 		while (pin < data->i)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		if (cmd->str[0] != '<')
+		if (data->cmdtoparse->str[0] != '<')
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
 			if (!value_env)
-				return (cmd);
+				return (data->cmdtoparse);
 		}
-		cmd = ft_buffercmd_in_lst(value_env, cmd, data);
+		ft_buffercmd_in_lst(value_env, data, 0);
 		free(value_env);
 		ft_quotes_checker(data, buffer, data->i);
 	}
 	else
-		cmd = ft_buffercmd_in_lst("$", cmd, data);
-	return (cmd);
+		ft_buffercmd_in_lst("$", data, 1);
+	return (data->cmdtoparse);
 }

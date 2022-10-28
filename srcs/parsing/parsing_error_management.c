@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_management.c                                 :+:      :+:    :+:   */
+/*   parsing_error_management.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:14:49 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/26 11:47:01 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:33:48 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	free_the_birds(t_list	*cmd)
+void	free_the_birds(t_data	*data)
 {
-	while (cmd)
+	while (data->cmdtoparse)
 	{
-		free(cmd->str);
-		cmd = cmd->next;
+		free(data->cmdtoparse->str);
+		data->cmdtoparse = data->cmdtoparse->next;
 	}
 }
 
-void	error_management(t_data	*data, char *buffer, t_list	*cmd)
+void	error_management(t_data	*data)
 {
 	ft_putstr_fd("Syntax Error\n", 2);
-	free_the_birds(cmd);
+	free_the_birds(data);
 }

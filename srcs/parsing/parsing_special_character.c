@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 16:07:26 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:46:12 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 	return (i);
 }
 
-t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
+int	ft_redirect_me_now(t_data	*data, char	*buffer)
 {
 	int	len;
 
@@ -34,23 +34,23 @@ t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
 	{
 		len = ft_get_len_until_redirection(data, buffer, '>');
 		if (len == 1)
-			cmd = ft_buffercmd_in_lst(">", cmd, data);
+			ft_buffercmd_in_lst(">", data, 0);
 		else if (len == 2)
-			cmd = ft_buffercmd_in_lst(">>", cmd, data);
+			ft_buffercmd_in_lst(">>", data, 0);
 		else if (len > 2)
-			return (NULL);
+			return (0);
 	}
 	else if (buffer[data->i] == '<')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '<');
 		if (len == 1)
-			cmd = ft_buffercmd_in_lst("<", cmd, data);
+			ft_buffercmd_in_lst("<", data, 0);
 		else if (len == 2)
-			cmd = ft_buffercmd_in_lst("<<", cmd, data);
+			ft_buffercmd_in_lst("<<", data, 0);
 		else if (len > 2)
-			return (NULL);
+			return (0);
 	}
-	return (cmd);
+	return (1);
 }
 
 int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
@@ -65,7 +65,7 @@ int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
 	return (1);
 }
 
-t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
+int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 {
 	int	len;
 
@@ -77,11 +77,11 @@ t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
 		len++;
 	}
 	if (len == 1)
-		cmd = ft_buffercmd_in_lst("|", cmd, data);
+		ft_buffercmd_in_lst("|", data, 0);
 	else
-		return (NULL);
+		return (0);
 	if (!ft_pipes_spaces_check(data, buffer + data->i)){
-		return (NULL);
+		return (0);
 	}
-	return (cmd);
+	return (1);
 }

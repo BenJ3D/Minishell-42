@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 10:33:36 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:54:26 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
+int	ft_parsing_others(t_data	*data, char	*buffer)
 {
 	int		pin;
 	int		len;
@@ -53,10 +53,10 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 			}
 		}
 		semi_final[pan] = '\0';
-		cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
+		ft_buffercmd_in_lst(semi_final, data, 0);
 		semi_final = NULL;
 		free(semi_final);
 		ft_quotes_checker(data, buffer, data->i);
 	}
-	return (cmd);
+	return (1);
 }
