@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 17:35:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:58:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,12 +204,12 @@ int	main(int ac, char **av, char **envp)
 	// aitpid(fat[1], NULL, 0);
 	// rintf("toute chose a une fin\n");
 
-	// char *tocmp = ft_strdup("bBB"); 
-	// char *tocmp2 = ft_strdup("BBB");
-	// int sizecmp = ft_strlen(tocmp);
-	// int ret;
-	// ret = ft_strncmp(tocmp, tocmp2, sizecmp); // si ret > 0 == tocmp > tocmp2 
-	// printf("ret = %i\n", ret);
+	char *tocmp = ft_strdup("PWD22"); 
+	char *tocmp2 = ft_strdup("PWD2");
+	int sizecmp = ft_strlen(tocmp);
+	int ret;
+	ret = ft_strncmp(tocmp, tocmp2, sizecmp); // si ret > 0 == tocmp > tocmp2 
+	printf("ret = %i\n", ret);
 	
 		
 

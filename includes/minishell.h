@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 17:59:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:40:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int			ft_shlvl_increment(t_envlst *env);
 t_envlst	*ft_env_lstnew(char *key, char *value, int isenv);
 t_envlst	*ft_env_lstlast(t_envlst *lst);
 int			ft_env_lstsize(t_envlst *lst);
+int			ft_env_lstsize_export(t_envlst *lst);
 void		ft_env_init_lst(char **envp, t_data *data);
 void		ft_env_lstadd_front(t_envlst **alst, t_envlst *new);
 void		ft_env_lstadd_back(t_envlst **alst, t_envlst *new);
@@ -112,7 +113,6 @@ void		ft_env_lstdelone(t_envlst *lst);
 void		ft_env_lstclear(t_envlst **lst);
 void		ft_env_lstclear_one(t_envlst **lst);
 void		ft_env_lstclear_one_first_element(t_envlst **lst);
-void		ft_sort_envlst_by_allocation_number(t_envlst *env);//abandonné??!
 char		**ft_env_return_envlst_sorted_in_tab(t_envlst *env);
 char		**ft_env_get_envtab(t_envlst *env);
 
@@ -138,6 +138,7 @@ void		dbg_lstdisplay_color_type(t_list *lst);
 void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
 void		dbg_display_errno(void);
+void		dbg_display_argv_choose_sep(char **argv, char *sep);
 
 /* FT DEBUG BEN A VIRER */
 void		dbg_fork_display_pid(const char *str); //TODO: FIXME:

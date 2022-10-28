@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/08 00:55:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:31:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,27 @@ int		ft_env_lstsize(t_envlst *lst)
 	{
 		if (tmp->isenv == 1)
 			i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+/**
+ * @brief returne la taille de la liste env
+ * 
+ * @param lst 
+ * @return int 
+ */
+int		ft_env_lstsize_export(t_envlst *lst)
+{
+	t_envlst	*tmp;
+	int			i;
+
+	tmp = lst;
+	i = 0;
+	while (tmp)
+	{
+		i++;
 		tmp = tmp->next;
 	}
 	return (i);

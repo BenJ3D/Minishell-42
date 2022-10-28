@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 18:55:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:59:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,15 @@ char	**ft_env_get_envtab(t_envlst *env) //FIXME: move to env file
 	if (!env)
 		return (NULL);
 	tmp = env;
-	tab = ft_calloc(ft_env_lstsize(env) + 1, sizeof(char **));
+	tab = ft_calloc(ft_env_lstsize_export(env) + 1, sizeof(char **));
 	i = 0;
 	while(tmp)
 	{
-		tab[i] = ft_strjoin_max("%s=%s", tmp->key, tmp->value);
+		if (tmp->isenv == 1)
+			tab[i] = ft_strjoin_max("%s=\"%s\"", tmp->key, tmp->value);
+		else
+			tab[i] = ft_strdup(tmp->key);
+			
 		tmp = tmp->next;
 		i++;
 	}
@@ -65,12 +69,13 @@ char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env fi
 	char	**tab;
 	char	*tmp;
 	int		i;
-
+	int		tabsize;
 	i = 0;
 	tab = ft_env_get_envtab(env);
+	tabsize = ft_env_lstsize(env);
 	while(tab[i])
 	{
-		if (ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i])) > 0)
+		if (tab[i + 1] && ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i])) > 0)
 		{
 			tmp = ft_strdup(tab[i]);
 			free (tab[i]);
@@ -84,68 +89,25 @@ char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env fi
 	}
 	return (tab);
 }
-// void	ft_sort_envlst_by_allocation_number(t_envlst *env)
-// {
-// 	t_envlst	*tmp;
-// 	char		*tocmp;
-// 	char		*winner;
-// 	int			sizecmp;
-// 	int			sizelst;
-// 	int			count;
-
-// 	if (!env)
-// 		return ;
-// 	tmp = env;
-// 	winner = NULL;
-// 	sizelst = ft_env_lstsize(env);
-// 	count = 0;
-// 	while (tmp)
-// 	{
-// 		tmp->alphaorder = 0;
-// 		tmp = tmp->next;
-// 	}
-// 	tmp = env;
-// 	tocmp = ft_strdup(tmp->key); //prendre le premier element
-// 	while (tmp)
-// 	{
-// 		if (!(tocmp == NULL))
-// 			free (tocmp);
-// 		sizecmp = ft_strlen(tocmp);
-// 		if (ft_strncmp(tocmp, tmp->next->key, sizecmp) > 0)
-// 		{
-// 			winner = ft_strdup()
-// 		}
-// 		else
-// 			tmp = tmp->next;
-// 	}
-// }
 
 /**
  * @brief function print export
  * 
  * @param env 
  */
-static void	ft_print_export(t_envlst *env)
+static void	ft_print_export(t_envlst *env) //V2 sorted
 {
-	t_envlst	*tmp;
 	char		**tab;
-
-	tmp = env;
+	int			i;
+	
 	tab = ft_env_return_envlst_sorted_in_tab(env);
-	dbg_display_argv(tab);
-	while (tmp)
+	i = 0;
+	while (tab[i])
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tmp->key, 1);
-		if (tmp->value && tmp->isenv == 1)
-		{
-			ft_putchar_fd('=', 1);
-			ft_putchar_fd('"', 1);
-			ft_putstr_fd(tmp->value, 1);
-			ft_putchar_fd('"', 1);
-		}
+		ft_putstr_fd(tab[i], 1);
 		ft_putchar_fd('\n', 1);
-		tmp = tmp->next;
+		i++;
 	}
 }
 
