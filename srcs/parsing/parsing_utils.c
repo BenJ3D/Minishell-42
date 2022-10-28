@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 10:39:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:02:44 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 		free(str);
 	}
 	cmd->heavy = 1;
+	printf("%s %d\n", cmd->str, cmd->heavy);
 	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }
@@ -191,15 +192,16 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 			return (cmd);
 		len = ft_strlen_next_word(buffer + bufi);
 		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
 	}
-	cmd->heavy = 0;
+	if (cmd->str[0] == '|')
+		cmd->heavy = 1;
+	else
+		cmd->heavy = 0;
 	ft_define_cmd_type_during_parsing(cmd, data);
 	return (cmd);
 }

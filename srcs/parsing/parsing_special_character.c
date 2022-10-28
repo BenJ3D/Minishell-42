@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 14:20:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:07:26 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
 		len++;
 	}
 	if (len == 1)
-		cmd = ft_buffercmd_in_lst_quotes("|", cmd, data);
+		cmd = ft_buffercmd_in_lst("|", cmd, data);
 	else
 		return (NULL);
 	if (!ft_pipes_spaces_check(data, buffer + data->i)){

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 14:21:29 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:02:07 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_cmf_first_type(t_list	*tmp)
 			tmp->type = OUT2;
 		else
 			tmp->type = OUT1;
-		tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+		tmp->next->type = OUTFILE;
 		tmp = tmp->next;
 	}
 	else if (tmp->str[0] == '<')
@@ -76,18 +76,25 @@ static int	ft_strlen_next_word(char *str)
  * @param lst la lst avec toutes les commandes du buffer pas encore split
  * @return int 
  */
-static int	ft_define_cmd_type(t_list *lst)
+static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 {
 	t_list	*tmp;
 
 	if (!lst)
 		return (-1);
 	tmp = lst;
+	data->first_cmd = 0;
 	ft_cmf_first_type(tmp);
 	tmp = tmp->next;
 	while (tmp)
 	{
-		if (tmp->str[0] == '>' && tmp->heavy == 0)
+		printf("%s %d %d\n", tmp->str, data->first_cmd, tmp->heavy);
+		if (data->first_cmd == 1)
+		{
+			ft_cmf_first_type(tmp);
+			data->first_cmd = 0;
+		}
+		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
@@ -96,10 +103,7 @@ static int	ft_define_cmd_type(t_list *lst)
 			tmp->next->type = OUTFILE;
 			tmp = tmp->next;
 			if (tmp && tmp->str[0] != '|')
-			{
-				printf("test\n");
-				tmp->type = CMD;
-			}
+				data->first_cmd = 1;
 		}
 		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
@@ -115,21 +119,13 @@ static int	ft_define_cmd_type(t_list *lst)
 					tmp->next->type = INQUOTE;
 				tmp = tmp->next;
 				if (tmp && tmp->str[0] != '|')
-				{
-					printf("test\n");
-					tmp->type = CMD;
-				}
+					data->first_cmd = 1;
 			}
 		}
 		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
-			tmp = tmp->next;
-			if (tmp)
-			{
-				ft_cmf_first_type(tmp);
-				tmp = tmp->next;
-			}
+			data->first_cmd = 1;
 		}
 		else
 			tmp->type = ARG;
@@ -253,8 +249,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		return (0);
 	}
 	data->cmdtoparse = ft_total_parsing(data, buffer);
-	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
-	ft_define_cmd_type(data->cmdtoparse);
+	ft_define_cmd_type(data->cmdtoparse, data);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
