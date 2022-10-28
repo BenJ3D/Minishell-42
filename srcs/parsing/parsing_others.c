@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 11:57:34 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:33:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_list	*ft_parsing_others(t_data	*data, t_list	*cmd, char	*buffer)
 			}
 		}
 		semi_final[pan] = '\0';
-		printf("4 %s\n", semi_final);
 		cmd = ft_buffercmd_in_lst(semi_final, cmd, data);
 		semi_final = NULL;
 		free(semi_final);

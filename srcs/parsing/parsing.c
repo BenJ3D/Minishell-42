@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 14:51:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:34:15 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 		return (-1);
 	tmp = lst;
 	ft_cmf_first_type(tmp);
-	printf("%d\n", lst->type);
 	//tmp->type = CMD;
 	tmp = tmp->next;
 	while (tmp)
