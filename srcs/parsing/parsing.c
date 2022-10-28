@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 12:19:16 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:21:29 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,10 @@ static int	ft_define_cmd_type(t_list *lst)
 		return (-1);
 	tmp = lst;
 	ft_cmf_first_type(tmp);
-	//tmp->type = CMD;
 	tmp = tmp->next;
 	while (tmp)
 	{
-		if (tmp->str[0] == '>')
+		if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
@@ -99,11 +98,10 @@ static int	ft_define_cmd_type(t_list *lst)
 			if (tmp && tmp->str[0] != '|')
 			{
 				printf("test\n");
-				tmp->type = CMD; 
-				tmp = tmp->next;
+				tmp->type = CMD;
 			}
 		}
-		else if (tmp->str[0] == '<')
+		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '<')
 				tmp->type = IN2;
@@ -118,12 +116,12 @@ static int	ft_define_cmd_type(t_list *lst)
 				tmp = tmp->next;
 				if (tmp && tmp->str[0] != '|')
 				{
-					tmp->type = CMD; 
-					tmp = tmp->next;
+					printf("test\n");
+					tmp->type = CMD;
 				}
 			}
 		}
-		else if (tmp->str[0] == '|')
+		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
 			tmp = tmp->next;
