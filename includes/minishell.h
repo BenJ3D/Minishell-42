@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 18:19:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:10:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
 int			ft_env_check_if_key_exist(t_envlst *env, char *key);
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
 char		*ft_env_extract_key_name(char *str, int *isenv);
+char		*ft_env_extract_key(char *str);
 char		*ft_env_extract_value_content(char *str);
 int			ft_shlvl_increment(t_envlst *env);
 
@@ -105,6 +106,7 @@ int			ft_shlvl_increment(t_envlst *env);
 t_envlst	*ft_env_lstnew(char *key, char *value, int isenv);
 t_envlst	*ft_env_lstlast(t_envlst *lst);
 int			ft_env_lstsize(t_envlst *lst);
+int			ft_env_lstsize_export(t_envlst *lst);
 void		ft_env_init_lst(char **envp, t_data *data);
 void		ft_env_lstadd_front(t_envlst **alst, t_envlst *new);
 void		ft_env_lstadd_back(t_envlst **alst, t_envlst *new);
@@ -112,6 +114,8 @@ void		ft_env_lstdelone(t_envlst *lst);
 void		ft_env_lstclear(t_envlst **lst);
 void		ft_env_lstclear_one(t_envlst **lst);
 void		ft_env_lstclear_one_first_element(t_envlst **lst);
+char		**ft_env_return_envlst_sorted_in_tab(t_envlst *env);
+char		**ft_env_get_envtab(t_envlst *env);
 
 /* FT LIST */
 void		ft_lstadd_back(t_list **alst, t_list *new);
@@ -120,6 +124,8 @@ t_list		*ft_lstlast(t_list *lst);
 int			ft_lstsize(t_list *lst);
 void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
+int			ft_lst_count_cmdarg(t_list *lst);
+
 
 /* FT FREE */
 int			ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab);
@@ -133,6 +139,7 @@ void		dbg_lstdisplay_color_type(t_list *lst);
 void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
 void		dbg_display_errno(void);
+void		dbg_display_argv_choose_sep(char **argv, char *sep);
 
 /* FT DEBUG BEN A VIRER */
 void		dbg_fork_display_pid(const char *str); //TODO: FIXME:

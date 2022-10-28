@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 17:31:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:13:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,12 +197,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 		}
 	}
-		// dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
-		// if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
-		// 	ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
-		// dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
-		// close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
-	
 	return (father);
 }
 
@@ -245,7 +239,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	cmdtab[ex.i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab, data);
-	dbg_display_cmdtab(cmdtab);
+	// dbg_display_cmdtab(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)

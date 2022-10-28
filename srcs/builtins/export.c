@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/08 01:31:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:10:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data);
 static void	ft_print_export(t_envlst *env);
 
 //TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et 
-														//que des alphanumeric)
+														 //que des alphanumeric)
 /**
  * @brief Fonction mère à appeler, TODO: parsing a faire
  * 
@@ -26,43 +26,119 @@ static void	ft_print_export(t_envlst *env);
  */
 int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 {
+	int	i;
+	
 	if (!cmd[1] || cmd[1][0] == '\0')
 		ft_print_export(env);
 	else
-		ft_main_export(env, cmd[1], data);
+	{
+		i = 1;
+		while (cmd[i])
+			ft_main_export(env, cmd[i++], data);
+	}
 	return (0);
 }
 
 
+char	**ft_env_get_envtab(t_envlst *env) //FIXME: move to env file
+{
+	char		**tab;
+	t_envlst	*tmp;
+	int			i;
+	
+	if (!env)
+		return (NULL);
+	tmp = env;
+	tab = ft_calloc(ft_env_lstsize_export(env) + 1, sizeof(char **));
+	i = 0;
+	while(tmp)
+	{
+		if (tmp->isenv == 1)
+			tab[i] = ft_strjoin_max("%s=\"%s\"", tmp->key, tmp->value);
+		else
+			tab[i] = ft_strdup(tmp->key);
+			
+		tmp = tmp->next;
+		i++;
+	}
+	return (tab);
+}
+
+char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env file
+{
+	char	**tab;
+	char	*tmp;
+	char	*cmp1;
+	char	*cmp2;
+	int		i;
+	int		tabsize;
+
+	i = 0;
+	tab = ft_env_get_envtab(env);
+	tabsize = ft_env_lstsize(env);
+	while(tab[i + 1])
+	{
+		cmp1 = ft_env_extract_key(tab[i]);
+		cmp2 = ft_env_extract_key(tab[i + 1]);
+		if (ft_strcmp(cmp1, cmp2) > 0)
+		{
+			tmp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = tmp;
+			tmp = NULL;
+			i = -1;
+		}
+		free(cmp1);
+		free(cmp2);
+		i++;
+	}
+	return (tab);
+}
 
 /**
  * @brief function print export
  * 
  * @param env 
  */
-static void	ft_print_export(t_envlst *env)
+static void	ft_print_export(t_envlst *env) //V2 sorted
 {
-	t_envlst	*tmp;
-
-	tmp = env;
-	while (tmp)
+	char		**tab;
+	int			i;
+	
+	tab = ft_env_return_envlst_sorted_in_tab(env);
+	i = 0;
+	while (tab[i])
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tmp->key, 1);
-		if (tmp->value && tmp->isenv == 1)
-		{
-			ft_putchar_fd('=', 1);
-			ft_putchar_fd('"', 1);
-			ft_putstr_fd(tmp->value, 1);
-			ft_putchar_fd('"', 1);
-		}
+		ft_putstr_fd(tab[i], 1);
 		ft_putchar_fd('\n', 1);
-		tmp = tmp->next;
+		i++;
 	}
 }
 
+// static void	ft_print_export(t_envlst *env)
+// {
+// 	t_envlst	*tmp;
+
+// 	tmp = env;
+// 	while (tmp)
+// 	{
+// 		ft_putstr_fd("declare -x ", 1);
+// 		ft_putstr_fd(tmp->key, 1);
+// 		if (tmp->value && tmp->isenv == 1)
+// 		{
+// 			ft_putchar_fd('=', 1);
+// 			ft_putchar_fd('"', 1);
+// 			ft_putstr_fd(tmp->value, 1);
+// 			ft_putchar_fd('"', 1);
+// 		}
+// 		ft_putchar_fd('\n', 1);
+// 		tmp = tmp->next;
+// 	}
+// }
+
 /**
- * @brief vérifie si la key est NULL
+ * @brief vérifie si la key est NULL //TODO: doit tchecker le normage des key env
  * 
  * @param key 
  * @return int 
@@ -139,44 +215,4 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
 	free (key);
 	return (0);
 }
-// static int	ft_main_export(t_envlst *env, char *str, t_data *data)
-// {
-// 	char		*key;
-// 	char		*value;
-// 	int			isenv;
-// 	int			_bool;
-// 	t_envlst	*ret;
-	
-// 	isenv = TRUE;
-// 	_bool = FALSE;
-// 	key = ft_env_extract_key_name(str, &isenv);
-// 	ret = ft_env_getenv_lst_value(env, key);
-// 	if (key == NULL)
-// 	{
-// 		key = ft_strdup(str);
-// 		_bool = TRUE;
-// 		isenv = FALSE;
-// 	}
-// 	else
-// 	{
-// 		if (ret == NULL || _bool == FALSE)
-// 			value = ft_env_extract_value_content(str);
-// 		else
-// 			value = ft_strdup(ret->value);
-// 	}
-// 	if (ret)
-// 	{
-// 		ret->isenv = isenv;
-// 		if (!ft_strequal(env->value, value))
-// 		{
-// 			free(ret->value);
-// 			ret->value = ft_strdup(value);
-// 			ret->isenv = TRUE;
-// 		}
-// 	}
-// 	else
-// 		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
-// 	free (key);
-// 	free (value);
-// 	return (0);
-// }
+
