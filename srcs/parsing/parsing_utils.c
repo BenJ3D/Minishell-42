@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 13:45:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:39:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-
-int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
-{
-	int	pin;
-
-	pin = 0;
-	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
-	{
-		if (buffer[pin] == '|')
-			return (0);
-	}
-	return (1);
-}
 
 int	ft_redirection_files_check(t_data	*data, char	*buffer)
 {
@@ -169,13 +156,11 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 	int		bufi;
 
 	bufi = 0;
-	printf("%s\n", buffer);
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
 			return (cmd);
 		len = ft_strlen_next_word_quotes(data, buffer);
-		printf("len %d\n", len);
 		str = ft_calloc(len + 1, sizeof(char));
 		if (!str)
 			return (NULL);
