@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 21:48:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:10:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,28 @@ char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env fi
 {
 	char	**tab;
 	char	*tmp;
+	char	*cmp1;
+	char	*cmp2;
 	int		i;
 	int		tabsize;
+
 	i = 0;
 	tab = ft_env_get_envtab(env);
 	tabsize = ft_env_lstsize(env);
 	while(tab[i + 1])
 	{
-		// printf("strncmp %s(%i) et %s(%i) sur %i size", tab[i], i, tab[i+1], i\
-		// 													ft_strlen(tab[i]));
-		if (ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i]) + 1) > 0)
+		cmp1 = ft_env_extract_key(tab[i]);
+		cmp2 = ft_env_extract_key(tab[i + 1]);
+		if (ft_strcmp(cmp1, cmp2) > 0)
 		{
-			tmp = ft_strdup(tab[i]);
-			free (tab[i]);
-			tab[i] = ft_strdup(tab[i + 1]);
-			free (tab[i + 1]);
-			tab[i + 1] = ft_strdup(tmp);
-			free (tmp);
+			tmp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = tmp;
+			tmp = NULL;
 			i = -1;
 		}
+		free(cmp1);
+		free(cmp2);
 		i++;
 	}
 	return (tab);

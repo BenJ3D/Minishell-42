@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 16:26:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:11:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,43 @@ char	*ft_env_extract_key_name(char *str, int *isenv) //TODO: norme
 	while (str[len] != '=' && str[len])
 		len++;
 	len++;//TODO: verifier si np si str[len]=='\0'
+	tmp = ft_calloc(len, sizeof(char));
+	i = 0;
+	while (str[i] != '=' && str[i])
+	{
+		tmp[i] =  str[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
+}
+
+/**
+ * @brief pour triage export (ne set pas isenv comme ft_env_extract_key_name)
+ * 
+ * @param str 
+ * @return char* 
+ */
+char	*ft_env_extract_key(char *str)
+{
+	int		i;
+	int		len;
+	char	*tmp;
+ 
+	i = 1;
+	len = 0;
+	while (str[i])
+		if (str[i++] == '=')
+			len++;
+	if (len == 0)
+	{
+		tmp = ft_strdup(str);
+		return (tmp);
+	}
+	len = 0;
+	while (str[len] != '=' && str[len])
+		len++;
+	len++;
 	tmp = ft_calloc(len, sizeof(char));
 	i = 0;
 	while (str[i] != '=' && str[i])

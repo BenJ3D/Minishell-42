@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 11:52:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:13:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	data->cmdtoparse = ft_total_parsing(data, buffer);
 	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
 	ft_define_cmd_type(data->cmdtoparse);
-	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	// dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
@@ -282,7 +282,7 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	if (argv[0] == NULL)
 		argv[0] = ft_strdup("");
 	// printf("nbword = %i\n And start argv dbg : \n", nbword);//TODO: a revoir quand type est corrigé
-	dbg_display_argv(argv);
+	// dbg_display_argv(argv);
 	return (argv);
 }
 
