@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 18:16:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:55:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,26 @@ char	**ft_env_get_envtab(t_envlst *env) //FIXME: move to env file
 
 char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env file
 {
-	char **tab;
+	char	**tab;
+	char	*tmp;
+	int		i;
 
+	i = 0;
 	tab = ft_env_get_envtab(env);
-	
+	while(tab[i])
+	{
+		if (ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i])) > 0)
+		{
+			tmp = ft_strdup(tab[i]);
+			free (tab[i]);
+			tab[i] = ft_strdup(tab[i + 1]);
+			free (tab[i +1 ]);
+			tab[i + 1] = ft_strdup(tmp);
+			free (tmp);
+			i = -1;
+		}
+		i++;
+	}
 	return (tab);
 }
 // void	ft_sort_envlst_by_allocation_number(t_envlst *env)
