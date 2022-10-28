@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 18:45:28 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:17:15 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_cmf_first_type(t_list	*tmp)
+void	ft_cmd_first_type(t_list	*tmp)
 {
 	if (tmp->str[0] == '>')
 	{
@@ -39,7 +39,10 @@ void	ft_cmf_first_type(t_list	*tmp)
 		}
 	}
 	else
+	{
 		tmp->type = CMD;
+		tmp = tmp->next;
+	}
 }
 
 int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
@@ -81,7 +84,7 @@ static int	ft_strlen_next_word(char *str)
  * @brief donne un type a chaque commande, pour faciliter le parsing en execve
  * ATTENTION : les erreurs de syntax doivent deja etre gerer en amont, 
  * sinon risque de SEGV
- * @param lst la lst avec toutes les commandes du buffer pas encore split
+ * @param  lst la lst avec toutes les commandes du buffer pas encore split
  * @return int 
  */
 static int	ft_define_cmd_type(t_list *lst, t_data	*data)
@@ -96,11 +99,11 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	{
 		if (data->first_cmd == 1)
 		{
-			ft_cmf_first_type(tmp);
+			ft_cmd_first_type(tmp);
 			tmp = tmp->next;
 			data->first_cmd = 0;
 		}
-		else if (tmp->str[0] == '>' && tmp->heavy == 0)
+		if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
@@ -186,7 +189,6 @@ void	ft_init_cmdtab_value(t_cmdtab *cmdtab)
 	// 	cmdtab->redirection = 0;
 	// 	cmdtab->rediarg = NULL;
 	// }
-	
 }
 
 /**
@@ -250,10 +252,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	i = 0;
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
-	{
-		exit(42);
 		return (0);
-	}
 	ft_total_parsing(data, buffer);
 	ft_define_cmd_type(data->cmdtoparse, data);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:

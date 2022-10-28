@@ -1,0 +1,14 @@
+total 400
+drwxr-xr-x  13 hmarconn  4221     442 Oct 28 19:07 .
+drwxr-xr-x  14 hmarconn  4221     476 Oct 28 14:13 ..
+drwxr-xr-x  15 hmarconn  4221     510 Oct 28 19:07 .git
+-rw-r--r--   1 hmarconn  4221     455 Oct 27 09:35 .gitignore
+drwxr-xr-x   6 hmarconn  4221     204 Oct 12 16:26 .vscode
+-rw-r--r--   1 hmarconn  4221    4299 Oct 28 11:59 Makefile
+-rw-r--r--   1 hmarconn  4221      13 Oct 12 16:26 README.md
+drwxr-xr-x   6 hmarconn  4221     204 Oct 28 11:59 includes
+drwxr-xr-x   3 hmarconn  4221     102 Oct 12 16:26 libs
+-rwxr-xr-x   1 hmarconn  4221  187632 Oct 28 19:07 minishell
+drwxr-xr-x  11 hmarconn  4221     374 Oct 28 17:54 obj
+drwxr-xr-x  11 hmarconn  4221     374 Oct 28 11:59 srcs
+-rw-r--r--   1 hmarconn  4221       0 Oct 28 19:07 test

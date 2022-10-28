@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 17:46:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:50:39 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 	int	len;
 
 	len = 0;
+	printf("test de parsing\n");
+	printf("le type de celui d'avant %d\n", data->cmdtoparse->type);
+	if (data->cmdtoparse->type == IN1 || data->cmdtoparse->type == IN2 || \
+		data->cmdtoparse->type == OUT1 || data->cmdtoparse->type == OUT2)
+	{
+		printf("testeur\n");		
+		error_management(data);
+	}
 	while (buffer[data->i] == '|')
 	{
 		
