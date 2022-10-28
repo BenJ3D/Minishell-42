@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:59:56 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 18:40:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 21:43:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int			ft_intlen(long long nb);
 int			ft_putunnbr_fd(unsigned int n, int fd);
 int			ft_strnequal(const char *s1, const char *s2, size_t n);
 int			ft_strequal(const char *s1, const char *s2);
+void		ft_sort_param(int argc, char ***argv);
+void		ft_swap_str(char *a, char *b);
+int			ft_strcmp(char *s1, char *s2);
 
 //chained list
 t_lst_void	*ft_lstnew_void(void *content);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 20:59:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 21:48:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,16 @@ char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env fi
 	i = 0;
 	tab = ft_env_get_envtab(env);
 	tabsize = ft_env_lstsize(env);
-	while(tab[i])
+	while(tab[i + 1])
 	{
-		if (tab[i + 1] && ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i])) > 0)
+		// printf("strncmp %s(%i) et %s(%i) sur %i size", tab[i], i, tab[i+1], i\
+		// 													ft_strlen(tab[i]));
+		if (ft_strncmp(tab[i], tab[i + 1], ft_strlen(tab[i]) + 1) > 0)
 		{
 			tmp = ft_strdup(tab[i]);
 			free (tab[i]);
 			tab[i] = ft_strdup(tab[i + 1]);
-			free (tab[i +1 ]);
+			free (tab[i + 1]);
 			tab[i + 1] = ft_strdup(tmp);
 			free (tmp);
 			i = -1;
