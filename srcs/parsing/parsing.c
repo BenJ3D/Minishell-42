@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 10:34:15 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:19:16 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	ft_strlen_next_word(char *str)
  * @param lst la lst avec toutes les commandes du buffer pas encore split
  * @return int 
  */
-static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
+static int	ft_define_cmd_type(t_list *lst)
 {
 	t_list	*tmp;
 
@@ -94,8 +94,14 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+			tmp->next->type = OUTFILE;
 			tmp = tmp->next;
+			if (tmp && tmp->str[0] != '|')
+			{
+				printf("test\n");
+				tmp->type = CMD; 
+				tmp = tmp->next;
+			}
 		}
 		else if (tmp->str[0] == '<')
 		{
@@ -110,6 +116,11 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 				else
 					tmp->next->type = INQUOTE;
 				tmp = tmp->next;
+				if (tmp && tmp->str[0] != '|')
+				{
+					tmp->type = CMD; 
+					tmp = tmp->next;
+				}
 			}
 		}
 		else if (tmp->str[0] == '|')
@@ -117,7 +128,10 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 			tmp->type = PIPE;
 			tmp = tmp->next;
 			if (tmp)
-				tmp->type = CMD;
+			{
+				ft_cmf_first_type(tmp);
+				tmp = tmp->next;
+			}
 		}
 		else
 			tmp->type = ARG;
