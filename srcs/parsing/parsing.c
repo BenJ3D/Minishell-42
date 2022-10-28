@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 16:13:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:45:28 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	ft_cmf_first_type(t_list	*tmp)
 			tmp->type = IN2;
 		else
 			tmp->type = IN1;
+		if (tmp->next)
+		{
+			if (tmp->type == IN1)
+				tmp->next->type = INFILE;
+			else
+				tmp->next->type = INQUOTE;
+			tmp = tmp->next;
+		}
 	}
 	else
 		tmp->type = CMD;
@@ -83,15 +91,13 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	if (!lst)
 		return (-1);
 	tmp = lst;
-	data->first_cmd = 0;
-	ft_cmf_first_type(tmp);
-	tmp = tmp->next;
+	data->first_cmd = 1;
 	while (tmp)
 	{
-		printf("%s %d %d\n", tmp->str, data->first_cmd, tmp->heavy);
 		if (data->first_cmd == 1)
 		{
 			ft_cmf_first_type(tmp);
+			tmp = tmp->next;
 			data->first_cmd = 0;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
