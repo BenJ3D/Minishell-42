@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 18:19:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:40:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ t_list		*ft_lstlast(t_list *lst);
 int			ft_lstsize(t_list *lst);
 void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
+int			ft_lst_count_cmdarg(t_list *lst);
+
 
 /* FT FREE */
 int			ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab);

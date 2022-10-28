@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 19:22:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:04:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data);
 static void	ft_print_export(t_envlst *env);
 
 //TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et 
-														//que des alphanumeric)
+														 //que des alphanumeric)
 /**
  * @brief Fonction mère à appeler, TODO: parsing a faire
  * 
@@ -26,10 +26,16 @@ static void	ft_print_export(t_envlst *env);
  */
 int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 {
+	int	i;
+	
 	if (!cmd[1] || cmd[1][0] == '\0')
 		ft_print_export(env);
 	else
-		ft_main_export(env, cmd[1], data);
+	{
+		i = 1;
+		while (cmd[i])
+			ft_main_export(env, cmd[i++], data);
+	}
 	return (0);
 }
 
@@ -62,7 +68,7 @@ static void	ft_print_export(t_envlst *env)
 }
 
 /**
- * @brief vérifie si la key est NULL
+ * @brief vérifie si la key est NULL //TODO: doit tchecker le normage des key env
  * 
  * @param key 
  * @return int 

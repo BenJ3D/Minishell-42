@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 17:31:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:44:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,12 +197,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
 		}
 	}
-		// dup2(data->savefd[0], STDIN_FILENO);//TODO:TODO:
-		// if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
-		// 	ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
-		// dup2(data->savefd[1], STDOUT_FILENO); //TODO:TODO:
-		// close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
-	
 	return (father);
 }
 

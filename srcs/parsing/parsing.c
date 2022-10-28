@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 14:51:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:52:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,25 +262,27 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 {
 	char	**argv;
 	int		nbword;
-	t_list	*lst;
+	t_list	*tmp;
 	int		y;
 	
 
-	nbword = ft_lstsize(cmd); //FIXME: ft pour calculer le nombre de mot cmd+arg sans les redirections et pipe
+	nbword = ft_lstsize(cmd);
+	// nbword = ft_lst_count_cmdarg(cmd);//FIXME: provoque sanitize a freetabargv
 	argv = ft_calloc(nbword + 1, sizeof(char **));
-	// argv = (char **)malloc(nbword + 1 * sizeof(char *));
-	if (!argv)
-		return (NULL);
-	lst = cmd;
-	y = 0;
-	while (lst)
+	tmp = cmd;
+	y = 1;
+	while (tmp)
 	{
-		// if (lst->type == PIPE) //TODO:
-		if (lst->type == CMD || lst->type == ARG)
-			argv[y] = ft_strdup(lst->str);
-		y++;
-		lst = lst->next;
+		if (tmp->type == CMD)
+			argv[0] = ft_strdup(tmp->str);
+		else if (tmp->type == ARG)
+			argv[y++] = ft_strdup(tmp->str);
+		tmp = tmp->next;
 	}
+	if (argv[0] == NULL)
+		argv[0] = ft_strdup("");
+	// printf("nbword = %i\n And start argv dbg : \n", nbword);//TODO: a revoir quand type est corrigé
+	dbg_display_argv(argv);
 	return (argv);
 }
 
