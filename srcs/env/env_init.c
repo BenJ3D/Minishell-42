@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/25 19:11:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:26:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,6 @@ char	*ft_env_extract_value_content(char *str)
 }
 
 /**
- * @brief verifie sur USER existe, et sinon creer la variable USER=guest
- * //FIXME: ===>>> depend du comportement voulu pour notre minishell :
- * soit on ne met plus de login soit on le remplace par guest a voir
- * @param data 
- * @param tmp 
- * @param tkey 
- * @param tvalue 
- */
-// static void	ft_env_init_lst_if_empty_env(t_data *data, t_envlst *tmp,
-// 	char *tkey, char *tvalue)
-// {
-// 	tkey = ft_strdup("USER");
-// 	tvalue = ft_strdup("guest");
-// 	ft_env_lstadd_back(&tmp, ft_env_lstnew(tkey, tvalue));
-// 	data->env = tmp;
-// 	free(tkey);
-// 	free(tvalue);
-// }
-
-/**
  * @brief create copy of envp in list chained 
  * 
  * @param envp src env
@@ -175,48 +155,3 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 	}
 	return (NULL);
 }
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////     ENV TEST     //////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-// /**
-//  * @brief fonction test pour debug le split env
-//  * 
-//  * @param env
-//  * @param key
-//  * @return int
-//  */
-// int	env_test_read(char **env, const char *key)
-// {
-// 	char *value;
-// 	int i;
-// 	int ret;
-
-// 	ret = 0;
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		if (!ft_strncmp(env[i], key, ft_strlen(key)))
-// 			break ;
-// 		i++;
-// 	}
-// 	if (!env[i])
-// 	{
-// 		perror("Aucune variable environnement de ce nom");
-// 		return (2);
-// 	}
-// 	value = ft_strdup(env[i]);
-// 	i = 1;
-// 	while(value[i - 1] != '=')
-// 		i++;
-// 	printf("env %s : %s\n", key, value + i);
-// 	free(value);
-// 	return (i);
-// }
-

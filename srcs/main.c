@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 15:54:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:35:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,18 @@ int	main(int ac, char **av, char **envp)
 	// close(p[0]);
 	// close(p[1]);
 	// waitpid(fat[0], NULL, 0);
-	// waitpid(fat[1], NULL, 0);
-	// printf("toute chose a une fin\n");
+	// aitpid(fat[1], NULL, 0);
+	// rintf("toute chose a une fin\n");
+
+	// char *tocmp = ft_strdup("bBB"); 
+	// char *tocmp2 = ft_strdup("BBB");
+	// int sizecmp = ft_strlen(tocmp);
+	// int ret;
+	// ret = ft_strncmp(tocmp, tocmp2, sizecmp); // si ret > 0 == tocmp > tocmp2 
+	// printf("ret = %i\n", ret);
+	
+		
+
 
 	// exit(0);
 ////////////////////////////////////////////////////////////////////////////////
@@ -212,6 +222,8 @@ int	main(int ac, char **av, char **envp)
 ////////////////////////////////////////////////////////////////////////////////
 	// puts("start minishell ");
 	// dbg_display_errno();
+
+	
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);

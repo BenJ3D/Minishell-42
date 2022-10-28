@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 11:40:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:59:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ void		ft_env_lstdelone(t_envlst *lst);
 void		ft_env_lstclear(t_envlst **lst);
 void		ft_env_lstclear_one(t_envlst **lst);
 void		ft_env_lstclear_one_first_element(t_envlst **lst);
+void		ft_sort_envlst_by_allocation_number(t_envlst *env);//abandonné??!
+char		**ft_env_return_envlst_sorted_in_tab(t_envlst *env);
+char		**ft_env_get_envtab(t_envlst *env);
 
 /* FT LIST */
 void		ft_lstadd_back(t_list **alst, t_list *new);

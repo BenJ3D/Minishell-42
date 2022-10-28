@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 12:04:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:16:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,69 @@ int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 }
 
 
+char	**ft_env_get_envtab(t_envlst *env) //FIXME: move to env file
+{
+	char		**tab;
+	t_envlst	*tmp;
+	int			i;
+	
+	if (!env)
+		return (NULL);
+	tmp = env;
+	tab = ft_calloc(ft_env_lstsize(env) + 1, sizeof(char **));
+	i = 0;
+	while(tmp)
+	{
+		tab[i] = ft_strjoin_max("%s=%s", tmp->key, tmp->value);
+		tmp = tmp->next;
+		i++;
+	}
+	return (tab);
+}
+
+char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env file
+{
+	char **tab;
+
+	tab = ft_env_get_envtab(env);
+	
+	return (tab);
+}
+// void	ft_sort_envlst_by_allocation_number(t_envlst *env)
+// {
+// 	t_envlst	*tmp;
+// 	char		*tocmp;
+// 	char		*winner;
+// 	int			sizecmp;
+// 	int			sizelst;
+// 	int			count;
+
+// 	if (!env)
+// 		return ;
+// 	tmp = env;
+// 	winner = NULL;
+// 	sizelst = ft_env_lstsize(env);
+// 	count = 0;
+// 	while (tmp)
+// 	{
+// 		tmp->alphaorder = 0;
+// 		tmp = tmp->next;
+// 	}
+// 	tmp = env;
+// 	tocmp = ft_strdup(tmp->key); //prendre le premier element
+// 	while (tmp)
+// 	{
+// 		if (!(tocmp == NULL))
+// 			free (tocmp);
+// 		sizecmp = ft_strlen(tocmp);
+// 		if (ft_strncmp(tocmp, tmp->next->key, sizecmp) > 0)
+// 		{
+// 			winner = ft_strdup()
+// 		}
+// 		else
+// 			tmp = tmp->next;
+// 	}
+// }
 
 /**
  * @brief function print export
@@ -49,8 +112,11 @@ int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 static void	ft_print_export(t_envlst *env)
 {
 	t_envlst	*tmp;
+	char		**tab;
 
 	tmp = env;
+	tab = ft_env_return_envlst_sorted_in_tab(env);
+	dbg_display_argv(tab);
 	while (tmp)
 	{
 		ft_putstr_fd("declare -x ", 1);
@@ -66,6 +132,27 @@ static void	ft_print_export(t_envlst *env)
 		tmp = tmp->next;
 	}
 }
+
+// static void	ft_print_export(t_envlst *env)
+// {
+// 	t_envlst	*tmp;
+
+// 	tmp = env;
+// 	while (tmp)
+// 	{
+// 		ft_putstr_fd("declare -x ", 1);
+// 		ft_putstr_fd(tmp->key, 1);
+// 		if (tmp->value && tmp->isenv == 1)
+// 		{
+// 			ft_putchar_fd('=', 1);
+// 			ft_putchar_fd('"', 1);
+// 			ft_putstr_fd(tmp->value, 1);
+// 			ft_putchar_fd('"', 1);
+// 		}
+// 		ft_putchar_fd('\n', 1);
+// 		tmp = tmp->next;
+// 	}
+// }
 
 /**
  * @brief vérifie si la key est NULL //TODO: doit tchecker le normage des key env
@@ -145,44 +232,4 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
 	free (key);
 	return (0);
 }
-// static int	ft_main_export(t_envlst *env, char *str, t_data *data)
-// {
-// 	char		*key;
-// 	char		*value;
-// 	int			isenv;
-// 	int			_bool;
-// 	t_envlst	*ret;
-	
-// 	isenv = TRUE;
-// 	_bool = FALSE;
-// 	key = ft_env_extract_key_name(str, &isenv);
-// 	ret = ft_env_getenv_lst_value(env, key);
-// 	if (key == NULL)
-// 	{
-// 		key = ft_strdup(str);
-// 		_bool = TRUE;
-// 		isenv = FALSE;
-// 	}
-// 	else
-// 	{
-// 		if (ret == NULL || _bool == FALSE)
-// 			value = ft_env_extract_value_content(str);
-// 		else
-// 			value = ft_strdup(ret->value);
-// 	}
-// 	if (ret)
-// 	{
-// 		ret->isenv = isenv;
-// 		if (!ft_strequal(env->value, value))
-// 		{
-// 			free(ret->value);
-// 			ret->value = ft_strdup(value);
-// 			ret->isenv = TRUE;
-// 		}
-// 	}
-// 	else
-// 		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
-// 	free (key);
-// 	free (value);
-// 	return (0);
-// }
+
