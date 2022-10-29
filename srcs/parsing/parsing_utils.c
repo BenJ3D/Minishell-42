@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 19:48:48 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:21:05 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
 			else
-			{
-				printf("toudouloulou\n");
 				tmp->type = OUT1;
-			}
 		}
 		else if (tmp->str[0] == '<')
 		{
@@ -77,7 +74,6 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		else
 			tmp->type = ARG;
 	}
-	printf("tmp->type :%d\n", tmp->type);
 	return (0);
 }
 
@@ -133,8 +129,6 @@ static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
 	else
 		c = '"';
 	i = 0;
-	// if (str[i] == '|')
-	// 	return (1);
 	while (str[i] && str[i] != c)
 		i++;
 	return (i);
@@ -184,7 +178,6 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	//ft_define_cmd_type_during_parsing(data->cmdtoparse, data);
 	return (data->cmdtoparse);
 }
 
@@ -210,10 +203,5 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	// if (data->cmdtoparse->str[0] == '|')
-	// 	data->cmdtoparse->heavy = 1;
-	// else
-	// 	data->cmdtoparse->heavy = 0;
-	//ft_define_cmd_type_during_parsing(data->cmdtoparse, data);
 	return (data->cmdtoparse);
 }

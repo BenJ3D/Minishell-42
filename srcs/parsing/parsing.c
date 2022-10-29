@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 19:17:15 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:26:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,12 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	data->first_cmd = 1;
 	while (tmp)
 	{
-		if (data->first_cmd == 1)
+		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			ft_cmd_first_type(tmp);
-			tmp = tmp->next;
 			data->first_cmd = 0;
 		}
-		if (tmp->str[0] == '>' && tmp->heavy == 0)
+		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
@@ -140,7 +139,9 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 			tmp->type = ARG;
 		if (tmp)
 			tmp = tmp->next;
+		printf("test\n");
 	}
+	printf("test\n");
 	return (0);
 }
 
