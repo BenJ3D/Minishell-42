@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 19:11:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:36:33 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
-	printf("%s %d\n", tmp->str, tmp->heavy);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -41,12 +40,8 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 	}
 	else
 	{
-		printf("%s 2\n", tmp->str);
 		if (first_arg == 0)
-		{
-			printf("ici\n");
 			tmp->type = CMD;
-		}
 		else
 		{
 			tmp->type = ARG;
@@ -110,7 +105,6 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	first_arg = 0;
 	while (tmp)
 	{
-		printf("%s, data->first_cmd %d, first_arg %d\n", tmp->str, data->first_cmd, first_arg);
 		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
@@ -122,7 +116,6 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
-			printf("bah alors\n");
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
 			else
