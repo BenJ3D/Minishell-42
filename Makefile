@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/10/29 17:21:21 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/10/29 20:32:28 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=1
+DEBUG=2
 
-ifeq ($(DEBUG), 0)
+ifeq ($(DEBUG), 0) # for final compilation
 CC = gcc $(CFLAGS)
 MAKELIB = @make DEBUG=0 -C./libs/libft/
 endif
