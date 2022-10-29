@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 18:12:50 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:24:55 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,20 @@ static int	ft_strlen_next_word(char *str)
 static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 {
 	t_list	*tmp;
-	int		too_direct_it;
+	int		first_arg;
 
 	if (!lst)
 		return (-1);
 	tmp = lst;
 	data->first_cmd = 1;
-	too_direct_it = 0;
+	first_arg = 0;
 	while (tmp)
 	{
 		printf("%s\n", tmp->str);
 		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			tmp = ft_cmd_first_type(data, tmp);
-			if (tmp->type == 0)
+			if (tmp && tmp->type == 0)
 				data->first_cmd = 0;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
