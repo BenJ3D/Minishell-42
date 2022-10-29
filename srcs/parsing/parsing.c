@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 18:58:23 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:11:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
-	printf("%s\n", tmp->str);
+	printf("%s %d\n", tmp->str, tmp->heavy);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -24,7 +24,7 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 		tmp->next->type = OUTFILE;
 		tmp = tmp->next;
 	}
-	else if (tmp->str[0] == '<')
+	else if (tmp->str[0] == '<' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '<')
 			tmp->type = IN2;
