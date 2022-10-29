@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/07 23:04:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:10:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ static int	ft_main_unset(t_data *data, char *key)
  */
 int	ft_builtin_unset(t_data *data, char **cmd)
 {
+	int	i;
+	
 	if (!cmd[1] || cmd[1][0] == '\0')
 		return (1);
 	else
-		ft_main_unset(data, cmd[1]);
+	{
+		i = 1;
+		while (cmd[i])
+			ft_main_unset(data, cmd[i++]);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 17:00:36 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:23:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_envlst
 {
 	char			*key;
 	char			*value;
+	int				alphaorder;
 	int				isenv;
 	struct s_envlst	*next;
 }			t_envlst;
