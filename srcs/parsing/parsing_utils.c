@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 13:45:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:02:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO: a normer !!
+int	ft_redirection_files_check(t_data	*data, char	*buffer)
+{
+	int	pin;
+
+	pin = 0;
+	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
+	{
+		if (buffer[pin] == '|' || buffer[pin] == '<' || buffer[pin] == '>')
+			return (0);
+		pin++;
+	}
+	return (1);
+}
+
+static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 {
 	t_list	*tmp;
 
@@ -27,8 +41,6 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO:
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
-			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<')
 		{
@@ -62,6 +74,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data) // TODO:
 		else
 			tmp->type = ARG;
 	}
+	data->type_of_the_last_cmd = tmp->type;
 	return (0);
 }
 
@@ -107,6 +120,21 @@ static int	ft_strlen_next_word(char *str)
 	return (i);
 }
 
+static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
+{
+	int		i;
+	char	c;
+
+	if (data->s_quotes_switch == 1)
+		c = '\'';
+	else
+		c = '"';
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
+
 int	ft_strlen_parsing(char	*str)
 {
 	int	i;
@@ -114,10 +142,24 @@ int	ft_strlen_parsing(char	*str)
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-	return (i);	
+	return (i);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
+static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
+{
+	t_list	*tmp;
+
+	tmp = (t_list *)malloc(sizeof(t_list));
+	if (!tmp)
+		return (NULL);
+	tmp->str = ft_strdup(str);
+	tmp->heavy = heavy;
+	ft_define_cmd_type_during_parsing(tmp, data);
+	tmp->next = NULL;
+	return (tmp);
+}
+
+t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 {
 	int		i;
 	int		len;
@@ -128,22 +170,19 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
-			return (cmd);
-		len = ft_strlen_next_word(buffer);
+			return (data->cmdtoparse);
+		len = ft_strlen_next_word_quotes(data, buffer);
 		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
 		i = 0;
-		while(len-- > 0)
+		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&cmd, ft_lstnew(str));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	ft_define_cmd_type_during_parsing(cmd, data);
-	return (cmd);
+	return (data->cmdtoparse);
 }
 
-t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
+t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 {
 	int		i;
 	int		len;
@@ -153,20 +192,17 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 	bufi = 0;
 	while (buffer[bufi])
 	{
-		while(ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
+		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
-			return (cmd);
+			return (data->cmdtoparse);
 		len = ft_strlen_next_word(buffer + bufi);
 		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
 		i = 0;
-		while(len-- > 0)
+		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&cmd, ft_lstnew(str));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	ft_define_cmd_type_during_parsing(cmd, data);
-	return (cmd);
+	return (data->cmdtoparse);
 }

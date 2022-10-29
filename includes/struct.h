@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
 /*   Updated: 2022/10/27 19:23:19 by bducrocq         ###   ########.fr       */
@@ -34,6 +34,7 @@ typedef struct	s_envlst
 typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls -> -all -> (pipe) -> cat -> -e -> (null))
 {
 	int				type;
+	int				heavy;
 	char			*str;
 	struct s_list	*next;
 }					t_list;
@@ -88,6 +89,7 @@ typedef struct s_data
 	int			first_cmd;
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
+	int			type_of_the_last_cmd;
 }				t_data;
 
 #endif
