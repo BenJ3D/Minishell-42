@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 18:18:58 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:43:44 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
+int	ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
 	int		pan;
@@ -42,24 +42,21 @@ t_list	*ft_double_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
-		printf("semi_final %s\n", semi_final);
 		if (buffer[data->i] == '$')
-			semi_final = ft_double_quotes_env(data, buffer, semi_final, cmd);
+			semi_final = ft_double_quotes_env(data, buffer, semi_final);
 		if (semi_final != NULL)
 		{
-			printf("1 %s\n", semi_final);
-			cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
-			printf("%s\n", semi_final);
+			ft_buffercmd_in_lst_quotes(semi_final, data, 1);
 			free(semi_final);
 		}
 		else
-			return (cmd);
+			return (0);
 		ft_quotes_checker(data, buffer, data->i);
 	}
-	return (cmd);
+	return (1);
 }
 
-t_list	*ft_simple_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
+void	ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
 	int		pan;
@@ -84,19 +81,16 @@ t_list	*ft_simple_quotes(t_data	*data, t_list	*cmd, char	*buffer, int len_max)
 		while (pin < data->i)
 			semi_final[pan++] = buffer[pin++];
 		semi_final[pan] = '\0';
-		cmd = ft_buffercmd_in_lst_quotes(semi_final, cmd, data);
-		printf("2 %s\n", semi_final);
+		ft_buffercmd_in_lst_quotes(semi_final, data, 1);
 		free(semi_final);
 	}
 	ft_quotes_checker(data, buffer, data->i);
-	return (cmd);
 }
 
-t_list	*ft_quotes(t_data	*data, char	*buffer, t_list	*cmd, int len_max)
+void	ft_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	if (data->d_quotes_switch == 1)
-		cmd = ft_double_quotes(data, cmd, buffer, len_max);
+		ft_double_quotes(data, buffer, len_max);
 	while (data->s_quotes_switch == 1)
-		cmd = ft_simple_quotes(data, cmd, buffer, len_max);
-	return (cmd);
+		ft_simple_quotes(data, buffer, len_max);
 }

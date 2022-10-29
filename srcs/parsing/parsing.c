@@ -6,21 +6,21 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 14:51:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:46:35 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_cmf_first_type(t_list	*tmp)
+void	ft_cmd_first_type(t_list	*tmp)
 {
-	if (tmp->str[0] == '>')
+	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
 			tmp->type = OUT2;
 		else
 			tmp->type = OUT1;
-		tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+		tmp->next->type = OUTFILE;
 		tmp = tmp->next;
 	}
 	else if (tmp->str[0] == '<')
@@ -29,9 +29,20 @@ void	ft_cmf_first_type(t_list	*tmp)
 			tmp->type = IN2;
 		else
 			tmp->type = IN1;
+		if (tmp->next)
+		{
+			if (tmp->type == IN1)
+				tmp->next->type = INFILE;
+			else
+				tmp->next->type = INQUOTE;
+			tmp = tmp->next;
+		}
 	}
 	else
+	{
 		tmp->type = CMD;
+		tmp = tmp->next;
+	}
 }
 
 int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
@@ -73,32 +84,38 @@ static int	ft_strlen_next_word(char *str)
  * @brief donne un type a chaque commande, pour faciliter le parsing en execve
  * ATTENTION : les erreurs de syntax doivent deja etre gerer en amont, 
  * sinon risque de SEGV
- * @param lst la lst avec toutes les commandes du buffer pas encore split
+ * @param  lst la lst avec toutes les commandes du buffer pas encore split
  * @return int 
  */
-static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
+static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 {
 	t_list	*tmp;
+	int		too_direct_it;
 
 	if (!lst)
 		return (-1);
 	tmp = lst;
-	ft_cmf_first_type(tmp);
-	printf("%d\n", lst->type);
-	//tmp->type = CMD;
-	tmp = tmp->next;
+	data->first_cmd = 1;
+	too_direct_it = 0;
 	while (tmp)
 	{
-		if (tmp->str[0] == '>')
+		if (data->first_cmd == 1 && tmp->str[0] != '|')
+		{
+			ft_cmd_first_type(tmp);
+			data->first_cmd = 0;
+		}
+		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '>')
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE; //? je ne comprends pas pourquoi on le met ici, et si jamais il n'y a pas de tmp->next?
+			tmp->next->type = OUTFILE;
 			tmp = tmp->next;
+			if (tmp && tmp->str[0] != '|')
+				data->first_cmd = 1;
 		}
-		else if (tmp->str[0] == '<')
+		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
 			if (tmp->str[1] == '<')
 				tmp->type = IN2;
@@ -111,14 +128,14 @@ static int	ft_define_cmd_type(t_list *lst) // TODO: a normer !!
 				else
 					tmp->next->type = INQUOTE;
 				tmp = tmp->next;
+				if (tmp && tmp->str[0] != '|')
+					data->first_cmd = 1;
 			}
 		}
-		else if (tmp->str[0] == '|')
+		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
-			tmp = tmp->next;
-			if (tmp)
-				tmp->type = CMD;
+			data->first_cmd = 1;
 		}
 		else
 			tmp->type = ARG;
@@ -173,7 +190,6 @@ void	ft_init_cmdtab_value(t_cmdtab *cmdtab)
 	// 	cmdtab->redirection = 0;
 	// 	cmdtab->rediarg = NULL;
 	// }
-	
 }
 
 /**
@@ -237,13 +253,9 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	i = 0;
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
-	{
-		exit(42);
 		return (0);
-	}
-	data->cmdtoparse = ft_total_parsing(data, buffer);
-	//TODO: gerer les erreurs de syntaxes //c'est quoi les erreurs de syntaxe ?
-	ft_define_cmd_type(data->cmdtoparse);
+	ft_total_parsing(data, buffer);
+	ft_define_cmd_type(data->cmdtoparse, data);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
