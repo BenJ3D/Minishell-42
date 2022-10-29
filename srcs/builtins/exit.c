@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 22:08:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:52:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	ft_exit_child(t_data *data) // peut etre pas besoin avec exit
 {
 	//TODO:
 	ft_free_all_minishell(data);
-	ft_exit_exit();
+	exit(errno); //TODO: changer dans fork exec child ?
 }
 

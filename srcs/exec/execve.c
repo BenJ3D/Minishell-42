@@ -6,15 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 22:30:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:16:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-
-// ft_lstcmd_to_cmdarg_for_execve
-
-
 
 /**
  * @brief check dans tous les path présent dans env si un programe existe
@@ -146,6 +142,7 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 	if ((father = fork()) == -1)
 		{
 			perror("fork");
+			g_status = errno;
 			free(ex->progpath);
 			ft_free_tab_char(ex->argv);
 			ft_free_tab_char(envp);
@@ -160,17 +157,16 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	pid_t	father;
 	
 	father = -2;
-	errno = 0;
-
+	errno = 0;	
+	
 	if ((cmdtab[ex->i].pipeout == 1) || (cmdtab[ex->i].pipein == 1) \
-										|| (cmdtab[ex->i].isbuilt == 0))
+												|| (cmdtab[ex->i].isbuilt == 0))
 		father = ft_createfork(data, ex, envp);
-
 	if (father == 0)
 	{
 		ft_forkexe_dup_if_pipes(cmdtab, ex);
 		if (ft_redirection(data, cmdtab, ex))
-			exit (errno);
+			exit(errno);
 		envp = ft_env_convert_envlst_to_tab(data->env);
 		if (cmdtab[ex->i].isbuilt > 0)
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
@@ -185,10 +181,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		ft_exit(data); // FIXME: utile ?
 	}
 	else
-	{
 		ft_forkexe_father_close_pipes(cmdtab, ex);
-		// dup2(data->savefd[1], STDOUT_FILENO); //TODO
-	}
 	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
 	{
 		if (ft_redirection(data, cmdtab, ex) == 0)
@@ -241,15 +234,17 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	cmdtab[ex.i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab, data);
-	// dbg_display_cmdtab(cmdtab);
 	while(cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)
 			ft_create_pipe(cmdtab, &ex);
-		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst); //TODO:
+		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst);
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
-		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0)
+		printf("ex.progpath %s | ex.argv[0] %s\n", ex.progpath, ex.argv[0]);
+		if (!ex.progpath && ft_stat_check(&ex, data))
+			puts("Hey mais coucou toi !\n");
+		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0 && ex.isfile == FALSE)
 			ft_command_not_found_message(ex.argv, data);
 		else
 			cmdtab[ex.i].pid = ft_forkexe(data, &ex, cmdtab);
@@ -264,7 +259,6 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			close(cmdtab[ex.i].fd[1]);
 			close(cmdtab[ex.i - 1].fd[1]);
 	}
-	
 	ex.i = 0; //TODO: test
 	while(cmdtab[ex.i].lst)
 	{
@@ -275,8 +269,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.i++;
 	}
 	if (cmdtab[0].pid > 0)
-		ft_parent_waitpid(cmdtab, data);
-	ex.i = 0; //TODO: test
+		ft_parent_waitpid(cmdtab, data); // attendre tous les child
+	ex.i = 0;
 	while(cmdtab[ex.i].lst)
 	{
 		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex))//fermeture hdc fd et del tmp file

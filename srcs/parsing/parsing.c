@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 19:36:33 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:03:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 		tmp = tmp->next;
 	}
 	if (argv[0] == NULL)
-		argv[0] = ft_strdup("");
+		argv[0] = ft_strdup(""); //FIXME: vraiment utile ?
 	// printf("nbword = %i\n And start argv dbg : \n", nbword);//TODO: a revoir quand type est corrigé
 	// dbg_display_argv(argv);
 	return (argv);
