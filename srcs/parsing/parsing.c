@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 16:46:35 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:12:50 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_cmd_first_type(t_list	*tmp)
+t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp)
 {
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
@@ -43,6 +43,7 @@ void	ft_cmd_first_type(t_list	*tmp)
 		tmp->type = CMD;
 		tmp = tmp->next;
 	}
+	return (tmp);
 }
 
 int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
@@ -99,10 +100,12 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	too_direct_it = 0;
 	while (tmp)
 	{
+		printf("%s\n", tmp->str);
 		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
-			ft_cmd_first_type(tmp);
-			data->first_cmd = 0;
+			tmp = ft_cmd_first_type(data, tmp);
+			if (tmp->type == 0)
+				data->first_cmd = 0;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
