@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 10:39:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:02:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 				tmp->type = OUT2;
 			else
 				tmp->type = OUT1;
-			tmp->next->type = OUTFILE;
-			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<')
 		{
@@ -76,6 +74,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		else
 			tmp->type = ARG;
 	}
+	data->type_of_the_last_cmd = tmp->type;
 	return (0);
 }
 
@@ -131,8 +130,6 @@ static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
 	else
 		c = '"';
 	i = 0;
-	if (str[i] == '|')
-		return (1);
 	while (str[i] && str[i] != c)
 		i++;
 	return (i);
@@ -148,7 +145,21 @@ int	ft_strlen_parsing(char	*str)
 	return (i);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
+static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
+{
+	t_list	*tmp;
+
+	tmp = (t_list *)malloc(sizeof(t_list));
+	if (!tmp)
+		return (NULL);
+	tmp->str = ft_strdup(str);
+	tmp->heavy = heavy;
+	ft_define_cmd_type_during_parsing(tmp, data);
+	tmp->next = NULL;
+	return (tmp);
+}
+
+t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 {
 	int		i;
 	int		len;
@@ -159,23 +170,19 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_list	*cmd, t_data	*data)
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
-			return (cmd);
+			return (data->cmdtoparse);
 		len = ft_strlen_next_word_quotes(data, buffer);
 		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&cmd, ft_lstnew(str));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	cmd->heavy = 1;
-	ft_define_cmd_type_during_parsing(cmd, data);
-	return (cmd);
+	return (data->cmdtoparse);
 }
 
-t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
+t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 {
 	int		i;
 	int		len;
@@ -188,18 +195,14 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_list	*cmd, t_data	*data)
 		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
-			return (cmd);
+			return (data->cmdtoparse);
 		len = ft_strlen_next_word(buffer + bufi);
 		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&cmd, ft_lstnew(str));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
-	cmd->heavy = 0;
-	ft_define_cmd_type_during_parsing(cmd, data);
-	return (cmd);
+	return (data->cmdtoparse);
 }
