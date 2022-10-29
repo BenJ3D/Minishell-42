@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 22:13:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:08:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int	main(int ac, char **av, char **envp)
 	// waitpid(pid, &g_status, 0);
 	// ft_putnbr(g_status % 255);
 	// puts("\n");
-
+	// exit(g_status % 255);
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
 	// int p[2];
 	// int	b;
@@ -211,6 +211,7 @@ int	main(int ac, char **av, char **envp)
 	// ret = ft_strncmp(tocmp, tocmp2, sizecmp); // si ret > 0 == tocmp > tocmp2 
 	// printf("ret = %i\n", ret);
 	
+///////////////////////////////  TEST ERRNO LAST /////////////////////////////////
 		
 
 

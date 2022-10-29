@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 22:13:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:30:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	
 	father = -2;
 	errno = 0;
+
 	if ((cmdtab[ex->i].pipeout == 1) || (cmdtab[ex->i].pipein == 1) \
 										|| (cmdtab[ex->i].isbuilt == 0))
 		father = ft_createfork(data, ex, envp);
@@ -176,6 +177,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		else
 		{
 			execve(ex->progpath, ex->argv, envp);
+			perror(ex->progpath);
 		}
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
@@ -210,7 +212,7 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 	{
 		if (cmdtab[i].pipeout == 1)
 			close(cmdtab[i].fd[0]);
-		waitpid(cmdtab[i].pid, &status, 0);
+		waitpid(cmdtab[i].pid, &g_status, 0);
 		if (WEXITSTATUS(status))
 			kill(cmdtab[i].pid, SIGKILL);//TODO:
 		i++;
@@ -272,7 +274,6 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			close(cmdtab[ex.i].fd[1]);
 		ex.i++;
 	}
-
 	if (cmdtab[0].pid > 0)
 		ft_parent_waitpid(cmdtab, data);
 	ex.i = 0; //TODO: test
