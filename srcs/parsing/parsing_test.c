@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 19:07:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:52:02 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,11 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 		return (0);
 	}
 	ft_reset_quotes_checker(data);
+	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
+		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
+	{	
+		error_management(data);
+		return (0);
+	}
 	return (1);
 }
