@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 16:21:05 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:02:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		else
 			tmp->type = ARG;
 	}
+	data->type_of_the_last_cmd = tmp->type;
 	return (0);
 }
 
