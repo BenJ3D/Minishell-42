@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/30 00:16:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/30 22:27:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 								argv[0], COLOR_RED, COLOR_NONE);
 		ft_putstr_fd(line2, 2);
 		free(line2);
+		g_status = 127;
 	}
 	else
 		return (1);
@@ -97,7 +98,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 	else if (cmdtab[ex->i].isbuilt == BUILT_ENV)
 		ft_builtin_env(data->env);
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXIT)
-		ft_exit(data);
+		ft_exit(data, argv);
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXPORT)
 		ft_builtin_export(data->env, argv, data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_PWD)
@@ -146,7 +147,7 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 			free(ex->progpath);
 			ft_free_tab_char(ex->argv);
 			ft_free_tab_char(envp);
-			ft_exit(data);
+			ft_exit(data, ex->argv);
 		}
 	return (father);
 }
@@ -178,7 +179,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);
-		ft_exit(data); // FIXME: utile ?
+		ft_exit(data, ex->argv); // FIXME: utile ?
 	}
 	else
 		ft_forkexe_father_close_pipes(cmdtab, ex);

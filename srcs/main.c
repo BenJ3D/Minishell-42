@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 23:34:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/30 22:32:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	// if (ac > 1)
-	// {
-		// ft_putstr_fd(av[0], 2);
-		// ft_putstr_fd(" to many arguments\n", 2);
-		// return (1);
-	// }
+	if (ac > 1)
+	{
+		ft_putstr_fd(av[0], 2);
+		ft_putstr_fd(" to many arguments\n", 2);
+		return (1); //FIXME: quelle errno renvoyer
+	}
 
 	interactive_mode (); //FIXME: pompe sur un autre minishell, a modifier 
 		// ameliorer
@@ -228,6 +228,6 @@ int	main(int ac, char **av, char **envp)
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);
-	ft_exit(&data);
+	ft_exit(&data, av);
 	return (0);
 }

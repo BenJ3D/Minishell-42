@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/30 00:13:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/30 22:21:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			ft_builtin_unset(t_data *data, char **cmd);
 int			ft_builtin_cd(t_envlst *env, char **argv);
 int			ft_builtin_pwd(t_envlst *env, char **argv);
 int			ft_builtin_echo(char **argv);
-void		ft_exit(t_data *data);
+void		ft_exit(t_data *data, char **argv);
 void		ft_exit_child(t_data *data);
 
 
