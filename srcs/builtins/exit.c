@@ -6,31 +6,32 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/30 22:30:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/30 23:35:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static void	ft_exit_exit(void)
+static void	ft_exit_exit(t_data *data)
 {
+	ft_free_all_minishell(data);
 	rl_replace_line("exit", 1);
 	exit(g_status % 255);
 }
 
-static void	ft_exit_arg(int exitarg)
+static void	ft_exit_arg(int exitarg, t_data *data)
 {
+	ft_free_all_minishell(data);
 	rl_replace_line("exit", 1);
 	exit(exitarg);
 }
 
 void	ft_exit(t_data *data, char **argv)
 {
-	ft_free_all_minishell(data);
 	if (argv[0] && argv[1])
-		ft_exit_arg(ft_atoi(argv[1]));
+		ft_exit_arg(ft_atoi(argv[1]), data);
 	else
-		ft_exit_exit();
+		ft_exit_exit(data);
 }
 
 /**
