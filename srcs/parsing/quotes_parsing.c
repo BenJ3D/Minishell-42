@@ -6,29 +6,11 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 14:59:50 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:03:47 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-
-char	*ft_strdup_parsing(const char *s1)
-{
-	char	*res;
-	size_t	i;
-
-	i = 0;
-	res = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!res)
-		return (NULL);
-	while (s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	res[i] = 0;
-	return (res);
-}
 
 int	ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 {
@@ -40,17 +22,17 @@ int	ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 
 	semi_final = NULL;
 	final = NULL;
-	if (buffer[data->i] == DOUBLE_QUOTE)
-		data->i++;
-	while (data->d_quotes_switch == 1 && buffer[data->i] != '\0')
+	if (buffer[data->scroller] == DOUBLE_QUOTE)
+		data->scroller++;
+	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
 	{
-		pin = data->i;
+		pin = data->scroller;
 		len = 0;
-		while (data->i < len_max && buffer[data->i] != '$' && buffer[data->i] \
-			!= DOUBLE_QUOTE)
+		while (data->scroller < len_max && buffer[data->scroller] \
+			 != '$' && buffer[data->scroller] != DOUBLE_QUOTE)
 		{
 			len++;
-			data->i++;
+			data->scroller++;
 		}
 		if (len != 0)
 		{
@@ -58,19 +40,24 @@ int	ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 			if (!semi_final)
 				exit(57);
 			pan = 0;
-			while (pin < data->i)
+			while (pin < data->scroller)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
-		printf("ici %s\n", semi_final);
-		if (buffer[data->i] == '$')
+		if (buffer[data->scroller] == '$')
 			final = ft_double_quotes_env(data, buffer, semi_final);
+		else if (final != NULL)
+			final = ft_strjoin(final, semi_final);
 		else
-			final = ft_strdup_parsing((const)semi_final);
+		{
+			final = ft_strdup(semi_final);
+			free(semi_final);
+		}
 		semi_final = NULL;
-		ft_quotes_checker(data, buffer, data->i);
+		ft_quotes_checker(data, buffer, data->scroller);
+		printf("final = %s\n", final);
 	}
-	if (semi_final != NULL)
+	if (final != NULL)
 	{
 		ft_buffercmd_in_lst_quotes(final, data, 1);
 		free(final);
@@ -88,14 +75,14 @@ void	ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 	char	*semi_final;
 
 	semi_final = NULL;
-	if (buffer[data->i] == SIMPLE_QUOTE)
-		data->i++;
-	pin = data->i;
+	if (buffer[data->scroller] == SIMPLE_QUOTE)
+		data->scroller++;
+	pin = data->scroller;
 	len = 0;
-	while (data->i < len_max && buffer[data->i] != SIMPLE_QUOTE)
+	while (data->scroller < len_max && buffer[data->scroller] != SIMPLE_QUOTE)
 	{
 		len++;
-		data->i++;
+		data->scroller++;
 	}
 	if (len != 0)
 	{
@@ -103,13 +90,13 @@ void	ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 		if (!semi_final)
 			exit(57);
 		pan = 0;
-		while (pin < data->i)
+		while (pin < data->scroller)
 			semi_final[pan++] = buffer[pin++];
 		semi_final[pan] = '\0';
 		ft_buffercmd_in_lst_quotes(semi_final, data, 1);
 		free(semi_final);
 	}
-	ft_quotes_checker(data, buffer, data->i);
+	ft_quotes_checker(data, buffer, data->scroller);
 }
 
 void	ft_quotes(t_data	*data, char	*buffer, int len_max)

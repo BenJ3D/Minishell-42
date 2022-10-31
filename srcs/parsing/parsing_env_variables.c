@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 13:31:42 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:04:05 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	int		pin;
 	int		pan;
 	char	*value_env;
+	char	*final;
 
 	len = 0;
-	data->i++;
-	pin = data->i;
+	data->scroller++;
+	pin = data->scroller;
 	value_env = NULL;
-	while (buffer[data->i] && ((buffer[data->i] >= 'A' && buffer[data->i] <= \
-		'Z') || buffer[data->i] == '_') && buffer[data->i] != DOUBLE_QUOTE)
+	final = NULL;
+	while (buffer[data->scroller] && ((buffer[data->scroller] >= 'A' && buffer[data->scroller] <= \
+		'Z') || buffer[data->scroller] == '_') && buffer[data->scroller] != DOUBLE_QUOTE)
 	{
-		data->i++;
+		data->scroller++;
 		len++;
 	}
 	if (len != 0)
@@ -47,11 +49,16 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 		if (semi_final != NULL)
 		{
-			semi_final = ft_strjoin_parsing(semi_final, value_env);
+			final = ft_strjoin_parsing(semi_final, value_env);
+			free(value_env);
+		}
+		else
+		{
+			final = ft_strdup(value_env);
 			free(value_env);
 		}
 	}
-	return (semi_final);
+	return (final);
 }
 
 t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
@@ -62,20 +69,20 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	char	*value_env;
 
 	if (data->cmdtoparse->str[0] != '<')
-		data->i++;
-	pin = data->i;
+		data->scroller++;
+	pin = data->scroller;
 	len = 0;
-	while (buffer[data->i] && (buffer[data->i] >= 33 && buffer[data->i] <= 126) \
-		&& (buffer[data->i] != '\'' && buffer[data->i] != '"'))
+	while (buffer[data->scroller] && (buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126) \
+		&& (buffer[data->scroller] != '\'' && buffer[data->scroller] != '"'))
 	{
-		data->i++;
+		data->scroller++;
 		len++;
 	}
 	if (len != 0)
 	{
 		value_env = ft_calloc(sizeof(char), len + 1);
 		pan = 0;
-		while (pin < data->i)
+		while (pin < data->scroller)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
 		if (data->cmdtoparse->str[0] != '<')
@@ -86,7 +93,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		}
 		ft_buffercmd_in_lst(value_env, data, 0);
 		free(value_env);
-		ft_quotes_checker(data, buffer, data->i);
+		ft_quotes_checker(data, buffer, data->scroller);
 	}
 	else
 		ft_buffercmd_in_lst("$", data, 1);
