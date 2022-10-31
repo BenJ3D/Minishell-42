@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/30 00:15:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/31 00:43:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,19 @@ typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls ->
 	struct s_list	*next;
 }					t_list;
 
+enum e_stat
+{
+	STAT_NONE,
+	STAT_ISFILE,
+	STAT_ISDIR
+};
 typedef struct	s_execarg //pour gagner des lignes // norme..
 {
-	int		i;
-	int		isfile;
-	char	**argv;
-	char	*progpath;
+	int			i;
+	int			isfile;
+	enum e_stat stat;
+	char		**argv;
+	char		*progpath;
 }				t_execarg;
 
 

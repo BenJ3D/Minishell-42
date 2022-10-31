@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/30 22:21:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/31 01:23:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
+char		*ft_cmdtab_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 
 
 /* FT EXECVE  STAT*/
-int			ft_stat_check(t_execarg *ex, t_data *data);
+int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str);
 
 /* FT EXECVE PIPES */
 int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
