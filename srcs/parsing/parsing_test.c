@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 19:52:02 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 14:42:42 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,27 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 	ft_reset_quotes_checker(data);
 	while (buffer[data->i])
 	{
+		printf("%c, %s\n", buffer[data->i], buffer + data->i);
 		ft_quotes_checker(data, buffer, data->i);
-		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
+		if (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
+			printf("%d, %d\n", data->s_quotes_switch, data->d_quotes_switch);
 			ft_quotes(data, buffer, len_max);
 			if (data->cmdtoparse == NULL)
 			{
 				error_management(data);
 				return (0);
 			}
+			if (buffer[data->i] == '"' || buffer[data->i] == '\'')
+				data->i++;
+			printf("%d, %d\n", data->s_quotes_switch, data->d_quotes_switch);
+			printf("'%c', %s\n", buffer[data->i], buffer + data->i);
 		}
-		if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
+		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
 			buffer[data->i] == '$')
 		{
 			ft_parsing_env_variable(data, buffer);
-			if (data->cmdtab == NULL)
+			if (data->cmdtoparse == NULL)
 			{
 				error_management(data);
 				return (0);

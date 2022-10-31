@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 18:05:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:31:42 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->i++;
 	pin = data->i;
 	len = 0;
-	while (buffer[data->i] && (buffer[data->i] >= 33 && buffer[data->i] <= 126))
+	while (buffer[data->i] && (buffer[data->i] >= 33 && buffer[data->i] <= 126) \
+		&& (buffer[data->i] != '\'' && buffer[data->i] != '"'))
 	{
 		data->i++;
 		len++;
