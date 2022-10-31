@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 20:31:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:09:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	ft_shlvl_increment(t_envlst *env)
 		if (ft_strequal(tmp->key, "SHLVL") == TRUE)
 		{
 			save = ft_atoi(tmp->value);
+			if (save < 0)
+				save = -1;
 			free (tmp->value);
 			tmp->value = ft_itoa(save + 1);
 			return (0);
