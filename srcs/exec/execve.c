@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/31 01:22:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:12:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	{
 		if (cmdtab[ex.i].pipeout)
 			ft_create_pipe(cmdtab, &ex);
+		
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst);
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
@@ -249,7 +250,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			// ex.stat = STAT_NONE;
 		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0 && ex.stat == STAT_NONE)
 			ft_command_not_found_message(ex.argv, data);
-		else if (ft_cmdtab_has_cmd(cmdtab, &ex) != NULL && ex.stat == STAT_NONE)
+		else if (ft_cmdtab_has_cmd(cmdtab, &ex) != NULL && ex.stat != STAT_ISDIR)
 		{
 			ft_putnbr(ex.stat);
 			puts(" va entrer dans ft_forkexe\n");

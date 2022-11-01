@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/30 23:55:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:34:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,25 @@ int	main(int ac, char **av, char **envp)
 
 
 	// exit(0);
+///////////////////////////////  TEST STAT / EXECVE /////////////////////////////////
+
+	puts("lkjd");
+	execve("lkjd", NULL, 0);
+	perror("execve main");
+	
+	puts("\n/lkjd");
+	execve("/lkjd", NULL, 0);
+	perror("execve main");
+	
+	puts("\n./srcs/main.c");
+	execve("./srcs/main.c", NULL, 0);
+	perror("execve main");
+	
+	puts("\n.srcsmain.c");
+	execve(".srcsmain.c", NULL, 0);
+	perror("execve main");
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
