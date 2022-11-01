@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/01 15:34:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 19:05:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,22 +217,38 @@ int	main(int ac, char **av, char **envp)
 
 	// exit(0);
 ///////////////////////////////  TEST STAT / EXECVE /////////////////////////////////
+ //pour tester si le chemin/cmd est un fichier ou un repertoire
+ 
+	// char	str1[] = "libss";
+	// char	str2[] = "/lkjd";
+	// char	str3[] = "./srcs/main.c";
+	// char	str4[] = ".srcsmain.c";
 
-	puts("lkjd");
-	execve("lkjd", NULL, 0);
-	perror("execve main");
+
+	// puts(str1);
+	// execve(str1, NULL, 0);
+	// perror("execve main");
+
+	// struct stat statcmd;
+	// stat(str1, &statcmd);
+
+	// if (S_ISDIR(statcmd.st_mode))
+	// 	puts("cest un DIR present");
 	
-	puts("\n/lkjd");
-	execve("/lkjd", NULL, 0);
-	perror("execve main");
+	// puts("\n");
+	// puts(str2);
+	// execve(str2, NULL, 0);
+	// perror("execve main");
 	
-	puts("\n./srcs/main.c");
-	execve("./srcs/main.c", NULL, 0);
-	perror("execve main");
+	// puts("\n");
+	// puts(str3);
+	// execve(str3, NULL, 0);
+	// perror("execve main");
 	
-	puts("\n.srcsmain.c");
-	execve(".srcsmain.c", NULL, 0);
-	perror("execve main");
+	// puts("\n");
+	// puts(str4);
+	// execve(str4, NULL, 0);
+	// perror("execve main");
 
 
 ////////////////////////////////////////////////////////////////////////////////

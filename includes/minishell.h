@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 01:23:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:43:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
-
+int			ft_check_if_cmd_has_a_backslash(char *str);
 /* FT REDIRECTIONS*/
 int			ft_heredoc_create(char *token, int fd);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
