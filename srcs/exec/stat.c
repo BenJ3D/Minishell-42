@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/31 01:30:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/31 22:11:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str)
 {
 	char	*line;
 	char	*cmd;
-	
 	
 	cmd = ft_cmdtab_has_cmd(cmdtab, ex);
 	printf("dbg check stat | progpath = %s\n", ex->progpath);
