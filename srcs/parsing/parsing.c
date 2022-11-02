@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 19:36:33 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:15:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,10 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	i = 0;
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
-		return (0);
+	{
+		exit(42);
+		return (0); //!pb ici, il faudrait juste que ca se stoppe
+	}
 	ft_total_parsing(data, buffer);
 	ft_define_cmd_type(data->cmdtoparse, data);
 	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
