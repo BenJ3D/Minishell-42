@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 22:13:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:23:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	char	*line;
 	char	*user;
 	char	usertmp[USER_MAX_LEN];
-	
+	char	*status;
+
+	status =  ft_itoa(g_status % 255);
 	if (!prgname)
 		prgname = ft_strdup("minishell");
 	if (ft_env_check_if_key_is_valid(env, "USER") == FALSE) //si USER n'existe pas
-		line = ft_strjoin_max("%s%s>%s$ ",
-				COLOR_CYAN, prgname, COLOR_NONE);
+		line = ft_strjoin_max("%s[%s] %s%s>%s$ ",
+		COLOR_RED, status, COLOR_CYAN, prgname, COLOR_NONE);
 	else
 	{
 		user = ft_env_getstr_env_value(env, "USER");
@@ -37,11 +39,12 @@ char	*prompt_update(t_envlst *env, char *prgname)
 			free (user);
 			user = ft_strdup(usertmp);
 		}
-		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
-					COLOR_GREEN, user,
+		line = ft_strjoin_max("%s[%s] %s- %s -%s %s>%s$ ",
+		COLOR_RED, status,COLOR_GREEN, user,
 					COLOR_CYAN, prgname, COLOR_NONE);
 		free (user);
 	}
+	free (status);
 	return (line);
 }
 

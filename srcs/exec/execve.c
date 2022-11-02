@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 21:29:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:09:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_check_if_cmd_has_a_backslash(char *str)
 int	ft_command_not_found_message(char **argv, t_data *data)
 {
 	char *line2;
-
+	
 	if (argv[0] != NULL)
 	{
 		if (ft_check_if_cmd_has_a_backslash(argv[0]))
@@ -87,7 +87,7 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 			line2 = ft_strjoin_max("%s%s: %s%s: %sNo such file or directory%s\n"
 						, COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
 												argv[0], COLOR_RED, COLOR_NONE);
-			g_status = 126;
+			g_status = 127;
 		}
 		else
 		{
@@ -101,7 +101,7 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 	}
 	else
 		return (0);
-	return (g_status);
+	return (127);
 }
 
 /**
