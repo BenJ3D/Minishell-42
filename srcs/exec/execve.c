@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 14:19:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:42:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 {
 	char	**envp;
 	pid_t	father;
+	char	*errline;
 	
 	father = -2;
 	errno = 0;	
@@ -199,14 +200,22 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		{
 			if (ex->progpath)
 			{
+				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
+					data->pgr_name, COLOR_PURPLE, ex->progpath, COLOR_PURPLE);
 				execve(ex->progpath, ex->argv, envp);
-				perror(ex->progpath);
-				
+				perror(errline);
+				ft_putstr_fd(COLOR_NONE, 2);
+				free (errline);
 			}
 			else
 			{
+				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
+						data->pgr_name, COLOR_PURPLE, ex->argv[0], COLOR_RED);
 				execve(ex->argv[0], ex->argv, envp);
-				perror(ex->argv[0]);
+				perror(errline);
+				ft_putstr_fd(COLOR_NONE, 2);
+				free (errline);
+
 			}
 		}
 		// exit(errno);

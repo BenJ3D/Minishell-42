@@ -6,12 +6,12 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/02 13:52:28 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/02 14:40:49 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=1
+DEBUG=2
 
 ifeq ($(DEBUG), 0) # for final compilation
 CC = gcc $(CFLAGS)
