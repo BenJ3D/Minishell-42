@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/01 17:43:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:01:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);

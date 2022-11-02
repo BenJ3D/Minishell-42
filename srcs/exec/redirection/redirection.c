@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 23:06:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:14:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,26 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	else if (cmdtab[ex->i].reditype == IN2)
 		ret = ft_redi_in2(cmdtab[ex->i].hdcfd, cmdtab, ex);
 	return (ret);
+}
+
+/**
+ * @brief fixe si 0 cmd detecter pour check les files redi quand meme
+ * 	les creer s'ils n'existent pas
+ * @param cmdtab 
+ * @param data 
+ * @return int 
+ */
+int	ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
+{
+	pid_t	father;
+
+	father = fork();
+	if (father == 0)
+	{
+		ft_redirection(data, cmdtab, ex);
+		exit(0);
+	}
+	waitpid(father, &g_status, 0);
+	return (0);
+	return (0);
 }

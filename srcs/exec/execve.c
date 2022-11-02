@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 14:42:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:03:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,13 +284,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst);
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
-		// printf("ex.progpath %s | ex.argv[0] %s\n", ex.progpath, ex.argv[0]);
-		// if (ex.progpath == NULL)
 		ex.stat = 0;
 		ex.stat = ft_stat_check(cmdtab, &ex, data, ex.progpath);
-		// else
-			// ex.stat = STAT_NONE;
-		// printf("ex.stat = %i\nex.progpath = %s\ncmdtab[ex.i].isbuilt = %i\n", ex.stat, ex.progpath, cmdtab[ex.i].isbuilt);
 		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0 && ex.stat == STAT_NONE)
 		{	
 			if (cmdtab[ex.i].pipein == 1 || cmdtab[ex.i].pipeout == 1)
@@ -315,6 +310,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			// puts(" va entrer dans ft_forkexe\n");
 			cmdtab[ex.i].pid = ft_forkexe(data, &ex, cmdtab);
 		}
+		else
+			ft_check_redi_if_has_no_cmd(cmdtab, &ex, data);
 		free(ex.progpath);
 		ex.i++;
 		ft_free_tab_char(ex.argv);
