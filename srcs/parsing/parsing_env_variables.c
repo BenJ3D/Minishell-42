@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 13:38:04 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:34:44 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	int		pin;
 	int		pan;
 	char	*value_env;
+	char	*final;
 
 	len = 0;
-	data->i++;
-	pin = data->i;
+	data->scroller++;
+	pin = data->scroller;
 	value_env = NULL;
-	printf("test\n");
+	final = NULL;
 	if (buffer[data->i] >= '0' && buffer[data->i] <= '9')
 	{
 		if (semi_final == NULL)
@@ -76,10 +77,9 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 		return(semi_final);
 	}
-	printf("test2\n");
 	while (buffer[data->i] && (ft_isalnum(buffer[data->i]) ||  buffer[data->i] == '_') && buffer[data->i] != DOUBLE_QUOTE)
 	{
-		data->i++;
+		data->scroller++;
 		len++;
 	}
 	if (len != 0)
@@ -96,17 +96,22 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			if (!value_env)
 			{
 				free(value_env);
-				return (NULL);
+				printf(" test %s\n", semi_final);
+				return (semi_final);
 			}
 		}
 		if (semi_final != NULL)
 		{
-			semi_final = ft_strjoin_parsing(semi_final, value_env);
+			final = ft_strjoin_parsing(semi_final, value_env);
+			free(value_env);
+		}
+		else
+		{
+			final = ft_strdup(value_env);
 			free(value_env);
 		}
 	}
-	printf("tes3\n");
-	return (semi_final);
+	return (final);
 }
 
 t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
@@ -116,22 +121,24 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	int		len;
 	char	*value_env;
 
+	value_env = NULL;
 	if (!data->cmdtoparse)
-		data->i++;
-	if (data->cmdtoparse && data->cmdtoparse->str[0] != '<')
-		data->i++;
-	pin = data->i;
+		data->scroller++;
+	else if (data->cmdtoparse->str && data->cmdtoparse->str[0] != '<')
+		data->scroller++;
+	pin = data->scroller;
 	len = 0;
-	while (buffer[data->i] && (buffer[data->i] >= 33 && buffer[data->i] <= 126))
+	while (buffer[data->scroller] && (buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126) \
+		&& (buffer[data->scroller] != '\'' && buffer[data->scroller] != '"'))
 	{
-		data->i++;
+		data->scroller++;
 		len++;
 	}
 	if (len != 0)
 	{
 		value_env = ft_calloc(sizeof(char), len + 1);
 		pan = 0;
-		while (pin < data->i)
+		while (pin < data->scroller)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
 		if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
@@ -144,7 +151,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		}
 		ft_buffercmd_in_lst(value_env, data, 0);
 		free(value_env);
-		ft_quotes_checker(data, buffer, data->i);
+		ft_quotes_checker(data, buffer, data->scroller);
 	}
 	else
 		ft_buffercmd_in_lst("$", data, 1);
