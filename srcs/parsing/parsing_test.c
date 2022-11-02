@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 19:52:02 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:38:33 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			buffer[data->i] == '$')
 		{
 			ft_parsing_env_variable(data, buffer);
-			if (data->cmdtab == NULL)
+			if (data->cmdtoparse == NULL)
 			{
+				printf("test\n");
 				error_management(data);
 				return (0);
 			}

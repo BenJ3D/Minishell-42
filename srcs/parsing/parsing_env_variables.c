@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 13:31:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:38:04 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 
 	if (!data->cmdtoparse)
 		data->i++;
-	if (data->cmdtoparse->str && data->cmdtoparse->str[0] != '<')
+	if (data->cmdtoparse && data->cmdtoparse->str[0] != '<')
 		data->i++;
 	pin = data->i;
 	len = 0;
@@ -134,7 +134,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		while (pin < data->i)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		if (data->cmdtoparse->str && data->cmdtoparse->str[0] == '<')
+		if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
 			pan = 0;
 		else
 		{
