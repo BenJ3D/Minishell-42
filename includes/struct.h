@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 19:23:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:35:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,19 @@ typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls ->
 	struct s_list	*next;
 }					t_list;
 
+enum e_stat
+{
+	STAT_NONE,
+	STAT_ISFILE,
+	STAT_ISDIR
+};
 typedef struct	s_execarg //pour gagner des lignes // norme..
 {
-	int		i;
-	char	**argv;
-	char	*progpath;
+	int			i;
+	int			isfile;
+	enum e_stat stat;
+	char		**argv;
+	char		*progpath;
 }				t_execarg;
 
 
@@ -70,8 +78,6 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
 
-
-
 typedef struct s_data
 {
 	char		*pgr_name; 			//le nom de notre programe afficher dans notre prompt
@@ -90,6 +96,7 @@ typedef struct s_data
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
 	int			type_of_the_last_cmd;
+	struct stat	statbuf;
 }				t_data;
 
 #endif

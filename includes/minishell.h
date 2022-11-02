@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 22:10:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:43:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ int			ft_exec_is_builtin(t_data	*data, char **argv,t_cmdtab *cmdtab, t_execarg *
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
+char		*ft_cmdtab_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
+
+
+/* FT EXECVE  STAT*/
+int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str);
 
 /* FT EXECVE PIPES */
 int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);
@@ -72,10 +77,9 @@ int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
 /* FT EXECVE UTILS*/
 int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
-
+int			ft_check_if_cmd_has_a_backslash(char *str);
 /* FT REDIRECTIONS*/
 int			ft_heredoc_create(char *token, int fd);
-// char		*ft_heredoc_create(char *token, int *pipe);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
@@ -90,7 +94,7 @@ int			ft_builtin_unset(t_data *data, char **cmd);
 int			ft_builtin_cd(t_envlst *env, char **argv);
 int			ft_builtin_pwd(t_envlst *env, char **argv);
 int			ft_builtin_echo(char **argv);
-void		ft_exit(t_data *data);
+void		ft_exit(t_data *data, char **argv);
 void		ft_exit_child(t_data *data);
 
 

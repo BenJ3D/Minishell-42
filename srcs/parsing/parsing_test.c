@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 19:52:02 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:18:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
 			buffer[data->i] == '|')
 		{
-			printf("test\n");
 			ft_parsing_for_a_pipe(data, buffer);
 			if (data->cmdtoparse == NULL)
 			{

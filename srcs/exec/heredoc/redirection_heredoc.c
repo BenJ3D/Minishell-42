@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 16:06:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 23:27:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,6 @@ int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex)
 	}
 	return (0);
 }
-
-// int	ft_redi_in1v2(int hdc_fd)
-// {
-// 	if ((hdc_fd = open(PATH_HEREDOC, O_RDONLY)) < 0)
-// 	{
-// 		perror(PATH_HEREDOC);
-// 		return (errno);
-// 	}
-// 	else
-// 	{
-// 		dup2(hdc_fd, STDIN_FILENO);
-// 		close(hdc_fd);
-// 	}
-// 	return (0);
-// }
-
 
 /**
  * @brief lancer un readline pour faire le heredoc

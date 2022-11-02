@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 22:13:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:46:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_init_minishell(t_data *data)
 {
-	data->pgr_name = ft_strdup("MiniHell");
+	data->pgr_name = ft_strdup("minishell");
 	data->s_quotes_switch = 0;
 	data->d_quotes_switch = 0;
 	data->savefd[0] = dup(STDIN_FILENO);
@@ -25,12 +25,12 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	// if (ac > 1)
-	// {
-		// ft_putstr_fd(av[0], 2);
-		// ft_putstr_fd(" to many arguments\n", 2);
-		// return (1);
-	// }
+	if (ac > 1)
+	{
+		ft_putstr_fd(av[0], 2);
+		ft_putstr_fd(" to many arguments\n", 2);
+		return (1); //FIXME: quelle errno renvoyer
+	}
 
 	interactive_mode (); //FIXME: pompe sur un autre minishell, a modifier 
 		// ameliorer
@@ -172,7 +172,7 @@ int	main(int ac, char **av, char **envp)
 	// waitpid(pid, &g_status, 0);
 	// ft_putnbr(g_status % 255);
 	// puts("\n");
-
+	// exit(g_status % 255);
 ///////////////////////////////  HEREDOCS TEST /////////////////////////////////
 	// int p[2];
 	// int	b;
@@ -211,10 +211,46 @@ int	main(int ac, char **av, char **envp)
 	// ret = ft_strncmp(tocmp, tocmp2, sizecmp); // si ret > 0 == tocmp > tocmp2 
 	// printf("ret = %i\n", ret);
 	
+///////////////////////////////  TEST ERRNO LAST /////////////////////////////////
 		
 
 
 	// exit(0);
+///////////////////////////////  TEST STAT / EXECVE /////////////////////////////////
+ //pour tester si le chemin/cmd est un fichier ou un repertoire
+ 
+	// char	str1[] = "libss";
+	// char	str2[] = "/lkjd";
+	// char	str3[] = "./srcs/main.c";
+	// char	str4[] = ".srcsmain.c";
+
+
+	// puts(str1);
+	// execve(str1, NULL, 0);
+	// perror("execve main");
+
+	// struct stat statcmd;
+	// stat(str1, &statcmd);
+
+	// if (S_ISDIR(statcmd.st_mode))
+	// 	puts("cest un DIR present");
+	
+	// puts("\n");
+	// puts(str2);
+	// execve(str2, NULL, 0);
+	// perror("execve main");
+	
+	// puts("\n");
+	// puts(str3);
+	// execve(str3, NULL, 0);
+	// perror("execve main");
+	
+	// puts("\n");
+	// puts(str4);
+	// execve(str4, NULL, 0);
+	// perror("execve main");
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,6 +263,7 @@ int	main(int ac, char **av, char **envp)
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);
-	ft_exit(&data);
+	ft_putstr_fd("exit\n", 1);
+	ft_exit(&data, av);
 	return (0);
 }
