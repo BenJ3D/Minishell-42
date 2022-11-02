@@ -6,12 +6,12 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 22:10:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:27:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-static int	ft_check_if_null(char *str, t_data *data);
+static int	ft_check_if_key_is_valid(char *str, t_data *data);
 static int	ft_main_export(t_envlst *env, char *str, t_data *data);
 static void	ft_print_export(t_envlst *env);
 
@@ -116,63 +116,30 @@ static void	ft_print_export(t_envlst *env) //V2 sorted
 	}
 }
 
-// static void	ft_print_export(t_envlst *env)
-// {
-// 	t_envlst	*tmp;
-
-// 	tmp = env;
-// 	while (tmp)
-// 	{
-// 		ft_putstr_fd("declare -x ", 1);
-// 		ft_putstr_fd(tmp->key, 1);
-// 		if (tmp->value && tmp->isenv == 1)
-// 		{
-// 			ft_putchar_fd('=', 1);
-// 			ft_putchar_fd('"', 1);
-// 			ft_putstr_fd(tmp->value, 1);
-// 			ft_putchar_fd('"', 1);
-// 		}
-// 		ft_putchar_fd('\n', 1);
-// 		tmp = tmp->next;
-// 	}
-// }
-
 /**
  * @brief vérifie si la key est NULL //TODO: doit tchecker le normage des key env
  * 
  * @param key 
  * @return int 
  */
-static int	ft_check_if_key_is_valid(char *key, t_data *data)
+int	ft_check_if_exportkey_is_valid(char *key, t_data *data)
 {
+	int	i;
+	
 	if (key == NULL)
-	{
-		ft_putstr_fd(data->pgr_name, 2);
-		ft_putstr_fd(" : export : ", 2);
-		ft_putstr_fd("not a valid identifier\n", 2);
 		return (1);
+	i = 0;
+	if (!ft_isalpha(key[i]) && key[i] != '_')
+		return (1);
+	i++;
+	while(key[i])
+	{
+		if (!ft_isalnum(key[i]))
+			return (1);
+		i++;
 	}
 	return (0);
 }
-
-/**
- * @brief vérifie si la key est NULL
- * 
- * @param key 
- * @return int 
- */
-static int	ft_check_if_null(char *key, t_data *data) //TODO: for parsing
-{
-	if (key == NULL)
-	{
-		ft_putstr_fd(data->pgr_name, 2);
-		ft_putstr_fd(" : export : ", 2);
-		ft_putstr_fd("not a valid identifier\n", 2);
-		return (1);
-	}
-	return (0);
-}
-
 
 
 /**
@@ -182,15 +149,27 @@ static int	ft_check_if_null(char *key, t_data *data) //TODO: for parsing
  * @param str name of futur key
  * @return int 
  */
-static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm
+static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm errno doit renvoyer 1
 {
 	char		*key;
 	char		*value;
 	int			isenv;
 	t_envlst	*node;
+	char		*errline;
 	
 	isenv = TRUE;
 	key = ft_env_extract_key_name(str, &isenv);
+	if (ft_check_if_exportkey_is_valid(key, data))
+	{
+		errline = ft_strjoin_max("%s%s: %s`%s': %snot a valid identifier%s\n",
+				COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
+				str, COLOR_RED, COLOR_NONE);
+		ft_putstr_fd(errline, 2);
+		g_status = 1;
+		errno = 1;
+		free (errline);
+		return (1);
+	}
 	if (ft_env_check_if_key_is_valid(env, key) == TRUE)  //tcheck si une clef existe deja
 	{
 		node = ft_env_getenv_lst_value(env, key);

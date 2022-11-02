@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/01 19:49:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:35:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static void	ft_exit_exit(t_data *data)
 {
 	ft_free_all_minishell(data);
 	rl_replace_line("exit", 0);
+	ft_putstr_fd("time to exit 1\n", 2);
 	exit(g_status % 255);
 }
 
 static void	ft_exit_arg(int exitarg, t_data *data)
 {
 	ft_free_all_minishell(data);
+	ft_putstr_fd("time to exit 2\n", 2);
 	rl_replace_line("exit", 0);
 	exit(exitarg);
 }
