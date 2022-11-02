@@ -43,6 +43,7 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 			ft_parsing_env_variable(data, buffer);
 			if (data->cmdtoparse == NULL)
 			{
+				printf("test\n");
 				error_management(data);
 				return (0);
 			}
