@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 20:25:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:01:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,10 @@ int			ft_lst_count_cmdarg(t_list *lst);
 int			ft_free_cmdtab_lst(int pipe, t_cmdtab *cmdtab);
 void		ft_free_all_minishell(t_data *data);
 void		ft_free_tab_char(char **tab);
+
+/* FT ERROR MANAGEMENT */
+void		ft_err_display_line_error(t_data *data, char *cmd, char *msg);
+
 
 /* FT DEBUG BEN */
 void		dbg_lstdisplay(t_list *lst);
