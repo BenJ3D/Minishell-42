@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 15:14:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:21:46 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 		return(semi_final);
 	}
-	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) ||  buffer[data->scroller] == '_') && buffer[data->scroller] != DOUBLE_QUOTE)
+	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) || \
+		buffer[data->scroller] == '_') && buffer[data->scroller] != DOUBLE_QUOTE)
 	{
 		data->scroller++;
 		len++;
@@ -133,8 +134,8 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 	pin = data->scroller;
 	len = 0;
-	while (buffer[data->scroller] && (buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126) \
-		&& (buffer[data->scroller] != '\'' && buffer[data->scroller] != '"'))
+	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) || \
+		buffer[data->scroller] == '_'))
 	{
 		data->scroller++;
 		len++;
