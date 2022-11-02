@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 14:39:28 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:21:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
 t_list		*ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy);
-void		ft_quotes(t_data	*data, char	*buffer, int len_max);
-t_list		*ft_parsing_env_variable(t_data	*data, char *buffer);
-int			ft_parsing_others(t_data	*data, char	*buffer);
+char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
+char		*ft_parsing_env_variable(t_data	*data, char *buffer);
+int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 void		error_management(t_data	*data);
 int			ft_redirection_files_check(t_data	*data, char	*buffer);
 int			ft_pipes_spaces_check(t_data	*data, char	*buffer);

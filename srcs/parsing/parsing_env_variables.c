@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 16:21:46 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:23:07 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	return (final);
 }
 
-t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
+char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 {
 	int		pin;
 	int		pan;
@@ -147,7 +147,7 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
 			if (!value_env)
-				return (data->cmdtoparse);
+				return (NULL);
 		}
 		else
 		{
@@ -162,14 +162,11 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			{
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
-					return (data->cmdtoparse);
+					return (NULL);
 			}
 		}
-		ft_buffercmd_in_lst(value_env, data, 0);
-		free(value_env);
-		ft_quotes_checker(data, buffer, data->scroller);
 	}
 	else
-		ft_buffercmd_in_lst("$", data, 1);
-	return (data->cmdtoparse);
+		return ("$");
+	return (value_env);
 }
