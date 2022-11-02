@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 17:03:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:41:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,7 +301,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			else
 			{
 				// ft_putstr_fd("NOT forked\n", 2);
-				ft_command_not_found_message(ex.argv, data);
+				g_status = ft_command_not_found_message(ex.argv, data);
+				errno = g_status;//FIXME:
 			}
 		}
 		else if (ft_cmdtab_has_cmd(cmdtab, &ex) != NULL && ex.stat != STAT_ISDIR)

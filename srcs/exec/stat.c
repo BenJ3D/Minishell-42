@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/01 19:25:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:45:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,16 @@ int	ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str)
 		stat(str, &data->statbuf);
 	if (S_ISDIR(data->statbuf.st_mode) && str != NULL)
 	{
-		line = ft_strjoin_max("%s%s: %s%s: %sIs a directory%s\n",
-							COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
-											cmd, COLOR_RED, COLOR_NONE);
-		ft_putstr_fd(line, 2);
-		free(line);
+		cmdtab[ex->i].pid = fork();
+		if (cmdtab[ex->i].pid == 0)
+		{
+			line = ft_strjoin_max("%s%s: %s%s: %sIs a directory%s\n",
+								  COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
+								  cmd, COLOR_RED, COLOR_NONE);
+			ft_putstr_fd(line, 2);
+			free(line);
+			exit (0);
+		}
 		return (STAT_ISDIR);
 	}
 	else if (S_ISREG(data->statbuf.st_mode))
