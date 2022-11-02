@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 22:09:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:49:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,19 @@ int	ft_check_if_cmd_has_a_backslash(char *str)
 
 int	ft_command_not_found_message(char **argv, t_data *data)
 {
-	char *line2;
-	
 	if (argv[0] != NULL)
 	{
 		if (ft_check_if_cmd_has_a_backslash(argv[0]))
 		{
-			line2 = ft_strjoin_max("%s%s: %s%s: %sNo such file or directory%s\n"
-						, COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
-												argv[0], COLOR_RED, COLOR_NONE);
+			ft_err_display_line_error(data, argv[0], \
+												"No such file or directory");
 			g_status = 127;
 		}
 		else
 		{
-			line2 = ft_strjoin_max("%s%s: %s%s: %scommand not found%s\n",
-							COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
-							argv[0], COLOR_RED, COLOR_NONE);
+			ft_err_display_line_error(data, argv[0], "command not found");
 			g_status = 127;
 		}
-		ft_putstr_fd(line2, 2);
-		free(line2);
 	}
 	else
 		return (0);
@@ -181,7 +174,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	char	*errline;
 	
 	father = -2;
-	errno = 0;	
+	errno = 0;
 	
 	// printf ("ex.i = %i\npipin = %i\npipeout = %i\n", ex->i, cmdtab[ex->i].pipein, cmdtab[ex->i].pipeout);
 	if ((cmdtab[ex->i].pipeout == 1) || (cmdtab[ex->i].pipein == 1) \
@@ -231,9 +224,9 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		if (ft_redirection(data, cmdtab, ex) == 0)
 		{
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
-			dup2(data->savefd[1], STDOUT_FILENO); //TODO:
+			dup2(data->savefd[1], STDOUT_FILENO);
 			if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1 )
-				close (cmdtab[ex->i].fdredipipe[0]); //FIXME: provoque exit si builtin
+				close (cmdtab[ex->i].fdredipipe[0]);
 		}
 	}
 	return (father);
