@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/28 17:42:55 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:39:28 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			ft_pipes_spaces_check(t_data	*data, char	*buffer);
 int			ft_redirect_me_now(t_data	*data, char	*buffer);
 int			ft_parsing_for_a_pipe(t_data	*data, char	*buffer);
 char		*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final);
+char		*ft_var_no_env(t_data	*data, char	*buffer);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
