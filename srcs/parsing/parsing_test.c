@@ -6,84 +6,94 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 11:44:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:35:38 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-t_list	*ft_total_parsing(t_data	*data, char	*buffer)
+int	ft_total_parsing(t_data	*data, char	*buffer)
 {
 	int		len_max;
-	t_list	*cmd;
 	int		pin;
 
 	data->first_cmd = 0;
-	cmd = NULL;
-	data->i = 0;
+	data->cmdtoparse = NULL;
+	data->scroller = 0;
 	len_max = ft_strlen_parsing(buffer);
 	ft_reset_quotes_checker(data);
-	while (buffer[data->i])
+	while (buffer[data->scroller])
 	{
-		ft_quotes_checker(data, buffer, data->i);
-		while (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
+		ft_quotes_checker(data, buffer, data->scroller);
+		if (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
 		{
-			cmd = ft_quotes(data, buffer, cmd, len_max);
-			if (cmd == NULL)
+			printf("test1\n");
+			ft_quotes(data, buffer, len_max);
+			if (data->cmdtoparse == NULL)
 			{
-				error_management(data, buffer, cmd);
-				return (NULL);
+				error_management(data);
+				return (0);
 			}
+			if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
+				data->scroller++;
 		}
-		if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
-			buffer[data->i] == '$')
+		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
+			buffer[data->scroller] == '$')
 		{
-			cmd = ft_parsing_env_variable(data, cmd, buffer);
-			if (cmd == NULL)
+			ft_parsing_env_variable(data, buffer);
+			if (data->cmdtoparse == NULL)
 			{
-				error_management(data, buffer, cmd);
-				return (NULL);
+				printf("test\n");
+				error_management(data);
+				return (0);
 			}
 		}
 		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
-			buffer[data->i] == '|')
+			buffer[data->scroller] == '|')
 		{
-			cmd = ft_parsing_for_a_pipe(data, buffer, cmd);
-			if (cmd == NULL)
+			ft_parsing_for_a_pipe(data, buffer);
+			if (data->cmdtoparse == NULL)
 			{
-				error_management(data, buffer, cmd);
-				return (NULL);
+				error_management(data);
+				return (0);
 			}
 		}
 		else if ((data->s_quotes_switch == 0 && data->d_quotes_switch == 0) && \
-			(buffer[data->i] == '<' || buffer[data->i] == '>'))
+			(buffer[data->scroller] == '<' || buffer[data->scroller] == '>'))
 		{
-			cmd = ft_redirect_me_now(data, buffer, cmd);
-			if (cmd == NULL || !ft_redirection_files_check(data, buffer + \
-				data->i))
+			ft_redirect_me_now(data, buffer);
+			if (data->cmdtoparse == NULL || !ft_redirection_files_check(data, buffer + \
+				data->scroller))
 			{
-				error_management(data, buffer, cmd);
-				return (NULL);
+				error_management(data);
+				return (0);
 			}
 		}
-		else if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
+		else if ((data->s_quotes_switch == 0 && data->d_quotes_switch == 0) && \
+			buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126)
 		{
-			cmd = ft_parsing_others(data, cmd, buffer);
-			if (cmd == NULL)
+			ft_parsing_others(data, buffer);
+			if (data->cmdtoparse == NULL)
 			{
-				error_management(data, buffer, cmd);
-				return (NULL);
+				error_management(data);
+				return (0);
 			}
 		}
-		if (buffer[data->i] && (buffer[data->i] < 33 || buffer[data->i] > 126) \
-			&& (buffer[data->i] != '|'))
-			data->i++;
+		if (buffer[data->scroller] && (buffer[data->scroller] < 33 || buffer[data->scroller] > 126) \
+			&& (buffer[data->scroller] != '|'))
+			data->scroller++;
 	}
-	if (cmd == NULL)
+	if (data->cmdtoparse == NULL)
 	{
-		error_management(data, buffer, cmd);
-		return (NULL);
+		error_management(data);
+		return (0);
 	}
 	ft_reset_quotes_checker(data);
-	return (cmd);
+	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
+		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
+	{	
+		error_management(data);
+		return (0);
+	}
+	return (1);
 }

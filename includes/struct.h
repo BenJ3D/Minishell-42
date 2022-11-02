@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/26 18:04:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:37:39 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,11 @@ typedef struct s_data
 	int			savefd[2];				//pour pipe
 	int			s_quotes_switch;
 	int			d_quotes_switch;
-	int			i;
+	int			scroller;
 	int			first_cmd;
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
+	int			type_of_the_last_cmd;
 }				t_data;
 
 #endif

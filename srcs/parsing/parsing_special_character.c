@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/27 17:59:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:37:39 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,57 +17,77 @@ int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 	int	i;
 
 	i = 0;
-	while (buffer[data->i] != '\0' && buffer[data->i] == special)
+	while (buffer[data->scroller] != '\0' && buffer[data->scroller] == special)
 	{
-		data->i++;
+		data->scroller++;
 		i++;
 	}
 	return (i);
 }
 
-t_list	*ft_redirect_me_now(t_data	*data, char	*buffer, t_list	*cmd)
+int	ft_redirect_me_now(t_data	*data, char	*buffer)
 {
 	int	len;
 
 	len = 0;
-	if (buffer[data->i] == '>')
+	if (buffer[data->scroller] == '>')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '>');
 		if (len == 1)
-			cmd = ft_buffercmd_in_lst(">", cmd, data);
+			ft_buffercmd_in_lst(">", data, 0);
 		else if (len == 2)
-			cmd = ft_buffercmd_in_lst(">>", cmd, data);
+			ft_buffercmd_in_lst(">>", data, 0);
 		else if (len > 2)
-			return (NULL);
+			return (0);
 	}
-	else if (buffer[data->i] == '<')
+	else if (buffer[data->scroller] == '<')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '<');
 		if (len == 1)
-			cmd = ft_buffercmd_in_lst("<", cmd, data);
+			ft_buffercmd_in_lst("<", data, 0);
 		else if (len == 2)
-			cmd = ft_buffercmd_in_lst("<<", cmd, data);
+			ft_buffercmd_in_lst("<<", data, 0);
 		else if (len > 2)
-			return (NULL);
+			return (0);
 	}
-	return (cmd);
+	return (1);
 }
 
-t_list	*ft_parsing_for_a_pipe(t_data	*data, char	*buffer, t_list	*cmd)
+int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
+{
+	int	pin;
+
+	pin = 0;
+	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
+		pin++;
+	if (buffer[pin] == '|')
+		return (0);
+	return (1);
+}
+
+int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 {
 	int	len;
 
 	len = 0;
-	while (buffer[data->i] == '|')
+	if (data->type_of_the_last_cmd == IN1 || data->type_of_the_last_cmd == IN2 || \
+		data->type_of_the_last_cmd == OUT1 || data->type_of_the_last_cmd == OUT2)
 	{
-		data->i++;
+		printf("testeur\n");		
+		error_management(data);
+	}
+	while (buffer[data->scroller] == '|')
+	{
+		
+		data->scroller++;
 		len++;
 	}
 	if (len == 1)
-		cmd = ft_buffercmd_in_lst("|", cmd, data);
+		ft_buffercmd_in_lst("|", data, 0);
 	else
-		return (NULL);
-	if (!ft_pipes_spaces_check(data, buffer + data->i))
-		error_management(data, buffer, cmd);
-	return (cmd);
+		return (0);
+	if (!ft_pipes_spaces_check(data, buffer + data->scroller)){
+		return (0);
+	}
+	return (1);
 }
