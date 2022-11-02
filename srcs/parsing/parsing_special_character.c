@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 17:03:57 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:37:39 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 	int	i;
 
 	i = 0;
-	while (buffer[data->i] != '\0' && buffer[data->i] == special)
+	while (buffer[data->scroller] != '\0' && buffer[data->scroller] == special)
 	{
-		data->i++;
+		data->scroller++;
 		i++;
 	}
 	return (i);
@@ -30,7 +30,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 	int	len;
 
 	len = 0;
-	if (buffer[data->i] == '>')
+	if (buffer[data->scroller] == '>')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '>');
 		if (len == 1)
@@ -40,7 +40,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len > 2)
 			return (0);
 	}
-	else if (buffer[data->i] == '<')
+	else if (buffer[data->scroller] == '<')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '<');
 		if (len == 1)
@@ -76,17 +76,17 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 		printf("testeur\n");		
 		error_management(data);
 	}
-	while (buffer[data->i] == '|')
+	while (buffer[data->scroller] == '|')
 	{
 		
-		data->i++;
+		data->scroller++;
 		len++;
 	}
 	if (len == 1)
 		ft_buffercmd_in_lst("|", data, 0);
 	else
 		return (0);
-	if (!ft_pipes_spaces_check(data, buffer + data->i)){
+	if (!ft_pipes_spaces_check(data, buffer + data->scroller)){
 		return (0);
 	}
 	return (1);
