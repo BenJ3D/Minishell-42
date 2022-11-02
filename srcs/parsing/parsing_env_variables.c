@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 18:04:05 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:34:44 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		while (pan < len)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
+		
 		if (data->cmdtoparse->type != IN1 && data->cmdtoparse->type != IN2)
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
 			if (!value_env)
 			{
 				free(value_env);
-				return (NULL);
+				printf(" test %s\n", semi_final);
+				return (semi_final);
 			}
 		}
 		if (semi_final != NULL)
@@ -68,7 +70,10 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	int		len;
 	char	*value_env;
 
-	if (data->cmdtoparse->str[0] != '<')
+	value_env = NULL;
+	if (!data->cmdtoparse)
+		data->scroller++;
+	else if (data->cmdtoparse->str && data->cmdtoparse->str[0] != '<')
 		data->scroller++;
 	pin = data->scroller;
 	len = 0;
@@ -85,7 +90,9 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		while (pin < data->scroller)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		if (data->cmdtoparse->str[0] != '<')
+		if (data->cmdtoparse && data->cmdtoparse->str[0] != '<')
+			pan = 0;
+		else
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
 			if (!value_env)

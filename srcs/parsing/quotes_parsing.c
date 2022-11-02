@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 18:42:34 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:47:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 	{
 		pin = data->scroller;
 		len = 0;
-		while (data->scroller < len_max && buffer[data->scroller] \
+		while (buffer[data->scroller] && buffer[data->scroller] \
 			 != '$' && buffer[data->scroller] != DOUBLE_QUOTE)
 		{
 			len++;
