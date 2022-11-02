@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 17:41:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:29:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		father = ft_createfork(data, ex, envp);
 	if (father == 0)
 	{
-		//TODO: dbg pour ./srcs/mainwe.c  | bonjour svaoir si fork ou pas
 		ft_forkexe_dup_if_pipes(cmdtab, ex);
 		if (ft_redirection(data, cmdtab, ex))
 			exit(errno);
@@ -203,6 +202,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
 					data->pgr_name, COLOR_PURPLE, ex->progpath, COLOR_PURPLE);
 				execve(ex->progpath, ex->argv, envp);
+				g_status = errno;
 				perror(errline);
 				ft_putstr_fd(COLOR_NONE, 2);
 				free (errline);
@@ -212,15 +212,15 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
 						data->pgr_name, COLOR_PURPLE, ex->argv[0], COLOR_RED);
 				execve(ex->argv[0], ex->argv, envp);
+				g_status = errno;
 				perror(errline);
 				ft_putstr_fd(COLOR_NONE, 2);
 				free (errline);
 
 			}
 		}
-		// exit(errno);
 		free(ex->progpath);
-		// ft_free_tab_char(ex->argv);
+		// ft_free_tab_char(ex->argv); // fait planter exit sinon 
 		ft_free_tab_char(envp);
 		ft_exit(data, ex->argv); // FIXME: utile ?
 	}
@@ -294,13 +294,11 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 			{
 				if (cmdtab[ex.i].pid == 0)
 				{
-					// ft_putstr_fd("forked\n", 2);
 					exit(ft_command_not_found_message(ex.argv, data));
 				}
 			}
 			else
 			{
-				// ft_putstr_fd("NOT forked\n", 2);
 				g_status = ft_command_not_found_message(ex.argv, data);
 				errno = g_status;//FIXME:
 			}

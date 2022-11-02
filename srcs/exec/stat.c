@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 17:45:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:06:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str)
 								  cmd, COLOR_RED, COLOR_NONE);
 			ft_putstr_fd(line, 2);
 			free(line);
-			exit (0);
+			exit (126);
 		}
 		return (STAT_ISDIR);
 	}
