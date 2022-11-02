@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 22:23:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:31:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*prompt_update(t_envlst *env, char *prgname)
 		free (user);
 	}
 	free (status);
+	g_status = 0;
 	return (line);
 }
 

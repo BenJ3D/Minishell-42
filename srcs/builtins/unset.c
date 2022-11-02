@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 23:11:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:28:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	ft_main_unset(t_data *data, char *key)
 {
 	t_envlst	*tmp;
 	char		*ptr;
-	char		*errline;
 
 	if (key[0] == '\0')
 		return (-1);
@@ -25,7 +24,6 @@ static int	ft_main_unset(t_data *data, char *key)
 		ft_err_display_line_error(data, key, "not a valid identifier");
 		g_status = 1;
 		errno = 1;
-		// free (errline);
 		return (1);
 	}
 	tmp = data->env;
@@ -35,7 +33,6 @@ static int	ft_main_unset(t_data *data, char *key)
 	{
 		ft_err_display_line_error(data, "unset PWD", "Operation not permitted");
 		return ((g_status = 1));
-		// return (ft_putstr_fd("failure: PWD is required\n", 2));
 	}
 	if (ft_strequal(tmp->key, key))
 	{

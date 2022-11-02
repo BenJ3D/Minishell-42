@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 23:05:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:39:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief affiche dans stderr un message d'erreur sous forme : 
- * "programe name: commande: erreur type"
+ * "programe name: commande: erreur type" avec code couleur
  * @param data 
  * @param cmd la commande en cours
  * @param msg le message d'erreur à afficher
