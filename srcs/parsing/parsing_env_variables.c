@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 14:45:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:14:27 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	if (buffer[data->scroller] >= '0' && buffer[data->scroller] <= '9')
 	{
 		if (semi_final == NULL)
+		{
 			semi_final = ft_var_no_env(data, buffer); //TODO coder cette fonction ou en tout cas cette hypothese
+		}
 		else
 		{
 			value_env = ft_var_no_env(data, buffer);
@@ -91,8 +93,9 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		while (pan < len)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
-		
-		if (data->cmdtoparse->type != IN1 && data->cmdtoparse->type != IN2)
+		if (data->cmdtoparse && (data->cmdtoparse->type == IN1 || data->cmdtoparse->type == IN2))
+			pan = 0;
+		else
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
 			if (!value_env)
