@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 17:14:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:47:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ int	ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 	father = fork();
 	if (father == 0)
 	{
-		ft_redirection(data, cmdtab, ex);
-		exit(0);
+		exit(ft_redirection(data, cmdtab, ex));
 	}
 	waitpid(father, &g_status, 0);
 	return (0);
