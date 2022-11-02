@@ -12,6 +12,46 @@
 
 #include "./../includes/minishell.h"
 
+char	*ft_strndup(const char *s1, int 	len)
+{
+	char	*res;
+	size_t	i;
+
+	i = 0;
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	while (s1[i] && i < len)
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	res[i] = 0;
+	return (res);
+}
+
+static char	*ft_echo_var_no_env(t_data	*data, char	*buffer)
+{
+	int	len;
+	char	*semi_final;
+	
+	len = 0;
+	data->i++;
+	semi_final = NULL;
+	while(buffer[data->i] != '\'' && buffer[data->i] != '"' && ft_isalnum(buffer[data->i]))
+	{
+		len++;
+		data->i++;
+	}
+	if (len != 0)
+	{
+		semi_final = ft_strndup(buffer + data->i, len);
+		if (!semi_final)
+			return (NULL);
+	}
+	return (semi_final);
+}
+
 char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 {
 	int		len;
@@ -23,8 +63,21 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	data->i++;
 	pin = data->i;
 	value_env = NULL;
-	while (buffer[data->i] && ((buffer[data->i] >= 'A' && buffer[data->i] <= \
-		'Z') || buffer[data->i] == '_') && buffer[data->i] != DOUBLE_QUOTE)
+	printf("test\n");
+	if (buffer[data->i] >= '0' && buffer[data->i] <= '9')
+	{
+		if (semi_final == NULL)
+			semi_final = ft_echo_var_no_env(data, buffer); //TODO coder cette fonction ou en tout cas cette hypothese
+		else
+		{
+			value_env = ft_echo_var_no_env(data, buffer);
+			semi_final = ft_strjoin(semi_final, value_env);
+			free(value_env);
+		}
+		return(semi_final);
+	}
+	printf("test2\n");
+	while (buffer[data->i] && (ft_isalnum(buffer[data->i]) ||  buffer[data->i] == '_') && buffer[data->i] != DOUBLE_QUOTE)
 	{
 		data->i++;
 		len++;
@@ -36,6 +89,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		while (pan < len)
 			value_env[pan++] = buffer[pin++];
 		value_env[pan] = '\0';
+		
 		if (data->cmdtoparse->type != IN1 && data->cmdtoparse->type != IN2)
 		{
 			value_env = ft_env_getstr_env_value(data->env, value_env);
@@ -51,6 +105,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			free(value_env);
 		}
 	}
+	printf("tes3\n");
 	return (semi_final);
 }
 
