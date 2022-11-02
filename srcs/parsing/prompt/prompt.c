@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 18:32:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:33:29 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ void	prompt_minishell(char **av, t_data *data)
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
 		nbpipe = ft_parsing_prompt(data, data->buffer);
-		dbg_display_cmdtab(data->cmdtab);
-		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
-		ft_free_cmdtab_lst(nbpipe, data->cmdtab);
+		if (nbpipe != 0)
+		{
+			//dbg_display_cmdtab(data->cmdtab);
+			ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
+			ft_free_cmdtab_lst(nbpipe, data->cmdtab);
+		}
 		free(data->line);
 		data->line = prompt_update(data->env, data->pgr_name);
 		free(data->buffer);
-		data->buffer = readline(data->line);
+		data->buffer = readline(data->line);			
 	}
 	if (data->line)
 		free(data->line);
