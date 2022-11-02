@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/29 23:27:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:38:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 		rl_on_new_line();
 		rl_on_new_line();
 		buf = readline(prompt);
-		while (ft_strequal(buf, token) != 1)
+		while (ft_strequal(buf, token) != 1 && buf)
 		{
 			ft_putstr_fd(buf, fd);
 			ft_putstr_fd("\n", fd);
@@ -114,40 +114,6 @@ int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
 	}
 	return (0);
 }
-
-// int	ft_make_heredoc(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
-// {
-// 	t_list *tmp;
-	
-// 	cmdtab[ex->i].heredoc = ft_strdup("");
-// 	tmp = cmdtab[ex->i].lst;
-// 	while (tmp)
-// 	{
-// 		if (tmp->type == IN2) //TODO:
-// 		{
-// 			free (cmdtab[ex->i].heredoc);
-// 			// cmdtab[ex->i].heredoc = ft_heredoc_create(cmdtab[ex->i].lst->next->str); //FIXME:
-// 		}
-// 		tmp = tmp->next;
-// 	}
-
-// 	return (0);
-// }
-
-// int	ft_pars_heredoc(t_data *data, t_cmdtab *cmdtab)
-// {
-// 	t_execarg ex;
-	
-// 	ex.i = 0;
-// 	while(cmdtab[ex.i].lst)
-// 	{
-// 		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex)) //TODO:
-// 			;
-// 	}
-	
-// 	return (0);
-// }
-
 
 /**
  * @brief return 1 si heredocs detecte dans la commande
