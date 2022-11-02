@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/01 19:54:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:19:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,25 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 	if (argv[0] != NULL)
 	{
 		if (ft_check_if_cmd_has_a_backslash(argv[0]))
+		{
 			line2 = ft_strjoin_max("%s%s: %s%s: %sNo such file or directory%s\n"
-								, COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
-								argv[0], COLOR_RED, COLOR_NONE);
+						, COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
+												argv[0], COLOR_RED, COLOR_NONE);
+			g_status = 126;
+		}
 		else
+		{
 			line2 = ft_strjoin_max("%s%s: %s%s: %scommand not found%s\n",
-								COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
-								argv[0], COLOR_RED, COLOR_NONE);
+							COLOR_CYAN, data->pgr_name, COLOR_PURPLE, 
+							argv[0], COLOR_RED, COLOR_NONE);
+			g_status = 127;
+		}
 		ft_putstr_fd(line2, 2);
 		free(line2);
-		g_status = 127;
 	}
 	else
-		return (1);
-	return (0);
+		return (0);
+	return (g_status);
 }
 
 /**
@@ -157,7 +162,6 @@ int	ft_check_is_builtin(t_data *data, char **argv, t_cmdtab *cmdtab, t_execarg *
 pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 {
 	pid_t	father;
-	
 	if ((father = fork()) == -1)
 		{
 			perror("fork");
@@ -178,13 +182,13 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 	father = -2;
 	errno = 0;	
 	
+	// printf ("ex.i = %i\npipin = %i\npipeout = %i\n", ex->i, cmdtab[ex->i].pipein, cmdtab[ex->i].pipeout);
 	if ((cmdtab[ex->i].pipeout == 1) || (cmdtab[ex->i].pipein == 1) \
 												|| (cmdtab[ex->i].isbuilt == 0))
 		father = ft_createfork(data, ex, envp);
 	if (father == 0)
 	{
 		//TODO: dbg pour ./srcs/mainwe.c  | bonjour svaoir si fork ou pas
-		puts("coucou \n");
 		ft_forkexe_dup_if_pipes(cmdtab, ex);
 		if (ft_redirection(data, cmdtab, ex))
 			exit(errno);
@@ -197,6 +201,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 			{
 				execve(ex->progpath, ex->argv, envp);
 				perror(ex->progpath);
+				
 			}
 			else
 			{
@@ -211,11 +216,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		ft_exit(data, ex->argv); // FIXME: utile ?
 	}
 	else
-	{
-		puts("pas coucou \n");
-		
 		ft_forkexe_father_close_pipes(cmdtab, ex);
-	}
 	if (cmdtab[ex->i].isbuilt > 0 && cmdtab[ex->i].pipeout == 0 && father == -2)
 	{
 		if (ft_redirection(data, cmdtab, ex) == 0)
@@ -232,7 +233,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 {
 	int	i;
-	int	status;
 
 	i = 0;
 	while (cmdtab[i].lst)
@@ -240,8 +240,8 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 		if (cmdtab[i].pipeout == 1)
 			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &g_status, 0);
-		if (WEXITSTATUS(status))
-			kill(cmdtab[i].pid, SIGKILL);//TODO:
+		// if (WEXITSTATUS(g_status))  //FIXME: killed ./minishell ( lkdjflkdsj | << EOL ) 
+		// 	kill(cmdtab[i].pid, SIGKILL);//TODO:
 		i++;
 	}
 	return (0);
@@ -275,19 +275,35 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		ex.argv = ft_lstcmd_to_cmdarg_for_execve(cmdtab[ex.i].lst);
 		ex.progpath = ft_check_if_prog_exist_in_pathenv(ex.argv[0], data->env);
 		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
-		printf("ex.progpath %s | ex.argv[0] %s\n", ex.progpath, ex.argv[0]);
+		// printf("ex.progpath %s | ex.argv[0] %s\n", ex.progpath, ex.argv[0]);
 		// if (ex.progpath == NULL)
 		ex.stat = 0;
 		ex.stat = ft_stat_check(cmdtab, &ex, data, ex.progpath);
 		// else
 			// ex.stat = STAT_NONE;
-		printf("ex.stat = %i\nex.progpath = %s\ncmdtab[ex.i].isbuilt = %i\n", ex.stat, ex.progpath, cmdtab[ex.i].isbuilt);
+		// printf("ex.stat = %i\nex.progpath = %s\ncmdtab[ex.i].isbuilt = %i\n", ex.stat, ex.progpath, cmdtab[ex.i].isbuilt);
 		if (!ex.progpath && cmdtab[ex.i].isbuilt <= 0 && ex.stat == STAT_NONE)
-			ft_command_not_found_message(ex.argv, data);
+		{	
+			if (cmdtab[ex.i].pipein == 1 || cmdtab[ex.i].pipeout == 1)
+				cmdtab[ex.i].pid = fork();
+			if (cmdtab[ex.i].pipein == 1 || cmdtab[ex.i].pipeout == 1)
+			{
+				if (cmdtab[ex.i].pid == 0)
+				{
+					// ft_putstr_fd("forked\n", 2);
+					exit(ft_command_not_found_message(ex.argv, data));
+				}
+			}
+			else
+			{
+				// ft_putstr_fd("NOT forked\n", 2);
+				ft_command_not_found_message(ex.argv, data);
+			}
+		}
 		else if (ft_cmdtab_has_cmd(cmdtab, &ex) != NULL && ex.stat != STAT_ISDIR)
 		{
-			ft_putnbr(ex.stat);
-			puts(" va entrer dans ft_forkexe\n");
+			// ft_putnbr(ex.stat);
+			// puts(" va entrer dans ft_forkexe\n");
 			cmdtab[ex.i].pid = ft_forkexe(data, &ex, cmdtab);
 		}
 		free(ex.progpath);
