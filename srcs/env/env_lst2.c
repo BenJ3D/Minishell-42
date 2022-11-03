@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   env_lst2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 18:51:32 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/11/03 21:52:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static void	ft_exit_exit(t_data *data)
+void	ft_env_lstclear_one_first_element(t_envlst **lst)
 {
-	ft_free_all_minishell(data);
-	rl_replace_line("exit", 0);
-	exit(g_status % 255);
+	t_envlst	*tmp;
+
+	if (lst && *lst)
+	{
+		tmp = (*lst)->next;
+		ft_env_lstdelone(*lst);
+		(*lst) = tmp;
+	}
 }
 
-static void	ft_exit_arg(int exitarg, t_data *data)
+void	ft_env_lstclear(t_envlst **lst)
 {
-	ft_free_all_minishell(data);
-	ft_putstr_fd("time to exit 2\n", 2);
-	rl_replace_line("exit", 0);
-	exit(exitarg);
-}
+	t_envlst	*tmp;
 
-void	ft_exit(t_data *data, char **argv)
-{
-	if (argv[0] && argv[1])
-		ft_exit_arg(ft_atoi(argv[1]), data);
-	else
-		ft_exit_exit(data);
+	if (lst)
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			ft_env_lstdelone(*lst);
+			(*lst) = tmp;
+		}
+	}
 }

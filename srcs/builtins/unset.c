@@ -3,32 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 00:28:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:06:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static int	ft_main_unset(t_data *data, char *key)
+static int	ft_main_unset_norm1(t_data *data, char *key, t_envlst *tmp)
 {
-	t_envlst	*tmp;
-	char		*ptr;
-
-	if (key[0] == '\0')
-		return (-1);
 	if (ft_check_if_exportkey_is_valid(key, data))
 	{
 		ft_err_display_line_error(data, key, "not a valid identifier");
 		g_status = 1;
-		errno = 1;
-		return (1);
+		return ((errno = 1));
 	}
-	tmp = data->env;
 	if (ft_env_check_if_key_is_valid(tmp, key) == FALSE)
-		return (0);
+		return (-1);
 	if (ft_strequal(key, "PWD") == TRUE)
 	{
 		ft_err_display_line_error(data, "unset PWD", "Operation not permitted");
@@ -37,8 +30,25 @@ static int	ft_main_unset(t_data *data, char *key)
 	if (ft_strequal(tmp->key, key))
 	{
 		ft_env_lstclear_one_first_element(&data->env);
-		return (0);
+		return (-1);
 	}
+	return (0);
+}
+
+static int	ft_main_unset(t_data *data, char *key)
+{
+	t_envlst	*tmp;
+	char		*ptr;
+	int			ret;
+
+	if (key[0] == '\0')
+		return (-1);
+	tmp = data->env;
+	ret = ft_main_unset_norm1(data, key, tmp);
+	if (ret == -1)
+		return (0);
+	else if (ret == 1)
+		return (1);
 	while (tmp && tmp->next)
 	{
 		if (ft_strequal(tmp->next->key, key))
@@ -61,7 +71,7 @@ static int	ft_main_unset(t_data *data, char *key)
 int	ft_builtin_unset(t_data *data, char **cmd)
 {
 	int	i;
-	
+
 	if (!cmd[1] || cmd[1][0] == '\0')
 		return (1);
 	else

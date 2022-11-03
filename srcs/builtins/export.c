@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 00:27:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:47:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
-static int	ft_check_if_key_is_valid(char *str, t_data *data);
+
 static int	ft_main_export(t_envlst *env, char *str, t_data *data);
 static void	ft_print_export(t_envlst *env);
 
-//TODO: faire le parsing avec rules ( doit commencer par une lettre ou _ et 
-														 //que des alphanumeric)
 /**
- * @brief Fonction mère à appeler, TODO: parsing a faire
+ * @brief Fonction mère à appeler
  * 
  * @param env 
  * @param cmd 
@@ -27,7 +25,7 @@ static void	ft_print_export(t_envlst *env);
 int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 {
 	int	i;
-	
+
 	if (!cmd[1] || cmd[1][0] == '\0')
 		ft_print_export(env);
 	else
@@ -39,73 +37,17 @@ int	ft_builtin_export(t_envlst *env, char **cmd, t_data *data)
 	return (0);
 }
 
-
-char	**ft_env_get_envtab(t_envlst *env) //FIXME: move to env file
-{
-	char		**tab;
-	t_envlst	*tmp;
-	int			i;
-	
-	if (!env)
-		return (NULL);
-	tmp = env;
-	tab = ft_calloc(ft_env_lstsize_export(env) + 1, sizeof(char **));
-	i = 0;
-	while(tmp)
-	{
-		if (tmp->isenv == 1)
-			tab[i] = ft_strjoin_max("%s=\"%s\"", tmp->key, tmp->value);
-		else
-			tab[i] = ft_strdup(tmp->key);
-			
-		tmp = tmp->next;
-		i++;
-	}
-	return (tab);
-}
-
-char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env) //FIXME: move to env file
-{
-	char	**tab;
-	char	*tmp;
-	char	*cmp1;
-	char	*cmp2;
-	int		i;
-	int		tabsize;
-
-	i = 0;
-	tab = ft_env_get_envtab(env);
-	tabsize = ft_env_lstsize(env);
-	while(tab[i + 1])
-	{
-		cmp1 = ft_env_extract_key(tab[i]);
-		cmp2 = ft_env_extract_key(tab[i + 1]);
-		if (ft_strcmp(cmp1, cmp2) > 0)
-		{
-			tmp = tab[i];
-			tab[i] = tab[i + 1];
-			tab[i + 1] = tmp;
-			tmp = NULL;
-			i = -1;
-		}
-		free(cmp1);
-		free(cmp2);
-		i++;
-	}
-	return (tab);
-}
-
 /**
  * @brief function print export
  * 
  * @param env 
  */
-static void	ft_print_export(t_envlst *env) //V2 sorted
+static void	ft_print_export(t_envlst *env)
 {
 	char		**tab;
 	int			i;
-	
-	tab = ft_env_return_envlst_sorted_in_tab(env);
+
+	tab = ft_env_return_envlst_sorted_in_tab(env, 0);
 	i = 0;
 	while (tab[i])
 	{
@@ -117,7 +59,7 @@ static void	ft_print_export(t_envlst *env) //V2 sorted
 }
 
 /**
- * @brief vérifie si la key est NULL //TODO: doit tchecker le normage des key env
+ * @brief vérifie si la key est NULL
  * 
  * @param key 
  * @return int 
@@ -125,14 +67,14 @@ static void	ft_print_export(t_envlst *env) //V2 sorted
 int	ft_check_if_exportkey_is_valid(char *key, t_data *data)
 {
 	int	i;
-	
+
 	if (key == NULL)
 		return (1);
 	i = 0;
 	if (!ft_isalpha(key[i]) && key[i] != '_')
 		return (1);
 	i++;
-	while(key[i])
+	while (key[i])
 	{
 		if (!ft_isalnum(key[i]))
 			return (1);
@@ -141,31 +83,12 @@ int	ft_check_if_exportkey_is_valid(char *key, t_data *data)
 	return (0);
 }
 
-
-/**
- * @brief add var to env with format key=value
- * 
- * @param env 
- * @param str name of futur key
- * @return int 
- */
-static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm errno doit renvoyer 1
+void	ft_main_export_norm1(t_envlst *env, char *key, char *str, int isenv)
 {
-	char		*key;
-	char		*value;
-	int			isenv;
 	t_envlst	*node;
-	
-	isenv = TRUE;
-	key = ft_env_extract_key_name(str, &isenv);
-	if (ft_check_if_exportkey_is_valid(key, data))
-	{
-		ft_err_display_line_error(data, str, "not a valid identifier");
-		g_status = 1;
-		errno = 1;
-		return (1);
-	}
-	if (ft_env_check_if_key_is_valid(env, key) == TRUE)  //tcheck si une clef existe deja
+	char		*value;
+
+	if (ft_env_check_if_key_is_valid(env, key) == TRUE)
 	{
 		node = ft_env_getenv_lst_value(env, key);
 		if (isenv == TRUE)
@@ -186,7 +109,30 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)//TODO: norm er
 		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, isenv));
 		free (value);
 	}
+}
+
+/**
+ * @brief add var to env with format key=value
+ * 
+ * @param env 
+ * @param str name of futur key
+ * @return int 
+ */
+static int	ft_main_export(t_envlst *env, char *str, t_data *data)
+{
+	char		*key;
+	int			isenv;
+
+	isenv = TRUE;
+	key = ft_env_extract_key_name(str, &isenv);
+	if (ft_check_if_exportkey_is_valid(key, data))
+	{
+		ft_err_display_line_error(data, str, "not a valid identifier");
+		g_status = 1;
+		errno = 1;
+		return (1);
+	}
+	ft_main_export_norm1(env, key, str, isenv);
 	free (key);
 	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 19:03:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:33:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,5 @@ int	ft_check_if_cmd_has_redirection(t_list *lst)
 			return (tmp->type);
 		tmp = tmp->next;
 	}
-	return (0);
-}
-
-
-int	ft_redi_init_all_redirections(t_cmdtab *cmdtab, t_execarg *ex, t_data *data) //TODO:
-{
-	
 	return (0);
 }

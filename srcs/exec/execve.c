@@ -3,69 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 01:02:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:36:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-/**
- * @brief check dans tous les path présent dans env si un programe existe
- * 
- * @param progname
- * @param envlst
- * @return char* return le path complet si il existe, null à l'inverse
- */
-char	*ft_check_if_prog_exist_in_pathenv(char *progname, t_envlst *envlst) //TODO: norm
-{
-	char	*envpaths;
-	char	**pathsplit;
-	char	*pathhascheck;
-	int		i;
-
-	if (!progname)
-		return (NULL);
-	if(progname[0] == '/')
-		if (!access(progname, X_OK))
-		{
-			pathhascheck = ft_strdup(progname);
-			return (pathhascheck);
-		}
-	pathhascheck = ft_strjoin_max("%s", progname);
-	if (ft_strlen(pathhascheck) >= 3) //tcheck avec repertoire courant
-		if(pathhascheck[0] == '.')
-			if (!access(pathhascheck, X_OK))
-				return (pathhascheck);
-	free(pathhascheck);
-	envpaths = ft_env_getstr_env_value(envlst, "PATH");
-	if (!envpaths)
-		return (NULL);
-	pathsplit = ft_split(envpaths, ':');
-	i = 0;
-	while (pathsplit[i])
-	{
-		pathhascheck = ft_strjoin_max("%s/%s", pathsplit[i], progname);
-		if (!access(pathhascheck, X_OK))
-		{
-			ft_free_tab_char(pathsplit);
-			free (envpaths);
-			return (pathhascheck);
-		}
-		i++;
-		free(pathhascheck);
-	}
-	ft_free_tab_char(pathsplit);
-	free (envpaths);
-	return (NULL);
-}
-
 int	ft_check_if_cmd_has_a_backslash(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
@@ -98,14 +48,14 @@ int	ft_command_not_found_message(char **argv, t_data *data)
 }
 
 /**
- * @brief //TODO: check parmit une liste si il y a une builtin
+ * @brief check parmit une liste si il y a une builtin
  * 
  * @return int 
  */
 int	ft_exec_is_builtin(t_data *data, char **argv, \
-												t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
+												t_cmdtab *cmdtab, t_execarg *ex)
 {
-	if (*argv ==  NULL)
+	if (*argv == NULL)
 		return (-1);
 	else if (cmdtab[ex->i].isbuilt == BUILT_CD)
 		ft_builtin_cd(data->env, argv);
@@ -129,9 +79,10 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
  * 
  * @return int return 0 if not built-in; else return 1 to 7 builtin type
  */
-int	ft_check_is_builtin(t_data *data, char **argv, t_cmdtab *cmdtab, t_execarg *ex) //TODO: TODO:
+int	ft_check_is_builtin(t_data *data, char **argv, \
+												t_cmdtab *cmdtab, t_execarg *ex)
 {	
-	if (*argv ==  NULL)
+	if (*argv == NULL)
 		return (-1);
 	if (!ft_strncmp(argv[0], "cd", 3))
 		cmdtab[ex->i].isbuilt = BUILT_CD;
