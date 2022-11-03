@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 23:00:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 23:11:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,16 +197,21 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 	}
 	if (cmdtab[0].pid > 0)
 		ft_parent_waitpid(cmdtab, data);
-	ex.i = 0;
-	while (cmdtab[ex.i].lst)
-	{
-		if (ft_redi_cmdtab_has_heredoc(cmdtab, &ex))
-		{
-			close(cmdtab[ex.i].hdcfd);
-			unlink(cmdtab[ex.i].hdcpath);
-			free(cmdtab[ex.i].hdcpath);
-		}
-		ex.i++;
-	}
+	ft_execve_clear_hdcfd(&ex, cmdtab);
 	return (0);
+}
+
+void	ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab)
+{
+	ex->i = 0;
+	while (cmdtab[ex->i].lst)
+	{
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex))
+		{
+			close(cmdtab[ex->i].hdcfd);
+			unlink(cmdtab[ex->i].hdcpath);
+			free(cmdtab[ex->i].hdcpath);
+		}
+		ex->i++;
+	}
 }
