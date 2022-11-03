@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 23:11:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 23:45:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,16 +121,6 @@ static int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 	return (0);
 }
 
-int	ft_init_cmd(t_cmdtab *cmdtab)
-{
-	int	i;
-
-	i = 0;
-	while (cmdtab[i].lst)
-		cmdtab[i++].hdcpath = NULL;
-	return (0);
-}
-
 int	ft_run_execve_norm1(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (!ex->progpath && cmdtab[ex->i].isbuilt <= 0 && ex->stat == STAT_NONE)
@@ -157,14 +147,40 @@ int	ft_run_execve_norm1(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 		ft_check_redi_if_has_no_cmd(cmdtab, ex, data);
 }
 
+int	ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
+{
+	ex->i = 0;
+	cmdtab[ex->i].pid = -1;
+	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
+	ft_heredoc_init(cmdtab, data);
+}
+
+int	ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
+{
+	if (ex->i == 1 && cmdtab[0].pipeout == 1)
+	{
+		close(cmdtab[ex->i].fd[1]);
+		close(cmdtab[ex->i - 1].fd[1]);
+	}
+	ex->i = 0;
+	while (cmdtab[ex->i].lst)
+	{
+		if (cmdtab[ex->i].fd[0] != 0)
+			close(cmdtab[ex->i].fd[0]);
+		if (cmdtab[ex->i].fd[1] != 0)
+			close(cmdtab[ex->i].fd[1]);
+		ex->i++;
+	}
+	if (cmdtab[0].pid > 0)
+		ft_parent_waitpid(cmdtab, data);
+	ft_execve_clear_hdcfd(ex, cmdtab);
+}
+
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 {
 	t_execarg	ex;
 
-	ex.i = 0;
-	cmdtab[ex.i].pid = -1;
-	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
-	ft_heredoc_init(cmdtab, data);
+	ft_run_execve_init(cmdtab, &ex, data);
 	while (cmdtab[ex.i].lst)
 	{
 		if (cmdtab[ex.i].pipeout)
@@ -181,23 +197,7 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		if (cmdtab[ex.i].pipein == 1)
 			ft_close_pipe(cmdtab, &ex);
 	}
-	if (ex.i == 1 && cmdtab[0].pipeout == 1)
-	{
-		close(cmdtab[ex.i].fd[1]);
-		close(cmdtab[ex.i - 1].fd[1]);
-	}
-	ex.i = 0;
-	while (cmdtab[ex.i].lst)
-	{
-		if (cmdtab[ex.i].fd[0] != 0)
-			close(cmdtab[ex.i].fd[0]);
-		if (cmdtab[ex.i].fd[1] != 0)
-			close(cmdtab[ex.i].fd[1]);
-		ex.i++;
-	}
-	if (cmdtab[0].pid > 0)
-		ft_parent_waitpid(cmdtab, data);
-	ft_execve_clear_hdcfd(&ex, cmdtab);
+	ft_run_execve2_norm(cmdtab, &ex, data);
 	return (0);
 }
 

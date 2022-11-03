@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 23:09:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 23:46:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			ft_exec_is_builtin(t_data *data, char **argv, \
 pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
+int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
