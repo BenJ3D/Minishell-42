@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 19:29:59 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:38:57 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,25 +112,37 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 		}
 		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
 		{
-			if (semi_final == NULL)
-				semi_final = ft_quotes(data, buffer, len_max);
+			if(buffer[data->scroller] == '"')
+				data->d_quotes_switch = 1;
 			else
+				data->s_quotes_switch = 1;
+			if (semi_final == NULL)
+			{
+				semi_final = ft_quotes(data, buffer, len_max);
+			}
+			else
+			{
 				doll = ft_quotes(data, buffer, len_max);
-				printf("%s %s\n", semi_final, doll);
 				semi_final = ft_strjoin(semi_final, doll);
+			}
+			ft_reset_quotes_checker(data);
+			data->scroller++;
 		}
-		if (final != NULL)
+		if (final == NULL)
 		{
-			final = ft_strjoin(final, semi_final);
+			if (semi_final != NULL)
+				final = ft_strdup(semi_final);
 		}
 		else
 		{
-			final = ft_strdup(semi_final);
-			free(semi_final);
-			semi_final = NULL;
+			if (semi_final != NULL)
+				final = ft_strjoin(final, semi_final);
 		}
+		free(semi_final);
+		semi_final = NULL;
 	}
-	ft_buffercmd_in_lst(final, data, 0);
+	if (final != NULL)
+		ft_buffercmd_in_lst(final, data, 0);
 	free(final);
 	final = NULL;
 	return (1);

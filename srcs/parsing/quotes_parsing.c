@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 19:09:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:17:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 			final = ft_strjoin(final, semi_final);
 		else
 		{
-			final = ft_strdup(semi_final);
-			free(semi_final);
+			if (semi_final != NULL)
+			{
+				final = ft_strdup(semi_final);
+				free(semi_final);
+			}
 		}
 		semi_final = NULL;
 		ft_quotes_checker(data, buffer, data->scroller);
