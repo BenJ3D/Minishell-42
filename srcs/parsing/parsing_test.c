@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 19:18:04 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:46:35 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,11 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 	while (buffer[data->scroller])
 	{
 		ft_quotes_checker(data, buffer, data->scroller);
-		// if (data->s_quotes_switch == 1 || data->d_quotes_switch == 1)
-		// {
-		// 	ft_quotes(data, buffer, len_max);
-		// 	if (data->cmdtoparse == NULL)
-		// 	{
-		// 		error_management(data);
-		// 		return (0);
-		// 	}
-		// 	if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
-		// 		data->scroller++;
-		// }
-		// if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
-		// 	buffer[data->scroller] == '$')
-		// {
-		// 	ft_parsing_env_variable(data, buffer);
-		// 	if (data->cmdtoparse == NULL)
-		// 	{
-		// 		printf("test\n");
-		// 		error_management(data);
-		// 		return (0);
-		// 	}
-		// }
 		if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
 			buffer[data->scroller] == '|')
 		{
-			ft_parsing_for_a_pipe(data, buffer);
+			if(!ft_parsing_for_a_pipe(data, buffer))
+				return (0);
 			if (data->cmdtoparse == NULL)
 			{
 				error_management(data);
