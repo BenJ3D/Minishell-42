@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 19:23:07 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:24:32 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_var_no_env(t_data	*data, char	*buffer)
 	data->scroller++;
 	pin = data->scroller;
 	semi_final = NULL;
-	while(buffer[data->scroller] != '\'' && buffer[data->scroller] != '"' && ft_isalnum(buffer[data->scroller]))
+	while(buffer[data->scroller] != '\'' && buffer[data->scroller] != '"' && \
+		ft_isalnum(buffer[data->scroller]))
 	{
 		len++;
 		data->scroller++;
@@ -71,7 +72,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	{
 		if (semi_final == NULL)
 		{
-			semi_final = ft_var_no_env(data, buffer); //TODO coder cette fonction ou en tout cas cette hypothese
+			semi_final = ft_var_no_env(data, buffer);
 		}
 		else
 		{
@@ -140,6 +141,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 		len++;
 	}
+	printf("%d\n", len);
 	if (len != 0)
 	{
 		if (buffer[pin] >= '0' && buffer[pin] <= '9')
@@ -167,6 +169,9 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		}
 	}
 	else
+	{
+		printf("ici\n");
 		return ("$");
+	}
 	return (value_env);
 }

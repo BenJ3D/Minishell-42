@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 15:33:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:36:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	tmp = lst;
 	data->first_cmd = 1;
 	first_arg = 0;
+	printf("tet\n");
 	while (tmp)
 	{
+		printf("%s %d\n", tmp->str, tmp->heavy);
 		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
@@ -227,7 +229,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	// cmdtab[i++].lst->type = 0;
 	while(tmp)
 	{
-		if (tmp->str[0] == '|')
+		if (tmp->str[0] == '|' && tmp->type == 2)
 		{
 			cmdtab[i].lst = tmp->next;
 			tmp->next = NULL;

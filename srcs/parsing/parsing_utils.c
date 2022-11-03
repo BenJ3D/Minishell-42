@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 17:02:09 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:34:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 	if (!lst)
 		return (-1);
 	tmp = lst;
-	if (data->first_cmd == 0)
+	if (data->quotes_in_parsing == 1)
+		tmp->type = ARG;
+	else if (data->first_cmd == 0)
 	{
 		if (tmp->str[0] == '>')
 		{
@@ -154,6 +156,7 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 		return (NULL);
 	tmp->str = ft_strdup(str);
 	tmp->heavy = heavy;
+	printf("%s, %d\n", tmp->str, tmp->heavy);
 	ft_define_cmd_type_during_parsing(tmp, data);
 	tmp->next = NULL;
 	return (tmp);
