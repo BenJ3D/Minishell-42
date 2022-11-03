@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 00:49:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 01:02:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,6 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				execve(ex->progpath, ex->argv, envp);
 				g_status = errno;
 				perror(errline);
-				ft_putstr_fd(COLOR_NONE, 2);
 				free (errline);
 			}
 			else
@@ -207,13 +206,11 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 				execve(ex->argv[0], ex->argv, envp);
 				g_status = errno;
 				perror(errline);
-				ft_putstr_fd(COLOR_NONE, 2);
 				free (errline);
 
 			}
 		}
 		free(ex->progpath);
-		// ft_free_tab_char(ex->argv); // fait planter exit sinon 
 		ft_free_tab_char(envp);
 		ft_exit(data, ex->argv); // FIXME: utile ?
 	}

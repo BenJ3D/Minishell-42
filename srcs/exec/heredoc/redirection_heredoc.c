@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 21:38:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 01:07:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_heredoc_create(char *token, int fd) // TODO: V4 tmp
 	if(father == 0)
 	{
 		errno = 0;
-		rl_on_new_line();
 		rl_on_new_line();
 		buf = readline(prompt);
 		while (ft_strequal(buf, token) != 1 && buf)

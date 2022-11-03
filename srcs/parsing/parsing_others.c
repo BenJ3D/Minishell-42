@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_others.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/29 16:19:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 01:04:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	ft_parsing_others(t_data	*data, char	*buffer)
 		}
 		semi_final[pan] = '\0';
 		ft_buffercmd_in_lst(semi_final, data, 0);
-		semi_final = NULL;
 		free(semi_final);
+		semi_final = NULL;
 		ft_quotes_checker(data, buffer, data->i);
 	}
 	return (1);
