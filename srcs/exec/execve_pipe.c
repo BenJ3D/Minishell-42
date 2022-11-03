@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 22:32:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:56:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_forkexe_father_close_pipes(t_cmdtab *cmdtab, t_execarg *ex)
 }
 
 /**
- * @brief definis pipeout et pipeint pour chaques commandes
+ * @brief defini pipeout et pipeint pour chaques commandes
  * permet de definir les comportement a adopter en cas de pipe
  * @param cmdtab 
  * @return int 
