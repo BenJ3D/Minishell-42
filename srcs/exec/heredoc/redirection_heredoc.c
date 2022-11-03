@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 01:07:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 01:28:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_heredoc_openfd(t_cmdtab *cmdtab, int i)
 	if (cmdtab[i].hdcfd > 0) //si deja eu un autre heredocs
 		close(cmdtab[i].hdcfd);
 	if ((cmdtab[i].hdcfd = open(cmdtab[i].hdcpath, O_CREAT | O_TRUNC \
-											| O_WRONLY, 0644)) < 0)
+														| O_WRONLY, 0644)) < 0)
 	{
 		perror("open");
 		exit(errno);
@@ -104,7 +104,6 @@ int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
 			if (tmp->type == IN2)
 			{
 				ft_heredoc_openfd(cmdtab, i);
-				// printf("cmdtabi = %i hdcfd = %i\n", i, cmdtab[i].hdcfd);
 				ft_heredoc_create(tmp->next->str, cmdtab[i].hdcfd);
 			}
 			tmp = tmp->next;
