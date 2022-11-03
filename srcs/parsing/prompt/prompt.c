@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 00:31:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:13:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	prompt_minishell(char **av, t_data *data)
 		free(data->buffer);
 		data->buffer = readline(data->line);
 	}
-	if (data->line)
-		free(data->line);
+	free(data->line); //verifier si pas de malloc already freed
 	free(data->buffer);
 	rl_on_new_line();
 	rl_replace_line("exit", 5);
