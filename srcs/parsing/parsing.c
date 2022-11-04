@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/30 00:03:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:19:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,11 +267,10 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		return (0);
 	ft_total_parsing(data, buffer);
 	ft_define_cmd_type(data->cmdtoparse, data);
-	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	// dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
-
 
 /**
  * @brief  return **argv pour execve (ex: "echo bonjour >> out.txt"  

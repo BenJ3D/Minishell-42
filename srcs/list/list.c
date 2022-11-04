@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 11:40:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:52:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	t_list	*tmp;
-	int			i;
+	int		i;
 
 	tmp = lst;
 	i = 0;
@@ -68,71 +68,3 @@ void	ft_lstdelone(t_list *lst)
 	free(lst->str);
 	free(lst);
 }
-
-void	ft_lstclear(t_list **lst)
-{
-	t_list	*tmp;
-
-	if (lst)
-	{
-		while (*lst)
-		{
-			tmp = (*lst)->next;
-			ft_lstdelone(*lst);
-			(*lst) = tmp;
-		}
-	}
-}
-
-int		ft_lst_count_cmdarg(t_list *lst)
-{
-	t_list	*tmp;
-	int			i;
-
-	tmp = lst;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->type == CMD || tmp->type == ARG)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-// void ft_create_tab_whith_list(t_list *lst, char **tab)//copilote idée TODO:
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (lst)
-// 	{
-// 		tab[i] = ft_strdup(lst->str);
-// 		lst = lst->next;
-// 		i++;
-// 	}
-// }
-
-// void ft_sorttab(char **tab)//copilote idée TODO:
-// {
-// 	int i;
-// 	int j;
-// 	char *tmp;
-
-// 	i = 0;
-// 	while (tab[i])
-// 	{
-// 		j = i + 1;
-// 		while (tab[j])
-// 		{
-// 			if (ft_strcmp(tab[i], tab[j]) > 0)
-// 			{
-// 				tmp = tab[i];
-// 				tab[i] = tab[j];
-// 				tab[j] = tmp;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }

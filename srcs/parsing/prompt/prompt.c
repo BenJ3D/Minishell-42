@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 18:13:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:31:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*prompt_update(t_envlst *env, char *prgname)
 		free (user);
 	}
 	free (status);
-	g_status = 0;
 	return (line);
 }
 
@@ -57,7 +56,7 @@ void	prompt_minishell(char **av, t_data *data)
 	data->line = prompt_update(data->env, data->pgr_name);
 	data->buffer = readline(data->line);
 	while (data->buffer)
-	{ 
+	{
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
 		nbpipe = ft_parsing_prompt(data, data->buffer);
@@ -71,11 +70,10 @@ void	prompt_minishell(char **av, t_data *data)
 	}
 	free(data->line); //verifier si pas de malloc already freed
 	free(data->buffer);
+	rl_replace_line("exit", 0);
 	rl_on_new_line();
-	rl_replace_line("exit", 5);
-
+	rl_redisplay();
 }
-
 
 // /**
 //  * @brief prompt coder en dur pour tests execs

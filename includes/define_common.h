@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 17:15:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:45:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # define PATH_HEREDOC "/tmp/.hdctmp1"
 # define BUFFER_SIZE 10
 
-
-
 # define CMD 0
 # define ARG 1
 # define PIPE 2 //	|
@@ -45,7 +43,7 @@
 # define OUT1 5	//	>
 # define OUT2 6 //	>>
 # define INFILE 7 // le nom du fichier si entrée
-# define INQUOTE 8 // les characteres de fin de quote
+# define INQUOTE 8 // les characteres de fin de quote <<
 # define OUTFILE 9 // le nom du fichier si sortie
 
 # define NO_BUILTIN 0
@@ -56,7 +54,6 @@
 # define BUILT_UNSET 5
 # define BUILT_PWD 6
 # define BUILT_EXIT 7
-
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"

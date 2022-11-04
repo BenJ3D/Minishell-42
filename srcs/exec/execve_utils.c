@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/19 19:03:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:55:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,75 @@ int	ft_check_if_cmd_has_redirection(t_list *lst)
 	return (0);
 }
 
-
-int	ft_redi_init_all_redirections(t_cmdtab *cmdtab, t_execarg *ex, t_data *data) //TODO:
+/**
+ * @brief check parmit une liste si il y a une builtin
+ * 
+ * @return int 
+ */
+int	ft_exec_is_builtin(t_data *data, char **argv, \
+												t_cmdtab *cmdtab, t_execarg *ex)
 {
-	
+	if (*argv == NULL)
+		return (-1);
+	else if (cmdtab[ex->i].isbuilt == BUILT_CD)
+		ft_builtin_cd(data->env, argv);
+	else if (cmdtab[ex->i].isbuilt == BUILT_ECHO)
+		ft_builtin_echo(argv);
+	else if (cmdtab[ex->i].isbuilt == BUILT_ENV)
+		ft_builtin_env(data->env);
+	else if (cmdtab[ex->i].isbuilt == BUILT_EXIT)
+		ft_exit(data, argv);
+	else if (cmdtab[ex->i].isbuilt == BUILT_EXPORT)
+		ft_builtin_export(data->env, argv, data);
+	else if (cmdtab[ex->i].isbuilt == BUILT_PWD)
+		ft_builtin_pwd(data->env, argv);
+	else if (cmdtab[ex->i].isbuilt == BUILT_UNSET)
+		ft_builtin_unset(data, argv);
 	return (0);
+}
+
+/**
+ * @brief		check si argv[0] est une builtin
+ * 
+ * @return int return 0 if not built-in; else return 1 to 7 builtin type
+ */
+int	ft_check_is_builtin(t_data *data, char **argv, \
+												t_cmdtab *cmdtab, t_execarg *ex)
+{	
+	if (*argv == NULL)
+		return (-1);
+	if (!ft_strncmp(argv[0], "cd", 3))
+		cmdtab[ex->i].isbuilt = BUILT_CD;
+	else if (!ft_strncmp(argv[0], "echo", 5))
+		cmdtab[ex->i].isbuilt = BUILT_ECHO;
+	else if (!ft_strncmp(argv[0], "env", 4))
+		cmdtab[ex->i].isbuilt = BUILT_ENV;
+	else if (!ft_strncmp(argv[0], "export", 7))
+		cmdtab[ex->i].isbuilt = BUILT_EXPORT;
+	else if (!ft_strncmp(argv[0], "unset", 6))
+		cmdtab[ex->i].isbuilt = BUILT_UNSET;
+	else if (!ft_strncmp(argv[0], "pwd", 4))
+		cmdtab[ex->i].isbuilt = BUILT_PWD;
+	else if (!ft_strncmp(argv[0], "exit", 5))
+		cmdtab[ex->i].isbuilt = BUILT_EXIT;
+	else
+		cmdtab[ex->i].isbuilt = NO_BUILTIN;
+	return (cmdtab[ex->i].isbuilt);
+}
+
+pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
+{
+	pid_t	father;
+
+	father = fork();
+	if (father == -1)
+	{
+		perror("fork");
+		g_status = errno;
+		free(ex->progpath);
+		ft_free_tab_char(ex->argv);
+		ft_free_tab_char(envp);
+		ft_exit(data, ex->argv);
+	}
+	return (father);
 }

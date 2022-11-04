@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   debug_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 19:44:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:08:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void dbg_display_cmdtab(t_cmdtab *cmdtab)
+void	dbg_display_cmdtab(t_cmdtab *cmdtab)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ void dbg_display_cmdtab(t_cmdtab *cmdtab)
 	}
 }
 
-void dbg_display_argv(char **argv)
+void	dbg_display_argv(char **argv)
 {
 	int		i;
 
@@ -44,7 +44,7 @@ void dbg_display_argv(char **argv)
 	ft_putstr("\n");
 }
 
-void dbg_display_argv_choose_sep(char **argv, char *sep)
+void	dbg_display_argv_choose_sep(char **argv, char *sep)
 {
 	int		i;
 

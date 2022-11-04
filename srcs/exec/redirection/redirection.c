@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/02 22:47:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:31:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
+int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 {
 	t_list	*tmp;
 	int		ret;
@@ -26,7 +26,8 @@ int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
 				free (cmdtab[ex->i].rediarg);
 			cmdtab[ex->i].reditype = tmp->type;
 			cmdtab[ex->i].rediarg = ft_strdup(tmp->next->str);
-			if ((ret = ft_dupredi(data, cmdtab, ex)))
+			ret = ft_dupredi(data, cmdtab, ex);
+			if (ret)
 				return (ret);
 		}
 		tmp = tmp->next;
@@ -37,6 +38,7 @@ int	ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex) //TODO:TODO:
 int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 {
 	int	ret;
+
 	if (cmdtab[ex->i].reditype == OUT1)
 		ret = ft_redi_out1(cmdtab, ex);
 	else if (cmdtab[ex->i].reditype == OUT2)
@@ -61,10 +63,7 @@ int	ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 
 	father = fork();
 	if (father == 0)
-	{
 		exit(ft_redirection(data, cmdtab, ex));
-	}
 	waitpid(father, &g_status, 0);
-	return (0);
 	return (0);
 }
