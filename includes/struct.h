@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/01 17:35:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:01:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCT_H
 # include "includes.h"
 
-typedef enum	e_redirection
+typedef enum e_redirection
 {
 	OUT_1,
 	OUT_2,
@@ -22,7 +22,7 @@ typedef enum	e_redirection
 	IN_2
 }	t_redirection;
 
-typedef struct	s_envlst
+typedef struct s_envlst
 {
 	char			*key;
 	char			*value;
@@ -31,7 +31,7 @@ typedef struct	s_envlst
 	struct s_envlst	*next;
 }			t_envlst;
 
-typedef struct s_list //struct liste pour commande splitter mot a mot (ex: ls -> -all -> (pipe) -> cat -> -e -> (null))
+typedef struct s_list
 {
 	int				type;
 	int				heavy;
@@ -45,17 +45,16 @@ enum e_stat
 	STAT_ISFILE,
 	STAT_ISDIR
 };
-typedef struct	s_execarg //pour gagner des lignes // norme..
+typedef struct s_execarg
 {
 	int			i;
 	int			isfile;
-	enum e_stat stat;
+	enum e_stat	stat;
 	char		**argv;
 	char		*progpath;
 }				t_execarg;
 
-
-typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
+typedef struct s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
 {									//exemple si buffer = ls -all | cat -e
 	int		isbuilt;				//si isbuilt > 0 : c'est une builtin
 	int		pipein;
@@ -73,7 +72,7 @@ typedef struct	s_cmdtab //pour creer un tab de command, un t_list par commande (
 	char	*heredoc;				//contient tout le heredocs
 	int		hdcpipe[2];				//pipe pour un heredocs par cmd
 	int		hdcfd;				//fd pour open un tmp pour heredocs par cmd
-	char	*hdcpath;			//path du tmp file poru les ehredocs par commande
+	char	*hdcpath;			//path du tmp file pour les heredocs par commandes
 	pid_t	pid;
 	t_list	*lst;
 }				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
@@ -93,7 +92,7 @@ typedef struct s_data
 	int			d_quotes_switch;
 	int			i;
 	int			first_cmd;
-	int 		ret;					//test pour heredocs
+	int			ret;					//test pour heredocs
 	char		*heredocpath;
 	int			type_of_the_last_cmd;
 	struct stat	statbuf;
