@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/04 16:51:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:57:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int			ft_builtin_pwd(t_envlst *env, char **argv);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
 
-int			ft_check_if_exportkey_is_valid(char *key, t_data *data);
+int			ft_check_if_exportkey_is_valid(char *key);
 
 /* FT ENV */
 char		**ft_env_init(char **envp);

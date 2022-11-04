@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 12:12:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:58:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_main_unset_norm1(t_data *data, char *key, t_envlst *tmp)
 {
-	if (ft_check_if_exportkey_is_valid(key, data))
+	if (ft_check_if_exportkey_is_valid(key))
 	{
 		ft_err_display_line_error(data, key, "not a valid identifier");
 		g_status = 1;
@@ -38,7 +38,6 @@ static int	ft_main_unset_norm1(t_data *data, char *key, t_envlst *tmp)
 static int	ft_main_unset(t_data *data, char *key)
 {
 	t_envlst	*tmp;
-	char		*ptr;
 	int			ret;
 
 	if (key[0] == '\0')

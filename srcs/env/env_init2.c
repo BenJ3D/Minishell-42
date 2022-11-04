@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 16:55:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:59:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_env_init_lst_norm(char **envp, t_data *data)
  */
 void	ft_env_init_lst(char **envp, t_data *data)
 {
-	int			i;
 	char		*tkey;
 	char		*tvalue;	
 	t_envlst	*tmp;
@@ -75,7 +74,6 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 {
 	char		*ret;
 	t_envlst	*tmp;
-	int			keylen;
 
 	if (ft_strlen(key) < 2)
 	{
