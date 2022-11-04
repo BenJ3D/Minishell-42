@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 23:46:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:23:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
+int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 int			ft_command_not_found_message(char **argv, t_data *data);
 int			ft_check_is_builtin(t_data *data, char **argv,
 				t_cmdtab *cmdtab, t_execarg *ex);
@@ -73,6 +74,7 @@ char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
 
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
