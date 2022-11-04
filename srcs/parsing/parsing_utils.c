@@ -37,6 +37,8 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		tmp->type = ARG;
 	else if (data->first_cmd == 0)
 	{
+		if (tmp->str[0] == '|')
+			return (0);
 		if (tmp->str[0] == '>')
 		{
 			if (tmp->str[1] == '>')
@@ -77,7 +79,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 			tmp->type = ARG;
 	}
 	data->type_of_the_last_cmd = tmp->type;
-	return (0);
+	return (1);
 }
 
 char	*ft_strjoin_parsing(char	*s1, char *s2)
@@ -157,7 +159,8 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 	tmp->str = ft_strdup(str);
 	tmp->heavy = heavy;
 	printf("%s, %d\n", tmp->str, tmp->heavy);
-	ft_define_cmd_type_during_parsing(tmp, data);
+	if (!ft_define_cmd_type_during_parsing(tmp, data))
+		return (NULL);
 	tmp->next = NULL;
 	return (tmp);
 }
@@ -191,6 +194,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 	int		len;
 	char	*str;
 	int		bufi;
+	t_list	*new;
 
 	bufi = 0;
 	while (buffer[bufi])
@@ -204,7 +208,11 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+		new = ft_lstnew_parsing(data, str, heavy);
+		if (!new)
+			return (NULL);
+		printf("madame\n");
+		ft_lstadd_back(&data->cmdtoparse, new);
 		free(str);
 	}
 	return (data->cmdtoparse);

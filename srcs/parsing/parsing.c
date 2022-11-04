@@ -14,6 +14,8 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
+	if (tmp->str[0] == '|' && tmp->heavy == 0)
+		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -106,10 +108,11 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	printf("tet\n");
 	while (tmp)
 	{
-		printf("%s %d\n", tmp->str, tmp->heavy);
 		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
+			if (tmp == NULL)
+				return (0);
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
@@ -155,7 +158,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 		if (tmp)
 			tmp = tmp->next;
 	}
-	return (0);
+	return (1);
 }
 
 /**
@@ -272,10 +275,16 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	}
 	if (!ft_total_parsing(data, buffer))
 	{
+		printf("testn");
 		error_management(data);
 		return (0);
 	}
-	ft_define_cmd_type(data->cmdtoparse, data);
+	if (!ft_define_cmd_type(data->cmdtoparse, data))
+	{
+		ft_putstr_fd("Syntax Error '|'\n", 2);
+		free_the_birds(data);
+		return (0);
+	}
 	//dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);

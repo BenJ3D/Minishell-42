@@ -52,6 +52,7 @@ int			ft_redirect_me_now(t_data	*data, char	*buffer);
 int			ft_parsing_for_a_pipe(t_data	*data, char	*buffer);
 char		*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
+void		free_the_birds(t_data	*data);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);

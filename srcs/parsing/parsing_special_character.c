@@ -70,11 +70,11 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 	int	len;
 
 	len = 0;
-	if (data->type_of_the_last_cmd == IN1 || data->type_of_the_last_cmd == IN2 || \
-		data->type_of_the_last_cmd == OUT1 || data->type_of_the_last_cmd == OUT2)
+	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
+		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
 	{
-		printf("testeur\n");		
 		error_management(data);
+		return (0);
 	}
 	while (buffer[data->scroller] == '|')
 	{
