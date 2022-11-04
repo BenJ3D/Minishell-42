@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 23:45:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:52:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int	ft_run_execve_norm1(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 		cmdtab[ex->i].pid = ft_forkexe(data, ex, cmdtab);
 	else
 		ft_check_redi_if_has_no_cmd(cmdtab, ex, data);
+	return (0);
 }
 
 int	ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
@@ -153,6 +154,7 @@ int	ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 	cmdtab[ex->i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab, data);
+	return (0);
 }
 
 int	ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
@@ -174,6 +176,7 @@ int	ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 	if (cmdtab[0].pid > 0)
 		ft_parent_waitpid(cmdtab, data);
 	ft_execve_clear_hdcfd(ex, cmdtab);
+	return (0);
 }
 
 int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
