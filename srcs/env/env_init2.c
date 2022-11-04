@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 15:35:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:55:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 	t_envlst	*tmp;
 	int			keylen;
 
-	printf("key = %s\n", key);
 	if (ft_strlen(key) < 2)
 	{
 		ret = ft_strdup("");
@@ -85,7 +84,6 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 			return (NULL);
 		return (ret);
 	}
-	// if (ft_strequal(tmp->key, key))
 	tmp = env;
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/04 14:35:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:51:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			ft_exec_is_builtin(t_data *data, char **argv,
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
-char		*ft_cmdtab_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
+char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_check_is_builtin(t_data *data, char **argv, \
 											t_cmdtab *cmdtab, t_execarg *ex);
@@ -75,6 +75,8 @@ void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
+int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
+int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
 
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
