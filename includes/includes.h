@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:35:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/06 16:48:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:36:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <fcntl.h>
 
 #endif

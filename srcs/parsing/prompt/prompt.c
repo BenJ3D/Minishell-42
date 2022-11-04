@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/12 15:49:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:31:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	char	*line;
 	char	*user;
 	char	usertmp[USER_MAX_LEN];
-	
+	char	*status;
+
+	status =  ft_itoa(g_status % 255);
 	if (!prgname)
 		prgname = ft_strdup("minishell");
 	if (ft_env_check_if_key_is_valid(env, "USER") == FALSE) //si USER n'existe pas
-		line = ft_strjoin_max("%s%s>%s$ ",
-				COLOR_CYAN, prgname, COLOR_NONE);
+		line = ft_strjoin_max("%s[%s] %s%s>%s$ ",
+		COLOR_RED, status, COLOR_CYAN, prgname, COLOR_NONE);
 	else
 	{
 		user = ft_env_getstr_env_value(env, "USER");
@@ -37,11 +39,12 @@ char	*prompt_update(t_envlst *env, char *prgname)
 			free (user);
 			user = ft_strdup(usertmp);
 		}
-		line = ft_strjoin_max("%s- %s -%s %s>%s$ ",
-					COLOR_GREEN, user,
+		line = ft_strjoin_max("%s[%s] %s- %s -%s %s>%s$ ",
+		COLOR_RED, status,COLOR_GREEN, user,
 					COLOR_CYAN, prgname, COLOR_NONE);
 		free (user);
 	}
+	free (status);
 	return (line);
 }
 
@@ -53,11 +56,11 @@ void	prompt_minishell(char **av, t_data *data)
 	data->line = prompt_update(data->env, data->pgr_name);
 	data->buffer = readline(data->line);
 	while (data->buffer)
-	{ 
+	{
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
 		nbpipe = ft_parsing_prompt(data, data->buffer);
-		dbg_display_cmdtab(data->cmdtab);
+		// dbg_display_cmdtab(data->cmdtab);
 		ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
 		ft_free_cmdtab_lst(nbpipe, data->cmdtab);
 		free(data->line);
@@ -65,14 +68,12 @@ void	prompt_minishell(char **av, t_data *data)
 		free(data->buffer);
 		data->buffer = readline(data->line);
 	}
-	if (data->line)
-		free(data->line);
+	free(data->line); //verifier si pas de malloc already freed
 	free(data->buffer);
+	rl_replace_line("exit", 0);
 	rl_on_new_line();
-	write(1, "exit\n", 6);
+	rl_redisplay();
 }
-
-
 
 // /**
 //  * @brief prompt coder en dur pour tests execs

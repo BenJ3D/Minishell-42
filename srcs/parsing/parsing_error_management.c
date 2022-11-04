@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   parsing_error_management.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 12:11:57 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/10/22 18:14:49 by hmarconn          #+#    #+#             */
+/*   Updated: 2022/10/28 16:33:48 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_builtin_env(t_envlst *envlst)
+void	free_the_birds(t_data	*data)
 {
-	t_envlst	*tmp;
-
-	g_status = 0;
-	tmp = envlst;
-	while (tmp)
+	while (data->cmdtoparse)
 	{
-		if (tmp->isenv == 1)
-		{
-			ft_putstr(tmp->key);
-			ft_putstr("=");
-			ft_putstr(tmp->value);
-			ft_putstr("\n");
-		}
-		tmp = tmp->next;
+		free(data->cmdtoparse->str);
+		data->cmdtoparse = data->cmdtoparse->next;
 	}
+}
+
+void	error_management(t_data	*data)
+{
+	ft_putstr_fd("Syntax Error\n", 2);
+	free_the_birds(data);
 }
