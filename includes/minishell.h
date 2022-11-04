@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/04 12:23:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:35:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
 				t_data *data, char *str);
+void		ft_stat_error_is_dir(t_data *data, t_cmdtab *cmdtab, \
+													t_execarg *ex, char *cmd);
 
 /* FT EXECVE PIPES */
 int			ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex);

@@ -1,51 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   list2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 14:52:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:51:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
-{
-	t_list	*lst1;
-
-	if (*alst == NULL)
-		*alst = new;
-	else if (alst != NULL && new != NULL)
-	{
-		lst1 = ft_lstlast(*alst);
-		lst1->next = new;
-	}
-}
-
-t_list	*ft_lstnew(char *str)
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*tmp;
 
-	tmp = (t_list *)malloc(sizeof(t_list));
-	if (!tmp)
-		return (NULL);
-	tmp->str = ft_strdup(str);
-	tmp->next = NULL;
-	return (tmp);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
 	if (lst)
-		while (lst->next)
-			lst = lst->next;
-	return (lst);
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			ft_lstdelone(*lst);
+			(*lst) = tmp;
+		}
+	}
 }
 
-int	ft_lstsize(t_list *lst)
+int	ft_lst_count_cmdarg(t_list *lst)
 {
 	t_list	*tmp;
 	int		i;
@@ -54,17 +36,9 @@ int	ft_lstsize(t_list *lst)
 	i = 0;
 	while (tmp)
 	{
-		i++;
+		if (tmp->type == CMD || tmp->type == ARG)
+			i++;
 		tmp = tmp->next;
 	}
 	return (i);
-}
-
-void	ft_lstdelone(t_list *lst)
-{
-	if (!lst)
-		return ;
-	ft_bzero(lst->str, ft_strlen(lst->str));
-	free(lst->str);
-	free(lst);
 }

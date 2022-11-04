@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 21:49:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:54:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
 /**
- * @brief Recupere le maillot de t_envlst correspondant a key
+ * @brief Recupere le maillon de t_envlst correspondant a key
  * return NULL si la key n'existe pas
  * @param env 
  * @param key 
