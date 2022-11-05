@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 02:04:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 11:57:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 
 	g_status = 0;
 	currentpwd = getcwd(NULL, PATH_MAX);
-	if (argv[1][0] == '.' && argv[1][0] == '\0')
-		return (0);
-	if (argv[1] == '\0')
+	if (argv[1] == NULL)
 	{
 		gethome = ft_env_getstr_env_value(env, "HOME");
 		if (gethome != NULL)
@@ -47,6 +45,8 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 			free (currentpwd);
 		}
 	}
+	else if (argv[1][0] == '.' && argv[1][1] == '\0')
+		return (0);
 	else if (chdir(argv[1]))
 	{
 		g_status = errno;
