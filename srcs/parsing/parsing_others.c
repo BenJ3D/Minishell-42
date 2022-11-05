@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_others.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 16:33:54 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 18:07:40 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 		{
 			if (semi_final != NULL)
 				final = ft_strjoin(final, semi_final);
+			semi_final = NULL;
 		}
 	}
 	if (final != NULL)
