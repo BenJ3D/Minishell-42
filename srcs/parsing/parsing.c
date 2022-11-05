@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 22:19:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:36:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
+	if (tmp->str[0] == '|' && tmp->heavy == 0)
+		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -105,9 +107,11 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	first_arg = 0;
 	while (tmp)
 	{
-		if (data->first_cmd == 1 && tmp->str[0] != '|')
+		if (data->first_cmd == 1)
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
+			if (tmp == NULL)
+				return (0);
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
@@ -153,7 +157,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 		if (tmp)
 			tmp = tmp->next;
 	}
-	return (0);
+	return (1);
 }
 
 /**
@@ -227,7 +231,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	// cmdtab[i++].lst->type = 0;
 	while(tmp)
 	{
-		if (tmp->str[0] == '|')
+		if (tmp->str[0] == '|' && tmp->type == 2)
 		{
 			cmdtab[i].lst = tmp->next;
 			tmp->next = NULL;
@@ -264,10 +268,22 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	i = 0;
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
+	{
+		ft_putstr_fd("Quote error\n", 2);
 		return (0);
-	ft_total_parsing(data, buffer);
-	ft_define_cmd_type(data->cmdtoparse, data);
-	// dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	}
+	if (!ft_total_parsing(data, buffer))
+	{
+		error_management(data);
+		return (0);
+	}
+	if (!ft_define_cmd_type(data->cmdtoparse, data))
+	{
+		ft_putstr_fd("Syntax Error '|'\n", 2);
+		free_the_birds(data);
+		return (0);
+	}
+	//dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
