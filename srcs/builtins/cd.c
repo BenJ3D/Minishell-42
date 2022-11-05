@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 14:34:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:37:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 		}
 		return (0);
 	}
-	else if (argv[1][0] == '.' && argv[1][1] == '\0')
+	else if (argv[1][0] == '.' && argv[1][1] == '\0') //TODO: probleme par ici
 	{
 		free (currentpwd);
 		return (0);
