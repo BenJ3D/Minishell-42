@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 18:07:40 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:43:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 		else
 			ft_buffercmd_in_lst(final, data, 0);
 	}
+	data->quotes_in_parsing = 0;
 	free(final);
 	final = NULL;
 	return (1);

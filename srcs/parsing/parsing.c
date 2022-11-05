@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 18:24:09 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:17:00 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,8 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		free_the_birds(data);
 		return (0);
 	}
-	//dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	printf("erreur\n");
+	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
