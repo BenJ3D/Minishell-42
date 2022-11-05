@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 16:58:46 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:36:10 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 		if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
 			buffer[data->scroller] == '|')
 		{
-			printf("pourquoi\n");
 			if(!ft_parsing_for_a_pipe(data, buffer))
 				return (0);
 			if (data->cmdtoparse == NULL)
 				return (0);
-			printf("ici\n");
 		}
 		else if ((data->s_quotes_switch == 0 && data->d_quotes_switch == 0) && \
 			(buffer[data->scroller] == '<' || buffer[data->scroller] == '>'))

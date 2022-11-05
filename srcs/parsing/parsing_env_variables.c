@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 17:19:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:36:01 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			if (!value_env)
 			{
 				free(value_env);
-				printf(" test %s\n", semi_final);
 				return (semi_final);
 			}
 		}
@@ -152,7 +151,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 		len++;
 	}
-	printf("%d\n", len);
 	if (len != 0)
 	{
 		if (buffer[pin] == '?')

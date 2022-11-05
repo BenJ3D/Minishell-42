@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 16:02:06 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:36:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,6 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	}
 	if (!ft_total_parsing(data, buffer))
 	{
-		printf("testn");
 		error_management(data);
 		return (0);
 	}
