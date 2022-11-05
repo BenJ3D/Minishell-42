@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export_api.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 18:08:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:42:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_builtin_pwd(void)
+/**
+ * @brief add var to env with format key=value
+ * 
+ * @param env 
+ * @param key 
+ * @param value 
+ * @return int 
+ */
+int	ft_builtin_export_api(t_envlst *env, char *key, char *value)
 {
-	char	line[PATH_MAX];
+	t_envlst	*node;
 
-	errno = 0;
-	ft_bzero(line, PATH_MAX * sizeof(char));
-	if (getcwd(line, PATH_MAX))
+	if (ft_env_check_if_key_is_valid(env, key))
 	{
-		ft_putstr_fd(line, STDOUT_FILENO);
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		return (0);
+		node = ft_env_getenv_lst_value(env, key);
+		free (node->value);
+		node->value = ft_strdup(value);
+		node->isenv = 1;
 	}
-	g_status = errno;
-	perror("pwd");
-	return (1);
+	else
+		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, 1));
+	return (0);
 }

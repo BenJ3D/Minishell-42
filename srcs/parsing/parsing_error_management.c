@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error_management.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:14:49 by hmarconn          #+#    #+#             */
 /*   Updated: 2022/11/03 18:26:24 by hmarconn         ###   ########.fr       */
