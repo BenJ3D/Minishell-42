@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 16:02:06 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 18:24:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		pipe;
 	int		bufi;
 	int		i;
+	int		f;
 	
 	pipe = ft_count_pipe(data, buffer);
 	if (pipe == 0)
@@ -272,12 +273,14 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		ft_putstr_fd("Quote error\n", 2);
 		return (0);
 	}
-	if (!ft_total_parsing(data, buffer))
+	f = ft_total_parsing(data, buffer);
+	if (f == 0)
 	{
-		printf("testn");
 		error_management(data);
 		return (0);
 	}
+	else if (f == 2)
+		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
 		ft_putstr_fd("Syntax Error '|'\n", 2);
