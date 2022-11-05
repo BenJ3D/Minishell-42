@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 21:57:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:22:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	ft_print_export(t_envlst *env)
 }
 
 /**
- * @brief vérifie si la key est NULL
+ * @brief vérifie si la key est NULL et son normage
  * 
  * @param key 
  * @return int 

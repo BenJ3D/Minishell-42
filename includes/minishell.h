@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/04 21:57:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:42:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,19 @@ int			ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab,
 void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd, t_data	*data);
 int			ft_builtin_unset(t_data *data, char **cmd);
-int			ft_builtin_cd(t_envlst *env, char **argv);
+int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data);
 int			ft_builtin_pwd(t_envlst *env, char **argv);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
-
 int			ft_check_if_exportkey_is_valid(char *key);
+int			ft_builtin_export_api(t_envlst *env, char *key, char *value);
 
 /* FT ENV */
 char		**ft_env_init(char **envp);
 char		*ft_env_getstr_env_value(t_envlst *env, const char *key);
 int			ft_env_check_if_key_is_valid(t_envlst *env, char *key);
 t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
-int			ft_env_check_if_key_exist(t_envlst *env, char *key);
+// int			ft_env_check_if_key_exist(t_envlst *env, char *key); //doublon?
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
 char		*ft_env_extract_key_name(char *str, int *isenv);
 char		*ft_env_extract_key(char *str);
