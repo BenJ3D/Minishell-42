@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 11:57:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:34:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 					data->pgr_name, COLOR_PURPLE, argv[1], COLOR_RED);
 				perror(errline);
 				free (errline);
+				return (1);
 			}
 			ft_builtin_cd_change_pwdenv(env, gethome, currentpwd);
 			free (gethome);
 			free (currentpwd);
 		}
+		return (0);
 	}
 	else if (argv[1][0] == '.' && argv[1][1] == '\0')
+	{
+		free (currentpwd);
 		return (0);
+	}
 	else if (chdir(argv[1]))
 	{
 		g_status = errno;
@@ -54,9 +59,13 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 			data->pgr_name, COLOR_PURPLE, argv[1], COLOR_RED);
 		perror(errline);
 		free (errline);
+		free (currentpwd);
 		return (1);
 	}
-	else
-		ft_builtin_cd_change_pwdenv(env, argv[1], currentpwd);
-	return (g_status);
+	free (gethome);
+	gethome = getcwd(NULL, PATH_MAX);
+	ft_builtin_cd_change_pwdenv(env, gethome, currentpwd);
+	free (gethome);
+	free (currentpwd);
+	return (0);
 }
