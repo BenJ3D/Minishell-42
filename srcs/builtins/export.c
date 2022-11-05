@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 01:22:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:20:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static void	ft_print_export(t_envlst *env)
 	i = 0;
 	while (tab[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tab[i], 1);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(tab[i], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
 }
