@@ -38,7 +38,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst(">>", data, 0);
 		else if (len > 2)
-			return (0);
+			return (1);
 	}
 	else if (buffer[data->scroller] == '<')
 	{
@@ -48,7 +48,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst("<<", data, 0);
 		else if (len > 2)
-			return (0);
+			return (1);
 	}
 	return (1);
 }
@@ -61,7 +61,7 @@ int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
 	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
 		pin++;
 	if (buffer[pin] == '|')
-		return (0);
+		return (1);
 	return (1);
 }
 
@@ -70,11 +70,11 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 	int	len;
 
 	len = 0;
-	if (data->type_of_the_last_cmd == IN1 || data->type_of_the_last_cmd == IN2 || \
-		data->type_of_the_last_cmd == OUT1 || data->type_of_the_last_cmd == OUT2)
+	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
+		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
 	{
-		printf("testeur\n");		
 		error_management(data);
+		return (1);
 	}
 	while (buffer[data->scroller] == '|')
 	{

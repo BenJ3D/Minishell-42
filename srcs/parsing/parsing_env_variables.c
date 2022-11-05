@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/02 15:14:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:19:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_var_no_env(t_data	*data, char	*buffer)
 	data->scroller++;
 	pin = data->scroller;
 	semi_final = NULL;
-	while(buffer[data->scroller] != '\'' && buffer[data->scroller] != '"' && ft_isalnum(buffer[data->scroller]))
+	while(buffer[data->scroller] != '\'' && buffer[data->scroller] != '"' && \
+		ft_isalnum(buffer[data->scroller]))
 	{
 		len++;
 		data->scroller++;
@@ -67,12 +68,23 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	pin = data->scroller;
 	value_env = NULL;
 	final = NULL;
-	if (buffer[data->scroller] >= '0' && buffer[data->scroller] <= '9')
+	if (buffer[data->scroller] == '?')
 	{
 		if (semi_final == NULL)
+			semi_final = ft_itoa(g_status % 255);
+		else
 		{
-			semi_final = ft_var_no_env(data, buffer); //TODO coder cette fonction ou en tout cas cette hypothese
+			value_env = ft_itoa(g_status % 255);
+			semi_final = ft_strjoin(semi_final, value_env);
+			free(value_env);
 		}
+		data->scroller++;
+		return(semi_final);
+	}
+	else if (buffer[data->scroller] >= '0' && buffer[data->scroller] <= '9')
+	{
+		if (semi_final == NULL)
+			semi_final = ft_var_no_env(data, buffer);
 		else
 		{
 			value_env = ft_var_no_env(data, buffer);
@@ -81,7 +93,8 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 		return(semi_final);
 	}
-	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) ||  buffer[data->scroller] == '_') && buffer[data->scroller] != DOUBLE_QUOTE)
+	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) || \
+		buffer[data->scroller] == '_') && buffer[data->scroller] != DOUBLE_QUOTE)
 	{
 		data->scroller++;
 		len++;
@@ -119,7 +132,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	return (final);
 }
 
-t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
+char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 {
 	int		pin;
 	int		pan;
@@ -133,20 +146,27 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 	pin = data->scroller;
 	len = 0;
-	while (buffer[data->scroller] && (buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126) \
-		&& (buffer[data->scroller] != '\'' && buffer[data->scroller] != '"'))
+	while (buffer[data->scroller] && (ft_isalnum(buffer[data->scroller]) || \
+		buffer[data->scroller] == '_'))
 	{
 		data->scroller++;
 		len++;
 	}
+	printf("%d\n", len);
 	if (len != 0)
 	{
-		if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] == '?')
+		{
+			value_env = ft_itoa(g_status % 255);
+			if (!value_env)
+				return (NULL);
+		}
+		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
 			if (!value_env)
-				return (data->cmdtoparse);
+				return (NULL);
 		}
 		else
 		{
@@ -161,14 +181,18 @@ t_list	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			{
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
-					return (data->cmdtoparse);
+					return (NULL);
 			}
 		}
-		ft_buffercmd_in_lst(value_env, data, 0);
-		free(value_env);
-		ft_quotes_checker(data, buffer, data->scroller);
+	}
+	else if (buffer[pin] == '?')
+	{
+		data->scroller++;
+		value_env = ft_itoa(g_status % 255);
+		if (!value_env)
+			return (NULL);
 	}
 	else
-		ft_buffercmd_in_lst("$", data, 1);
-	return (data->cmdtoparse);
+		return ("$");
+	return (value_env);
 }
