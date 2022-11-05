@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_others.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
 /*   Updated: 2022/11/05 16:33:54 by hmarconn         ###   ########.fr       */

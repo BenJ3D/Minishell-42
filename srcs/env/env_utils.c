@@ -6,14 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/08 00:55:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:54:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
 /**
- * @brief Recupere le maillot de t_envlst correspondant a key
+ * @brief Recupere le maillon de t_envlst correspondant a key
  * return NULL si la key n'existe pas
  * @param env 
  * @param key 
@@ -33,7 +33,6 @@ t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key)
 	return (NULL);
 }
 
-
 /**
  * @brief Verifie si une clef (key) est deja presente ou non dans l'env
  * @param env 
@@ -43,7 +42,7 @@ int	ft_env_check_if_key_is_valid(t_envlst *env, char *key)
 {
 	t_envlst	*tmp;
 	int			i;
-	
+
 	tmp = env;
 	i = 0;
 	while (tmp)
@@ -80,13 +79,15 @@ int	ft_shlvl_increment(t_envlst *env)
 {
 	t_envlst	*tmp;
 	int			save;
-	
+
 	tmp = env;
 	while (tmp)
 	{
 		if (ft_strequal(tmp->key, "SHLVL") == TRUE)
 		{
 			save = ft_atoi(tmp->value);
+			if (save < 0)
+				save = -1;
 			free (tmp->value);
 			tmp->value = ft_itoa(save + 1);
 			return (0);
@@ -108,7 +109,7 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 	int			i;
 	char		**tab;
 	t_envlst	*tmp;
-	
+
 	tmp = env;
 	tab = ft_calloc(ft_env_lstsize(tmp) + 1, sizeof(t_envlst));
 	i = 0;
@@ -120,28 +121,4 @@ char	**ft_env_convert_envlst_to_tab(t_envlst *env)
 		i++;
 	}
 	return (tab);
-}
-
-
-
-/**
- * @brief returne la taille de la liste env
- * 
- * @param lst 
- * @return int 
- */
-int		ft_env_lstsize(t_envlst *lst)
-{
-	t_envlst	*tmp;
-	int			i;
-
-	tmp = lst;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->isenv == 1)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
 }

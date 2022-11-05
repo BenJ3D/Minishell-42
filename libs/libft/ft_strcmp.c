@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 12:11:57 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/10/28 21:41:19 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/28 21:48:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "libft.h"
 
-void	ft_builtin_env(t_envlst *envlst)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_envlst	*tmp;
+	int		i;
+	char	*str1;
+	char	*str2;
 
-	g_status = 0;
-	tmp = envlst;
-	while (tmp)
-	{
-		if (tmp->isenv == 1)
-		{
-			ft_putstr(tmp->key);
-			ft_putstr("=");
-			ft_putstr(tmp->value);
-			ft_putstr("\n");
-		}
-		tmp = tmp->next;
-	}
+	i = 0;
+	str1 = s1;
+	str2 = s2;
+	while (str1[i] && str2[i] && str1[i] == str2[i])
+		i++;
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }
