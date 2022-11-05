@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 15:58:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:52:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	ft_builtin_cd_change_pwdenv(t_envlst *env, char *newpwd, char *oldpwd)
 int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 {
 	char	*errline;
-	char	*gethome;
+	char	*futurpwd;
 	char	*currentpwd;
 
 	g_status = 0;
 	currentpwd = getcwd(NULL, PATH_MAX);
 	if (argv[1] == NULL)
 	{
-		gethome = ft_env_getstr_env_value(env, "HOME");
-		if (gethome != NULL)
+		futurpwd = ft_env_getstr_env_value(env, "HOME");
+		if (futurpwd != NULL)
 		{
-			if (chdir(gethome))
+			if (chdir(futurpwd))
 			{
 				g_status = errno;
 				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
@@ -41,8 +41,8 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 				free (errline);
 				return (1);
 			}
-			ft_builtin_cd_change_pwdenv(env, gethome, currentpwd);
-			free (gethome);
+			ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
+			free (futurpwd);
 			free (currentpwd);
 		}
 		return (0);
@@ -50,6 +50,32 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 	else if (argv[1][0] == '.' && argv[1][1] == '\0')
 	{
 		free (currentpwd);
+		return (0);
+	}
+	else if (argv[1][0] == '-' && argv[1][1] == '\0')
+	{
+		futurpwd = ft_env_getstr_env_value(env, "OLDPWD");
+		if (futurpwd != NULL)
+		{
+			if (chdir(futurpwd))
+			{
+				g_status = errno;
+				errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
+					data->pgr_name, COLOR_PURPLE, argv[1], COLOR_RED);
+				perror(errline);
+				free (errline);
+				return (1);
+			}
+			ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
+			free (futurpwd);
+			free (currentpwd);
+			ft_builtin_pwd();
+		}
+		else
+		{
+			ft_err_display_line_error(data, "cd", "OLDPWD not set");
+			g_status = 1;
+		}
 		return (0);
 	}
 	else if (chdir(argv[1]))
@@ -62,9 +88,9 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 		free (currentpwd);
 		return (1);
 	}
-	gethome = getcwd(NULL, PATH_MAX);
-	ft_builtin_cd_change_pwdenv(env, gethome, currentpwd);
-	free (gethome);
+	futurpwd = getcwd(NULL, PATH_MAX);
+	ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
+	free (futurpwd);
 	free (currentpwd);
 	return (0);
 }
