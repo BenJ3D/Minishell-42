@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:43:02 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 16:33:54 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
-		if (buffer[data->scroller] == '$')
+		if (buffer[data->scroller] == '$') // ! si jamais il n'y a rien apres
 		{
 			if (semi_final == NULL)
 				semi_final = ft_parsing_env_variable(data, buffer);
@@ -111,7 +111,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 				semi_final = ft_strjoin(semi_final, doll);
 			}
 		}
-		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
+		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'') //TODO gerer les 
 		{
 			if(buffer[data->scroller] == '"')
 				data->d_quotes_switch = 1;
@@ -143,20 +143,14 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			if (semi_final != NULL)
 				final = ft_strjoin(final, semi_final);
 		}
-		printf("%d, %d\n", len_max, data->scroller);
 	}
-	printf("final %s, %d\n", final, data->quotes_in_parsing);
 	if (final != NULL)
 	{
 		if (data->quotes_in_parsing == 1)
-		{
-			printf("test\n");
 			ft_buffercmd_in_lst_quotes(final, data, 1);
-		}
 		else
 			ft_buffercmd_in_lst(final, data, 0);
 	}
-	printf("test\n");
 	free(final);
 	final = NULL;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 18:45:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 16:02:06 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,9 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	tmp = lst;
 	data->first_cmd = 1;
 	first_arg = 0;
-	printf("tet\n");
 	while (tmp)
 	{
-		if (data->first_cmd == 1 && tmp->str[0] != '|')
+		if (data->first_cmd == 1)
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
 			if (tmp == NULL)

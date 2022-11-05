@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:24:32 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:19:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,23 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	pin = data->scroller;
 	value_env = NULL;
 	final = NULL;
-	if (buffer[data->scroller] >= '0' && buffer[data->scroller] <= '9')
+	if (buffer[data->scroller] == '?')
 	{
 		if (semi_final == NULL)
+			semi_final = ft_itoa(g_status % 255);
+		else
 		{
-			semi_final = ft_var_no_env(data, buffer);
+			value_env = ft_itoa(g_status % 255);
+			semi_final = ft_strjoin(semi_final, value_env);
+			free(value_env);
 		}
+		data->scroller++;
+		return(semi_final);
+	}
+	else if (buffer[data->scroller] >= '0' && buffer[data->scroller] <= '9')
+	{
+		if (semi_final == NULL)
+			semi_final = ft_var_no_env(data, buffer);
 		else
 		{
 			value_env = ft_var_no_env(data, buffer);
@@ -144,7 +155,13 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	printf("%d\n", len);
 	if (len != 0)
 	{
-		if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] == '?')
+		{
+			value_env = ft_itoa(g_status % 255);
+			if (!value_env)
+				return (NULL);
+		}
+		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
@@ -168,10 +185,14 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			}
 		}
 	}
-	else
+	else if (buffer[pin] == '?')
 	{
-		printf("ici\n");
-		return ("$");
+		data->scroller++;
+		value_env = ft_itoa(g_status % 255);
+		if (!value_env)
+			return (NULL);
 	}
+	else
+		return ("$");
 	return (value_env);
 }

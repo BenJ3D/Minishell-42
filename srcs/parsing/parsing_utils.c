@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:34:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 16:01:13 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		tmp->type = ARG;
 	else if (data->first_cmd == 0)
 	{
-		if (tmp->str[0] == '|')
-			return (0);
 		if (tmp->str[0] == '>')
 		{
 			if (tmp->str[1] == '>')
@@ -79,7 +77,7 @@ static int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 			tmp->type = ARG;
 	}
 	data->type_of_the_last_cmd = tmp->type;
-	return (1);
+	return (0);
 }
 
 char	*ft_strjoin_parsing(char	*s1, char *s2)
@@ -158,9 +156,7 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 		return (NULL);
 	tmp->str = ft_strdup(str);
 	tmp->heavy = heavy;
-	printf("%s, %d\n", tmp->str, tmp->heavy);
-	if (!ft_define_cmd_type_during_parsing(tmp, data))
-		return (NULL);
+	ft_define_cmd_type_during_parsing(tmp, data);
 	tmp->next = NULL;
 	return (tmp);
 }
@@ -194,7 +190,6 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 	int		len;
 	char	*str;
 	int		bufi;
-	t_list	*new;
 
 	bufi = 0;
 	while (buffer[bufi])
@@ -208,11 +203,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		new = ft_lstnew_parsing(data, str, heavy);
-		if (!new)
-			return (NULL);
-		printf("madame\n");
-		ft_lstadd_back(&data->cmdtoparse, new);
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
 	}
 	return (data->cmdtoparse);
