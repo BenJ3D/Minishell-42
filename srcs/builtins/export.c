@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:20:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 04:19:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 	key = ft_env_extract_key_name(str, &isenv);
 	if (ft_check_if_exportkey_is_valid(key))
 	{
-		ft_err_display_line_error(data, str, "not a valid identifier");
+		ft_err_display_line_export_error(data, str, "not a valid identifier");
 		g_status = 1;
 		errno = 1;
 		return (1);

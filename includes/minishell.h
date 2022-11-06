@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/06 03:49:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 04:18:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void		ft_free_tab_char(char **tab);
 
 /* FT ERROR MANAGEMENT */
 void		ft_err_display_line_error(t_data *data, char *cmd, char *msg);
+void		ft_err_display_line_export_error(t_data *dat, char *cmd, char *msg);
 
 /* FT DEBUG BEN */
 void		dbg_lstdisplay(t_list *lst);
