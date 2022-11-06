@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 17:46:32 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/06 20:06:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ enum e_stat
 	STAT_NONE,
 	STAT_ISFILE,
 	STAT_ISDIR
+};
+
+enum e_prtype
+{
+	PRNO,
+	PRQ1,
+	PRQ2
 };
 typedef struct s_execarg
 {
