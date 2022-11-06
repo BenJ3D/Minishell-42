@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 17:04:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 02:44:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab)
 		{
 			ft_exec_is_builtin(data, ex->argv, cmdtab, ex);
 			dup2(data->savefd[1], STDOUT_FILENO);
+			dup2(data->savefd[0], STDIN_FILENO);
 			if (cmdtab[ex->i].pipeout == 1 || cmdtab[ex->i].pipein == 1)
 				close (cmdtab[ex->i].fdredipipe[0]);
 		}
