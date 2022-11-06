@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_error_management.c                         :+:      :+:    :+:   */
+/*   export_api.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 18:14:49 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:26:24 by hmarconn         ###   ########.fr       */
+/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/11/05 01:42:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	free_the_birds(t_data	*data)
+/**
+ * @brief add var to env with format key=value
+ * 
+ * @param env 
+ * @param key 
+ * @param value 
+ * @return int 
+ */
+int	ft_builtin_export_api(t_envlst *env, char *key, char *value)
 {
-	while (data->cmdtoparse)
-	{
-		free(data->cmdtoparse->str);
-		data->cmdtoparse = data->cmdtoparse->next;
-	}
-}
+	t_envlst	*node;
 
-void	error_management(t_data	*data)
-{
-	printf("%d\n", data->scroller);
-	ft_putstr_fd("Syntax Error\n", 2);
-	free_the_birds(data);
+	if (ft_env_check_if_key_is_valid(env, key))
+	{
+		node = ft_env_getenv_lst_value(env, key);
+		free (node->value);
+		node->value = ft_strdup(value);
+		node->isenv = 1;
+	}
+	else
+		ft_env_lstadd_back(&env, ft_env_lstnew(key, value, 1));
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/04 21:59:47 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/06 04:03:08 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ RESDIR      := lib
 SRCEXT      := c
 DEPEXT      := d
 OBJEXT      := o
+
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux) #sur linux (ou WSL) instal readline : 'apt-get install readline'
@@ -134,4 +135,4 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includ
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
 
 #Non-File NAMEs
-.PHONY: all re clean fclean
+.PHONY: multi all re clean fclean
