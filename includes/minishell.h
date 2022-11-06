@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/06 03:08:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 03:49:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ int			ft_total_parsing(t_data	*data, char	*buffer);
 /*PARSING TESTS*/
 char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy);
 char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
 int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 void		error_management(t_data	*data);
-int			ft_redirection_files_check(t_data	*data, char	*buffer);
-int			ft_pipes_spaces_check(t_data	*data, char	*buffer);
-int			ft_redirect_me_now(t_data	*data, char	*buffer);
-int			ft_parsing_for_a_pipe(t_data	*data, char	*buffer);
-char		*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final);
+int			ft_redirection_files_check(t_data *data, char *buffer);
+int			ft_pipes_spaces_check(t_data *data, char *buffer);
+int			ft_redirect_me_now(t_data *data, char *buffer);
+int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
+char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
 
@@ -79,7 +79,7 @@ int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
 int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
 int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
 int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
-
+void		ft_exit_exit(t_data *data);
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
 				t_data *data, char *str);
