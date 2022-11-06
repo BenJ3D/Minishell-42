@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:20:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 01:08:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_err_display_line_error(t_data *data, char *cmd, char *msg)
 {
 	char	*errline;
 
-	errline = ft_strjoin_max("%s%s: %s`%s': %s%s%s\n",
+	errline = ft_strjoin_max("%s%s: %s%s: %s%s%s\n",
 			COLOR_CYAN, data->pgr_name, COLOR_PURPLE,
 			cmd, COLOR_RED, msg, COLOR_NONE);
 	ft_putstr_fd(errline, STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 21:00:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 01:23:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_builtin_cd_moins(t_envlst *env, char **argv, \
 		}
 		ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
 		free (futurpwd);
-		ft_builtin_pwd();
+		ft_builtin_pwd(data);
 		return (g_status = 0);
 	}
 	else
@@ -72,7 +72,7 @@ static int	ft_builtin_cd_moins(t_envlst *env, char **argv, \
 	return ((g_status = 1));
 }
 
-static int	ft_builtin_cd_classic(t_envlst *env, char **argv, \
+static int	ft_builtin_cd_err(t_envlst *env, char **argv, \
 								char *currentpwd, t_data *data)
 {
 	char	*futurpwd;
@@ -86,15 +86,18 @@ static int	ft_builtin_cd_classic(t_envlst *env, char **argv, \
 	return (g_status);
 }
 
-int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
+int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret)
 {
 	char	*futurpwd;
-	char	*currentpwd;
-	int		ret;
+	char	currentpwd[PATH_MAX];
 
 	g_status = 0;
-	ret = 0;
-	currentpwd = getcwd(NULL, PATH_MAX);
+	ft_bzero(currentpwd, PATH_MAX);
+	if (!getcwd(currentpwd, PATH_MAX))
+	{
+		g_status = errno;
+		ft_err_display_line_error(data, "cd", "No such file or directory");
+	}
 	if (argv[1] == NULL)
 		ret = ft_builtin_cd_point(env, argv, currentpwd, data);
 	else if (argv[1][0] == '.' && argv[1][1] == '\0')
@@ -102,13 +105,41 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data)
 	else if (argv[1][0] == '-' && argv[1][1] == '\0')
 		ret = ft_builtin_cd_moins(env, argv, currentpwd, data);
 	else if (chdir(argv[1]))
-		ret = ft_builtin_cd_classic(env, argv, currentpwd, data);
-	else if (ret == 0)
+		ret = ft_builtin_cd_err(env, argv, currentpwd, data);
+	else if (ret == 0 && currentpwd[0] != '\0')
 	{
 		futurpwd = getcwd(NULL, PATH_MAX);
 		ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
 		free(futurpwd);
 	}
-	free (currentpwd);
 	return (ret);
 }
+
+// int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int relou)
+// {
+// 	char	*futurpwd;
+// 	char	*currentpwd;
+// 	int		ret;
+
+// 	g_status = 0;
+// 	ret = 0;
+// 	currentpwd = getcwd(NULL, PATH_MAX);
+// 	if (currentpwd == NULL)
+// 		ft_err_display_line_error(data, "cd", "No such file or directory");
+// 	if (argv[1] == NULL)
+// 		ret = ft_builtin_cd_point(env, argv, currentpwd, data);
+// 	else if (argv[1][0] == '.' && argv[1][1] == '\0')
+// 		ret = 0;
+// 	else if (argv[1][0] == '-' && argv[1][1] == '\0')
+// 		ret = ft_builtin_cd_moins(env, argv, currentpwd, data);
+// 	else if (chdir(argv[1]))
+// 		ret = ft_builtin_cd_err(env, argv, currentpwd, data);
+// 	else if (ret == 0 && currentpwd != NULL)
+// 	{
+// 		futurpwd = getcwd(NULL, PATH_MAX);
+// 		ft_builtin_cd_change_pwdenv(env, futurpwd, currentpwd);
+// 		free(futurpwd);
+// 	}
+// 	free (currentpwd);
+// 	return (ret);
+// }

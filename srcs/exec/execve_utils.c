@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 18:08:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 00:36:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 	if (*argv == NULL)
 		return (-1);
 	else if (cmdtab[ex->i].isbuilt == BUILT_CD)
-		ft_builtin_cd(data->env, argv, data);
+		ft_builtin_cd(data->env, argv, data, 0);
 	else if (cmdtab[ex->i].isbuilt == BUILT_ECHO)
 		ft_builtin_echo(argv);
 	else if (cmdtab[ex->i].isbuilt == BUILT_ENV)
@@ -73,7 +73,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXPORT)
 		ft_builtin_export(data->env, argv, data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_PWD)
-		ft_builtin_pwd();
+		ft_builtin_pwd(data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_UNSET)
 		ft_builtin_unset(data, argv);
 	return (0);

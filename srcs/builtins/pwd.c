@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 18:08:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 00:35:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_builtin_pwd(void)
+int	ft_builtin_pwd(t_data *data)
 {
 	char	line[PATH_MAX];
 
@@ -25,6 +25,6 @@ int	ft_builtin_pwd(void)
 		return (0);
 	}
 	g_status = errno;
-	perror("pwd");
+	ft_err_display_line_error(data, "pwd", "No such file or directory");
 	return (1);
 }
