@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 00:36:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 03:41:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 	father = fork();
 	if (father == -1)
 	{
-		perror("fork");
+		perror("minishell: fork");
 		g_status = errno;
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);

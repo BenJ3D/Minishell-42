@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 02:44:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 03:44:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	ft_forkexe_child(t_data *data, t_execarg *ex, t_cmdtab *cmdtab, char **envp)
 		ft_forkexe_exe(data, ex, envp);
 	free(ex->progpath);
 	ft_free_tab_char(envp);
-	ft_exit(data, ex->argv);
+	if (cmdtab[ex->i].isbuilt > 0)
+		ft_exit_exit(data);
+	else
+		ft_exit(data, ex->argv);
 	return (0);
 }
 
