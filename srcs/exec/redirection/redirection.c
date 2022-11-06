@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 22:31:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 03:07:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 	int	ret;
 
 	if (cmdtab[ex->i].reditype == OUT1)
-		ret = ft_redi_out1(cmdtab, ex);
+		ret = ft_redi_out1(cmdtab, ex, data);
 	else if (cmdtab[ex->i].reditype == OUT2)
-		ret = ft_redi_out2(cmdtab, ex);
+		ret = ft_redi_out2(cmdtab, ex, data);
 	else if (cmdtab[ex->i].reditype == IN1)
-		ret = ft_redi_in1(cmdtab, ex);
+		ret = ft_redi_in1(cmdtab, ex, data);
 	else if (cmdtab[ex->i].reditype == IN2)
-		ret = ft_redi_in2(cmdtab[ex->i].hdcfd, cmdtab, ex);
+		ret = ft_redi_in2(cmdtab[ex->i].hdcfd, cmdtab, ex, data);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/06 00:35:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 03:08:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ int			ft_check_if_cmd_has_a_backslash(char *str);
 /* FT REDIRECTIONS*/
 int			ft_heredoc_create(char *token, int fd);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex, \
+																t_data *data);
 int			ft_redi_cmdtab_has_heredoc(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab,
 				t_execarg *ex, t_data *data);
