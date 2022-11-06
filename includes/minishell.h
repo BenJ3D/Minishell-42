@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/06 04:18:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 04:25:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void		dbg_display_argv_choose_sep(char **argv, char *sep);
 /* FT DEBUG BEN A VIRER */
 int			ft_redi_in1v2(int fd);
 
-/* FT AART */
+/* FT SINAUX */
 void		handler_interative(int signum);
 void		interactive_mode(void);
 
