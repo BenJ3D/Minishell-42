@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:19:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 01:29:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_builtin_echo_check_option(char *str)
 	int	iter;
 
 	iter = 0;
+	if (!str)
+		return (0);
 	if (str[iter] == '-' && str[iter + 1] == 'n')
 	{
 		iter += 1;
