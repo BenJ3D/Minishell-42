@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 18:07:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 00:35:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int			ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab,
 void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd, t_data	*data);
 int			ft_builtin_unset(t_data *data, char **cmd);
-int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data);
-int			ft_builtin_pwd(void);
+int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret);
+int			ft_builtin_pwd(t_data *data);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
 int			ft_check_if_exportkey_is_valid(char *key);
