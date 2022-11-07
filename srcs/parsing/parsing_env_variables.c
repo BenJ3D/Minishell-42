@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 09:36:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:35:13 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	char	*final;
 
 	len = 0;
-	printf("%s\n", buffer + data->scroller);
 	data->scroller++;
 	pin = data->scroller;
 	value_env = NULL;
@@ -131,7 +130,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	}
 	else
 		return ("$");
-	printf("ici\n");
 	return (final);
 }
 
@@ -142,6 +140,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	int		len;
 	char	*value_env;
 
+	printf("hello\n");
 	value_env = NULL;
 	if (!data->cmdtoparse)
 		data->scroller++;
@@ -155,15 +154,10 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 		len++;
 	}
+	printf("%d\n", len);
 	if (len != 0)
 	{
-		if (buffer[pin] == '?')
-		{
-			value_env = ft_itoa(g_status % 255);
-			if (!value_env)
-				return (NULL);
-		}
-		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
@@ -177,13 +171,16 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			while (pin < data->scroller)
 				value_env[pan++] = buffer[pin++];
 			value_env[pan] = '\0';
+			printf("%s\n", value_env);
 			if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
 				pan = 0;
 			else
 			{
+				printf("%s ici\n", value_env);
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
 					return (NULL);
+				printf("'%s'\n", value_env);
 			}
 		}
 	}
