@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 16:41:23 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:35:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_var_no_env(t_data	*data, char	*buffer)
 	int	len;
 	char	*semi_final;
 	int		pin;
-	
 	len = 0;
 	data->scroller++;
 	pin = data->scroller;
