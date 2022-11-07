@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 14:16:45 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:41:23 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 	}
 	else
-		return ("$");
+		final = ft_strdup("$");
 	return (final);
 }
 
@@ -169,19 +169,13 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			while (pin < data->scroller)
 				value_env[pan++] = buffer[pin++];
 			value_env[pan] = '\0';
-			printf("%s\n", value_env);
 			if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
 				pan = 0;
 			else
 			{
-				printf("%s ici\n", value_env);
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
-				{
-					printf("ici youpi\n");	
 					return (NULL);
-				}
-				printf("'%s'\n", value_env);
 			}
 		}
 	}
@@ -193,6 +187,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			return (NULL);
 	}
 	else
-		return ("$");
+		value_env = ft_strdup("$");	
 	return (value_env);
 }
