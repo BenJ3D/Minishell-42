@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 15:34:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:55:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_stty_control(int b, t_data *data)
 		else
 		{
 			execve("/bin/stty", (char *[]){"stty", "sane", NULL}, NULL);
-			ft_err_display_line_error(data, "stty", "stdin isn't a terminal");
 			perror("stty");
 		}
 		exit (errno);
