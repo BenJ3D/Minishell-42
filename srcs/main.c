@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 23:10:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:41:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
+	ft_issaty_control();
 	ft_stty_control(0);
 	interactive_mode ();
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
-	prompt_minishell(av, &data); // supprimer av
+	prompt_minishell(av, &data);// supprimer av
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	ft_exit(&data, av);
 	return (0);

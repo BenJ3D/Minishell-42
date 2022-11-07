@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 11:01:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:57:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,28 @@ int	ft_stty_control(int b)
 		exit (errno);
 	}
 	waitpid(father, &g_status, 0);
+	return (0);
+}
+
+int	ft_issaty_control(void)
+{
+	pid_t	father;
+
+	g_status = 0;
+	father = fork();
+	if (father == 0)
+	{
+		if (!isatty(1))
+		{
+			ft_putnbr_fd(errno, 2);
+			ft_putchar_fd('\n', 2);
+			exit(1);
+		}
+		exit(0);
+	}
+	waitpid(father, &g_status, 0);
+	if ((g_status % 255) != 0)
+		exit (1);
+	puts("wtf\n");
 	return (0);
 }
