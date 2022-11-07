@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:36:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:35:12 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
+	printf("passage %s, heavy %d\n", tmp->str, tmp->heavy);
 	if (tmp->str[0] == '|' && tmp->heavy == 0)
 		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
@@ -47,7 +48,8 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 		else
 		{
 			tmp->type = ARG;
-			tmp = tmp->next;
+			if (tmp->next != NULL)
+				tmp = tmp->next;
 		}
 	}
 	return (tmp);
@@ -109,9 +111,13 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	{
 		if (data->first_cmd == 1)
 		{
+			printf("%s\n", tmp->str);
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
 			if (tmp == NULL)
+			{
+				printf("seule option\n");
 				return (0);
+			}
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
@@ -261,6 +267,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		pipe;
 	int		bufi;
 	int		i;
+	int		f;
 	
 	pipe = ft_count_pipe(data, buffer);
 	if (pipe == 0)
@@ -272,18 +279,22 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		ft_putstr_fd("Quote error\n", 2);
 		return (0);
 	}
-	if (!ft_total_parsing(data, buffer))
+	f = ft_total_parsing(data, buffer);
+	if (f == 0)
 	{
 		error_management(data);
 		return (0);
 	}
+	else if (f == 2)
+		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
+		printf("ici\n");
 		ft_putstr_fd("Syntax Error '|'\n", 2);
 		free_the_birds(data);
 		return (0);
 	}
-	//dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }

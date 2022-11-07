@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 16:01:13 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:43:56 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_redirection_files_check(t_data	*data, char	*buffer)
 	int	pin;
 
 	pin = 0;
-	while ((buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
+	while (buffer[pin] && (buffer[pin] < 33 || buffer[pin] > 126) && buffer[pin] != '\0')
 	{
 		if (buffer[pin] == '|' || buffer[pin] == '<' || buffer[pin] == '>')
 			return (0);
