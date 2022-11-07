@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 15:00:52 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:34:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 				doll = ft_parsing_env_variable(data, buffer);
 				if (doll != NULL)
 					semi_final = ft_strjoin(semi_final, doll);
-				printf("chiant\n");
 			}
 		}
 		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
@@ -73,11 +72,21 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			if (semi_final == NULL)
 			{
 				semi_final = ft_quotes(data, buffer, len_max);
+				if (semi_final == NULL && (buffer[++data->scroller] < 33 || buffer[data->scroller] > 126))
+				{
+						ft_buffercmd_in_lst_quotes("\0", data, 1);
+						free(semi_final);
+						data->quotes_in_parsing = 0;
+						return (1);
+				}
+				else
+					data->scroller--;
 			}
 			else
 			{
 				doll = ft_quotes(data, buffer, len_max);
-				semi_final = ft_strjoin(semi_final, doll);
+				if (doll != NULL)
+					semi_final = ft_strjoin(semi_final, doll);
 			}
 			ft_reset_quotes_checker(data);
 			data->quotes_in_parsing = 1;

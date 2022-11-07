@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/03 16:29:16 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:38:14 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
+		else
+			
 		if (buffer[data->scroller] == '$')
 		{
 			if (final == NULL)
