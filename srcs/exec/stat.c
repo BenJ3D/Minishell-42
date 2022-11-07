@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 16:33:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:20:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_stat_error_is_dir(t_data *data, t_cmdtab *cmdtab, \
 		line = ft_strjoin_max("%s%s: %s%s: %sIs a directory%s\n", \
 								COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
 												cmd, COLOR_RED, COLOR_NONE);
-		ft_putstr_fd(line, 2);
+		ft_putstr_fd(line, STDERR_FILENO);
 		free(line);
 		free(cmd);
 		exit (126);

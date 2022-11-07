@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 21:57:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 04:19:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ static void	ft_print_export(t_envlst *env)
 	i = 0;
 	while (tab[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tab[i], 1);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(tab[i], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
 }
 
 /**
- * @brief vérifie si la key est NULL
+ * @brief vérifie si la key est NULL et son normage
  * 
  * @param key 
  * @return int 
@@ -128,7 +128,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 	key = ft_env_extract_key_name(str, &isenv);
 	if (ft_check_if_exportkey_is_valid(key))
 	{
-		ft_err_display_line_error(data, str, "not a valid identifier");
+		ft_err_display_line_export_error(data, str, "not a valid identifier");
 		g_status = 1;
 		errno = 1;
 		return (1);

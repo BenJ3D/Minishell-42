@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 00:32:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 01:29:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_builtin_echo_check_option(char *str)
 	int	iter;
 
 	iter = 0;
+	if (!str)
+		return (0);
 	if (str[iter] == '-' && str[iter + 1] == 'n')
 	{
 		iter += 1;
@@ -37,14 +39,14 @@ static int	ft_builtin_echo_norm(char **argv, int i, int previsop, int option)
 	{
 		if (!ft_builtin_echo_check_option(argv[i]))
 		{
-			ft_putstr_fd(argv[i], 1);
+			ft_putstr_fd(argv[i], STDOUT_FILENO);
 			previsop = 0;
 			if (argv[i + 1])
 				ft_putchar(' ');
 		}
 		else if (ft_builtin_echo_check_option(argv[i]) && previsop == 0)
 		{
-			ft_putstr_fd(argv[i], 1);
+			ft_putstr_fd(argv[i], STDOUT_FILENO);
 			if (argv[i + 1])
 				ft_putchar(' ');
 		}

@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactive_mode.c                                 :+:      :+:    :+:   */
+/*   stty.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 04:41:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:01:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	handler_interative(int signum)
+/**
+ * @brief masquer le ^C ou de le restaurer
+ * 
+ * @param envp 
+ * @param b  0 pour masquer / 1 ou != 0 pour restaurer
+ * @return int 
+ */
+int	ft_stty_control(int b)
 {
-	if (signum == SIGINT)
+	pid_t	father;
+
+	father = fork();
+	if (father == 0)
 	{
-		ft_putchar_fd('\n', 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		if (b == 0)
+		{
+			execve("/bin/stty", (char *[]){"stty", "-ctlecho", NULL}, NULL);
+			perror("stty");
+		}
+		else
+		{
+			execve("/bin/stty", (char *[]){"stty", "sane", NULL}, NULL);
+			perror("stty");
+		}
+		exit (errno);
 	}
-	else if (signum == SIGQUIT)
-		return ;
-}
-
-void	interactive_mode(void)
-{
-	struct sigaction	sa;
-	struct sigaction	sa1;
-
-	ft_bzero(&sa, sizeof(struct sigaction));
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sa.sa_handler = &handler_interative;
-	ft_bzero(&sa1, sizeof(struct sigaction));
-	sa1.sa_handler = SIG_IGN;
-	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa1, NULL) == -1)
-		ft_putstr_fd("Error sigaction\n", STDERR_FILENO);
+	waitpid(father, &g_status, 0);
+	return (0);
 }
