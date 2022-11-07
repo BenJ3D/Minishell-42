@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 14:27:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:35:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void		handler_interative(int signum);
 void		interactive_mode(void);
 
 /* FT SINAUX */
-int			ft_stty_control(int b);
+int			ft_stty_control(int b, t_data *data);
 int			ft_issaty_control(void);
 
 // avoid compilation crash

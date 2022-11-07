@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 14:57:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:34:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param b  0 pour masquer / 1 ou != 0 pour restaurer
  * @return int 
  */
-int	ft_stty_control(int b)
+int	ft_stty_control(int b, t_data *data)
 {
 	pid_t	father;
 
@@ -34,6 +34,7 @@ int	ft_stty_control(int b)
 		else
 		{
 			execve("/bin/stty", (char *[]){"stty", "sane", NULL}, NULL);
+			ft_err_display_line_error(data, "stty", "stdin isn't a terminal");
 			perror("stty");
 		}
 		exit (errno);
@@ -51,16 +52,11 @@ int	ft_issaty_control(void)
 	if (father == 0)
 	{
 		if (!isatty(1))
-		{
-			ft_putnbr_fd(errno, 2);
-			ft_putchar_fd('\n', 2);
 			exit(1);
-		}
 		exit(0);
 	}
 	waitpid(father, &g_status, 0);
 	if ((g_status % 255) != 0)
 		exit (1);
-	puts("wtf\n");
 	return (0);
 }
