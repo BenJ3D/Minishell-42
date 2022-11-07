@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 16:24:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:41:23 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 	}
 	else
-		return ("$");
+		final = ft_strdup("$");
 	return (final);
 }
 
@@ -155,13 +155,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	}
 	if (len != 0)
 	{
-		if (buffer[pin] == '?')
-		{
-			value_env = ft_itoa(g_status % 255);
-			if (!value_env)
-				return (NULL);
-		}
-		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
@@ -193,6 +187,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			return (NULL);
 	}
 	else
-		return ("$");
+		value_env = ft_strdup("$");	
 	return (value_env);
 }

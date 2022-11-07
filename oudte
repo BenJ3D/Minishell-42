@@ -1,0 +1,12 @@
+Makefile
+README.md
+includes
+libs
+minishell
+obj
+oudte
+out
+outde
+srcs
+valgrind_ignore_leaks.txt
+valgrind_memo_cmd.txt
