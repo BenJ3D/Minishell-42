@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/12 15:59:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:07:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ void	dbg_lstdisplay_color(t_list *lst)
 	t_list	*tmp;
 
 	tmp = lst;
-	while(tmp)
+	while (tmp)
 	{
 		ft_putstr(tmp->str);
-		// ft_putstr("(");
-		// ft_putnbr(tmp->type);
-		// ft_putstr(")");
 		ft_putstr(COLOR_RED);
 		ft_putstr(" -> ");
 		ft_putstr(COLOR_NONE);
 		tmp = tmp->next;
 	}
-		ft_putstr("(null)");
-		ft_putstr("\n");
+	ft_putstr("(null)");
+	ft_putstr("\n");
 }
 
 void	dbg_lstdisplay_color_type(t_list *lst)
@@ -39,7 +36,7 @@ void	dbg_lstdisplay_color_type(t_list *lst)
 	if (!lst)
 		return ;
 	tmp = lst;
-	while(tmp)
+	while (tmp)
 	{
 		ft_putstr(tmp->str);
 		ft_putstr(COLOR_PURPLE);
@@ -51,8 +48,8 @@ void	dbg_lstdisplay_color_type(t_list *lst)
 		ft_putstr(COLOR_NONE);
 		tmp = tmp->next;
 	}
-		ft_putstr("(null)");
-		ft_putstr("\n");
+	ft_putstr("(null)");
+	ft_putstr("\n");
 }
 
 void	dbg_lstdisplay(t_list *lst)
@@ -60,7 +57,7 @@ void	dbg_lstdisplay(t_list *lst)
 	t_list	*tmp;
 
 	tmp = lst;
-	while(tmp)
+	while (tmp)
 	{
 		ft_putstr(tmp->str);
 		ft_putstr("\n");

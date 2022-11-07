@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 16:02:06 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:46:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
-	if (tmp->str[0] == '|' && tmp->heavy == 0)
-		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -45,10 +43,7 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 		if (first_arg == 0)
 			tmp->type = CMD;
 		else
-		{
 			tmp->type = ARG;
-			tmp = tmp->next;
-		}
 	}
 	return (tmp);
 }
@@ -107,16 +102,18 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	first_arg = 0;
 	while (tmp)
 	{
-		if (data->first_cmd == 1)
+		if (data->first_cmd == 1 && tmp->str[0] == '|' && tmp->heavy == 0 && \
+			first_arg == 0)
+			return (0);
+		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
-			if (tmp == NULL)
-				return (0);
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
 				data->first_cmd = 0;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
@@ -128,6 +125,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 			tmp = tmp->next;
 			if (tmp && tmp->str[0] != '|')
 				data->first_cmd = 1;
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
@@ -145,17 +143,24 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 				if (tmp && tmp->str[0] != '|')
 					data->first_cmd = 1;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
 			data->first_cmd = 1;
 			first_arg = 0;
+			tmp = tmp->next;
 		}
 		else
+		{
 			tmp->type = ARG;
-		if (tmp)
 			tmp = tmp->next;
+		}
+		// if (tmp)
+		// {
+		// 	tmp = tmp->next;
+		// }
 	}
 	return (1);
 }
@@ -261,6 +266,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		pipe;
 	int		bufi;
 	int		i;
+	int		f;
 	
 	pipe = ft_count_pipe(data, buffer);
 	if (pipe == 0)
@@ -272,23 +278,25 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		ft_putstr_fd("Quote error\n", 2);
 		return (0);
 	}
-	if (!ft_total_parsing(data, buffer))
+	f = ft_total_parsing(data, buffer);
+	if (f == 0)
 	{
-		printf("testn");
 		error_management(data);
 		return (0);
 	}
+	else if (f == 2)
+		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
 		ft_putstr_fd("Syntax Error '|'\n", 2);
 		free_the_birds(data);
 		return (0);
 	}
-	//dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	ft_define_cmd_type(data->cmdtoparse, data);
+	dbg_lstdisplay_color_type(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }
-
 
 /**
  * @brief  return **argv pour execve (ex: "echo bonjour >> out.txt"  
@@ -302,25 +310,27 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 {
 	char	**argv;
 	int		nbword;
-	t_list	*lst;
+	t_list	*tmp;
 	int		y;
 	
 
-	nbword = ft_lstsize(cmd); //FIXME: ft pour calculer le nombre de mot cmd+arg sans les redirections et pipe
+	nbword = ft_lstsize(cmd);
+	// nbword = ft_lst_count_cmdarg(cmd);//FIXME: provoque sanitize a freetabargv
 	argv = ft_calloc(nbword + 1, sizeof(char **));
-	// argv = (char **)malloc(nbword + 1 * sizeof(char *));
-	if (!argv)
-		return (NULL);
-	lst = cmd;
-	y = 0;
-	while (lst)
+	tmp = cmd;
+	y = 1;
+	while (tmp)
 	{
-		// if (lst->type == PIPE) //TODO:
-		if (lst->type == CMD || lst->type == ARG)
-			argv[y] = ft_strdup(lst->str);
-		y++;
-		lst = lst->next;
+		if (tmp->type == CMD)
+			argv[0] = ft_strdup(tmp->str);
+		else if (tmp->type == ARG)
+			argv[y++] = ft_strdup(tmp->str);
+		tmp = tmp->next;
 	}
+	if (argv[0] == NULL)
+		argv[0] = ft_strdup(""); //FIXME: vraiment utile ?
+	// printf("nbword = %i\n And start argv dbg : \n", nbword);//TODO: a revoir quand type est corrigé
+	// dbg_display_argv(argv);
 	return (argv);
 }
 

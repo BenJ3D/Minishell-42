@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 17:19:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:16:45 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			if (!value_env)
 			{
 				free(value_env);
-				printf(" test %s\n", semi_final);
 				return (semi_final);
 			}
 		}
@@ -129,6 +128,8 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 			free(value_env);
 		}
 	}
+	else
+		return ("$");
 	return (final);
 }
 
@@ -152,16 +153,9 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 		len++;
 	}
-	printf("%d\n", len);
 	if (len != 0)
 	{
-		if (buffer[pin] == '?')
-		{
-			value_env = ft_itoa(g_status % 255);
-			if (!value_env)
-				return (NULL);
-		}
-		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
@@ -175,13 +169,19 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			while (pin < data->scroller)
 				value_env[pan++] = buffer[pin++];
 			value_env[pan] = '\0';
+			printf("%s\n", value_env);
 			if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
 				pan = 0;
 			else
 			{
+				printf("%s ici\n", value_env);
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
+				{
+					printf("ici youpi\n");	
 					return (NULL);
+				}
+				printf("'%s'\n", value_env);
 			}
 		}
 	}

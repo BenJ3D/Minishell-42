@@ -3,38 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/27 18:19:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/06 23:10:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-static void	ft_exit_exit(void)
+void	ft_exit_exit(t_data *data)
 {
-	// ft_putnbr_fd(errno, 2);
+	ft_free_all_minishell(data);
 	rl_replace_line("exit", 0);
-	// write(2, "exit\n", 6);
-	exit(errno);
+	exit(g_status % 255);
 }
 
-void	ft_exit(t_data *data)
+static void	ft_exit_arg(int exitarg, t_data *data)
 {
 	ft_free_all_minishell(data);
-	ft_exit_exit();
+	rl_replace_line("exit", 0);
+	exit(exitarg);
 }
 
-/**
- * @brief ft qui free en plus des variable utiliser pour le prompt
- * 
- * @param data 
- */
-void	ft_exit_child(t_data *data) // peut etre pas besoin avec exit
+void	ft_exit(t_data *data, char **argv)
 {
-	//TODO:
-	ft_free_all_minishell(data);
-	ft_exit_exit();
+	ft_stty_control(1);
+	if (argv[0] && argv[1])
+		ft_exit_arg(ft_atoi(argv[1]), data);
+	else
+		ft_exit_exit(data);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/10/31 16:37:39 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:37:59 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
 		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
 	{
-		error_management(data);
-		return (1);
+		//error_management(data);
+		return (0);
 	}
 	while (buffer[data->scroller] == '|')
 	{

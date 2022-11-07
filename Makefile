@@ -6,14 +6,14 @@
 #    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/03 16:27:09 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/11/07 11:44:43 by hmarconn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=2
+DEBUG=1
 
-ifeq ($(DEBUG), 0)
+ifeq ($(DEBUG), 0) # for final compilation
 CC = gcc $(CFLAGS)
 MAKELIB = @make DEBUG=0 -C./libs/libft/
 endif
@@ -38,6 +38,7 @@ RESDIR      := lib
 SRCEXT      := c
 DEPEXT      := d
 OBJEXT      := o
+
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux) #sur linux (ou WSL) instal readline : 'apt-get install readline'
@@ -134,4 +135,4 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includ
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
 
 #Non-File NAMEs
-.PHONY: all re clean fclean
+.PHONY: multi all re clean fclean

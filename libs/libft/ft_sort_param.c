@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_sort_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 12:11:57 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/10/28 21:41:32 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/10/28 21:53:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "libft.h"
 
-void	ft_builtin_env(t_envlst *envlst)
+void	ft_sort_param(int argc, char **argv)
 {
-	t_envlst	*tmp;
+	int		i;
+	char	*t;
 
-	g_status = 0;
-	tmp = envlst;
-	while (tmp)
+	i = 0;
+	while (argc - 1 > i)
 	{
-		if (tmp->isenv == 1)
+		if ((ft_strcmp(argv[i], argv[i + 1]) > 0))
 		{
-			ft_putstr(tmp->key);
-			ft_putstr("=");
-			ft_putstr(tmp->value);
-			ft_putstr("\n");
+			t = argv[i];
+			argv[i] = argv[i + 1];
+			argv[i + 1] = t;
+			i = 0;
 		}
-		tmp = tmp->next;
+		else
+			i++;
 	}
 }

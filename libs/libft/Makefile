@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/09/23 17:19:15 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/10/28 21:47:52 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,10 @@ FILES = ft_memset				\
 		ft_lstclear_void		\
 		ft_lstiter_void			\
 		ft_lstmap_void			\
-		ft_strequal
+		ft_strequal				\
+		ft_sort_param			\
+		ft_strcmp				\
+		ft_swap_str				
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

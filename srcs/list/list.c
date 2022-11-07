@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:52:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	t_list	*tmp;
-	int			i;
+	int		i;
 
 	tmp = lst;
 	i = 0;
@@ -67,19 +67,4 @@ void	ft_lstdelone(t_list *lst)
 	ft_bzero(lst->str, ft_strlen(lst->str));
 	free(lst->str);
 	free(lst);
-}
-
-void	ft_lstclear(t_list **lst)
-{
-	t_list	*tmp;
-
-	if (lst)
-	{
-		while (*lst)
-		{
-			tmp = (*lst)->next;
-			ft_lstdelone(*lst);
-			(*lst) = tmp;
-		}
-	}
 }

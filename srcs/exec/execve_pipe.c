@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/23 02:03:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:56:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,13 @@ int	ft_forkexe_dup_if_pipes(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (cmdtab[ex->i].pipeout == 1)
 	{
-	 	if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0)//FIXME:FIXME:
-			dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
-		else
-			close(cmdtab[ex->i + 1].fd[1]);
+		dup2(cmdtab[ex->i + 1].fd[1], STDOUT_FILENO);
 		close(cmdtab[ex->i + 1].fd[0]);
 	}
 	if (cmdtab[ex->i].pipein == 1)
 	{
-		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0) //FIXME:FIXME:
-		{
-			// ft_putstr_fd("dup2 fd0 , STDIN if pipein\n", 2);
+		if (ft_redi_cmdtab_has_heredoc(cmdtab, ex) == 0)
 			dup2(cmdtab[ex->i].fd[0], STDIN_FILENO);
-		}
 		else
 			close(cmdtab[ex->i].fd[0]);
 		close(cmdtab[ex->i].fd[1]);
@@ -62,7 +56,7 @@ int	ft_forkexe_father_close_pipes(t_cmdtab *cmdtab, t_execarg *ex)
 }
 
 /**
- * @brief definis pipeout et pipeint pour chaques commandes
+ * @brief defini pipeout et pipeint pour chaques commandes
  * permet de definir les comportement a adopter en cas de pipe
  * @param cmdtab 
  * @return int 
@@ -72,13 +66,13 @@ int	ft_pipe_init_cmdtab_pipe_in_out(t_cmdtab *cmdtab)
 	int	i;
 
 	i = 0;
-	while(cmdtab[i].lst)
+	while (cmdtab[i].lst)
 	{
 		cmdtab[i].pipeout = 0;
 		cmdtab[i++].pipein = 0;
 	}
 	i = -1;
-	while(cmdtab[++i].lst)
+	while (cmdtab[++i].lst)
 	{
 		if (i > 0)
 		{
@@ -86,7 +80,7 @@ int	ft_pipe_init_cmdtab_pipe_in_out(t_cmdtab *cmdtab)
 			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
 				cmdtab[i].pipeout = 1;
 		}
-		else 
+		else
 		{
 			cmdtab[i].pipein = 0;
 			if (ft_check_if_cmd_has_pipe(cmdtab[i].lst))
@@ -107,9 +101,6 @@ int	ft_create_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 int	ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex)
 {
 	if (ex->i >= 2)
-	{
-		// close(cmdtab[ex->i - 2].fd[0]);
 		close(cmdtab[ex->i - 2].fd[1]);
-	}
 	return (0);
 }
