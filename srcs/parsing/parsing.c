@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 10:35:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:42:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
-	printf("passage %s, heavy %d\n", tmp->str, tmp->heavy);
 	if (tmp->str[0] == '|' && tmp->heavy == 0)
 		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
@@ -111,13 +110,9 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	{
 		if (data->first_cmd == 1)
 		{
-			printf("%s\n", tmp->str);
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
 			if (tmp == NULL)
-			{
-				printf("seule option\n");
 				return (0);
-			}
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
@@ -289,7 +284,6 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
-		printf("ici\n");
 		ft_putstr_fd("Syntax Error '|'\n", 2);
 		free_the_birds(data);
 		return (0);

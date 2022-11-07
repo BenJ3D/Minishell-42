@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:21:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 21:59:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:03:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft_env_getstr_env_value(t_envlst *env, const char *key)
 	char		*ret;
 	t_envlst	*tmp;
 
-	if (ft_strlen(key) < 2)
+	if (ft_strlen(key) < 1)
 	{
 		ret = ft_strdup("");
 		if (!ret)

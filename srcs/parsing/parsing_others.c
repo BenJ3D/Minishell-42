@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_others.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 09:44:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:41:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 		}
 		if (buffer[data->scroller] == '$')
 		{
-			printf("test\n");
 			if (semi_final == NULL)
 				semi_final = ft_parsing_env_variable(data, buffer);
 			else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_env_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 09:36:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:24:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	char	*final;
 
 	len = 0;
-	printf("%s\n", buffer + data->scroller);
 	data->scroller++;
 	pin = data->scroller;
 	value_env = NULL;
@@ -131,7 +130,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	}
 	else
 		return ("$");
-	printf("ici\n");
 	return (final);
 }
 
