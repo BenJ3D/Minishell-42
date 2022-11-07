@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 13:35:13 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:16:45 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	int		len;
 	char	*value_env;
 
-	printf("hello\n");
 	value_env = NULL;
 	if (!data->cmdtoparse)
 		data->scroller++;
@@ -154,7 +153,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		data->scroller++;
 		len++;
 	}
-	printf("%d\n", len);
 	if (len != 0)
 	{
 		if (buffer[pin] >= '0' && buffer[pin] <= '9')
@@ -179,7 +177,10 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 				printf("%s ici\n", value_env);
 				value_env = ft_env_getstr_env_value(data->env, value_env);
 				if (!value_env)
+				{
+					printf("ici youpi\n");	
 					return (NULL);
+				}
 				printf("'%s'\n", value_env);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 13:20:13 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:00:52 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 	{
 		pin = data->scroller;
 		len = 0;
+		semi_final = NULL;
 		while (buffer[data->scroller] && buffer[data->scroller] >= 33 && \
 		buffer[data->scroller] <= 126 && buffer[data->scroller] != '<' && \
 			buffer[data->scroller] != '>' && buffer[data->scroller] != '$' && \
@@ -58,7 +59,9 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			else
 			{
 				doll = ft_parsing_env_variable(data, buffer);
-				semi_final = ft_strjoin(semi_final, doll);
+				if (doll != NULL)
+					semi_final = ft_strjoin(semi_final, doll);
+				printf("chiant\n");
 			}
 		}
 		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
