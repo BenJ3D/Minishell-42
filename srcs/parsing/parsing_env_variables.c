@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_env_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
 /*   Updated: 2022/11/07 16:41:23 by hmarconn         ###   ########.fr       */

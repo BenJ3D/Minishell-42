@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 01:46:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:12:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	ft_builtin_cd_moins(t_envlst *env, char **argv, \
 static int	ft_builtin_cd_err(t_envlst *env, char **argv, \
 								char *currentpwd, t_data *data)
 {
-	char	*futurpwd;
 	char	*errline;
 
 	g_status = errno;
