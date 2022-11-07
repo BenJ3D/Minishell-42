@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 11:40:05 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:46:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 		if (first_arg == 0)
 			tmp->type = CMD;
 		else
-		{
 			tmp->type = ARG;
-			if (tmp->next != NULL)
-				tmp = tmp->next;
-		}
 	}
 	return (tmp);
 }
@@ -117,6 +113,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 				first_arg = 1;
 				data->first_cmd = 0;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
@@ -128,6 +125,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 			tmp = tmp->next;
 			if (tmp && tmp->str[0] != '|')
 				data->first_cmd = 1;
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
@@ -145,19 +143,24 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 				if (tmp && tmp->str[0] != '|')
 					data->first_cmd = 1;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
 			data->first_cmd = 1;
 			first_arg = 0;
-		}
-		else
-			tmp->type = ARG;
-		if (tmp)
-		{
 			tmp = tmp->next;
 		}
+		else
+		{
+			tmp->type = ARG;
+			tmp = tmp->next;
+		}
+		// if (tmp)
+		// {
+		// 	tmp = tmp->next;
+		// }
 	}
 	return (1);
 }

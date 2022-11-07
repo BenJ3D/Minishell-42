@@ -6,12 +6,12 @@
 #    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/07 10:41:11 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/11/07 11:44:43 by hmarconn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=1
+DEBUG=2
 
 ifeq ($(DEBUG), 0) # for final compilation
 CC = gcc $(CFLAGS)
