@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stty.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 15:55:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:55:19 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_issaty_control(void)
 		exit(0);
 	}
 	waitpid(father, &g_status, 0);
-	if ((g_status % 255) != 0)
+	if ((g_status & 255) != 0)
 		exit (1);
 	return (0);
 }

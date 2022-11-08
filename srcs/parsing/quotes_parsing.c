@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 16:04:47 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:35:56 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 		pin = data->scroller;
 		len = 0;
 		while (buffer[data->scroller] && buffer[data->scroller] \
-			 != '$' && buffer[data->scroller] != DOUBLE_QUOTE)
+			!= '$' && buffer[data->scroller] != DOUBLE_QUOTE)
 		{
 			len++;
 			data->scroller++;
@@ -49,23 +49,31 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 		if (buffer[data->scroller] == '$')
 		{
 			if (final == NULL)
+			{
 				final = ft_double_quotes_env(data, buffer, semi_final);
+				free(semi_final);
+				semi_final = NULL;
+			}
 			else
 			{
 				trollo = ft_double_quotes_env(data, buffer, semi_final);
 				final = ft_strjoin(final, trollo);
+				free(trollo);
+				trollo = NULL;
 			}
 		}
 		else if (final != NULL)
+		{
 			final = ft_strjoin(final, semi_final);
+		}
 		else
 		{
 			if (semi_final != NULL)
 			{
 				final = ft_strdup(semi_final);
-				free(semi_final);
 			}
 		}
+		free(semi_final);
 		semi_final = NULL;
 		ft_quotes_checker(data, buffer, data->scroller);
 	}

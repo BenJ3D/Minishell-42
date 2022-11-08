@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 17:11:16 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:48:25 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,11 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			{
 				doll = ft_quotes(data, buffer, len_max);
 				if (doll != NULL)
+				{
 					semi_final = ft_strjoin(semi_final, doll);
+					free(doll);
+					doll = NULL;
+				}
 			}
 			ft_reset_quotes_checker(data);
 			data->quotes_in_parsing = 1;
@@ -117,25 +121,38 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			if (semi_final != NULL)
 			{
 				final = ft_strdup(semi_final);
+				free(semi_final);
 				semi_final = NULL;
 			}
 		}
 		else
 		{
 			if (semi_final != NULL)
+			{
 				final = ft_strjoin(final, semi_final);
-			semi_final = NULL;
+				free(semi_final);
+				semi_final = NULL;
+			}
 		}
 	}
+	free(semi_final);
 	if (final != NULL)
 	{
 		if (data->quotes_in_parsing == 1)
+		{
 			ft_buffercmd_in_lst_quotes(final, data, 1, 0);
+			free(final);
+			final = NULL;
+		}
 		else
+		{
 			ft_buffercmd_in_lst(final, data, 0, 0);
+			free(final);
+			final = NULL;
+		}
 	}
 	data->quotes_in_parsing = 0;
-	free(final);
-	final = NULL;
+	// free(final);
+	// final = NULL;
 	return (1);
 }
