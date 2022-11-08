@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 13:15:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:27:26 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	char	*final;
 
 	len = 0;
-	printf("%s\n", buffer + data->scroller);
 	data->scroller++;
 	pin = data->scroller;
 	value_env = NULL;

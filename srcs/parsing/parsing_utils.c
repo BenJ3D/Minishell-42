@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 19:43:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:42:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 	int		bufi;
 
 	bufi = 0;
+	
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
