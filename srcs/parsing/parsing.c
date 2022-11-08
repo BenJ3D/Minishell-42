@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 13:50:55 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:05:27 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,20 +273,20 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
 	{
-		ft_putstr_fd("Quote error\n", 2);
+		ft_err_display_line_error(data, "syntax error", "invalid quotes");
 		return (0);
 	}
 	f = ft_total_parsing(data, buffer);
 	if (f == 0)
 	{
-		error_management(data);
+		ft_err_display_line_error(data, "syntax error", " ");
 		return (0);
 	}
 	else if (f == 2)
 		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
-		ft_putstr_fd("Syntax Error '|'\n", 2);
+		ft_err_display_line_error(data, "syntax error", "near unexpected '|'");
 		free_the_birds(data);
 		return (0);
 	}
