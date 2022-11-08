@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 13:37:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:16:24 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,35 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 				semi_final[pan++] = buffer[pin++];
 			semi_final[pan] = '\0';
 		}
-		if (buffer[data->scroller] == '$')
+		if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd != 4)
 		{
 			if (semi_final == NULL)
 				semi_final = ft_parsing_env_variable(data, buffer);
 			else
 				semi_final = ft_double_quotes_env(data, buffer, semi_final);
+		}
+		else if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd \
+			== 4)
+		{
+			if (semi_final == NULL)
+			{
+				pin = data->scroller;
+				len = 0;
+				printf("%c\n", buffer[data->scroller]);
+				while (buffer[data->scroller] != '\0' && buffer[data->scroller] \
+					>= 33 && buffer[data->scroller] <= 126)
+				{
+					len++;
+					data->scroller++;
+				}
+				semi_final = ft_calloc(sizeof(char), (len + 1));
+				if (!semi_final)
+					exit (11);
+				pan = 0;
+				while (pin < data->scroller)
+					semi_final[pan++] = buffer[pin++];
+				semi_final[pan] = '\0';
+			}
 		}
 		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == \
 			'\'')

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 13:46:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:50:55 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,18 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 }
 
 
-int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
+int	ft_count_pipe(t_data	*data, char *buffer)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while(buffer[i])
+	while (buffer[i])
 	{
 		ft_quotes_checker(data, buffer, i);
-		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
+		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && \
+			data->d_quotes_switch == 0)
 			len++;
 	}
 	return (len);
@@ -174,12 +175,12 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 	int		i;
 	int		len;
 	char	*str;
-	t_list *cmd;
-	
+	t_list 	*cmd;
+
 	cmd = NULL;
 	while (buffer[bufi])
 	{
-		while(ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
+		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
 			return (cmd);
@@ -188,7 +189,7 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 		if (!str)
 			return (NULL);
 		i = 0;
-		while(len-- > 0)
+		while (len-- > 0)
 			str[i++] = buffer[bufi++];
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
@@ -222,7 +223,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	t_cmdtab	*cmdtab;
 	char		*str;
 	int			i;
-	
+
 	tmp = lst;
 	cmdtab = ft_calloc(nbrpipe + 2, sizeof(t_cmdtab));
 	if (!cmdtab)
@@ -231,7 +232,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	// ft_init_cmdtab_value(cmdtab);
 	cmdtab[i++].lst = lst;
 	// cmdtab[i++].lst->type = 0;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->str[0] == '|' && tmp->type == 2)
 		{
@@ -308,7 +309,6 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	int		nbword;
 	t_list	*tmp;
 	int		y;
-	
 
 	nbword = ft_lstsize(cmd);
 	// nbword = ft_lst_count_cmdarg(cmd);//FIXME: provoque sanitize a freetabargv
