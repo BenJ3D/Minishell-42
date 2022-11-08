@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:05:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:16:53 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,9 +318,19 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	while (tmp)
 	{
 		if (tmp->type == CMD)
-			argv[0] = ft_strdup(tmp->str);
+		{
+			if (tmp->is_empty == 1)
+				argv[0] = ft_strdup("");
+			else
+				argv[0] = ft_strdup(tmp->str);
+		}
 		else if (tmp->type == ARG)
-			argv[y++] = ft_strdup(tmp->str);
+		{
+			if (tmp->is_empty == 1)
+				argv[y++] = ft_strdup("");
+			else
+				argv[y++] = ft_strdup(tmp->str);
+		}
 		tmp = tmp->next;
 	}
 	if (argv[0] == NULL)

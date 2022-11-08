@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 16:07:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:09:40 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_list
 {
 	int				type;
 	int				heavy;
+	int				is_empty;
 	char			*str;
 	struct s_list	*next;
 }					t_list;

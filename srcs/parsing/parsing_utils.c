@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 16:31:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:11:06 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	ft_strlen_parsing(char	*str)
 	return (i);
 }
 
-static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
+static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy, int is_empty)
 {
 	t_list	*tmp;
 
@@ -151,12 +151,13 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 		return (NULL);
 	tmp->str = ft_strdup(str);
 	tmp->heavy = heavy;
+	tmp->is_empty = is_empty;
 	ft_define_cmd_type_during_parsing(tmp, data);
 	tmp->next = NULL;
 	return (tmp);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy) //!ICI ALERTE 
+t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy, int is_empty) //!ICI ALERTE 
 {
 	int		i;
 	int		len;
@@ -174,13 +175,13 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy) //!ICI
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, is_empty));
 		free(str);
 	}
 	return (data->cmdtoparse);
 }
 
-t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
+t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy, int is_empty)
 {
 	int		i;
 	int		len;
@@ -199,7 +200,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, is_empty));
 		free(str);
 	}
 	return (data->cmdtoparse);

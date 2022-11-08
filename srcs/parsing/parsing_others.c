@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 17:06:39 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:11:16 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 						+ 1] <= 32 || buffer[data->scroller + 1] > 126))
 					{
 						data->scroller++;
-						ft_buffercmd_in_lst_quotes(" ", data, 1);
+						ft_buffercmd_in_lst_quotes(" ", data, 1, 1);
 						return (1);
 					}
 				}
@@ -130,9 +130,9 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 	if (final != NULL)
 	{
 		if (data->quotes_in_parsing == 1)
-			ft_buffercmd_in_lst_quotes(final, data, 1);
+			ft_buffercmd_in_lst_quotes(final, data, 1, 0);
 		else
-			ft_buffercmd_in_lst(final, data, 0);
+			ft_buffercmd_in_lst(final, data, 0, 0);
 	}
 	data->quotes_in_parsing = 0;
 	free(final);
