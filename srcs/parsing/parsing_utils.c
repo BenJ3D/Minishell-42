@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 13:42:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:31:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,9 @@ static int	ft_strlen_next_word(char *str)
 static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
 {
 	int		i;
-	char	c;
 
-	if (data->s_quotes_switch == 1)
-		c = '\'';
-	else
-		c = '"';
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -161,7 +156,7 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 	return (tmp);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
+t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy) //!ICI ALERTE 
 {
 	int		i;
 	int		len;
@@ -169,12 +164,12 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 	int		bufi;
 
 	bufi = 0;
-	
+	printf("%s\n", buffer);
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
 			return (data->cmdtoparse);
-		len = ft_strlen_next_word_quotes(data, buffer);
+		len = ft_strlen_parsing(buffer);
 		str = ft_calloc(len + 1, sizeof(char));
 		i = 0;
 		while (len-- > 0)
