@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 09:44:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:08:06 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 {
-	int	len;
-	int	pin;
-	int	pan;
+	int		len;
+	int		pin;
+	int		pan;
 	char	*semi_final;
 	char	*final;
 	char	*doll;
@@ -53,15 +53,15 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 		}
 		if (buffer[data->scroller] == '$')
 		{
-			printf("test\n");
 			if (semi_final == NULL)
 				semi_final = ft_parsing_env_variable(data, buffer);
 			else
 				semi_final = ft_double_quotes_env(data, buffer, semi_final);
 		}
-		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
+		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == \
+			'\'')
 		{
-			if(buffer[data->scroller] == '"')
+			if (buffer[data->scroller] == '"')
 				data->d_quotes_switch = 1;
 			else
 				data->s_quotes_switch = 1;
@@ -72,7 +72,8 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 			else
 			{
 				doll = ft_quotes(data, buffer, len_max);
-				semi_final = ft_strjoin(semi_final, doll);
+				if (doll != NULL)
+					semi_final = ft_strjoin(semi_final, doll);
 			}
 			ft_reset_quotes_checker(data);
 			data->quotes_in_parsing = 1;
