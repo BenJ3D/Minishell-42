@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:25:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:26:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, int is_empty
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, int is_empty);
 char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
-int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 void		error_management(t_data	*data);
 int			ft_redirection_files_check(t_data *data, char *buffer);
 int			ft_pipes_spaces_check(t_data *data, char *buffer);
@@ -54,11 +53,13 @@ char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
 /*PARSING_OTHERS*/
+int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
 char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
 char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
+void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);

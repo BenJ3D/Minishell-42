@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:23:49 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:30:40 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_parsing_others(t_data	*data, char *buffer, int len_max)
 {
 	int		len;
 	int		pin;
-	int		pan;
 	char	*semi_final;
 	char	*final;
 	char	*doll;

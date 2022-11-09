@@ -6,24 +6,41 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 18:35:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:46:52 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
+char	*ft_double_quotes_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final)
+{
+	char	*trollo;
+
+	if (final == NULL)
+	{
+		final = ft_double_quotes_env(data, buffer, semi_final);
+		free(semi_final);
+		semi_final = NULL;
+	}
+	else
+	{
+		trollo = ft_double_quotes_env(data, buffer, semi_final);
+		final = ft_strjoin(final, trollo);
+		free(trollo);
+		trollo = NULL;
+	}
+	return (final);
+}
+
 char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
-	int		pan;
 	int		len;
 	char	*final;
 	char	*semi_final;
-	char	*trollo;
 
 	semi_final = NULL;
 	final = NULL;
-	trollo = NULL;
 	if (buffer[data->scroller] == DOUBLE_QUOTE)
 		data->scroller++;
 	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
@@ -37,41 +54,16 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 			data->scroller++;
 		}
 		if (len != 0)
-		{
-			semi_final = ft_calloc(sizeof(char), len + 1);
-			if (!semi_final)
-				exit(57);
-			pan = 0;
-			while (pin < data->scroller)
-				semi_final[pan++] = buffer[pin++];
-			semi_final[pan] = '\0';
-		}
+			semi_final = ft_parsing_others_normal(data, buffer, \
+			len_max, pin);
 		if (buffer[data->scroller] == '$')
-		{
-			if (final == NULL)
-			{
-				final = ft_double_quotes_env(data, buffer, semi_final);
-				free(semi_final);
-				semi_final = NULL;
-			}
-			else
-			{
-				trollo = ft_double_quotes_env(data, buffer, semi_final);
-				final = ft_strjoin(final, trollo);
-				free(trollo);
-				trollo = NULL;
-			}
-		}
+			final = ft_double_quotes_get_env(data, buffer, semi_final, final);
 		else if (final != NULL)
-		{
 			final = ft_strjoin(final, semi_final);
-		}
 		else
 		{
 			if (semi_final != NULL)
-			{
 				final = ft_strdup(semi_final);
-			}
 		}
 		free(semi_final);
 		semi_final = NULL;
@@ -83,7 +75,6 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
-	int		pan;
 	int		len;
 	char	*semi_final;
 
@@ -98,15 +89,8 @@ char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 		data->scroller++;
 	}
 	if (len != 0)
-	{
-		semi_final = ft_calloc(sizeof(char), len + 1);
-		if (!semi_final)
-			exit(57);
-		pan = 0;
-		while (pin < data->scroller)
-			semi_final[pan++] = buffer[pin++];
-		semi_final[pan] = '\0';
-	}
+		semi_final = ft_parsing_others_normal(data, buffer, \
+			len_max, pin);
 	ft_quotes_checker(data, buffer, data->scroller);
 	return (semi_final);
 }
