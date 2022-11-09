@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 17:17:40 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:25:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
+/*PARSING_OTHERS*/
+char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
+char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
+char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
+void		ft_parsing_others_final(t_data	*data, char	*final);
+char		*ft_parsing_make_final(char	*semi_final, char	*final);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
