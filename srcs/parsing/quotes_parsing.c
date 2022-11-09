@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 15:34:26 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:09:41 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,18 @@ char	*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final)
 	return (final);
 }
 
-char	*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final)
-{
-	if (buffer[data->scroller] == '$')
-		final = ft_dq_get_env(data, buffer, semi_final, final);
-	else if (final != NULL)
-		final = ft_strjoin(final, semi_final);
-	else
-	{
-		if (semi_final != NULL)
-			final = ft_strdup(semi_final);
-	}
-	free(semi_final);
-	return (final);
-}
-
 int	ft_dq_len(t_data	*data, char	*buffer)
 {
-	
+	int	len;
+
+	len = 0;
+	while (buffer[data->scroller] && buffer[data->scroller] \
+		!= '$' && buffer[data->scroller] != DOUBLE_QUOTE)
+	{
+		len++;
+		data->scroller++;
+	}
+	return (len);
 }
 
 char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
@@ -66,13 +60,7 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
 	{
 		pin = data->scroller;
-		len = 0;
-		while (buffer[data->scroller] && buffer[data->scroller] \
-			!= '$' && buffer[data->scroller] != DOUBLE_QUOTE)
-		{
-			len++;
-			data->scroller++;
-		}
+		len = ft_dq_len(data, buffer);
 		if (len != 0)
 			semi_final = ft_parsing_others_normal(data, buffer, \
 			len_max, pin);

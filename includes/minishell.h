@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:26:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:13:42 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
 t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, int is_empty);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, int is_empty);
-char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
 void		error_management(t_data	*data);
 int			ft_redirection_files_check(t_data *data, char *buffer);
 int			ft_pipes_spaces_check(t_data *data, char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
-char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
 /*PARSING_OTHERS*/
@@ -60,6 +58,11 @@ char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_f
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
 void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
+/*PARSING_QUOTES*/
+char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
+char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
+char		*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final);
+char		*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
