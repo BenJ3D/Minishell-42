@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 17:18:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:37:59 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 	{
 		len = ft_get_len_until_redirection(data, buffer, '>');
 		if (len == 1)
-			ft_buffercmd_in_lst(">", data, 0, 0);
+			ft_buffercmd_in_lst(">", data, 0);
 		else if (len == 2)
-			ft_buffercmd_in_lst(">>", data, 0, 0);
+			ft_buffercmd_in_lst(">>", data, 0);
 		else if (len > 2)
 			return (1);
 	}
@@ -44,9 +44,9 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 	{
 		len = ft_get_len_until_redirection(data, buffer, '<');
 		if (len == 1)
-			ft_buffercmd_in_lst("<", data, 0, 0);
+			ft_buffercmd_in_lst("<", data, 0);
 		else if (len == 2)
-			ft_buffercmd_in_lst("<<", data, 0, 0);
+			ft_buffercmd_in_lst("<<", data, 0);
 		else if (len > 2)
 			return (1);
 	}
@@ -83,7 +83,7 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 		len++;
 	}
 	if (len == 1)
-		ft_buffercmd_in_lst("|", data, 0, 0);
+		ft_buffercmd_in_lst("|", data, 0);
 	else
 		return (0);
 	if (!ft_pipes_spaces_check(data, buffer + data->scroller)){

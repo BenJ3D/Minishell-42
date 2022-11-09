@@ -6,24 +6,17 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:30:40 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:34:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_parsing_others_set_quotes(t_data	*data, char	*buffer)
+int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 {
-	if (buffer[data->scroller] == '"')
-		data->d_quotes_switch = 1;
-	else
-		data->s_quotes_switch = 1;
-}
-
-int	ft_parsing_others(t_data	*data, char *buffer, int len_max)
-{
-	int		len;
-	int		pin;
+	int	len;
+	int	pin;
+	int	pan;
 	char	*semi_final;
 	char	*final;
 	char	*doll;
@@ -50,52 +43,79 @@ int	ft_parsing_others(t_data	*data, char *buffer, int len_max)
 			len++;
 		}
 		if (len != 0)
-			semi_final = ft_parsing_others_normal(data, buffer, len_max, pin);
-		if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd != 4)
-			semi_final = ft_parsing_others_normal_env(data, buffer, \
-				semi_final);
-		else if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd \
-			== 4)
-			semi_final = ft_parsing_others_not_normal_env(data, buffer, \
-				semi_final, pin, len);
-		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == \
-			'\'')
-		{	
-			ft_parsing_others_set_quotes(data, buffer);
+		{
+			semi_final = ft_calloc(sizeof(char), (len + 1));
+			if (!semi_final)
+				exit (11);
+			pan = 0;
+			while (pin < data->scroller)
+				semi_final[pan++] = buffer[pin++];
+			semi_final[pan] = '\0';
+		}
+		if (buffer[data->scroller] == '$')
+		{
+			if (semi_final == NULL)
+				semi_final = ft_parsing_env_variable(data, buffer);
+			else
+			{
+				doll = ft_parsing_env_variable(data, buffer);
+				if (doll != NULL)
+					semi_final = ft_strjoin(semi_final, doll);
+			}
+		}
+		else if (buffer[data->scroller] == '"' || buffer[data->scroller] == '\'')
+		{
+			if(buffer[data->scroller] == '"')
+				data->d_quotes_switch = 1;
+			else
+				data->s_quotes_switch = 1;
 			if (semi_final == NULL)
 			{
 				semi_final = ft_quotes(data, buffer, len_max);
-				if (!semi_final)
+				if (semi_final == NULL && (buffer[++data->scroller] < 33 || buffer[data->scroller] > 126))
 				{
-					if (buffer[data->scroller + 1] && (buffer[data->scroller \
-						+ 1] <= 32 || buffer[data->scroller + 1] > 126))
-					{
-						data->scroller++;
-						ft_buffercmd_in_lst_quotes(" ", data, 1, 1);
-						return (0);
-					}
+						ft_buffercmd_in_lst_quotes("\0", data, 1);
+						free(semi_final);
+						data->quotes_in_parsing = 0;
+						return (1);
 				}
+				else
+					data->scroller--;
 			}
 			else
 			{
 				doll = ft_quotes(data, buffer, len_max);
 				if (doll != NULL)
-				{
 					semi_final = ft_strjoin(semi_final, doll);
-					free(doll);
-					doll = NULL;
-				}
 			}
 			ft_reset_quotes_checker(data);
 			data->quotes_in_parsing = 1;
 			data->scroller++;
 		}
-		final = ft_parsing_make_final(semi_final, final);
-		semi_final = NULL;
+		if (final == NULL)
+		{
+			if (semi_final != NULL)
+			{
+				final = ft_strdup(semi_final);
+				semi_final = NULL;
+			}
+		}
+		else
+		{
+			if (semi_final != NULL)
+				final = ft_strjoin(final, semi_final);
+			semi_final = NULL;
+		}
 	}
-	free(semi_final);
 	if (final != NULL)
-		ft_parsing_others_final(data, final);
+	{
+		if (data->quotes_in_parsing == 1)
+			ft_buffercmd_in_lst_quotes(final, data, 1);
+		else
+			ft_buffercmd_in_lst(final, data, 0);
+	}
 	data->quotes_in_parsing = 0;
+	free(final);
+	final = NULL;
 	return (1);
 }
