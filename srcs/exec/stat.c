@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:20:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:32:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ char	*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex)
 	{
 		if (tmp->type == 0)
 		{
-			cmd = tmp->str;
+			if (tmp->is_empty == 1)
+				cmd = ft_strdup("");
+			else
+				cmd = tmp->str;
 			return (cmd);
 		}
 		tmp = tmp->next;
@@ -55,6 +58,8 @@ int	ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str)
 	cmd = ft_cmdtab_cmdstr_if_has_cmd(cmdtab, ex);
 	if (cmd == NULL)
 		return (STAT_NONE);
+	if (*cmd == '\0')
+		return (STAT_ISEMPTY);
 	if (str == NULL)
 		stat(cmd, &data->statbuf);
 	else

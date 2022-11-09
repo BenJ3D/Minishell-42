@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 20:41:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:51:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int	ft_run_execve_norm1(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 			errno = g_status;
 		}
 	}
-	else if (ft_cmdtab_cmdstr_if_has_cmd(cmdtab, ex) \
-										!= NULL && ex->stat != STAT_ISDIR)
+	else if (ft_cmdtab_cmdstr_if_has_cmd(cmdtab, ex) != NULL \
+						&& ex->stat != STAT_ISDIR && cmdtab[ex->i].isempty != 1)
 		cmdtab[ex->i].pid = ft_forkexe(data, ex, cmdtab);
+	else if (cmdtab[ex->i].isempty == 1)
+		g_status = ft_command_not_found_message(ex->argv, data);
 	else
 		ft_check_redi_if_has_no_cmd(cmdtab, ex, data);
 	return (0);
@@ -110,6 +112,8 @@ int	ft_run_execve(t_cmdtab *cmdtab, t_data *data)
 		cmdtab[ex.i].isbuilt = ft_check_is_builtin(data, ex.argv, cmdtab, &ex);
 		ex.stat = 0;
 		ex.stat = ft_stat_check(cmdtab, &ex, data, ex.progpath);
+		if (ex.stat == STAT_ISEMPTY)
+			cmdtab[ex.i].isempty = 1;
 		ft_run_execve_norm1(data, cmdtab, &ex);
 		free(ex.progpath);
 		ex.i++;
