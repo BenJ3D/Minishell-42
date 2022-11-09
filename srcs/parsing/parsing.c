@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:16:53 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:46:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,17 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 	return (tmp);
 }
 
-
-int	ft_count_pipe(t_data	*data, char *buffer)
+int	ft_count_pipe(t_data	*data, char *buffer) //ft pour test sans parsing
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (buffer[i])
+	while(buffer[i])
 	{
 		ft_quotes_checker(data, buffer, i);
-		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && \
-			data->d_quotes_switch == 0)
+		if (buffer[i++] == '|' && data->s_quotes_switch == 0 && data->d_quotes_switch == 0)
 			len++;
 	}
 	return (len);
@@ -159,6 +157,10 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 			tmp->type = ARG;
 			tmp = tmp->next;
 		}
+		// if (tmp)
+		// {
+		// 	tmp = tmp->next;
+		// }
 	}
 	return (1);
 }
@@ -175,12 +177,12 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 	int		i;
 	int		len;
 	char	*str;
-	t_list 	*cmd;
-
+	t_list *cmd;
+	
 	cmd = NULL;
 	while (buffer[bufi])
 	{
-		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
+		while(ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
 			return (cmd);
@@ -189,7 +191,7 @@ static t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
 		if (!str)
 			return (NULL);
 		i = 0;
-		while (len-- > 0)
+		while(len-- > 0)
 			str[i++] = buffer[bufi++];
 		ft_lstadd_back(&cmd, ft_lstnew(str));
 		free(str);
@@ -223,7 +225,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	t_cmdtab	*cmdtab;
 	char		*str;
 	int			i;
-
+	
 	tmp = lst;
 	cmdtab = ft_calloc(nbrpipe + 2, sizeof(t_cmdtab));
 	if (!cmdtab)
@@ -232,7 +234,7 @@ static t_cmdtab *ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	// ft_init_cmdtab_value(cmdtab);
 	cmdtab[i++].lst = lst;
 	// cmdtab[i++].lst->type = 0;
-	while (tmp)
+	while(tmp)
 	{
 		if (tmp->str[0] == '|' && tmp->type == 2)
 		{
@@ -265,7 +267,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	int		bufi;
 	int		i;
 	int		f;
-
+	
 	pipe = ft_count_pipe(data, buffer);
 	if (pipe == 0)
 		pipe++;
@@ -273,23 +275,24 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	bufi = 0;
 	if (!ft_full_prompt_quote_check(data, buffer))
 	{
-		ft_err_display_line_error(data, "syntax error", "invalid quotes");
+		ft_putstr_fd("Quote error\n", 2);
 		return (0);
 	}
 	f = ft_total_parsing(data, buffer);
 	if (f == 0)
 	{
-		ft_err_display_line_error(data, "syntax error", " ");
+		error_management(data);
 		return (0);
 	}
 	else if (f == 2)
 		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
-		ft_err_display_line_error(data, "syntax error", "near unexpected '|'");
+		ft_putstr_fd("Syntax Error '|'\n", 2);
 		free_the_birds(data);
 		return (0);
 	}
+	ft_define_cmd_type(data->cmdtoparse, data);
 	dbg_lstdisplay_color_type(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
@@ -309,6 +312,7 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	int		nbword;
 	t_list	*tmp;
 	int		y;
+	
 
 	nbword = ft_lstsize(cmd);
 	// nbword = ft_lst_count_cmdarg(cmd);//FIXME: provoque sanitize a freetabargv
@@ -318,19 +322,9 @@ char	**ft_lstcmd_to_cmdarg_for_execve(t_list	*cmd)
 	while (tmp)
 	{
 		if (tmp->type == CMD)
-		{
-			if (tmp->is_empty == 1)
-				argv[0] = ft_strdup("");
-			else
-				argv[0] = ft_strdup(tmp->str);
-		}
+			argv[0] = ft_strdup(tmp->str);
 		else if (tmp->type == ARG)
-		{
-			if (tmp->is_empty == 1)
-				argv[y++] = ft_strdup("");
-			else
-				argv[y++] = ft_strdup(tmp->str);
-		}
+			argv[y++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 	}
 	if (argv[0] == NULL)
