@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 21:23:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:59:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_heredoc_create(char *token, int fd)
 	father = fork();
 	if (father == 0)
 		ft_heredoc_create_child(token, fd);
-	waitpid(father, NULL, 0);
+	waitpid(father, &g_status, 0);
 	return (0);
 }
 

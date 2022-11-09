@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 03:41:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:43:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,19 @@ int	ft_check_is_builtin(t_data *data, char **argv, \
 pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 {
 	pid_t	father;
+	char	*errline;
 
 	father = fork();
 	if (father == -1)
 	{
-		perror("minishell: fork");
-		g_status = errno;
+		errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
+			data->pgr_name, COLOR_PURPLE, "fork", COLOR_RED);
+		perror(errline);
+		free (errline);
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
 		ft_free_tab_char(envp);
-		ft_exit(data, ex->argv);
+		exit(errno);
 	}
 	return (father);
 }

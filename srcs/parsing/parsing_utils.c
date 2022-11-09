@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:55:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:12:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy, int is
 	int		bufi;
 
 	bufi = 0;
-	printf("%s\n", buffer);
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')

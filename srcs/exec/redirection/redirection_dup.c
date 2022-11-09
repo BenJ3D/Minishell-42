@@ -6,16 +6,28 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 18:07:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:31:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
+int	ft_redi_doll_errorcheck(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
+{
+	if (cmdtab[ex->i].rediarg[0] == '$')
+	{
+		ft_err_display_line_error(data, "syntax error", "ambiguous redirect");
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {
 	char	*errline;
 
+	if (ft_redi_doll_errorcheck(cmdtab, ex, data))
+		return (1);
 	cmdtab[ex->i].fdredi = open(cmdtab[ex->i].rediarg, \
 											O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmdtab[ex->i].fdredi < 0)
@@ -40,6 +52,8 @@ int	ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {
 	char	*errline;
 
+	if (ft_redi_doll_errorcheck(cmdtab, ex, data))
+		return (1);
 	cmdtab[ex->i].fdredi = open(cmdtab[ex->i].rediarg, \
 										O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmdtab[ex->i].fdredi < 0)
@@ -64,6 +78,8 @@ int	ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {
 	char	*errline;
 
+	if (ft_redi_doll_errorcheck(cmdtab, ex, data))
+		return (1);
 	cmdtab[ex->i].fdredi = open(cmdtab[ex->i].rediarg, O_RDONLY);
 	if (cmdtab[ex->i].fdredi < 0)
 	{

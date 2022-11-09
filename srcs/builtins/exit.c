@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:54:27 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:10:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ static void	ft_exit_arg(int exitarg, t_data *data)
 }
 
 void	ft_exit(t_data *data, char **argv)
+{
+	if (argv[0] && argv[1])
+		ft_exit_arg(ft_atoi(argv[1]), data);
+	else
+		ft_exit_exit(data);
+}
+
+void	ft_exit_normal(t_data *data, char **argv)
 {
 	ft_stty_control(1, data);
 	if (argv[0] && argv[1])
