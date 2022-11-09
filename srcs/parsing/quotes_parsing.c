@@ -6,13 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:46:52 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:34:26 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-char	*ft_double_quotes_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final)
+char	*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final)
 {
 	char	*trollo;
 
@@ -30,6 +30,26 @@ char	*ft_double_quotes_get_env(t_data	*data, char	*buffer, char	*semi_final, cha
 		trollo = NULL;
 	}
 	return (final);
+}
+
+char	*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final)
+{
+	if (buffer[data->scroller] == '$')
+		final = ft_dq_get_env(data, buffer, semi_final, final);
+	else if (final != NULL)
+		final = ft_strjoin(final, semi_final);
+	else
+	{
+		if (semi_final != NULL)
+			final = ft_strdup(semi_final);
+	}
+	free(semi_final);
+	return (final);
+}
+
+int	ft_dq_len(t_data	*data, char	*buffer)
+{
+	
 }
 
 char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
@@ -56,16 +76,7 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 		if (len != 0)
 			semi_final = ft_parsing_others_normal(data, buffer, \
 			len_max, pin);
-		if (buffer[data->scroller] == '$')
-			final = ft_double_quotes_get_env(data, buffer, semi_final, final);
-		else if (final != NULL)
-			final = ft_strjoin(final, semi_final);
-		else
-		{
-			if (semi_final != NULL)
-				final = ft_strdup(semi_final);
-		}
-		free(semi_final);
+		final = ft_dq_spacials(data, buffer, semi_final, final);
 		semi_final = NULL;
 		ft_quotes_checker(data, buffer, data->scroller);
 	}
