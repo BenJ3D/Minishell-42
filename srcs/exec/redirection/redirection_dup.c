@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 18:58:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:31:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	ft_redi_doll_errorcheck(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {
-	ft_putstr_fd(cmdtab[ex->i].rediarg, 2);
-	ft_putstr_fd("\n", 2);
 	if (cmdtab[ex->i].rediarg[0] == '$')
 	{
-		ft_err_display_line_error(data, "syntax error", "ambiguous redirect2");
+		ft_err_display_line_error(data, "syntax error", "ambiguous redirect");
 		return (1);
 	}
 	return (0);
@@ -105,8 +103,6 @@ int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {
 	char	*errline;
 
-	if (ft_redi_doll_errorcheck(cmdtab, ex, data))
-		return (1);
 	hdc_fd = open(cmdtab[ex->i].hdcpath, O_RDONLY);
 	if (hdc_fd < 0)
 	{
