@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:09:40 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:47:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ enum e_stat
 {
 	STAT_NONE,
 	STAT_ISFILE,
-	STAT_ISDIR
+	STAT_ISDIR,
+	STAT_ISEMPTY
 };
 
 enum e_prtype
@@ -65,6 +66,7 @@ typedef struct s_execarg
 typedef struct s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
 {									//exemple si buffer = ls -all | cat -e
 	int		isbuilt;				//si isbuilt > 0 : c'est une builtin
+	int		isempty;				//gerer le cas cmd == '\0'
 	int		pipein;
 	int		pipeout;
 	int		reditype;
