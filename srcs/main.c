@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 15:36:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:52:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	main(int ac, char **av, char **envp)
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);// supprimer av
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	ft_exit(&data, av);
+	ft_exit_normal(&data, av);
 	return (0);
 }

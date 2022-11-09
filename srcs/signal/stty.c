@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 15:55:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:11:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	ft_stty_control(int b, t_data *data)
 	return (0);
 }
 
+/**
+ * @brief pour contrer un appel ./minishell | ./minishell
+ * 
+ * @return int 
+ */
 int	ft_issaty_control(void)
 {
 	pid_t	father;

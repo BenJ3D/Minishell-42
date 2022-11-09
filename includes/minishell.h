@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:56:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:53:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
 void		ft_reset_quotes_checker(t_data	*data);
 int			ft_node_quote_checker(t_data	*data);
 int			ft_total_parsing(t_data	*data, char	*buffer);
+
 /*PARSING TESTS*/
 char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
@@ -52,14 +53,16 @@ int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
+
 /*PARSING_OTHERS*/
-int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
+ int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
 char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
 char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
 void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
+
 /*PARSING_QUOTES*/
 char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
@@ -92,6 +95,7 @@ int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
 int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
 int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
 void		ft_exit_exit(t_data *data);
+
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
 				t_data *data, char *str);
@@ -109,6 +113,7 @@ int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
 int			ft_check_if_cmd_has_a_backslash(char *str);
+
 /* FT REDIRECTIONS*/
 int			ft_heredoc_create(char *token, int fd);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
@@ -129,6 +134,7 @@ int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret);
 int			ft_builtin_pwd(t_data *data);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
+void		ft_exit_normal(t_data *data, char **argv);
 int			ft_check_if_exportkey_is_valid(char *key);
 int			ft_builtin_export_api(t_envlst *env, char *key, char *value);
 
