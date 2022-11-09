@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_env_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/08 20:09:19 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:12:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 		}
 		else
 		{
-			printf("test\n");
 			value_env = ft_calloc(sizeof(char), len + 1);
 			if (!value_env)
 				return (NULL);
@@ -183,19 +182,16 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			while (pin < data->scroller)
 				value_env[pan++] = buffer[pin++];
 			value_env[pan] = '\0';
-			printf("%s\n", value_env);
 			if (data->cmdtoparse && data->cmdtoparse->str[0] == '<')
 				pan = 0;
 			else
 			{
-				printf("ici\n");
 				tmp = ft_strdup(value_env);
 				free(value_env);
 				value_env = ft_env_getstr_env_value(data->env, tmp);
 				free(tmp);
 				if (!value_env)
 				{
-					printf("la\n");
 					free(value_env);
 					return (NULL);
 				}
