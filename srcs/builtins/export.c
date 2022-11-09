@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 04:19:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/08 20:11:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	ft_print_export(t_envlst *env)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
+	ft_free_tab_char(tab);
 }
 
 /**
