@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_env_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 09:36:17 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:35:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_var_no_env(t_data	*data, char	*buffer)
 	int	len;
 	char	*semi_final;
 	int		pin;
-	
 	len = 0;
 	data->scroller++;
 	pin = data->scroller;
@@ -64,7 +63,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	char	*final;
 
 	len = 0;
-	printf("%s\n", buffer + data->scroller);
 	data->scroller++;
 	pin = data->scroller;
 	value_env = NULL;
@@ -130,8 +128,7 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 		}
 	}
 	else
-		return ("$");
-	printf("ici\n");
+		final = ft_strdup("$");
 	return (final);
 }
 
@@ -157,13 +154,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	}
 	if (len != 0)
 	{
-		if (buffer[pin] == '?')
-		{
-			value_env = ft_itoa(g_status % 255);
-			if (!value_env)
-				return (NULL);
-		}
-		else if (buffer[pin] >= '0' && buffer[pin] <= '9')
+		if (buffer[pin] >= '0' && buffer[pin] <= '9')
 		{
 			data->scroller = pin;
 			value_env = ft_var_no_env(data, buffer);
@@ -195,6 +186,6 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 			return (NULL);
 	}
 	else
-		return ("$");
+		value_env = ft_strdup("$");	
 	return (value_env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 10:35:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:46:18 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 {
-	printf("passage %s, heavy %d\n", tmp->str, tmp->heavy);
-	if (tmp->str[0] == '|' && tmp->heavy == 0)
-		return (NULL);
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '>')
@@ -46,11 +43,7 @@ t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp, int first_arg)
 		if (first_arg == 0)
 			tmp->type = CMD;
 		else
-		{
 			tmp->type = ARG;
-			if (tmp->next != NULL)
-				tmp = tmp->next;
-		}
 	}
 	return (tmp);
 }
@@ -109,20 +102,18 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 	first_arg = 0;
 	while (tmp)
 	{
-		if (data->first_cmd == 1)
+		if (data->first_cmd == 1 && tmp->str[0] == '|' && tmp->heavy == 0 && \
+			first_arg == 0)
+			return (0);
+		if (data->first_cmd == 1 && tmp->str[0] != '|')
 		{
-			printf("%s\n", tmp->str);
 			tmp = ft_cmd_first_type(data, tmp, first_arg);
-			if (tmp == NULL)
-			{
-				printf("seule option\n");
-				return (0);
-			}
 			if (tmp && tmp->type == 0)
 			{
 				first_arg = 1;
 				data->first_cmd = 0;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '>' && tmp->heavy == 0)
 		{
@@ -134,6 +125,7 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 			tmp = tmp->next;
 			if (tmp && tmp->str[0] != '|')
 				data->first_cmd = 1;
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '<' && tmp->heavy == 0)
 		{
@@ -151,17 +143,24 @@ static int	ft_define_cmd_type(t_list *lst, t_data	*data)
 				if (tmp && tmp->str[0] != '|')
 					data->first_cmd = 1;
 			}
+			tmp = tmp->next;
 		}
 		else if (tmp->str[0] == '|' && tmp->heavy == 0)
 		{
 			tmp->type = PIPE;
 			data->first_cmd = 1;
 			first_arg = 0;
+			tmp = tmp->next;
 		}
 		else
+		{
 			tmp->type = ARG;
-		if (tmp)
 			tmp = tmp->next;
+		}
+		// if (tmp)
+		// {
+		// 	tmp = tmp->next;
+		// }
 	}
 	return (1);
 }
@@ -289,12 +288,12 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 		return (0);
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
-		printf("ici\n");
 		ft_putstr_fd("Syntax Error '|'\n", 2);
 		free_the_birds(data);
 		return (0);
 	}
-	dbg_lstdisplay_color_type(data->cmdtoparse); //FIXME:
+	ft_define_cmd_type(data->cmdtoparse, data);
+	dbg_lstdisplay_color_type(data->cmdtoparse);
 	data->cmdtab = ft_create_tab_per_cmd(data->cmdtoparse, pipe);
 	return (pipe);
 }

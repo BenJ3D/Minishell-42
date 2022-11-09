@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 11:01:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:55:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param b  0 pour masquer / 1 ou != 0 pour restaurer
  * @return int 
  */
-int	ft_stty_control(int b)
+int	ft_stty_control(int b, t_data *data)
 {
 	pid_t	father;
 
@@ -39,5 +39,23 @@ int	ft_stty_control(int b)
 		exit (errno);
 	}
 	waitpid(father, &g_status, 0);
+	return (0);
+}
+
+int	ft_issaty_control(void)
+{
+	pid_t	father;
+
+	g_status = 0;
+	father = fork();
+	if (father == 0)
+	{
+		if (!isatty(1))
+			exit(1);
+		exit(0);
+	}
+	waitpid(father, &g_status, 0);
+	if ((g_status % 255) != 0)
+		exit (1);
 	return (0);
 }

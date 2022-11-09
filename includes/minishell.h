@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/06 23:10:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:35:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,10 @@ int			ft_redi_in1v2(int fd);
 /* FT SINAUX */
 void		handler_interative(int signum);
 void		interactive_mode(void);
-int			ft_stty_control(int b);
+
+/* FT SINAUX */
+int			ft_stty_control(int b, t_data *data);
+int			ft_issaty_control(void);
 
 // avoid compilation crash
 void		rl_replace_line(const char *text, int clear_undo);

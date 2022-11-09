@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/05 19:43:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:31:34 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,17 +169,26 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 	int		bufi;
 
 	bufi = 0;
-	while (buffer[bufi])
+	if (!buffer[bufi])
 	{
-		if (buffer[bufi] == '\0')
-			return (data->cmdtoparse);
-		len = ft_strlen_next_word_quotes(data, buffer);
-		str = ft_calloc(len + 1, sizeof(char));
-		i = 0;
-		while (len-- > 0)
-			str[i++] = buffer[bufi++];
+		str = ft_strdup("");
 		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
 		free(str);
+	}
+	else
+	{
+		while (buffer[bufi])
+		{
+			if (buffer[bufi] == '\0')
+				return (data->cmdtoparse);
+			len = ft_strlen_next_word_quotes(data, buffer);
+			str = ft_calloc(len + 1, sizeof(char));
+			i = 0;
+			while (len-- > 0)
+				str[i++] = buffer[bufi++];
+			ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+			free(str);
+		}
 	}
 	return (data->cmdtoparse);
 }
