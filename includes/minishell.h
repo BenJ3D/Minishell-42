@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:27:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:56:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int			ft_total_parsing(t_data	*data, char	*buffer);
 /*PARSING TESTS*/
 char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, int is_empty);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, int is_empty);
 char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
 int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);

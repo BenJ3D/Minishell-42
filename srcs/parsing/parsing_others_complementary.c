@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_others_complementary.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:22:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:05:42 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:55:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
