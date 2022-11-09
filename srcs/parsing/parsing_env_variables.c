@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_env_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
 /*   Updated: 2022/11/08 20:09:19 by hmarconn         ###   ########.fr       */
@@ -35,7 +35,6 @@ char	*ft_var_no_env(t_data	*data, char	*buffer)
 	int	len;
 	char	*semi_final;
 	int		pin;
-	
 	len = 0;
 	data->scroller++;
 	pin = data->scroller;
