@@ -55,12 +55,15 @@ int	ft_dq_len(t_data	*data, char	*buffer)
 char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
+	int		pan;
 	int		len;
 	char	*final;
 	char	*semi_final;
+	char	*trollo;
 
 	semi_final = NULL;
 	final = NULL;
+	trollo = NULL;
 	if (buffer[data->scroller] == DOUBLE_QUOTE)
 		data->scroller++;
 	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
@@ -68,7 +71,7 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 		pin = data->scroller;
 		len = 0;
 		while (buffer[data->scroller] && buffer[data->scroller] \
-			!= '$' && buffer[data->scroller] != DOUBLE_QUOTE)
+			 != '$' && buffer[data->scroller] != DOUBLE_QUOTE)
 		{
 			len++;
 			data->scroller++;
@@ -86,6 +89,7 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
+	int		pan;
 	int		len;
 	char	*semi_final;
 
@@ -100,8 +104,15 @@ char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 		data->scroller++;
 	}
 	if (len != 0)
-		semi_final = ft_parsing_others_normal(data, buffer, \
-			len_max, pin);
+	{
+		semi_final = ft_calloc(sizeof(char), len + 1);
+		if (!semi_final)
+			exit(57);
+		pan = 0;
+		while (pin < data->scroller)
+			semi_final[pan++] = buffer[pin++];
+		semi_final[pan] = '\0';
+	}
 	ft_quotes_checker(data, buffer, data->scroller);
 	return (semi_final);
 }

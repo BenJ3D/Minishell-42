@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 03:09:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:07:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	ft_redi_out1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 	{
 		g_status = errno;
 		errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
-				data->pgr_name, COLOR_PURPLE, cmdtab[ex->i].rediarg, COLOR_RED);
+			data->pgr_name, COLOR_PURPLE, cmdtab[ex->i].rediarg, COLOR_RED);
 		perror(errline);
+		ft_putstr_fd(COLOR_NONE, 2);
 		free (errline);
 		return (errno);
 	}
@@ -47,6 +48,7 @@ int	ft_redi_out2(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 		errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
 				data->pgr_name, COLOR_PURPLE, cmdtab[ex->i].rediarg, COLOR_RED);
 		perror(errline);
+		ft_putstr_fd(COLOR_NONE, 2);
 		free (errline);
 		return (errno);
 	}
@@ -69,6 +71,7 @@ int	ft_redi_in1(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 		errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
 				data->pgr_name, COLOR_PURPLE, cmdtab[ex->i].rediarg, COLOR_RED);
 		perror(errline);
+		ft_putstr_fd(COLOR_NONE, 2);
 		free (errline);
 		return (errno);
 	}
@@ -91,6 +94,7 @@ int	ft_redi_in2(int hdc_fd, t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 		errline = ft_strjoin_max("%s%s: %s%s%s", COLOR_CYAN, \
 				data->pgr_name, COLOR_PURPLE, cmdtab[ex->i].rediarg, COLOR_RED);
 		perror(errline);
+		ft_putstr_fd(COLOR_NONE, 2);
 		free (errline);
 		return (errno);
 	}
