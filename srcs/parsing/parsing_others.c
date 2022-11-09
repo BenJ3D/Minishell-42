@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 15:20:44 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:34:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_parsing_others(t_data	*data, char *buffer, int	len_max)
 	char	*doll;
 
 	len = 0;
+	semi_final = NULL;
 	final = NULL;
 	doll = NULL;
 	data->quotes_in_parsing = 0;
