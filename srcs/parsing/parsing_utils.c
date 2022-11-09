@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 16:31:34 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:47:40 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,9 @@ static int	ft_strlen_next_word(char *str)
 static int	ft_strlen_next_word_quotes(t_data	*data, char *str)
 {
 	int		i;
-	char	c;
 
-	if (data->s_quotes_switch == 1)
-		c = '\'';
-	else
-		c = '"';
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -147,7 +142,7 @@ int	ft_strlen_parsing(char	*str)
 	return (i);
 }
 
-static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
+static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy, int is_empty)
 {
 	t_list	*tmp;
 
@@ -156,12 +151,13 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy)
 		return (NULL);
 	tmp->str = ft_strdup(str);
 	tmp->heavy = heavy;
+	tmp->is_empty = is_empty;
 	ft_define_cmd_type_during_parsing(tmp, data);
 	tmp->next = NULL;
 	return (tmp);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
+t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy, int is_empty) //!ICI ALERTE 
 {
 	int		i;
 	int		len;
@@ -169,10 +165,17 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 	int		bufi;
 
 	bufi = 0;
-	if (!buffer[bufi])
+	printf("%s\n", buffer);
+	while (buffer[bufi])
 	{
-		str = ft_strdup("");
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+		if (buffer[bufi] == '\0')
+			return (data->cmdtoparse);
+		len = ft_strlen_parsing(buffer);
+		str = ft_calloc(len + 1, sizeof(char));
+		i = 0;
+		while (len-- > 0)
+			str[i++] = buffer[bufi++];
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, is_empty));
 		free(str);
 	}
 	else
@@ -193,7 +196,7 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int	heavy)
 	return (data->cmdtoparse);
 }
 
-t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
+t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy, int is_empty)
 {
 	int		i;
 	int		len;
@@ -212,7 +215,7 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int	heavy)
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy));
+		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, is_empty));
 		free(str);
 	}
 	return (data->cmdtoparse);
