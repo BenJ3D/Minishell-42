@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   quotes_parsing_complementary.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:54:27 by hmarconn         ###   ########.fr       */
+/*   Created: 2022/11/09 16:06:47 by hmarconn          #+#    #+#             */
+/*   Updated: 2022/11/09 16:07:21 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-void	ft_exit_exit(t_data *data)
+char	*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final)
 {
-	ft_free_all_minishell(data);
-	rl_replace_line("exit", 0);
-	exit(g_status & 255);
-}
-
-static void	ft_exit_arg(int exitarg, t_data *data)
-{
-	ft_free_all_minishell(data);
-	rl_replace_line("exit", 0);
-	exit(exitarg);
-}
-
-void	ft_exit(t_data *data, char **argv)
-{
-	ft_stty_control(1, data);
-	if (argv[0] && argv[1])
-		ft_exit_arg(ft_atoi(argv[1]), data);
+	if (buffer[data->scroller] == '$')
+		final = ft_dq_get_env(data, buffer, semi_final, final);
+	else if (final != NULL)
+		final = ft_strjoin(final, semi_final);
 	else
-		ft_exit_exit(data);
+	{
+		if (semi_final != NULL)
+			final = ft_strdup(semi_final);
+	}
+	free(semi_final);
+	return (final);
 }

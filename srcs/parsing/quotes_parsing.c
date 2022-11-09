@@ -6,68 +6,65 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 16:38:14 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:09:41 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
+char	*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final)
+{
+	char	*trollo;
+
+	if (final == NULL)
+	{
+		final = ft_double_quotes_env(data, buffer, semi_final);
+		free(semi_final);
+		semi_final = NULL;
+	}
+	else
+	{
+		trollo = ft_double_quotes_env(data, buffer, semi_final);
+		final = ft_strjoin(final, trollo);
+		free(trollo);
+		trollo = NULL;
+	}
+	return (final);
+}
+
+int	ft_dq_len(t_data	*data, char	*buffer)
+{
+	int	len;
+
+	len = 0;
+	while (buffer[data->scroller] && buffer[data->scroller] \
+		!= '$' && buffer[data->scroller] != DOUBLE_QUOTE)
+	{
+		len++;
+		data->scroller++;
+	}
+	return (len);
+}
+
 char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
-	int		pan;
 	int		len;
 	char	*final;
 	char	*semi_final;
-	char	*trollo;
 
 	semi_final = NULL;
 	final = NULL;
-	trollo = NULL;
 	if (buffer[data->scroller] == DOUBLE_QUOTE)
 		data->scroller++;
 	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
 	{
 		pin = data->scroller;
-		len = 0;
-		while (buffer[data->scroller] && buffer[data->scroller] \
-			 != '$' && buffer[data->scroller] != DOUBLE_QUOTE)
-		{
-			len++;
-			data->scroller++;
-		}
+		len = ft_dq_len(data, buffer);
 		if (len != 0)
-		{
-			semi_final = ft_calloc(sizeof(char), len + 1);
-			if (!semi_final)
-				exit(57);
-			pan = 0;
-			while (pin < data->scroller)
-				semi_final[pan++] = buffer[pin++];
-			semi_final[pan] = '\0';
-		}
-		else
-			
-		if (buffer[data->scroller] == '$')
-		{
-			if (final == NULL)
-				final = ft_double_quotes_env(data, buffer, semi_final);
-			else
-			{
-				trollo = ft_double_quotes_env(data, buffer, semi_final);
-				final = ft_strjoin(final, trollo);
-			}
-		}
-		else if (final != NULL)
-			final = ft_strjoin(final, semi_final);
-		else
-		{
-			if (semi_final != NULL)
-			{
-				final = ft_strdup(semi_final);
-				free(semi_final);
-			}
-		}
+			semi_final = ft_parsing_others_normal(data, buffer, \
+			len_max, pin);
+		final = ft_dq_spacials(data, buffer, semi_final, final);
 		semi_final = NULL;
 		ft_quotes_checker(data, buffer, data->scroller);
 	}
@@ -77,7 +74,6 @@ char	*ft_double_quotes(t_data	*data, char	*buffer, int len_max)
 char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 {
 	int		pin;
-	int		pan;
 	int		len;
 	char	*semi_final;
 
@@ -92,15 +88,8 @@ char	*ft_simple_quotes(t_data	*data, char	*buffer, int len_max)
 		data->scroller++;
 	}
 	if (len != 0)
-	{
-		semi_final = ft_calloc(sizeof(char), len + 1);
-		if (!semi_final)
-			exit(57);
-		pan = 0;
-		while (pin < data->scroller)
-			semi_final[pan++] = buffer[pin++];
-		semi_final[pan] = '\0';
-	}
+		semi_final = ft_parsing_others_normal(data, buffer, \
+			len_max, pin);
 	ft_quotes_checker(data, buffer, data->scroller);
 	return (semi_final);
 }
