@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 16:57:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:00:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_exit(t_data *data, char **argv)
 
 void	ft_exit_normal(t_data *data, char **argv)
 {
-	ft_stty_control(1, data);
+	ft_stty_control(1);
 	if (argv[0] && argv[1])
 		ft_exit_arg(ft_atoi(argv[1]), data);
 	else

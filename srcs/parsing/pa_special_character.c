@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_special_character.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 17:40:18 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:50:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 	return (1);
 }
 
-int	ft_pipes_spaces_check(t_data	*data, char	*buffer)
+int	ft_pipes_spaces_check(char	*buffer)
 {
 	int	pin;
 
@@ -82,7 +82,7 @@ int	ft_parsing_for_a_pipe(t_data	*data, char	*buffer)
 		ft_buffercmd_in_lst("|", data, 0, 0);
 	else
 		return (0);
-	if (!ft_pipes_spaces_check(data, buffer + data->scroller))
+	if (!ft_pipes_spaces_check(buffer + data->scroller))
 		return (0);
 	return (1);
 }

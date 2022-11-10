@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:58:53 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:25:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:48:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
 	int		pan;
-	char	*tmp;
 
 	value_env = ft_calloc(sizeof(char), len + 1);
 	if (!value_env)
@@ -61,8 +60,6 @@ char	*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, int pin)
 char	*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
-	int		pan;
-	char	*tmp;
 
 	if (buffer[pin] == '?')
 	{
@@ -85,8 +82,6 @@ char	*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, int pin)
 char	*ft_pa_env_regular_prime(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
-	char	*tmp;
-	int		pan;
 
 	value_env = NULL;
 	if (len != 0)

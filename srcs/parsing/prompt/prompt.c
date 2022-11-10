@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 21:15:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:56:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*prompt_update(t_envlst *env, char *prgname)
  * @param data 
  * @return int 
  */
-int	ft_prompting(char **av, t_data *data)
+int	ft_prompting(t_data *data)
 {
 	signal_recept_not_blocking_cmd();
 	data->line = prompt_update(data->env, data->pgr_name);
@@ -71,13 +71,13 @@ int	ft_prompting(char **av, t_data *data)
  * @param av 
  * @param data 
  */
-void	prompt_minishell(char **av, t_data *data)
+void	prompt_minishell(t_data *data)
 {
 	int		nbpipe;
 
 	data->buffer = NULL;
 	data->line = NULL;
-	while (ft_prompting(av, data))
+	while (ft_prompting(data))
 	{
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);

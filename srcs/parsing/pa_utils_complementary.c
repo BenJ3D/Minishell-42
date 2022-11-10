@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pa_utils_complementary.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:56:29 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:50:29 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:54:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_redirection_files_check(t_data	*data, char	*buffer)
+int	ft_redirection_files_check(char *buffer)
 {
 	int	pin;
 
@@ -55,7 +55,7 @@ char	*ft_strjoin_parsing(char	*s1, char *s2)
 	return (s3);
 }
 
-static void	ft_pa_deftype_first_cmd(t_list	*tmp, t_data	*data)
+static void	ft_pa_deftype_first_cmd(t_list	*tmp, t_data *data)
 {
 	if (tmp->str[0] == '>')
 	{
@@ -76,7 +76,7 @@ static void	ft_pa_deftype_first_cmd(t_list	*tmp, t_data	*data)
 	data->first_cmd = 1;
 }
 
-static void	ft_pa_deftype(t_list	*tmp, t_data	*data)
+static void	ft_pa_deftype(t_list *tmp)
 {
 	if (tmp->str[0] == '>')
 	{
@@ -110,7 +110,7 @@ int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 	else if (data->first_cmd == 0)
 		ft_pa_deftype_first_cmd(tmp, data);
 	else
-		ft_pa_deftype(tmp, data);
+		ft_pa_deftype(tmp);
 	data->type_of_the_last_cmd = tmp->type;
 	return (0);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pa_test.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 15:11:33 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:52:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-int	ft_total_parsing_complementary(t_data	*data, char	*buffer)
+int	ft_total_parsing_complementary(t_data *data, char *buffer)
 {
 	if (data->s_quotes_switch == 0 && data->d_quotes_switch == 0 && \
 		buffer[data->scroller] == '|')
@@ -24,8 +24,8 @@ int	ft_total_parsing_complementary(t_data	*data, char	*buffer)
 		(buffer[data->scroller] == '<' || buffer[data->scroller] == '>'))
 	{
 		ft_redirect_me_now(data, buffer);
-		if (data->cmdtoparse == NULL || !ft_redirection_files_check(data, \
-			buffer + data->scroller))
+		if (data->cmdtoparse == NULL || \
+						!ft_redirection_files_check(buffer + data->scroller))
 			return (0);
 	}
 	else if (buffer[data->scroller] >= 33 && buffer[data->scroller] <= 126)
