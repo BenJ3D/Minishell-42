@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 17:07:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:39:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,18 @@ void	ft_stat_error_is_dir(t_data *data, t_cmdtab *cmdtab, \
 	cmdtab[ex->i].pid = fork();
 	if (cmdtab[ex->i].pid == 0)
 	{
-		line = ft_strjoin_max("%s%s: %s%s: %sIs a directory%s\n", \
-								COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
-												cmd, COLOR_RED, COLOR_NONE);
+		if (cmd[0] == '.' && cmd[1] == '\0')
+			line = ft_strjoin_max("%s%s: %s%s: \
+%sfilename argument required%s\n", COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+													cmd, COLOR_RED, COLOR_NONE);
+		else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '\0')
+				line = ft_strjoin_max("%s%s: %s%s: %scommand not found%s\n", \
+				COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+				cmd, COLOR_RED, COLOR_NONE);
+		else
+			line = ft_strjoin_max("%s%s: %s%s: %sis a directory%s\n", \
+									COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+													cmd, COLOR_RED, COLOR_NONE);
 		ft_putstr_fd(line, STDERR_FILENO);
 		free(line);
 		free(cmd);
