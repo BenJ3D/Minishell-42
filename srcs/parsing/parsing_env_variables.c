@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 20:12:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:58:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	if (buffer[data->scroller] == '?')
 	{
 		if (semi_final == NULL)
-			semi_final = ft_itoa(g_status & 255);
+			semi_final = ft_itoa(g_status % 255);
 		else
 		{
-			value_env = ft_itoa(g_status & 255);
+			value_env = ft_itoa(g_status % 255);
 			semi_final = ft_strjoin(semi_final, value_env);
 			free(value_env);
 		}
@@ -162,7 +162,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	{
 		if (buffer[pin] == '?')
 		{
-			value_env = ft_itoa(g_status & 255);
+			value_env = ft_itoa(g_status % 255);
 			if (!value_env)
 				return (NULL);
 		}
@@ -201,7 +201,7 @@ char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
 	else if (buffer[pin] == '?')
 	{
 		data->scroller++;
-		value_env = ft_itoa(g_status & 255);
+		value_env = ft_itoa(g_status % 255);
 		if (!value_env)
 			return (NULL);
 	}

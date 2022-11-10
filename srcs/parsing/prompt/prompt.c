@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 17:56:23 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:07:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,71 @@ char	*prompt_update(t_envlst *env, char *prgname)
 	return (line);
 }
 
+// void	prompt_minishell(char **av, t_data *data)
+// {
+// 	int		nbpipe;
+	
+// 	data->buffer = NULL;
+// 	data->line = prompt_update(data->env, data->pgr_name);
+// 	data->buffer = readline(data->line);
+// 	while (data->buffer)
+// 	{
+		
+// 		if (data->buffer[0] != '\0')
+// 			add_history(data->buffer);
+// 		nbpipe = ft_parsing_prompt(data, data->buffer);
+// 		if (nbpipe != 0)
+// 		{
+// 			//dbg_display_cmdtab(data->cmdtab);
+// 			ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
+// 			ft_free_cmdtab_lst(nbpipe, data->cmdtab);
+// 		}
+// 		free(data->line);
+// 		data->line = prompt_update(data->env, data->pgr_name);
+// 		free(data->buffer);
+// 		signal_recept_not_blocking_cmd();
+// 		signal_recept_blocking_cmd();
+// 		data->buffer = readline(data->line);			
+// 	}
+// 	free(data->line); //verifier si pas de malloc already freed
+// 	free(data->buffer);
+// 	rl_replace_line("exit", 0);
+// 	rl_on_new_line();
+// 	rl_redisplay();
+// }
+
+int	ft_prompting(char **av, t_data *data)
+{
+	signal_recept_not_blocking_cmd();
+	// asking_input();
+	data->line = prompt_update(data->env, data->pgr_name);
+	data->buffer = readline(data->line);
+	signal_recept_blocking_cmd();
+	if (data->buffer)
+		return (1);
+	else 
+		return (0);
+	
+}
+
 void	prompt_minishell(char **av, t_data *data)
 {
 	int		nbpipe;
 	
 	data->buffer = NULL;
-	data->line = prompt_update(data->env, data->pgr_name);
-	data->buffer = readline(data->line);
-	while (data->buffer)
+	data->line = NULL;
+	while (ft_prompting(av, data))
 	{
 		if (data->buffer[0] != '\0')
 			add_history(data->buffer);
 		nbpipe = ft_parsing_prompt(data, data->buffer);
 		if (nbpipe != 0)
 		{
-			//dbg_display_cmdtab(data->cmdtab);
 			ft_run_execve(data->cmdtab, data);//TODO: ft execv et lst to argv for execved
 			ft_free_cmdtab_lst(nbpipe, data->cmdtab);
 		}
-		free(data->line);
-		data->line = prompt_update(data->env, data->pgr_name);
 		free(data->buffer);
-		data->buffer = readline(data->line);			
+		free(data->line);
 	}
 	free(data->line); //verifier si pas de malloc already freed
 	free(data->buffer);
@@ -77,6 +120,7 @@ void	prompt_minishell(char **av, t_data *data)
 	rl_on_new_line();
 	rl_redisplay();
 }
+
 
 // /**
 //  * @brief prompt coder en dur pour tests execs

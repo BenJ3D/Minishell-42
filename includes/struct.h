@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 21:47:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:31:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_data
 	char		*heredocpath;
 	int			type_of_the_last_cmd;
 	struct stat	statbuf;
+	int			currentshlvl;
 }				t_data;
 
 #endif
