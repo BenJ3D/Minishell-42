@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:47:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,18 @@ void	signal_handler_not_blocking_cmd(int signum)
 */
 void	signal_handler_blocking_cmd(int signum)
 {
-	if (signum == SIGQUIT)
-	{
+	if (signum == SIGQUIT && isatty(1))
 		ft_putstr("Quit: 3\n");
-		g_status = 131;
-		errno = 131;
-	}
 	else if (signum == SIGINT)
-	{
 		ft_putstr("\n");
-		g_status = 130;
-		errno = 130;
-	}
 }
 
-/*
-    Execution of signal() function allows reception of specific \
-	signals (first param) at any time during the running \
-	of the loop it is placed in.
 
-	When a signal is received, the function handler \
-	(second param) is executed.
-
-	Signal reception after empty or non empty prompt \
-	but not after a blocking command was executed:
-		ctrl + c (SIGINT)
-		ctrl + \ (SIGQUIT)
-*/
+/**
+ * @brief ctrl + c (SIGINT)
+ *		ctrl + \ (SIGQUIT)
+ * 
+ */
 void	signal_recept_not_blocking_cmd(void)
 {
 	signal(SIGINT, signal_handler_not_blocking_cmd);
@@ -64,7 +49,7 @@ void	signal_recept_not_blocking_cmd(void)
 }
 
 /*
-	Signal reception after a blocking command was executed:
+	Signal reception after a blocking command :
 		ctrl + c (SIGINT)
 		ctrl + \ (SIGQUIT)
 */
@@ -72,4 +57,22 @@ void	signal_recept_blocking_cmd(void)
 {
 	signal(SIGINT, signal_handler_blocking_cmd);
 	signal(SIGQUIT, signal_handler_blocking_cmd);
+}
+
+void	signal_handler_ignore(int signum)
+{
+	if (signum == SIGQUIT)
+	{
+
+	}
+	else if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+	}
+}
+
+void	signal_ignore(void)
+{
+	signal(SIGINT, &signal_handler_ignore);
+	signal(SIGQUIT, SIG_IGN);
 }

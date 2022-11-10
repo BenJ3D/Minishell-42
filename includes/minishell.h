@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 14:34:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:00:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "struct.h"
 
 int	g_status;
+int	g_shlvl;
 
 /* FT TEST */
 int			test_execve_ls_fork(char **av);
@@ -202,7 +203,7 @@ void		ft_signal_exec_mode(void);
 
 void		signal_recept_not_blocking_cmd(void);
 void		signal_recept_blocking_cmd(void);
-
+void		signal_ignore(void);
 
 /* FT SINAUX */
 int			ft_stty_control(int b, t_data *data);
