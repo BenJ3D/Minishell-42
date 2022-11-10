@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 18:47:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:37:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	signal_handler_blocking_cmd(int signum)
 		ft_putstr("\n");
 }
 
-
 /**
  * @brief ctrl + c (SIGINT)
  *		ctrl + \ (SIGQUIT)
@@ -57,22 +56,4 @@ void	signal_recept_blocking_cmd(void)
 {
 	signal(SIGINT, signal_handler_blocking_cmd);
 	signal(SIGQUIT, signal_handler_blocking_cmd);
-}
-
-void	signal_handler_ignore(int signum)
-{
-	if (signum == SIGQUIT)
-	{
-
-	}
-	else if (signum == SIGINT)
-	{
-		ft_putchar('\n');
-	}
-}
-
-void	signal_ignore(void)
-{
-	signal(SIGINT, &signal_handler_ignore);
-	signal(SIGQUIT, SIG_IGN);
 }
