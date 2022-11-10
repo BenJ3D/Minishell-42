@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 15:31:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:27:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ typedef struct s_data
 	int			d_quotes_switch;
 	int			scroller;
 	int			first_cmd;
+	int			first_arg;
 	int			quotes_in_parsing;
+	int			len_max;
 	int 		ret;					//test pour heredocs
 	char		*heredocpath;
 	int			type_of_the_last_cmd;

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 17:00:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:25:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,73 @@ int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
 void		ft_reset_quotes_checker(t_data	*data);
 int			ft_node_quote_checker(t_data	*data);
 int			ft_total_parsing(t_data	*data, char	*buffer);
-
+t_list		*ft_split_buffercmd_in_lst(char *buffer, int bufi);
+t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe);
+int			ft_define_cmd_type(t_list *lst, t_data	*data);
+t_list		*ft_cft_prime(t_data	*data, t_list	*tmp);
+t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
-char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, int is_empty);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, int is_empty);
-char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
+	int is_empty);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
+	int is_empty);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
-int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 void		error_management(t_data	*data);
-int			ft_redirection_files_check(t_data *data, char *buffer);
 int			ft_pipes_spaces_check(t_data *data, char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
-
 /*PARSING_OTHERS*/
-int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
-char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
-char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
-char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
+int			ft_pa_others(t_data	*data, char	*buffer);
+char		*ft_pa_others_normal(t_data	*data, char	*buffer, int len);
+char		*ft_pa_others_normal_env(t_data	*data, char	*buffer, \
+	char	*semi_final);
+char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, \
+	char	*semi_final, int len);
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
 void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
-
+int			ft_pa_others_len(t_data	*data, char	*buffer);
+char		*ft_pa_others_existing_quotes(t_data	*data, char	*buffer, \
+	char	*semi_final);
+void		ft_parsing_others_setings(t_data *data, char *buffer, int choice);
 /*PARSING_QUOTES*/
-char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
+char		*ft_quotes(t_data	*data, char	*buffer);
 char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
-char		*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final);
-char		*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final);
+char		*ft_dq_specials(t_data	*data, char	*buffer, char	*semi_final, \
+	char	*final);
+char		*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, \
+	char	*final);
+char		*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
+	int len);
+char		*ft_pa_fill_value(t_data	*data, char	*buffer, int len);
+char		*ft_pq_dq_env_final(char	*semi_final, char	*value_env);
+char		*ft_pa_dq_env_bis(t_data	*data, char	*value_env);
+char		*ft_padq_env_digits(t_data	*data, char	*semi_final, \
+	char	*buffer);
+char		*ft_padq_env_code_error(t_data	*data, char	*semi_final);
+/*PARSING_UTILS*/
+int			ft_redirection_files_check(t_data *data, char *buffer);
+char		*ft_strjoin_parsing(char	*s1, char *s2);
+int			ft_define_cmd_type_during_parsing(t_list *lst, t_data *data);
+int			ft_strlen_next_word_quotes(t_data	*data, char *str);
+int			ft_strlen_next_word(char *str);
+int			ft_strlen_parsing(char	*str);
+/*PARSING_SPECIALS*/
+int			ft_redirection_files_check(t_data	*data, char	*buffer);
+/*PARSING_ENV*/
+char		*ft_parsing_env_variable(t_data	*data, char	*buffer);
+char		*ft_pa_env_regular_prime(t_data	*data, char	*buffer, int len, \
+	int pin);
+char		*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, \
+	int pin);
+char		*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, \
+	int pin);
+char		*ft_pa_env_regular_bis(t_data	*data, char	*buffer, char	\
+	*value_env, int len);
+void		ft_pa_env_set(t_data	*data);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);

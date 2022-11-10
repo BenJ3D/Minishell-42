@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_double_quotes_env.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:15:31 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:54:21 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:34:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_padq_env_code_error(t_data	*data, char	*semi_final)
 	char	*value_env;
 
 	if (semi_final == NULL)
-		semi_final = ft_itoa(g_status & 255);
+		semi_final = ft_itoa(g_status % 255);
 	else
 	{
-		value_env = ft_itoa(g_status & 255);
+		value_env = ft_itoa(g_status % 255);
 		semi_final = ft_strjoin_parsing(semi_final, value_env);
 		printf("'%s', value_env\n", __func__);
 		free(value_env);

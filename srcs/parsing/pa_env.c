@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:58:53 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:54:45 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:34:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, int pin)
 
 	if (buffer[pin] == '?')
 	{
-		value_env = ft_itoa(g_status & 255);
+		value_env = ft_itoa(g_status % 255);
 		if (!value_env)
 			return (NULL);
 	}
@@ -95,7 +95,7 @@ char	*ft_pa_env_regular_prime(t_data	*data, char	*buffer, int len, int pin)
 	else if (buffer[pin] == '?')
 	{
 		data->scroller++;
-		value_env = ft_itoa(g_status & 255);
+		value_env = ft_itoa(g_status % 255);
 		if (!value_env)
 			return (NULL);
 	}
