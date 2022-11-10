@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/07 15:12:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:55:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static int	ft_builtin_cd_change_pwdenv(t_envlst *env, \
 													char *newpwd, char *oldpwd)
 {
-	ft_builtin_export_api(env, "PWD", newpwd);
-	ft_builtin_export_api(env, "OLDPWD", oldpwd);
+	if (newpwd)
+		ft_builtin_export_api(env, "PWD", newpwd);
+	if (oldpwd)
+		ft_builtin_export_api(env, "OLDPWD", oldpwd);
 	return (0);
 }
 
