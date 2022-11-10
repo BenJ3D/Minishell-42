@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 19:53:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:34:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
 
 /*PARSING_OTHERS*/
- int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
+int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
 char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
 char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
@@ -195,8 +195,14 @@ void		dbg_display_argv_choose_sep(char **argv, char *sep);
 int			ft_redi_in1v2(int fd);
 
 /* FT SINAUX */
-void		handler_interative(int signum);
-void		interactive_mode(void);
+void		ft_signal_interactive_mode(void);
+void		ft_signal_ignore(void);
+void		ft_signal_exec_child_process(void);
+void		ft_signal_exec_mode(void);
+
+void		signal_recept_not_blocking_cmd(void);
+void		signal_recept_blocking_cmd(void);
+
 
 /* FT SINAUX */
 int			ft_stty_control(int b, t_data *data);

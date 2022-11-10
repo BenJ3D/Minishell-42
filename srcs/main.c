@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 19:52:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:20:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av, char **envp)
 
 	ft_issaty_control();
 	ft_stty_control(0, &data);
-	interactive_mode ();
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
 	prompt_minishell(av, &data);// supprimer av
