@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 20:25:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:25:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			ft_total_parsing(t_data	*data, char	*buffer);
 t_list		*ft_split_buffercmd_in_lst(char *buffer, int bufi);
 t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe);
 int			ft_define_cmd_type(t_list *lst, t_data	*data);
-t_list		*ft_cft_prime(t_data	*data, t_list	*tmp);
+t_list		*ft_cft_prime(t_list *tmp);
 t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
 int			ft_strlen_parsing(char	*str);
@@ -102,33 +102,28 @@ char		*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, \
 	int pin);
 char		*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, \
 	int pin);
-char		*ft_pa_env_regular_bis(t_data	*data, char	*buffer, char	\
-	*value_env, int len);
+char		*ft_pa_env_regular_bis(t_data	*data, char *value_env);
 void		ft_pa_env_set(t_data	*data);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
-int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_command_not_found_message(char **argv, t_data *data);
-int			ft_check_is_builtin(t_data *data, char **argv,
-				t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_check_is_builtin(char **argv, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_exec_is_builtin(t_data *data, char **argv,
 				t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
+int			ft_heredoc_init(t_cmdtab *cmdtab);
 char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
-int			ft_check_is_builtin(t_data *data, char **argv, \
-											t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_exec_is_builtin(t_data *data, char **argv, \
 											t_cmdtab *cmdtab, t_execarg *ex);
 pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
-int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
-int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
-int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
+int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_parent_waitpid(t_cmdtab *cmdtab);
 int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
 int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
 void		ft_exit_exit(t_data *data);

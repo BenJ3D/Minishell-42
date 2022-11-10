@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   define_cmdtypes_cmp.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:22:01 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 18:29:23 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:23:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-t_list	*ft_cft_prime(t_data	*data, t_list	*tmp)
+t_list	*ft_cft_prime(t_list	*tmp)
 {
 	if (tmp->str[1] == '>')
 		tmp->type = OUT2;
@@ -26,7 +26,7 @@ t_list	*ft_cft_prime(t_data	*data, t_list	*tmp)
 t_list	*ft_cmd_first_type(t_data	*data, t_list	*tmp)
 {
 	if (tmp->str[0] == '>' && tmp->heavy == 0)
-		tmp = ft_cft_prime(data, tmp);
+		tmp = ft_cft_prime(tmp);
 	else if (tmp->str[0] == '<' && tmp->heavy == 0)
 	{
 		if (tmp->str[1] == '<')
