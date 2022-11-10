@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 21:55:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:13:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static int	ft_builtin_cd_moins(t_envlst *env, char **argv, \
 	return ((g_status = 1));
 }
 
-static int	ft_builtin_cd_err(t_envlst *env, char **argv, \
-								char *currentpwd, t_data *data)
+static int	ft_builtin_cd_err(char **argv, t_data *data)
 {
 	char	*errline;
 
@@ -106,7 +105,7 @@ int	ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret)
 	else if (argv[1][0] == '-' && argv[1][1] == '\0')
 		ret = ft_builtin_cd_moins(env, argv, currentpwd, data);
 	else if (chdir(argv[1]))
-		ret = ft_builtin_cd_err(env, argv, currentpwd, data);
+		ret = ft_builtin_cd_err(argv, data);
 	else if (ret == 0 && currentpwd[0] != '\0')
 	{
 		futurpwd = getcwd(NULL, PATH_MAX);

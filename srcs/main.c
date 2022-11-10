@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 17:03:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:00:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_get_current_shlvl(t_envlst *env)
 {
 	char	*shlvl;
 	int		ret;
-	
+
 	shlvl = ft_env_getstr_env_value(env, "SHLVL");
 	if (shlvl != NULL)
 		ret = ft_atoi(shlvl);
@@ -42,12 +42,13 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
+	ac = 0;
 	ft_issaty_control();
-	ft_stty_control(0, &data);
+	ft_stty_control(0);
 	ft_init_minishell(&data);
 	ft_env_init_lst(envp, &data);
 	data.currentshlvl = ft_get_current_shlvl(data.env);
-	prompt_minishell(av, &data);// supprimer av
+	prompt_minishell(&data);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	ft_exit_normal(&data, av);
 	return (0);

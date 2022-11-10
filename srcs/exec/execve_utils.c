@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 19:43:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:17:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
  * 
  * @return int return 0 if not built-in; else return 1 to 7 builtin type
  */
-int	ft_check_is_builtin(t_data *data, char **argv, \
-												t_cmdtab *cmdtab, t_execarg *ex)
+int	ft_check_is_builtin( char **argv, t_cmdtab *cmdtab, t_execarg *ex)
 {	
 	if (*argv == NULL)
 		return (-1);

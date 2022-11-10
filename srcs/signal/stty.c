@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 20:11:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:59:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param b  0 pour masquer / 1 ou != 0 pour restaurer
  * @return int 
  */
-int	ft_stty_control(int b, t_data *data)
+int	ft_stty_control(int b)
 {
 	pid_t	father;
 

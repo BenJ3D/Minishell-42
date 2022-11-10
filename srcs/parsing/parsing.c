@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 12:29:35 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:55:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 {
 	t_list		*tmp;
 	t_cmdtab	*cmdtab;
-	char		*str;
 	int			i;
 
 	tmp = lst;
@@ -98,5 +97,3 @@ t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe)
 	}
 	return (cmdtab);
 }
-
-// 							ls -all | grep @ | ls

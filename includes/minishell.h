@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 20:25:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:23:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@
 # include "struct.h"
 
 int	g_status;
-int	g_shlvl;
-
-/* FT TEST */
-int			test_execve_ls_fork(char **av);
-void		prompt_basic_test(char **av, t_data *data);
-int			env_test_read(char **env, const char *key);
 
 /* FT MINISHELL */
-void		prompt_minishell(char **av, t_data *data);
+void		prompt_minishell(t_data *data);
 
 /* FT PARSING */
 int			ft_parsing_prompt(t_data *data, char *buffer);
@@ -41,17 +35,15 @@ int			ft_total_parsing(t_data	*data, char	*buffer);
 t_list		*ft_split_buffercmd_in_lst(char *buffer, int bufi);
 t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe);
 int			ft_define_cmd_type(t_list *lst, t_data	*data);
-t_list		*ft_cft_prime(t_data	*data, t_list	*tmp);
+t_list		*ft_cft_prime(t_list *tmp);
 t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
-int			ft_strlen_parsing(char	*str);
 t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
-	int is_empty);
+																int is_empty);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
-	int is_empty);
-char		*ft_parsing_env_variable(t_data	*data, char *buffer);
+																int is_empty);
 void		error_management(t_data	*data);
-int			ft_pipes_spaces_check(t_data *data, char *buffer);
+int			ft_pipes_spaces_check(char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
@@ -86,14 +78,13 @@ char		*ft_padq_env_digits(t_data	*data, char	*semi_final, \
 	char	*buffer);
 char		*ft_padq_env_code_error(t_data	*data, char	*semi_final);
 /*PARSING_UTILS*/
-int			ft_redirection_files_check(t_data *data, char *buffer);
 char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_define_cmd_type_during_parsing(t_list *lst, t_data *data);
-int			ft_strlen_next_word_quotes(t_data	*data, char *str);
+int			ft_strlen_next_word_quotes(char *str);
 int			ft_strlen_next_word(char *str);
 int			ft_strlen_parsing(char	*str);
 /*PARSING_SPECIALS*/
-int			ft_redirection_files_check(t_data	*data, char	*buffer);
+int			ft_redirection_files_check(char *buffer);
 /*PARSING_ENV*/
 char		*ft_parsing_env_variable(t_data	*data, char	*buffer);
 char		*ft_pa_env_regular_prime(t_data	*data, char	*buffer, int len, \
@@ -102,33 +93,26 @@ char		*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, \
 	int pin);
 char		*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, \
 	int pin);
-char		*ft_pa_env_regular_bis(t_data	*data, char	*buffer, char	\
-	*value_env, int len);
+char		*ft_pa_env_regular_bis(t_data	*data, char *value_env);
 void		ft_pa_env_set(t_data	*data);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
-int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
+int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_command_not_found_message(char **argv, t_data *data);
-int			ft_check_is_builtin(t_data *data, char **argv,
-				t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_check_is_builtin(char **argv, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_exec_is_builtin(t_data *data, char **argv,
 				t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_redirection(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_heredoc_init(t_cmdtab *cmdtab, t_data *data);
+int			ft_heredoc_init(t_cmdtab *cmdtab);
 char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
-int			ft_check_is_builtin(t_data *data, char **argv, \
-											t_cmdtab *cmdtab, t_execarg *ex);
-int			ft_exec_is_builtin(t_data *data, char **argv, \
-											t_cmdtab *cmdtab, t_execarg *ex);
 pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
-int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
-int			ft_run_execve2_norm(t_cmdtab *cmdtab, t_execarg *ex, t_data *data);
-int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
+int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex);
+int			ft_parent_waitpid(t_cmdtab *cmdtab);
 int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
 int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
 void		ft_exit_exit(t_data *data);
@@ -166,6 +150,7 @@ int			ft_check_redi_if_has_no_cmd(t_cmdtab *cmdtab,
 /* FT BUILTIN */
 void		ft_builtin_env(t_envlst *envlst);
 int			ft_builtin_export(t_envlst *env, char **cmd, t_data	*data);
+int			ft_builtin_export_api(t_envlst *env, char *key, char *value);
 int			ft_builtin_unset(t_data *data, char **cmd);
 int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret);
 int			ft_builtin_pwd(t_data *data);
@@ -173,17 +158,15 @@ int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
 void		ft_exit_normal(t_data *data, char **argv);
 int			ft_check_if_exportkey_is_valid(char *key);
-int			ft_builtin_export_api(t_envlst *env, char *key, char *value);
 
 /* FT ENV */
 char		**ft_env_init(char **envp);
 char		*ft_env_getstr_env_value(t_envlst *env, const char *key);
 int			ft_env_check_if_key_is_valid(t_envlst *env, char *key);
 t_envlst	*ft_env_getenv_lst_value(t_envlst *env, char *key);
-// int			ft_env_check_if_key_exist(t_envlst *env, char *key); //doublon?
 char		**ft_env_convert_envlst_to_tab(t_envlst *env);
-char		*ft_env_extract_key_name(char *str, int *isenv);
 char		*ft_env_extract_key(char *str);
+char		*ft_env_extract_key_name(char *str, int *isenv);
 char		*ft_env_extract_value_content(char *str);
 int			ft_shlvl_increment(t_envlst *env);
 
@@ -228,21 +211,11 @@ void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
 void		dbg_display_argv_choose_sep(char **argv, char *sep);
 
-/* FT DEBUG BEN A VIRER */
-int			ft_redi_in1v2(int fd);
-
-/* FT SINAUX */
-void		ft_signal_interactive_mode(void);
-void		ft_signal_ignore(void);
-void		ft_signal_exec_child_process(void);
-void		ft_signal_exec_mode(void);
-
 void		signal_recept_not_blocking_cmd(void);
 void		signal_recept_blocking_cmd(void);
-void		signal_ignore(void);
 
 /* FT SINAUX */
-int			ft_stty_control(int b, t_data *data);
+int			ft_stty_control(int b);
 int			ft_issaty_control(void);
 
 // avoid compilation crash

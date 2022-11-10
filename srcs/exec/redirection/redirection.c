@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 15:21:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:22:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex)
 {
 	int	ret;
 
+	ret = 0;
 	if (cmdtab[ex->i].reditype == OUT1)
 		ret = ft_redi_out1(cmdtab, ex, data);
 	else if (cmdtab[ex->i].reditype == OUT2)

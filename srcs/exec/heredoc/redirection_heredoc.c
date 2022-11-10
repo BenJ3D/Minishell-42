@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 19:59:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:20:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_heredoc_openfd(t_cmdtab *cmdtab, int i)
 	return (0);
 }
 
-int	ft_heredoc_init(t_cmdtab *cmdtab, t_data *data)
+int	ft_heredoc_init(t_cmdtab *cmdtab)
 {
 	int		i;
 	t_list	*tmp;

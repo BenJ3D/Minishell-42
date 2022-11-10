@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:58:53 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 20:34:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:48:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	ft_pa_env_set(t_data	*data)
 		data->scroller++;
 }
 
-char	*ft_pa_env_regular_bis(t_data	*data, char	*buffer, char	\
-	*value_env, int len)
+char	*ft_pa_env_regular_bis(t_data	*data, char	*value_env)
 {
 	char	*tmp;
 
@@ -43,7 +42,6 @@ char	*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
 	int		pan;
-	char	*tmp;
 
 	value_env = ft_calloc(sizeof(char), len + 1);
 	if (!value_env)
@@ -55,15 +53,13 @@ char	*ft_pa_env_regular_len(t_data	*data, char	*buffer, int len, int pin)
 	if (data->cmdtoparse && data->cmdtoparse->str[1] == '<')
 		pan = 0;
 	else
-		value_env = ft_pa_env_regular_bis(data, buffer, value_env, len);
+		value_env = ft_pa_env_regular_bis(data, value_env);
 	return (value_env);
 }
 
 char	*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
-	int		pan;
-	char	*tmp;
 
 	if (buffer[pin] == '?')
 	{
@@ -86,8 +82,6 @@ char	*ft_pa_env_positive_len(t_data	*data, char	*buffer, int len, int pin)
 char	*ft_pa_env_regular_prime(t_data	*data, char	*buffer, int len, int pin)
 {
 	char	*value_env;
-	char	*tmp;
-	int		pan;
 
 	value_env = NULL;
 	if (len != 0)

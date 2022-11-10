@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_len.c                                :+:      :+:    :+:   */
+/*   pa_utils_len.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:03:51 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/09 17:05:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:54:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen_next_word(char *str)
 	return (i);
 }
 
-int	ft_strlen_next_word_quotes(t_data	*data, char *str)
+int	ft_strlen_next_word_quotes(char *str)
 {
 	int		i;
 
