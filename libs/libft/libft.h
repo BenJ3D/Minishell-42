@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:59:56 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/10/28 21:53:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:26:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_isspace(char c);
 int			ft_atoi(const char *src);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *s1);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char *s1, char const *s2);
 char		*ft_strcharjoin(char *s1, char c);
 char		*ft_strjoin_max(const char *str, ...);
 char		*ft_concat_str(char *src, char *str);
