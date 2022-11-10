@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 01:11:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:46:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,19 @@ int	ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data)
 	int	i;
 
 	i = 0;
+
 	while (cmdtab[i].lst)
 	{
 		if (cmdtab[i].pipeout == 1)
 			close(cmdtab[i].fd[0]);
 		waitpid(cmdtab[i].pid, &g_status, 0);
+		if (WIFSIGNALED(g_status))
+		{
+			if (g_status == 2)
+				g_status = 130;
+			else
+				g_status = 131;
+		}
 		i++;
 	}
 	return (0);

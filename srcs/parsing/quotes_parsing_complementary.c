@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes_parsing_complementary.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/09 16:06:47 by hmarconn          #+#    #+#             */
+/*   Updated: 2022/11/09 16:07:21 by hmarconn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./../includes/minishell.h"
+
+char	*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final)
+{
+	if (buffer[data->scroller] == '$')
+		final = ft_dq_get_env(data, buffer, semi_final, final);
+	else if (final != NULL)
+		final = ft_strjoin(final, semi_final);
+	else
+	{
+		if (semi_final != NULL)
+			final = ft_strdup(semi_final);
+	}
+	free(semi_final);
+	return (final);
+}

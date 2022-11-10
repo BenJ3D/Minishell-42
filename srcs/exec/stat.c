@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/05 17:20:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:39:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ char	*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex)
 	{
 		if (tmp->type == 0)
 		{
-			cmd = tmp->str;
+			if (tmp->is_empty == 1)
+				cmd = ft_strdup("");
+			else
+				cmd = tmp->str;
 			return (cmd);
 		}
 		tmp = tmp->next;
@@ -55,6 +58,8 @@ int	ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex, t_data *data, char *str)
 	cmd = ft_cmdtab_cmdstr_if_has_cmd(cmdtab, ex);
 	if (cmd == NULL)
 		return (STAT_NONE);
+	if (*cmd == '\0')
+		return (STAT_ISEMPTY);
 	if (str == NULL)
 		stat(cmd, &data->statbuf);
 	else
@@ -81,9 +86,18 @@ void	ft_stat_error_is_dir(t_data *data, t_cmdtab *cmdtab, \
 	cmdtab[ex->i].pid = fork();
 	if (cmdtab[ex->i].pid == 0)
 	{
-		line = ft_strjoin_max("%s%s: %s%s: %sIs a directory%s\n", \
-								COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
-												cmd, COLOR_RED, COLOR_NONE);
+		if (cmd[0] == '.' && cmd[1] == '\0')
+			line = ft_strjoin_max("%s%s: %s%s: \
+%sfilename argument required%s\n", COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+													cmd, COLOR_RED, COLOR_NONE);
+		else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '\0')
+				line = ft_strjoin_max("%s%s: %s%s: %scommand not found%s\n", \
+				COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+				cmd, COLOR_RED, COLOR_NONE);
+		else
+			line = ft_strjoin_max("%s%s: %s%s: %sis a directory%s\n", \
+									COLOR_CYAN, data->pgr_name, COLOR_PURPLE, \
+													cmd, COLOR_RED, COLOR_NONE);
 		ft_putstr_fd(line, STDERR_FILENO);
 		free(line);
 		free(cmd);

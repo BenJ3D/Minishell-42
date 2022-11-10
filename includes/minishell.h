@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/07 15:35:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:00:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "struct.h"
 
 int	g_status;
+int	g_shlvl;
 
 /* FT TEST */
 int			test_execve_ls_fork(char **av);
@@ -37,11 +38,12 @@ int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
 void		ft_reset_quotes_checker(t_data	*data);
 int			ft_node_quote_checker(t_data	*data);
 int			ft_total_parsing(t_data	*data, char	*buffer);
+
 /*PARSING TESTS*/
 char		*ft_strjoin_parsing(char	*s1, char *s2);
 int			ft_strlen_parsing(char	*str);
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy);
+t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, int is_empty);
+t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, int is_empty);
 char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
 char		*ft_parsing_env_variable(t_data	*data, char *buffer);
 int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
@@ -50,9 +52,23 @@ int			ft_redirection_files_check(t_data *data, char *buffer);
 int			ft_pipes_spaces_check(t_data *data, char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
-char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
+
+/*PARSING_OTHERS*/
+int			ft_parsing_others(t_data	*data, char	*buffer, int len_max);
+char		*ft_parsing_others_normal(t_data	*data, char	*buffer, int len, int pin);
+char		*ft_parsing_others_normal_env(t_data	*data, char	*buffer, char	*semi_final);
+char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, char	*semi_final, int pin, int len);
+void		ft_parsing_others_final(t_data	*data, char	*final);
+char		*ft_parsing_make_final(char	*semi_final, char	*final);
+void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
+
+/*PARSING_QUOTES*/
+char		*ft_quotes(t_data	*data, char	*buffer, int len_max);
+char		*ft_double_quotes_env(t_data *data, char *buffer, char *semi_final);
+char		*ft_dq_spacials(t_data	*data, char	*buffer, char	*semi_final, char	*final);
+char		*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, char	*final);
 
 /* FT EXECVE */
 int			ft_run_execve(t_cmdtab *cmdtab, t_data *data);
@@ -80,6 +96,7 @@ int			ft_parent_waitpid(t_cmdtab *cmdtab, t_data *data);
 int			ft_cmdtab_has_cmd(t_cmdtab *cmdtab, int i);
 int			ft_run_execve_init_patchcmd(t_cmdtab *cmdtab);
 void		ft_exit_exit(t_data *data);
+
 /* FT EXECVE  STAT*/
 int			ft_stat_check(t_cmdtab *cmdtab, t_execarg *ex,
 				t_data *data, char *str);
@@ -97,6 +114,7 @@ int			ft_close_pipe(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_check_if_cmd_has_pipe(t_list *lst);
 int			ft_check_if_cmd_has_redirection(t_list *lst);
 int			ft_check_if_cmd_has_a_backslash(char *str);
+
 /* FT REDIRECTIONS*/
 int			ft_heredoc_create(char *token, int fd);
 int			ft_dupredi(t_data *data, t_cmdtab *cmdtab, t_execarg *ex);
@@ -117,6 +135,7 @@ int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret);
 int			ft_builtin_pwd(t_data *data);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
+void		ft_exit_normal(t_data *data, char **argv);
 int			ft_check_if_exportkey_is_valid(char *key);
 int			ft_builtin_export_api(t_envlst *env, char *key, char *value);
 
@@ -177,8 +196,14 @@ void		dbg_display_argv_choose_sep(char **argv, char *sep);
 int			ft_redi_in1v2(int fd);
 
 /* FT SINAUX */
-void		handler_interative(int signum);
-void		interactive_mode(void);
+void		ft_signal_interactive_mode(void);
+void		ft_signal_ignore(void);
+void		ft_signal_exec_child_process(void);
+void		ft_signal_exec_mode(void);
+
+void		signal_recept_not_blocking_cmd(void);
+void		signal_recept_blocking_cmd(void);
+void		signal_ignore(void);
 
 /* FT SINAUX */
 int			ft_stty_control(int b, t_data *data);

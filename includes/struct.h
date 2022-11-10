@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/06 20:06:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:31:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_list
 {
 	int				type;
 	int				heavy;
+	int				is_empty;
 	char			*str;
 	struct s_list	*next;
 }					t_list;
@@ -43,7 +44,8 @@ enum e_stat
 {
 	STAT_NONE,
 	STAT_ISFILE,
-	STAT_ISDIR
+	STAT_ISDIR,
+	STAT_ISEMPTY
 };
 
 enum e_prtype
@@ -64,6 +66,7 @@ typedef struct s_execarg
 typedef struct s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
 {									//exemple si buffer = ls -all | cat -e
 	int		isbuilt;				//si isbuilt > 0 : c'est une builtin
+	int		isempty;				//gerer le cas cmd == '\0'
 	int		pipein;
 	int		pipeout;
 	int		reditype;
@@ -104,6 +107,7 @@ typedef struct s_data
 	char		*heredocpath;
 	int			type_of_the_last_cmd;
 	struct stat	statbuf;
+	int			currentshlvl;
 }				t_data;
 
 #endif

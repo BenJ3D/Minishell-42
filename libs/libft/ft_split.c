@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 21:00:06 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/09/20 18:02:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:06:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static int	is_sep(char const c, char sp)
 	return (0);
 }
 
-static char	**free_all(char **s_splited)
+static char	**free_all(char **splited)
 {
 	int	i;
 
 	i = 0;
-	while (s_splited[i] == NULL)
+	while (splited[i] == NULL)
 	{
-		free(s_splited[i]);
+		free(splited[i]);
 		i++;
 	}
-	free(s_splited);
+	free(splited);
 	return (NULL);
 }
 
