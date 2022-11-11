@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:22:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 15:23:05 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:47:55 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*ft_parsing_make_final(char	*semi_final, char	*final)
 		if (semi_final != NULL)
 		{
 			final = ft_strdup(semi_final);
-			printf("'%s', semi_final\n", __func__);
 			free(semi_final);
 			semi_final = NULL;
 		}
@@ -56,7 +55,6 @@ char	*ft_parsing_make_final(char	*semi_final, char	*final)
 		if (semi_final != NULL)
 		{
 			final = ft_strjoin_parsing(final, semi_final);
-			printf("'%s', semi_final\n", __func__);
 			free(semi_final);
 			semi_final = NULL;
 		}
@@ -98,7 +96,6 @@ void	ft_parsing_others_final(t_data	*data, char	*final)
 		ft_buffercmd_in_lst_quotes(final, data, 1, 0);
 	else
 		ft_buffercmd_in_lst(final, data, 0, 0);
-	printf("'%s', final\n", __func__);
 	free(final);
 	final = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:19:00 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:48:19 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ char	*ft_dq_get_env(t_data	*data, char	*buffer, char	*semi_final, \
 	if (final == NULL)
 	{
 		final = ft_double_quotes_env(data, buffer, semi_final);
-		printf("'%s', semi_final\n", __func__);
-		//free(semi_final);
 		semi_final = NULL;
 	}
 	else
 	{
 		trollo = ft_double_quotes_env(data, buffer, semi_final);
 		final = ft_strjoin_parsing(final, trollo);
-		printf("'%s', trollo\n", __func__);
 		free(trollo);
 		trollo = NULL;
 	}

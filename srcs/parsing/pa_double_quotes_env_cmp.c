@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 14:18:31 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:47:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int		pan;
 
 	pan = 0;
-	printf("%d, buffer: %s, scroller: %d\n", data->type_of_the_last_cmd, semi_final, data->scroller);
 	if (data->type_of_the_last_cmd == 4)
 	{
 		value_env = ft_pa_fill_value_special(data, buffer, len);
@@ -47,11 +46,9 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	else
 	{
 		value_env = ft_pa_fill_value(data, buffer, len);
-		printf("ici\n");
 		value_env = ft_pa_dq_env_bis(data, value_env);
 		if (!value_env)
 		{
-			printf("'%s', value_env\n", __func__);
 			free(value_env);
 			value_env = NULL;
 			return (semi_final);

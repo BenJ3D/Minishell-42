@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:33:25 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 10:37:08 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:48:50 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	check = ft_total_parsing(data, buffer);
 	if (check != 1)
 	{
-		printf("Test\n");
 		if (check == 0)
 			ft_err_display_line_error(data, "syntax error", " ");
 		free_the_birds(data);

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:56:29 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 15:20:12 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:48:00 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*ft_strjoin_parsing(char	*s1, char *s2)
 	while (s2 && s2[a] != '\0')
 			s3[b++] = s2[a++];
 	s3[b] = '\0';
-	printf("'%s', s1\n", __func__);
 	if (s1[0] != '\0')
 		free(s1);
 	return (s3);

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:06:47 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:18:41 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:48:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_dq_specials(t_data	*data, char	*buffer, char	*semi_final, \
 			free(semi_final);
 		}
 	}
-	printf("'%s' semi_final\n", __func__);
 	semi_final = NULL;
 	return (final);
 }
