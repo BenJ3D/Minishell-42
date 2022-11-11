@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 17:52:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:05:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ static void	ft_print_export(t_envlst *env)
 	char		**tab;
 	int			i;
 
+	if (!env)
+		return ;
 	tab = ft_env_return_envlst_sorted_in_tab(env, 0);
+	if (!tab)
+		return ;
 	i = 0;
 	while (tab[i])
 	{

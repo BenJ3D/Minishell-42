@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 21:44:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:49:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strcharjoin(char *s1, char c)
 	j = 0;
 	if (!s1)
 		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 2));
+	str = ft_calloc(sizeof(char *), (ft_strlen(s1) + 2));
 	if (!str)
 	{
 		free(s1);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 22:55:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:10:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,6 @@ int	ft_count_pipe(t_data	*data, char *buffer)
 	if (len == 0)
 		len++;
 	return (len);
-}
-
-/**
- * @brief split tout le buffer en plusieurs cmd dans une liste chainé
- * 
- * @param lst 
- * @param buffer 
- * @return int 
- */
-t_list	*ft_split_buffercmd_in_lst(char *buffer, int bufi)
-{
-	int		i;
-	int		len;
-	char	*str;
-	t_list	*cmd;
-
-	cmd = NULL;
-	while (buffer[bufi])
-	{
-		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
-			bufi = bufi + 1;
-		if (buffer[bufi] == '\0')
-			return (cmd);
-		len = ft_strlen_next_word(buffer + bufi);
-		str = ft_calloc(len + 1, sizeof(char));
-		if (!str)
-			return (NULL);
-		i = 0;
-		while (len-- > 0)
-			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&cmd, ft_lstnew(str));
-		free(str);
-	}
-	return (cmd);
 }
 
 /**

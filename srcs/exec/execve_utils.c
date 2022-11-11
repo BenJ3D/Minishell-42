@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 22:17:05 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:16:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 		ft_builtin_pwd(data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_UNSET)
 		ft_builtin_unset(data, argv);
+	free(cmdtab[ex->i].rediarg);
+	cmdtab[ex->i].rediarg = NULL;
 	return (0);
 }
 

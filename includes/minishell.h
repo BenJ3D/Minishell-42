@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 23:23:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:12:37 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			ft_full_prompt_quote_check(t_data	*data, char	*buffer);
 void		ft_reset_quotes_checker(t_data	*data);
 int			ft_node_quote_checker(t_data	*data);
 int			ft_total_parsing(t_data	*data, char	*buffer);
-t_list		*ft_split_buffercmd_in_lst(char *buffer, int bufi);
 t_cmdtab	*ft_create_tab_per_cmd(t_list *lst, int nbrpipe);
 int			ft_define_cmd_type(t_list *lst, t_data	*data);
 t_list		*ft_cft_prime(t_list *tmp);
@@ -187,7 +186,6 @@ char		**ft_env_get_envtab(t_envlst *env);
 
 /* FT LIST */
 void		ft_lstadd_back(t_list **alst, t_list *new);
-t_list		*ft_lstnew(char *str);
 t_list		*ft_lstlast(t_list *lst);
 int			ft_lstsize(t_list *lst);
 void		ft_lstdelone(t_list *lst);

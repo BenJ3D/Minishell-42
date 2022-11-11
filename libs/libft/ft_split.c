@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 21:00:06 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 21:06:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:47:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nword = (size_or_cntwrd(s, c, 0, 1));
-	tab_split = (char **)malloc(sizeof(char *) * (nword + 1));
+	tab_split = ft_calloc(sizeof(char **), (nword + 1));
 	if (!tab_split)
 		return (NULL);
 	tab_split = make_line(s, c, tab_split, nword);
