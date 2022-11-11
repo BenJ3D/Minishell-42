@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 02:43:41 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/04 14:52:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:12:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		lst1 = ft_lstlast(*alst);
 		lst1->next = new;
 	}
-}
-
-t_list	*ft_lstnew(char *str)
-{
-	t_list	*tmp;
-
-	tmp = (t_list *)malloc(sizeof(t_list));
-	if (!tmp)
-		return (NULL);
-	tmp->str = ft_strdup(str);
-	tmp->next = NULL;
-	return (tmp);
 }
 
 t_list	*ft_lstlast(t_list *lst)

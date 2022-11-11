@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:49:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:13:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strndup(const char *s1, int len)
 	size_t	i;
 
 	i = 0;
-	res = malloc(sizeof(char) * (len + 1));
+	res = ft_calloc(sizeof(char *), (len + 1));
 	if (!res)
 		return (NULL);
 	while (s1[i] && i < (size_t)len)
