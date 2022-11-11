@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:01:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 01:05:44 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:17:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ static int	ft_main_export(t_envlst *env, char *str, t_data *data)
 		ft_err_display_line_export_error(data, str, "not a valid identifier");
 		g_status = 1;
 		errno = 1;
+		free(key);
 		return (1);
 	}
 	ft_main_export_norm1(env, key, str, isenv);
