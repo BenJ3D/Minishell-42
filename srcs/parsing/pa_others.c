@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 17:34:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:24:42 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	ft_pa_others_quotes_alone(t_data	*data, char	*buffer)
 {
-	if (buffer[data->scroller + 1] && (buffer[data->scroller \
-		+ 1] <= 32 || buffer[data->scroller + 1] > 126))
+	printf("Testici\n");
+	if (buffer[data->scroller + 1] == '\0' || (buffer[data->scroller + 1] && \
+		(buffer[data->scroller + 1] <= 32 || buffer[data->scroller + 1] > 126)))
 	{
 		printf("ici\n");
 		data->scroller++;
