@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 20:08:59 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:29:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab);
 char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
-pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
+pid_t		ft_createfork(t_data *data, t_execarg *ex);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex);

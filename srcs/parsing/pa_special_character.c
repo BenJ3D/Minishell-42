@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 20:31:35 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:35:29 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 	int	i;
 
 	i = 0;
-	printf("top %c\n", special);
 	while (buffer[data->scroller] != '\0' && buffer[data->scroller] == special)
 	{
 		data->scroller++;
 		i++;
 	}
-	printf("%d\n", i);
 	return (i);
 }
 
@@ -36,41 +34,22 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 	{
 		len = ft_get_len_until_redirection(data, buffer, '>');
 		if (len == 1)
-		{
-			printf("tip\n");
 			ft_buffercmd_in_lst(">", data, 0, 0);
-		}
 		else if (len == 2)
-		{
-			printf("cool\n");
 			ft_buffercmd_in_lst(">>", data, 0, 0);
-		}
 		else if (len > 2)
-		{
-			printf("coucou\n");
 			return (0);
-		}
 	}
 	else if (buffer[data->scroller] == '<')
 	{
 		len = ft_get_len_until_redirection(data, buffer, '<');
 		if (len == 1)
-		{
-			printf("tip\n");
 			ft_buffercmd_in_lst("<", data, 0, 0);
-		}
 		else if (len == 2)
-		{
-			printf("cool\n");
 			ft_buffercmd_in_lst("<<", data, 0, 0);
-		}
 		else if (len > 2)
-		{
-			printf("coucou\n");
 			return (0);
-		}
 	}
-	printf("'%c'\n", buffer[data->scroller]);
 	return (1);
 }
 

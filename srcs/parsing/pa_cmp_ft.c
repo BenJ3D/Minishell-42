@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:33:25 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 20:58:55 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:34:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	if (check != 1)
 	{
 		if (check == 0)
-		{
-			printf("merci\n");
 			ft_err_display_line_error(data, "syntax error", " ");
-		}
 		ft_lstclear(&(data)->cmdtoparse);
 		return (0);
 	}
