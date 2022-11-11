@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 19:04:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:29:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int			ft_define_cmd_type(t_list *lst, t_data	*data);
 t_list		*ft_cft_prime(t_list *tmp);
 t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
 																int is_empty);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
 																int is_empty);
 int			ft_pipes_spaces_check(char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
@@ -106,7 +106,7 @@ int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab);
 char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
-pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
+pid_t		ft_createfork(t_data *data, t_execarg *ex);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex);

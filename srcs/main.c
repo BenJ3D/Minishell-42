@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 23:00:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:42:33 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int ac, char **av, char **envp)
 	t_data	data;
 
 	ac = 0;
+	ft_bzero(&data, sizeof(t_data));
 	ft_issaty_control();
 	ft_stty_control(0);
 	ft_init_minishell(&data);

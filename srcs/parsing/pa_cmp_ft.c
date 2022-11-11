@@ -6,11 +6,20 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:33:25 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 19:04:05 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:34:09 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+// void	ft_initialise_data(t_data	*data)
+// {
+// 	data->s_quotes_switch = 0;
+// 	data->d_quotes_switch = 0;
+// 	data->scroller = 0;
+// 	data->first_arg = 0;
+// 	data->first_cmd = 0
+// }
 
 /**
  * @brief parsing de base pour decouper les cmd et args
@@ -34,17 +43,14 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	if (check != 1)
 	{
 		if (check == 0)
-		{
-			printf("merci\n");
 			ft_err_display_line_error(data, "syntax error", " ");
-		}
-		free_the_birds(data);
+		ft_lstclear(&(data)->cmdtoparse);
 		return (0);
 	}
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
 		ft_err_display_line_error(data, "syntax error", "near unexpected '|'");
-		free_the_birds(data);
+		ft_lstclear(&(data)->cmdtoparse);
 		return (0);
 	}
 	dbg_lstdisplay_color_type(data->cmdtoparse);

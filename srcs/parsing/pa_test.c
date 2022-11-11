@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 19:03:14 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:35:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
 		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6 || \
 		data->type_of_the_last_cmd == 2)
-	{
-		printf("ici\n");
-		
 		return (0);
-	}
 	return (1);
 }
