@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 15:24:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:04:43 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
 																int is_empty);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
 																int is_empty);
-void		error_management(t_data	*data);
 int			ft_pipes_spaces_check(char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
