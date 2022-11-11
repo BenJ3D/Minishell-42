@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_common.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/08 18:37:39 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:00:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@
 
 # define CMD 0
 # define ARG 1
-# define PIPE 2 //	|
-# define IN1 3 //	<
-# define IN2 4	//	<<
-# define OUT1 5	//	>
-# define OUT2 6 //	>>
-# define INFILE 7 // le nom du fichier si entrée
-# define INQUOTE 8 // les characteres de fin de quote <<
-# define OUTFILE 9 // le nom du fichier si sortie
+# define PIPE 2
+# define IN1 3
+# define IN2 4
+# define OUT1 5
+# define OUT2 6
+# define INFILE 7
+# define INQUOTE 8
+# define OUTFILE 9
 
 # define NO_BUILTIN 0
 # define BUILT_CD 1
