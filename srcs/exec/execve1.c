@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 22:21:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:45:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex)
 	cmdtab[ex->i].pid = -1;
 	ft_pipe_init_cmdtab_pipe_in_out(cmdtab);
 	ft_heredoc_init(cmdtab);
+	signal_recept_blocking_cmd();
 	ft_run_execve_init_patchcmd(cmdtab);
 	return (0);
 }

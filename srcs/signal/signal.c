@@ -6,11 +6,18 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:26:11 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 23:37:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:41:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+void	signal_handler_not_blocking_heredoc(int signum)
+{
+	(void)signum;
+	ft_putstr_fd("\n", 1);
+	exit (1);
+}
 
 void	signal_handler_not_blocking_cmd(int signum)
 {
@@ -41,10 +48,18 @@ void	signal_handler_blocking_cmd(int signum)
  *		ctrl + \ (SIGQUIT)
  * 
  */
-void	signal_recept_not_blocking_cmd(void)
+void	signal_recept_not_blocking(int mode)
 {
-	signal(SIGINT, signal_handler_not_blocking_cmd);
-	signal(SIGQUIT, SIG_IGN);
+	if (mode == 1)
+	{
+		signal(SIGINT, signal_handler_not_blocking_cmd);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, signal_handler_not_blocking_heredoc);
+		signal(SIGQUIT, SIG_IGN);
+	}
 }
 
 /*
