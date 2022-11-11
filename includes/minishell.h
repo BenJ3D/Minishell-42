@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 21:29:36 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:11:56 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
+void		ft_dct_data_reload(t_data	*data);
 /*PARSING_OTHERS*/
 int			ft_pa_others(t_data	*data, char	*buffer);
 char		*ft_pa_others_normal(t_data	*data, char	*buffer, int len);

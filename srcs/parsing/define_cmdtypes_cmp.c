@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   define_cmdtypes_cmp.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:22:01 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:23:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:11:15 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+void	ft_dct_data_reload(t_data	*data)
+{
+	data->first_arg = 1;
+	data->first_cmd = 0;
+}
 
 t_list	*ft_cft_prime(t_list	*tmp)
 {
