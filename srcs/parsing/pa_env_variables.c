@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:57:02 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:54:09 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:40:32 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strndup(const char *s1, int len)
 	return (res);
 }
 
-char	*ft_parsing_env_variable(t_data	*data, char	*buffer)
+char	*ft_parsing_env_variable(t_data	*data, char	*buffer) // !ICI
 {
 	int		pin;
 	int		len;

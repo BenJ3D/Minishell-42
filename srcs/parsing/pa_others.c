@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:24:42 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:13:38 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_pa_others_bis(t_data	*data, char	*buffer, char	*semi_final, \
 				semi_final);
 		ft_parsing_others_setings(data, buffer, 2);
 	}
+	data->quotes_in_parsing = 0;
 	return (semi_final);
 }
 
@@ -68,8 +69,6 @@ char	*ft_pa_others_cmp(t_data	*data, char	*buffer, char	*final)
 		if (len != 0)
 			semi_final = ft_pa_others_normal(data, buffer, len);
 		semi_final = ft_pa_others_bis(data, buffer, semi_final, len);
-		// if (!semi_final)
-		// 	return (0);
 		final = ft_parsing_make_final(semi_final, final);
 	}
 	return (final);
