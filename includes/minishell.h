@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 20:07:14 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:08:59 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
 void		ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
 																int is_empty);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
 																int is_empty);
 int			ft_pipes_spaces_check(char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
