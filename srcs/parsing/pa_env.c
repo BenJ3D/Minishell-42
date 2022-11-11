@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:58:53 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:48:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:54:24 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,15 @@ char	*ft_pa_env_regular_bis(t_data	*data, char	*value_env)
 	free(tmp);
 	if (!value_env)
 	{
-		printf("'%s', value_env\n", __func__);
-		free(value_env);
-		value_env = NULL;
-		return (NULL);
+		if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 5 \
+			|| data->type_of_the_last_cmd == 6)
+			value_env = ft_strdup("$");
+		else
+		{
+			free(value_env);
+			value_env = NULL;
+			return (NULL);
+		}
 	}
 	return (value_env);
 }
