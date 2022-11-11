@@ -6,11 +6,20 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:33:25 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 19:07:03 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:40:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+// void	ft_initialise_data(t_data	*data)
+// {
+// 	data->s_quotes_switch = 0;
+// 	data->d_quotes_switch = 0;
+// 	data->scroller = 0;
+// 	data->first_arg = 0;
+// 	data->first_cmd = 0
+// }
 
 /**
  * @brief parsing de base pour decouper les cmd et args
