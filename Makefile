@@ -6,7 +6,7 @@
 #    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/11 21:43:21 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/11/11 23:27:04 by hmarconn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,6 @@ SOURCES     := 		./srcs/main.c \
 					./srcs/builtins/export_api.c \
 					./srcs/builtins/pwd.c \
 					./srcs/builtins/unset.c \
-					./srcs/dbg/debug_lst.c \
-					./srcs/dbg/debug_pars.c \
 					./srcs/env/env_init.c \
 					./srcs/env/env_init2.c \
 					./srcs/env/env_lst.c \

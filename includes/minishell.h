@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 23:01:13 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:27:20 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,14 +200,6 @@ void		ft_free_tab_char(char **tab);
 /* FT ERROR MANAGEMENT */
 void		ft_err_display_line_error(t_data *data, char *cmd, char *msg);
 void		ft_err_display_line_export_error(t_data *dat, char *cmd, char *msg);
-
-/* FT DEBUG BEN */
-void		dbg_lstdisplay(t_list *lst);
-void		dbg_lstdisplay_color(t_list *lst);
-void		dbg_lstdisplay_color_type(t_list *lst);
-void		dbg_display_cmdtab(t_cmdtab *cmdtab);
-void		dbg_display_argv(char **argv);
-void		dbg_display_argv_choose_sep(char **argv, char *sep);
 
 void		signal_recept_not_blocking(int mode);
 void		signal_recept_blocking_cmd(void);
