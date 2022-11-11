@@ -38,7 +38,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst(">>", data, 0, 0);
 		else if (len > 2)
-			return (1);
+			return (0);
 	}
 	else if (buffer[data->scroller] == '<')
 	{
@@ -48,7 +48,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst("<<", data, 0, 0);
 		else if (len > 2)
-			return (1);
+			return (0);
 	}
 	return (1);
 }

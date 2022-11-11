@@ -46,9 +46,12 @@ UNAME_S := $(shell uname -s)
 		INC_INC = -I/usr/local/include
 	endif
 	ifeq ($(UNAME_S),Darwin)
-		INC_LIB = -L ~/.brew/opt/readline/lib
-		INC_INC = -I ~/.brew/opt/readline/include
+		INC_LIB = -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
+		INC_INC = -I $(shell brew --prefix readline)/include
 	endif
+#		INC_LIB = -L ~/.brew/opt/readline/lib
+#		INC_INC = -I ~/.brew/opt/readline/include
+#	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
 #	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
