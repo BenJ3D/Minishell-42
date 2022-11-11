@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 15:47:36 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:52:17 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	if (len != 0)
 		final = ft_pa_dq_env(data, buffer, semi_final, len);
 	else
-		final = ft_strdup("$");
+		final = ft_strjoin(semi_final, ft_strdup("$"));
 	return (final);
 }
