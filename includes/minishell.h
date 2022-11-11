@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 01:12:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:24:03 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char		*ft_pa_others_normal(t_data	*data, char	*buffer, int len);
 char		*ft_pa_others_normal_env(t_data	*data, char	*buffer, \
 	char	*semi_final);
 char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, \
-	char	*semi_final, int len);
+	char	*semi_final);
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
 void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);

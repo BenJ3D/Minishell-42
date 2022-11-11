@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:22:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:55:01 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:23:05 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ char	*ft_parsing_make_final(char	*semi_final, char	*final)
 }
 
 char	*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, \
-	char	*semi_final, int len)
+	char	*semi_final)
 {
 	int	pan;
 	int	pin;
+	int	len;
 
 	if (semi_final == NULL)
 	{
