@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:49:25 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:31:04 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 {
 	char	*value_env;
 	char	*final;
-	int		pan;
 
-	pan = 0;
 	value_env = ft_pa_fill_value(data, buffer, len);
 	if (data->cmdtoparse && (data->cmdtoparse->type == IN1 || \
 		data->cmdtoparse->type == IN2))
-		pan = 0;
+		;
 	else
 	{
 		value_env = ft_pa_dq_env_bis(data, value_env);
