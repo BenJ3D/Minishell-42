@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:22:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 16:38:58 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:51:23 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ char	*ft_pa_others_normal(t_data	*data, char	*buffer, int len)
 
 char	*ft_pa_others_normal_env(t_data	*data, char	*buffer, char	*semi_final)
 {
-	if (semi_final == NULL)
+	if (buffer[data->scroller + 1] == '"' || buffer[data->scroller + 1] == '\'')
+		data->scroller++;
+	else if (semi_final == NULL)
 		semi_final = ft_parsing_env_variable(data, buffer);
 	else
 		semi_final = ft_double_quotes_env(data, buffer, semi_final);
