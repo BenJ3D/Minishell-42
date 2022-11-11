@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 01:12:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:27:20 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ int			ft_define_cmd_type(t_list *lst, t_data	*data);
 t_list		*ft_cft_prime(t_list *tmp);
 t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
 																int is_empty);
-t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
 																int is_empty);
-void		error_management(t_data	*data);
 int			ft_pipes_spaces_check(char *buffer);
 int			ft_redirect_me_now(t_data *data, char *buffer);
 int			ft_parsing_for_a_pipe(t_data *data, char *buffer);
 char		*ft_var_no_env(t_data	*data, char	*buffer);
 void		free_the_birds(t_data	*data);
+void		ft_dct_data_reload(t_data	*data);
 /*PARSING_OTHERS*/
 int			ft_pa_others(t_data	*data, char	*buffer);
 char		*ft_pa_others_normal(t_data	*data, char	*buffer, int len);
 char		*ft_pa_others_normal_env(t_data	*data, char	*buffer, \
 	char	*semi_final);
 char		*ft_parsing_others_not_normal_env(t_data	*data, char	*buffer, \
-	char	*semi_final, int len);
+	char	*semi_final);
 void		ft_parsing_others_final(t_data	*data, char	*final);
 char		*ft_parsing_make_final(char	*semi_final, char	*final);
 void		ft_parsing_others_set_quotes(t_data	*data, char	*buffer);
@@ -107,7 +107,7 @@ int			ft_close_all_fdredi(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_heredoc_init(t_cmdtab *cmdtab);
 char		*ft_cmdtab_cmdstr_if_has_cmd(t_cmdtab *cmdtab, t_execarg *ex);
 int			ft_forkexe(t_data *data, t_execarg *ex, t_cmdtab *cmdtab);
-pid_t		ft_createfork(t_data *data, t_execarg *ex, char **envp);
+pid_t		ft_createfork(t_data *data, t_execarg *ex);
 char		*ft_check_if_prog_exist_in_pathenv(char *prognam, t_envlst *envlst);
 void		ft_execve_clear_hdcfd(t_execarg *ex, t_cmdtab *cmdtab);
 int			ft_run_execve_init(t_cmdtab *cmdtab, t_execarg *ex);
@@ -201,16 +201,9 @@ void		ft_free_tab_char(char **tab);
 void		ft_err_display_line_error(t_data *data, char *cmd, char *msg);
 void		ft_err_display_line_export_error(t_data *dat, char *cmd, char *msg);
 
-/* FT DEBUG BEN */
-void		dbg_lstdisplay(t_list *lst);
-void		dbg_lstdisplay_color(t_list *lst);
-void		dbg_lstdisplay_color_type(t_list *lst);
-void		dbg_display_cmdtab(t_cmdtab *cmdtab);
-void		dbg_display_argv(char **argv);
-void		dbg_display_argv_choose_sep(char **argv, char *sep);
-
-void		signal_recept_not_blocking_cmd(void);
+void		signal_recept_not_blocking(int mode);
 void		signal_recept_blocking_cmd(void);
+// void		signal_recept_not_blocking_heredoc(void);
 
 /* FT SINAUX */
 int			ft_stty_control(int b);

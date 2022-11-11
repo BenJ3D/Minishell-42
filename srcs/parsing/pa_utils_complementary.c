@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_utils_complementary.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:56:29 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:54:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:00:37 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ char	*ft_strjoin_parsing(char	*s1, char *s2)
 	while (s2 && s2[a] != '\0')
 			s3[b++] = s2[a++];
 	s3[b] = '\0';
-	printf("'%s', s1\n", __func__);
 	if (s1[0] != '\0')
 		free(s1);
 	return (s3);
 }
 
-static void	ft_pa_deftype_first_cmd(t_list	*tmp, t_data *data)
+static int	ft_pa_deftype_first_cmd(t_list	*tmp, t_data *data)
 {
 	if (tmp->str[0] == '>')
 	{
@@ -74,9 +73,10 @@ static void	ft_pa_deftype_first_cmd(t_list	*tmp, t_data *data)
 	else
 		tmp->type = CMD;
 	data->first_cmd = 1;
+	return (tmp->type);
 }
 
-static void	ft_pa_deftype(t_list *tmp)
+static int	ft_pa_deftype(t_list *tmp)
 {
 	if (tmp->str[0] == '>')
 	{
@@ -96,6 +96,7 @@ static void	ft_pa_deftype(t_list *tmp)
 		tmp->type = PIPE;
 	else
 		tmp->type = ARG;
+	return (tmp->type);
 }
 
 int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
@@ -106,11 +107,14 @@ int	ft_define_cmd_type_during_parsing(t_list *lst, t_data *data)
 		return (-1);
 	tmp = lst;
 	if (data->quotes_in_parsing == 1)
+	{
 		tmp->type = ARG;
+		data->type_of_the_last_cmd = 1;
+		data->quotes_in_parsing = 0;
+	}
 	else if (data->first_cmd == 0)
-		ft_pa_deftype_first_cmd(tmp, data);
+		data->type_of_the_last_cmd = ft_pa_deftype_first_cmd(tmp, data);
 	else
-		ft_pa_deftype(tmp);
-	data->type_of_the_last_cmd = tmp->type;
+		data->type_of_the_last_cmd = ft_pa_deftype(tmp);
 	return (0);
 }

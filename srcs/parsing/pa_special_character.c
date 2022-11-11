@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_special_character.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:50:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:35:29 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst(">>", data, 0, 0);
 		else if (len > 2)
-			return (1);
+			return (0);
 	}
 	else if (buffer[data->scroller] == '<')
 	{
@@ -48,7 +48,7 @@ int	ft_redirect_me_now(t_data	*data, char	*buffer)
 		else if (len == 2)
 			ft_buffercmd_in_lst("<<", data, 0, 0);
 		else if (len > 2)
-			return (1);
+			return (0);
 	}
 	return (1);
 }

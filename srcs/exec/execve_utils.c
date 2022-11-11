@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 00:16:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:29:11 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_check_is_builtin( char **argv, t_cmdtab *cmdtab, t_execarg *ex)
 	return (cmdtab[ex->i].isbuilt);
 }
 
-pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
+pid_t	ft_createfork(t_data *data, t_execarg *ex)
 {
 	pid_t	father;
 	char	*errline;
@@ -123,7 +123,6 @@ pid_t	ft_createfork(t_data *data, t_execarg *ex, char **envp)
 		free (errline);
 		free(ex->progpath);
 		ft_free_tab_char(ex->argv);
-		ft_free_tab_char(envp);
 		exit(errno);
 	}
 	return (father);

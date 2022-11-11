@@ -2,6 +2,7 @@
 *.d
 minishell
 out*
+.vscode
 
 # Object files
 *.o

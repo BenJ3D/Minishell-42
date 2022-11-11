@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 15:38:07 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:56:28 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_list	*ft_lstnew_parsing(t_data	*data, char *str, int heavy, \
 	return (tmp);
 }
 
-t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy, \
+void	ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy, \
 	int is_empty)
 {
 	int		i;
@@ -37,13 +37,14 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy, \
 	int		bufi;
 
 	bufi = 0;
-	printf("%s\n", buffer);
 	while (buffer[bufi])
 	{
 		if (buffer[bufi] == '\0')
-			return (data->cmdtoparse);
+			return ;
 		len = ft_strlen_parsing(buffer);
 		str = ft_calloc(len + 1, sizeof(char));
+		if (!str)
+			return ;
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
@@ -51,10 +52,9 @@ t_list	*ft_buffercmd_in_lst_quotes(char *buffer, t_data	*data, int heavy, \
 			is_empty));
 		free(str);
 	}
-	return (data->cmdtoparse);
 }
 
-t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy, \
+void	ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy, \
 	int is_empty)
 {
 	int		i;
@@ -68,15 +68,17 @@ t_list	*ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy, \
 		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
 			bufi = bufi + 1;
 		if (buffer[bufi] == '\0')
-			return (data->cmdtoparse);
+			return ;
 		len = ft_strlen_next_word(buffer + bufi);
 		str = ft_calloc(len + 1, sizeof(char));
+		if (!str)
+			return ;
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
+		str[i] = '\0';
 		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, \
 			is_empty));
 		free(str);
 	}
-	return (data->cmdtoparse);
 }

@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:18:35 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:50:16 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:48:07 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_pa_others_existing_quotes(t_data	*data, char	*buffer, \
 	if (doll != NULL)
 	{
 		semi_final = ft_strjoin_parsing(semi_final, doll);
-		printf("'%s', doll\n", __func__);
 		free(doll);
 		doll = NULL;
 	}

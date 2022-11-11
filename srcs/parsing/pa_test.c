@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pa_test.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:26:09 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 22:52:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:35:36 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	ft_total_parsing_complementary(t_data *data, char *buffer)
 	else if ((data->s_quotes_switch == 0 && data->d_quotes_switch == 0) && \
 		(buffer[data->scroller] == '<' || buffer[data->scroller] == '>'))
 	{
-		ft_redirect_me_now(data, buffer);
-		if (data->cmdtoparse == NULL || \
+		if (!ft_redirect_me_now(data, buffer) || data->cmdtoparse == NULL || \
 						!ft_redirection_files_check(buffer + data->scroller))
 			return (0);
 	}
@@ -62,7 +61,8 @@ int	ft_total_parsing(t_data	*data, char	*buffer)
 		return (2);
 	ft_reset_quotes_checker(data);
 	if (data->type_of_the_last_cmd == 3 || data->type_of_the_last_cmd == 4 || \
-		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6)
+		data->type_of_the_last_cmd == 5 || data->type_of_the_last_cmd == 6 || \
+		data->type_of_the_last_cmd == 2)
 		return (0);
 	return (1);
 }

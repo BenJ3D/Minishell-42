@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:55:59 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 17:34:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:39:06 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	ft_pa_others_quotes_alone(t_data	*data, char	*buffer)
 {
-	if (buffer[data->scroller + 1] && (buffer[data->scroller \
-		+ 1] <= 32 || buffer[data->scroller + 1] > 126))
+	if (buffer[data->scroller + 1] == '\0' || (buffer[data->scroller + 1] && \
+		(buffer[data->scroller + 1] <= 32 || buffer[data->scroller + 1] > 126)))
 	{
-		printf("ici\n");
 		data->scroller++;
 		ft_buffercmd_in_lst_quotes(" ", data, 1, 1);
 		return (0);
@@ -26,14 +25,14 @@ int	ft_pa_others_quotes_alone(t_data	*data, char	*buffer)
 }
 
 char	*ft_pa_others_bis(t_data	*data, char	*buffer, char	*semi_final, \
-	int len)
+	char	*final)
 {
 	if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd != 4)
 		semi_final = ft_pa_others_normal_env(data, buffer, semi_final);
 	else if (buffer[data->scroller] == '$' && data->type_of_the_last_cmd \
 		== 4)
 		semi_final = ft_parsing_others_not_normal_env(data, buffer, \
-			semi_final, len);
+			semi_final);
 	else if (buffer[data->scroller] == '"' || buffer[data->scroller] == \
 		'\'')
 	{	
@@ -41,7 +40,7 @@ char	*ft_pa_others_bis(t_data	*data, char	*buffer, char	*semi_final, \
 		if (semi_final == NULL)
 		{
 			semi_final = ft_quotes(data, buffer);
-			if (!semi_final)
+			if (!semi_final && !final)
 				if (!ft_pa_others_quotes_alone(data, buffer))
 					return (0);
 		}
@@ -66,9 +65,7 @@ char	*ft_pa_others_cmp(t_data	*data, char	*buffer, char	*final)
 		len = ft_pa_others_len(data, buffer);
 		if (len != 0)
 			semi_final = ft_pa_others_normal(data, buffer, len);
-		semi_final = ft_pa_others_bis(data, buffer, semi_final, len);
-		// if (!semi_final)
-		// 	return (0);
+		semi_final = ft_pa_others_bis(data, buffer, semi_final, final);
 		final = ft_parsing_make_final(semi_final, final);
 	}
 	return (final);

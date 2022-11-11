@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   pa_double_quotes_env_cmp.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:53:30 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:05:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+char	*ft_pa_fill_value_special(t_data	*data, char	*buffer, int len)
+{
+	int		pan;
+	int		pin;
+	char	*value_env;
+
+	pan = 0;
+	len++;
+	value_env = ft_calloc(sizeof(char), len + 1);
+	if (!value_env)
+		exit (42);
+	pin = data->scroller - len;
+	while (pan < len)
+		value_env[pan++] = buffer[pin++];
+	value_env[pan] = '\0';
+	return (value_env);
+}
 
 char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int len)
@@ -20,16 +38,17 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int		pan;
 
 	pan = 0;
-	value_env = ft_pa_fill_value(data, buffer, len);
-	if (data->cmdtoparse && (data->cmdtoparse->type == IN1 || \
-		data->cmdtoparse->type == IN2))
+	if (data->type_of_the_last_cmd == 4)
+	{
+		value_env = ft_pa_fill_value_special(data, buffer, len);
 		pan = 0;
+	}
 	else
 	{
+		value_env = ft_pa_fill_value(data, buffer, len);
 		value_env = ft_pa_dq_env_bis(data, value_env);
 		if (!value_env)
 		{
-			printf("'%s', value_env\n", __func__);
 			free(value_env);
 			value_env = NULL;
 			return (semi_final);
@@ -77,6 +96,6 @@ char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 	if (len != 0)
 		final = ft_pa_dq_env(data, buffer, semi_final, len);
 	else
-		final = ft_strdup("$");
+		final = ft_strjoin(semi_final, "$");
 	return (final);
 }

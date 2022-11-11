@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:13:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 20:27:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:02:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,41 +63,41 @@ typedef struct s_execarg
 	char		*progpath;
 }				t_execarg;
 
-typedef struct s_cmdtab //pour creer un tab de command, un t_list par commande (jusqu'à trouver un pipe '|'))
-{									//exemple si buffer = ls -all | cat -e
-	int		isbuilt;				//si isbuilt > 0 : c'est une builtin
-	int		isempty;				//gerer le cas cmd == '\0'
+typedef struct s_cmdtab
+{
+	int		isbuilt;
+	int		isempty;
 	int		pipein;
 	int		pipeout;
 	int		reditype;
 	char	*rediarg;
 	pid_t	pidredi;
 	pid_t	*multiredi;
-	int		redinbr;				//compte le nombre de redi pour while jusqu'a 0
+	int		redinbr;
 	int		fdredipipe[2];
-	int		fd[2];					//    cmdtab[0].lst = ls -> -all -> (pipe)
-	int		fdsave[2];				//    cmdtab[0].lst = ls -> -all -> (pipe)
-	int		fdredi;					//  file descriptor if redirection
-	int		fdredierr;				//  1 if file (fdredi) not exist
-	char	*heredoc;				//contient tout le heredocs
-	int		hdcpipe[2];				//pipe pour un heredocs par cmd
-	int		hdcfd;				//fd pour open un tmp pour heredocs par cmd
-	char	*hdcpath;			//path du tmp file pour les heredocs par commandes
+	int		fd[2];
+	int		fdsave[2];
+	int		fdredi;
+	int		fdredierr;
+	char	*heredoc;
+	int		hdcpipe[2];
+	int		hdcfd;
+	char	*hdcpath;
 	pid_t	pid;
 	t_list	*lst;
-}				t_cmdtab;			//    cmdtab[1].lst = cat -> -e -> (null)
+}				t_cmdtab;
 
 typedef struct s_data
 {
-	char		*pgr_name; 			//le nom de notre programe afficher dans notre prompt
-	char		*line;				//*line pour le prompt
-	char		*buffer;			//buffer pour readline
-	t_envlst	*env;				//contient tout l'environnement sous forme de liste
-	t_cmdtab	*cmdtab; 			//toutes les commandes sont stockées dans un tableau de list
-	t_list		*cmdtoparse; 		//contient toute la ligne de commande split en mot
+	char		*pgr_name;
+	char		*line;
+	char		*buffer;
+	t_envlst	*env;
+	t_cmdtab	*cmdtab;
+	t_list		*cmdtoparse;
 	int			nbpipes;
-	int			fd[2];				//pour pipe
-	int			savefd[2];				//pour pipe
+	int			fd[2];
+	int			savefd[2];
 	int			s_quotes_switch;
 	int			d_quotes_switch;
 	int			scroller;
@@ -105,7 +105,8 @@ typedef struct s_data
 	int			first_arg;
 	int			quotes_in_parsing;
 	int			len_max;
-	int 		ret;					//test pour heredocs
+	int			first_in_line;
+	int			ret;
 	char		*heredocpath;
 	int			type_of_the_last_cmd;
 	struct stat	statbuf;
