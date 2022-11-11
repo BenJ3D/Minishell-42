@@ -6,13 +6,29 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 11:49:25 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:18:31 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
 
-// char	*ft_pa_dq_
+char	*ft_pa_fill_value_special(t_data	*data, char	*buffer, int len)
+{
+	int		pan;
+	int		pin;
+	char	*value_env;
+
+	pan = 0;
+	len++;
+	value_env = ft_calloc(sizeof(char), len + 1);
+	if (!value_env)
+		exit (42);
+	pin = data->scroller - len;
+	while (pan < len)
+		value_env[pan++] = buffer[pin++];
+	value_env[pan] = '\0';
+	return (value_env);
+}
 
 char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int len)
@@ -22,12 +38,16 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int		pan;
 
 	pan = 0;
-	value_env = ft_pa_fill_value(data, buffer, len);
-	if (data->cmdtoparse && (data->cmdtoparse->type == IN1 || \
-		data->cmdtoparse->type == IN2))
+	printf("%d, buffer: %s, scroller: %d\n", data->type_of_the_last_cmd, semi_final, data->scroller);
+	if (data->type_of_the_last_cmd == 4)
+	{
+		value_env = ft_pa_fill_value_special(data, buffer, len);
 		pan = 0;
+	}
 	else
 	{
+		value_env = ft_pa_fill_value(data, buffer, len);
+		printf("ici\n");
 		value_env = ft_pa_dq_env_bis(data, value_env);
 		if (!value_env)
 		{
