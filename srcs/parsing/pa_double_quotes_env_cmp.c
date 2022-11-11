@@ -6,11 +6,13 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:53:30 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:49:25 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/minishell.h"
+
+// char	*ft_pa_dq_
 
 char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 	int len)
