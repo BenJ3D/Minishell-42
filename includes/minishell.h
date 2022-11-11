@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 19:04:43 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:07:14 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			ft_define_cmd_type(t_list *lst, t_data	*data);
 t_list		*ft_cft_prime(t_list *tmp);
 t_list		*ft_cmd_first_type(t_data	*data, t_list	*tmp);
 /*PARSING TESTS*/
-t_list		*ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
+void		ft_buffercmd_in_lst(char *buffer, t_data *data, int heavy, \
 																int is_empty);
 t_list		*ft_buffercmd_in_lst_quotes(char *buffer, t_data *data, int heavy, \
 																int is_empty);
