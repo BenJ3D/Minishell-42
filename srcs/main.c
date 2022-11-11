@@ -6,11 +6,11 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 20:42:33 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:43:54 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/minishell.h>
+#include "../includes/minishell.h"
 
 static void	ft_init_minishell(t_data *data)
 {

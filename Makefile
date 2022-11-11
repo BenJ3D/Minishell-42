@@ -6,23 +6,23 @@
 #    By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/11 21:19:33 by hmarconn         ###   ########.fr        #
+#    Updated: 2022/11/11 21:43:21 by hmarconn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler and Linker
-DEBUG=2
+DEBUG=0
 
 ifeq ($(DEBUG), 0) # for final compilation
-CC = gcc $(CFLAGS)
+CC = cc $(CFLAGS)
 MAKELIB = @make DEBUG=0 -C./libs/libft/
 endif
 ifeq ($(DEBUG), 1)  # for sanitize test
-CC = gcc $(SANITIZE) $(LLDBFLAG)
+CC = cc $(SANITIZE) $(LLDBFLAG)
 MAKELIB = @make DEBUG=1 -C./libs/libft/
 endif
 ifeq ($(DEBUG), 2) # for LEAKS test
-CC = gcc $(LLDBFLAG)
+CC = cc $(LLDBFLAG)
 MAKELIB = @make DEBUG=2 -C./libs/libft/
 endif
 
@@ -46,12 +46,9 @@ UNAME_S := $(shell uname -s)
 		INC_INC = -I/usr/local/include
 	endif
 	ifeq ($(UNAME_S),Darwin)
-		INC_LIB = -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
-		INC_INC = -I $(shell brew --prefix readline)/include
+		INC_LIB = -L ~/.brew/opt/readline/lib
+		INC_INC = -I ~/.brew/opt/readline/include
 	endif
-#		INC_LIB = -L ~/.brew/opt/readline/lib
-#		INC_INC = -I ~/.brew/opt/readline/include
-#	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
 #	-L .brew/opt/readline/lib -I .brew/opt/readline/include
 
@@ -63,10 +60,69 @@ LIBFT_PATH  := ./libs/libft/libft.a
 LIB         := $(INC_LIB) $(INC_INC) -lreadline $(LIBFT_PATH)
 INC         := -I$(INCDIR)
 INCDEP      := -I$(INCDIR)
+HEADERS      := 	./includes/define_common.h \
+				./includes/includes.h \
+				./includes/minishell.h \
+				./includes/struct.h
+
 #------------------------------------------------------------------------------#
 #                                  RULES.......................................#
 #------------------------------------------------------------------------------#
-SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+
+SOURCES     := 		./srcs/main.c \
+					./srcs/builtins/cd.c \
+					./srcs/builtins/echo.c \
+					./srcs/builtins/env.c \
+					./srcs/builtins/exit.c \
+					./srcs/builtins/export.c \
+					./srcs/builtins/export_api.c \
+					./srcs/builtins/pwd.c \
+					./srcs/builtins/unset.c \
+					./srcs/dbg/debug_lst.c \
+					./srcs/dbg/debug_pars.c \
+					./srcs/env/env_init.c \
+					./srcs/env/env_init2.c \
+					./srcs/env/env_lst.c \
+					./srcs/env/env_lst2.c \
+					./srcs/env/env_utils.c \
+					./srcs/env/env_utils2.c \
+					./srcs/err/error_management.c \
+					./srcs/exec/execve1.c \
+					./srcs/exec/execve2.c \
+					./srcs/exec/execve_findprog.c \
+					./srcs/exec/execve_pipe.c \
+					./srcs/exec/execve_utils.c \
+					./srcs/exec/execve_utils2.c \
+					./srcs/exec/heredoc/redirection_heredoc.c \
+					./srcs/exec/redirection/redirection.c \
+					./srcs/exec/redirection/redirection_dup.c \
+					./srcs/exec/stat.c \
+					./srcs/free/free.c \
+					./srcs/list/list.c \
+					./srcs/list/list2.c \
+					./srcs/parsing/define_cmd_types.c \
+					./srcs/parsing/define_cmdtypes_cmp.c \
+					./srcs/parsing/pa_cmp_ft.c \
+					./srcs/parsing/pa_double_quotes_env.c \
+					./srcs/parsing/pa_double_quotes_env_cmp.c \
+					./srcs/parsing/pa_env.c \
+					./srcs/parsing/pa_env_variables.c \
+					./srcs/parsing/pa_others.c \
+					./srcs/parsing/pa_others_complementary.c \
+					./srcs/parsing/pa_others_fcts.c \
+					./srcs/parsing/pa_special_character.c \
+					./srcs/parsing/pa_test.c \
+					./srcs/parsing/pa_utils.c \
+					./srcs/parsing/pa_utils_complementary.c \
+					./srcs/parsing/pa_utils_len.c \
+					./srcs/parsing/parsing.c \
+					./srcs/parsing/prompt/prompt.c \
+					./srcs/parsing/quotes_parsing.c \
+					./srcs/parsing/quotes_parsing_complementary.c \
+					./srcs/parsing/quotes_related.c \
+					./srcs/signal/signal.c \
+					./srcs/signal/stty.c
+					
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) 
 
 #Defauilt Make
@@ -87,7 +143,7 @@ lib: directories
 #Make the Directories
 directories:
 	@mkdir -p $(NAMEDIR)
-	@mkdir -p $(BUILDDIR)
+
 
 dbg:
 
@@ -95,7 +151,7 @@ dbg:
 #Clean only Objecst
 clean:
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
-	@$(RM) -rf $(BUILDDIR)
+	@$(RM) -rf $(OBJECTS)
 	@make clean -C ./libs/libft/
 	@echo "\033[31mFiles .o deleted\n\033[0m"
 
@@ -123,18 +179,12 @@ git:
 
 #Link
 $(NAME): $(OBJECTS)
-	$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
-	@echo "\033[32m$(NAME) created\n\033[0m"
+	@$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
+	@echo "\n\033[32m🔥$\MiniHell created🔥\n\033[0m"
 
-#Compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) $(LIBFT_PATH) ./Makefile ./includes/*.h 
-	@mkdir -p $(dir $@)
-	$(CC) $(INC) $(INC_INC) -c -o $@ $<
-	@$(CC) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
-	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
-	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
-	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+%.o : %.c $(HEADERS) Makefile $(LIBFT_PATH)
+	@/bin/echo -n 🔥
+	@$(CC) -c $< -o $@ -I $(INCDIR)
 
 #Non-File NAMEs
-.PHONY: multi all re clean fclean
+.PHONY: all re clean fclean git
