@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:08:38 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/03 21:52:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:06:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_envlst	*ft_env_lstnew(char *key, char *value, int isenv)
 {
 	t_envlst	*tmp;
 
-	tmp = (t_envlst *)malloc(sizeof(*tmp));
+	tmp = (t_envlst *)ft_calloc(sizeof(t_envlst), 1);
 	if (!tmp)
 		return (NULL);
 	tmp->key = ft_strdup(key);
