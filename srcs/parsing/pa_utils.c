@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:48:54 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 20:08:44 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:33:33 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy, \
 	int		len;
 	char	*str;
 	int		bufi;
+	t_list	*tmp;
 
 	bufi = 0;
+	tmp = data->cmdtoparse;
 	while (buffer[bufi])
 	{
 		while (ft_isspace(buffer[bufi]) && buffer[bufi] && buffer[bufi] != '|')
@@ -76,8 +78,9 @@ void	ft_buffercmd_in_lst(char *buffer, t_data	*data, int heavy, \
 		i = 0;
 		while (len-- > 0)
 			str[i++] = buffer[bufi++];
-		ft_lstadd_back(&data->cmdtoparse, ft_lstnew_parsing(data, str, heavy, \
+		ft_lstadd_back(&tmp, ft_lstnew_parsing(data, str, heavy, \
 			is_empty));
 		free(str);
 	}
+	data->cmdtoparse = tmp;
 }
