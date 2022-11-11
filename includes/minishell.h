@@ -6,7 +6,7 @@
 /*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 22:11:56 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:01:13 by hmarconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,9 @@ void		dbg_display_cmdtab(t_cmdtab *cmdtab);
 void		dbg_display_argv(char **argv);
 void		dbg_display_argv_choose_sep(char **argv, char *sep);
 
-void		signal_recept_not_blocking_cmd(void);
+void		signal_recept_not_blocking(int mode);
 void		signal_recept_blocking_cmd(void);
+// void		signal_recept_not_blocking_heredoc(void);
 
 /* FT SINAUX */
 int			ft_stty_control(int b);

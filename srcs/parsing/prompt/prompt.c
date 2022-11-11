@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:45:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/10 22:56:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:42:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ char	*prompt_update(t_envlst *env, char *prgname)
  */
 int	ft_prompting(t_data *data)
 {
-	signal_recept_not_blocking_cmd();
+	signal_recept_not_blocking(1);
 	data->line = prompt_update(data->env, data->pgr_name);
 	data->buffer = readline(data->line);
-	signal_recept_blocking_cmd();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (data->buffer)
 		return (1);
 	else
