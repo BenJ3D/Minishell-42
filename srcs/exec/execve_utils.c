@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:50:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_exec_is_builtin(t_data *data, char **argv, \
 	else if (cmdtab[ex->i].isbuilt == BUILT_ENV)
 		ft_builtin_env(data->env);
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXIT)
-		ft_exit(data, argv);
+		ft_exit_built(data, argv);
 	else if (cmdtab[ex->i].isbuilt == BUILT_EXPORT)
 		ft_builtin_export(data->env, argv, data);
 	else if (cmdtab[ex->i].isbuilt == BUILT_PWD)

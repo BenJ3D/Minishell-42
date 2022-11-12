@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:32:10 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:52:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,13 @@ int	ft_parent_waitpid(t_cmdtab *cmdtab)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_exit_normal(t_data *data, char **argv)
+{
+	ft_stty_control(1);
+	if (argv[0] && argv[1])
+		ft_exit_arg(ft_atoi(argv[1]), data);
+	else
+		ft_exit_exit(data);
 }

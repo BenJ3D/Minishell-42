@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 11:52:20 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/12 19:26:48 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/12 20:42:51 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,12 +124,10 @@ SOURCES     := 		./srcs/main.c \
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) 
 
 #Defauilt Make
-all: lib $(NAME) cleand
+all: lib $(NAME) 
 
 #Remake
 re: fclean all
-
-fix: cleand
 
 #Copy Resources from Resources Directory to NAME Directory
 resources: directories
@@ -141,11 +139,7 @@ lib: directories
 #Make the Directories
 directories:
 	@mkdir -p $(NAMEDIR)
-
-
-dbg:
-
-
+	
 #Clean only Objecst
 clean:
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
@@ -176,7 +170,7 @@ git:
 	@git push
 
 #Link
-$(NAME): $(OBJECTS)
+$(NAME) : $(OBJECTS) 
 	@$(CC) -o $(NAMEDIR)/$(NAME) $^ $(LIB)
 	@echo "\n\033[32m🔥$\MiniHell created🔥\n\033[0m"
 

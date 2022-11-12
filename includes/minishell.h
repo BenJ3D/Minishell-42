@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:50:37 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 23:27:20 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:56:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,12 @@ int			ft_builtin_cd(t_envlst *env, char **argv, t_data *data, int ret);
 int			ft_builtin_pwd(t_data *data);
 int			ft_builtin_echo(char **argv);
 void		ft_exit(t_data *data, char **argv);
+void		ft_exit_built(t_data *data, char **argv);
 void		ft_exit_normal(t_data *data, char **argv);
 int			ft_check_if_exportkey_is_valid(char *key);
+int			ft_check_if_has_no_digit(char *str);
+void		ft_exit_exit(t_data *data);
+void		ft_exit_arg(int exitarg, t_data *data);
 
 /* FT ENV */
 char		**ft_env_init(char **envp);
