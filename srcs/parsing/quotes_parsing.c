@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:12:40 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:33:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_dq_len(t_data	*data, char	*buffer)
 
 char	*ft_double_quotes(t_data	*data, char	*buffer)
 {
-	int		pin;
 	int		len;
 	char	*final;
 	char	*semi_final;
@@ -59,7 +58,6 @@ char	*ft_double_quotes(t_data	*data, char	*buffer)
 		data->scroller++;
 	while (data->d_quotes_switch == 1 && buffer[data->scroller] != '\0')
 	{
-		pin = data->scroller;
 		len = ft_dq_len(data, buffer);
 		if (len != 0)
 			semi_final = ft_pa_others_normal(data, buffer, \
@@ -73,14 +71,12 @@ char	*ft_double_quotes(t_data	*data, char	*buffer)
 
 char	*ft_simple_quotes(t_data	*data, char	*buffer)
 {
-	int		pin;
 	int		len;
 	char	*semi_final;
 
 	semi_final = NULL;
 	if (buffer[data->scroller] == SIMPLE_QUOTE)
 		data->scroller++;
-	pin = data->scroller;
 	len = 0;
 	while (data->scroller < data->len_max && buffer[data->scroller] != \
 		SIMPLE_QUOTE)

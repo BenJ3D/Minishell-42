@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:33:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@ char	*ft_pa_dq_env(t_data	*data, char	*buffer, char	*semi_final, \
 {
 	char	*value_env;
 	char	*final;
-	int		pan;
 
-	pan = 0;
 	if (data->type_of_the_last_cmd == 4)
-	{
 		value_env = ft_pa_fill_value_special(data, buffer, len);
-		pan = 0;
-	}
 	else
 	{
 		value_env = ft_pa_fill_value(data, buffer, len);
@@ -76,12 +71,10 @@ int	ft_pa_dq_len(t_data	*data, char	*buffer)
 char	*ft_double_quotes_env(t_data	*data, char	*buffer, char	*semi_final)
 {
 	int		len;
-	int		pin;
 	char	*final;
 
 	len = 0;
 	data->scroller++;
-	pin = data->scroller;
 	if (buffer[data->scroller] == '?')
 	{
 		final = ft_padq_env_code_error(data, semi_final);

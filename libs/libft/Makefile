@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/10/28 21:47:52 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/12 19:27:47 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ NAME = libft.a
 DEBUG=0
 
 ifeq ($(DEBUG), 0)
-CC = gcc $(CFLAGS)
+CC = cc $(CFLAGS)
 endif
 ifeq ($(DEBUG), 1)
-CC = gcc $(SANITIZE) $(LLDBFLAG)
+CC = cc $(SANITIZE) $(LLDBFLAG)
 endif
 ifeq ($(DEBUG), 2)
-CC = gcc $(LLDBFLAG)
+CC = cc $(LLDBFLAG)
 endif
 
 CFLAGS      := -Wall -Wextra -Werror

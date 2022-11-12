@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:33:28 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:32:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ char	**ft_env_return_envlst_sorted_in_tab(t_envlst *env, int i)
 	char	*tmp;
 	char	*cmp1;
 	char	*cmp2;
-	int		tabsize;
 
 	tab = ft_env_get_envtab(env);
-	tabsize = ft_env_lstsize(env);
 	while (tab[i + 1])
 	{
 		cmp1 = ft_env_extract_key(tab[i]);

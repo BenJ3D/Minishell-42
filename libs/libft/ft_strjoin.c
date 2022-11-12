@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 00:49:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:28:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ char	*ft_strcharjoin(char *s1, char c)
 {
 	char	*str;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	if (!s1)
 		return (NULL);
 	str = ft_calloc(sizeof(char *), (ft_strlen(s1) + 2));

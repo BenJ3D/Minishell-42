@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:12:46 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 21:43:54 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:31:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	ac = 0;
+	if (ac > 1)
+		return (1);
 	ft_bzero(&data, sizeof(t_data));
 	ft_issaty_control();
 	ft_stty_control(0);
