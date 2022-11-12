@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pa_special_character.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:26:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 21:35:29 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_get_len_until_redirection(t_data	*data, char	*buffer, char special)
 {

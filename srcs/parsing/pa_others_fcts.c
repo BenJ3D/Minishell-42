@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pa_others_fcts.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:18:35 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 15:48:07 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_parsing_others_setings(t_data	*data, char	*buffer, int choice)
 {

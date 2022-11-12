@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pa_others_complementary.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:22:58 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 17:25:58 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_pa_others_normal(t_data	*data, char	*buffer, int len)
 {

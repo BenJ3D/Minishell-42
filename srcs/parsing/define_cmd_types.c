@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   define_cmd_types.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmarconn <hmarconn@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:36:27 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 22:12:54 by hmarconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_list	*ft_dct_rd(t_list	*tmp, t_data	*data)
 {

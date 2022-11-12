@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:24:45 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/11 21:05:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_pa_fill_value_special(t_data	*data, char	*buffer, int len)
 {

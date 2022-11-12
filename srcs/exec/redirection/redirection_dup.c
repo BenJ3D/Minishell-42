@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:42:35 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/09 20:31:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:11:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	ft_redi_doll_errorcheck(t_cmdtab *cmdtab, t_execarg *ex, t_data *data)
 {

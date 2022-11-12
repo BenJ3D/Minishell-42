@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:31:43 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/11 22:41:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:11:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 void	ft_heredoc_create_child(char *token, int fd)
 {
