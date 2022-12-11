@@ -15,7 +15,8 @@ Ce mini shell qui doit implémenter :
 - La gestion des codes d'erreur
 - Les signaux <kbd>ctrl</kbd> +  <kbd>c</kbd>, <kbd>ctrl</kbd> +  <kbd>d</kbd>, <kbd>ctrl</kbd> + <kbd> \ </kbd>
 
-Le travail se découpe en 3 grandes parties :
+
+### Le travail se découpe en 3 grandes parties :
 
 <h2 align="left">Le parsing</h2>
 
