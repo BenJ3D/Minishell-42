@@ -22,9 +22,10 @@ L'objectif ici est d'analyser et de découper les commandes entrées par l'utili
 
 <h2 align="left">L'execution</h2>
 
-Il faut ici analyser les commandes qui doivent être éxécutée, notament préparer s'il y en a les pipes et rédirection, rechercher si la commande éxiste à l'aide de la varaible environnement PATH, et essayer de l'éxécuter avec tous ses arguments.
+Il faut ici analyser les commandes qui doivent être éxécutées, notamment préparer, s'il y en a, les pipes et rédirections puis rechercher si la commande éxiste à l'aide de la varaible environnement PATH pour essayer de l'éxécuter avec tous ses arguments ou renvoyer l'erreur adéquate.
 
 ![image](https://user-images.githubusercontent.com/49345674/206907622-7ede78d7-da42-45f6-a979-8b0cc2317abd.png)
+![image](https://user-images.githubusercontent.com/49345674/206910263-5ce9b5b8-4d4a-427c-86f9-3452b51d3aa4.png)
 
 <h2 align="left">Les builtins</h2>
 Ne devions recoder et implémenter les builtins suivantes :
