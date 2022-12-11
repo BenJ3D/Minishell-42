@@ -3,7 +3,7 @@
 Premier projet 42 à faire en duo, nous devons reproduire les fonctionnalitées de base d'un shell : bash.
 
 Le projet doit être codé en C et respecter la norme42 et ses contraintes (par exemple : maximum 25 lignes par fonctions, max 80 caractères de large et max 5 fonctions par fichier) 
-Plus d'info sur la norme 42 ici : https://github.com/42School/norminette/tree/master/pdf
+Plus d'info sur la norme 42 ici (voir fr.norme.pdf) : https://github.com/42School/norminette/tree/master/pdf
 
 Ce mini shell qui doit implémenter :
 
