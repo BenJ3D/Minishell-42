@@ -9,7 +9,7 @@ Ce mini shell qui doit implémenter :
 
 - Les variables d'environnement
 - Les redirections et les pipes
-- Lq gestion des quotes et double quotes
+- La gestion des quotes et double quotes
 - Les herdocs
 - L'historique des commandes
 - La gestion des codes d'erreur
