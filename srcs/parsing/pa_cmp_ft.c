@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:33:25 by hmarconn          #+#    #+#             */
-/*   Updated: 2022/11/12 19:10:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/11 14:43:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,24 @@ int	ft_parsing_prompt(t_data *data, char *buffer)
 	if (!ft_full_prompt_quote_check(data, buffer))
 	{
 		ft_err_display_line_error(data, "syntax error", "invalid quotes");
+		g_status = 1;
 		return (0);
 	}
 	check = ft_total_parsing(data, buffer);
 	if (check != 1)
 	{
 		if (check == 0)
+		{
+			g_status = 1;
 			ft_err_display_line_error(data, "syntax error", " ");
+		}
 		ft_lstclear(&(data)->cmdtoparse);
 		return (0);
 	}
 	if (!ft_define_cmd_type(data->cmdtoparse, data))
 	{
 		ft_err_display_line_error(data, "syntax error", "near unexpected '|'");
+		g_status = 1;
 		ft_lstclear(&(data)->cmdtoparse);
 		return (0);
 	}
