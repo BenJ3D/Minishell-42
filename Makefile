@@ -159,7 +159,7 @@ cleand:
 	@find . -name "*.d" -type f -delete
 
 #Compile and keep the executable only
-b:	lib $(NAME) clean
+cbis:	lib $(NAME) clean
 
 #compile and keep only the binary
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
