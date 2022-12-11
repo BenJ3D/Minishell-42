@@ -2,14 +2,14 @@
 
 Premier projet 42 à faire en duo, nous devons reproduire les fonctionnalitées de base d'un shell : bash.
 
-Nous devons recréer un mini shell qui doit implémenter :
+Ce mini shell qui doit implémenter :
 
 - Les variables d'environnement
 - Les redirections et les pipes
-- Les quotes et double quotes
+- Lq gestion des quotes et double quotes
 - Les herdocs
 - L'historique des commandes
-- La gestion des codes retour d'erreur
+- La gestion des codes d'erreur
 - Les signaux <kbd>ctrl</kbd> +  <kbd>c</kbd>, <kbd>ctrl</kbd> +  <kbd>d</kbd>, <kbd>ctrl</kbd> + <kbd> \ </kbd>
 
 Le travail se découpe en 3 grandes parties :
